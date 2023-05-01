@@ -22,9 +22,19 @@ public abstract class BaseTimeEntity {
 
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdDate;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private LocalDateTime modifiedDate;
+    private LocalDateTime modifiedAt;
+
+    /*
+    soft delete를 위해 deletedAt추가.
+    이 기능을 사용하기 위해서는 BaseTimeEntity class를
+    상속받는 모든 entity의 어노테이션으로 아래와 같은 것들을 추가해주어야함.
+
+    @Where(clause = "deleted_at IS NULL")
+    @SQLDelete(sql = "UPDATE post SET deleted_at = CURRENT_TIMESTAMP where id = ?")
+     */
+    private LocalDateTime deletedAt;
 }
 
