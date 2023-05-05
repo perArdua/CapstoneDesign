@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oAr-a4-H4b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GIo-Gp-z0y">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="com-Aj-Hp3">
             <objects>
-                <viewController id="oAr-a4-H4b" customClass="LoginViewController" customModule="CampusIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="oAr-a4-H4b" customClass="LoginViewController" customModule="CampusIn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6uT-dY-JXf">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,9 +72,6 @@
                                 <rect key="frame" x="153.33333333333334" y="575" width="83.333333333333343" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="To Main"/>
-                                <connections>
-                                    <segue destination="GIo-Gp-z0y" kind="presentation" modalPresentationStyle="fullScreen" id="SXL-sL-SR8"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BMj-8k-iRU"/>
@@ -93,12 +91,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RCR-4B-rZb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="595" y="-63"/>
+            <point key="canvasLocation" x="2452.3076923076924" y="-63.270142180094787"/>
         </scene>
         <!--Item-->
         <scene sceneID="xy9-mx-iQs">
             <objects>
-                <viewController id="JvF-if-7T3" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainViewController" id="JvF-if-7T3" customClass="ViewController" customModule="CampusIn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GcQ-gt-c4t">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,25 +115,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="83" height="34.333333333333336"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="질의응답"/>
-                                        <connections>
-                                            <segue destination="ho5-mQ-lZV" kind="show" id="sUn-yd-UwD"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYP-PH-IZv">
                                         <rect key="frame" x="124" y="0.0" width="83" height="34.333333333333336"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="자유"/>
-                                        <connections>
-                                            <segue destination="9Dg-8a-SxN" kind="show" id="sF4-KN-FbW"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLn-Vb-4Rz">
                                         <rect key="frame" x="248" y="0.0" width="83" height="34.333333333333336"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="책방"/>
-                                        <connections>
-                                            <segue destination="YSE-j2-Tnh" kind="show" id="qp0-eU-otv"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -154,36 +143,6 @@
             </objects>
             <point key="canvasLocation" x="1523.0769230769231" y="625.5924170616114"/>
         </scene>
-        <!--GeneralPostingViewController-->
-        <scene sceneID="f82-mG-7zB">
-            <objects>
-                <viewControllerPlaceholder storyboardName="GeneralPostingViewController" referencedIdentifier="GeneralPostingViewController" id="9Dg-8a-SxN" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Ual-K7-5lw"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ook-SX-EBV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-327" y="1027"/>
-        </scene>
-        <!--QnAPostingViewController-->
-        <scene sceneID="glr-ti-cXb">
-            <objects>
-                <viewControllerPlaceholder storyboardName="QnAPostingViewController" referencedIdentifier="QnAPostingViewController" id="ho5-mQ-lZV" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="jPe-5y-ErB"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S0d-mZ-J8q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-763" y="1027"/>
-        </scene>
-        <!--BookStoreViewController-->
-        <scene sceneID="jSz-le-v1Y">
-            <objects>
-                <viewControllerPlaceholder storyboardName="BookStoreViewController" referencedIdentifier="BookStoreViewController" id="YSE-j2-Tnh" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="EQs-WH-Fr7"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qNr-Vw-MBF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="99" y="1025"/>
-        </scene>
         <!--Social View Controller-->
         <scene sceneID="Ero-8t-LOC">
             <objects>
@@ -193,20 +152,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Laa-6T-bK8">
-                                <rect key="frame" x="0.0" y="47" width="390" height="763"/>
+                                <rect key="frame" x="0.0" y="87" width="390" height="723"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbh-WI-FnV">
+                                <rect key="frame" x="0.0" y="55" width="77.333333333333329" height="34.333333333333343"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system" title="Back"/>
+                                <connections>
+                                    <action selector="backBtnTapped:" destination="3UP-WW-p6E" eventType="touchUpInside" id="9IB-hs-hL5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mfY-bC-6lk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Laa-6T-bK8" firstAttribute="top" secondItem="mfY-bC-6lk" secondAttribute="top" id="WdM-uk-afL"/>
+                            <constraint firstItem="Laa-6T-bK8" firstAttribute="top" secondItem="mfY-bC-6lk" secondAttribute="top" constant="40" id="WdM-uk-afL"/>
                             <constraint firstItem="Laa-6T-bK8" firstAttribute="leading" secondItem="mfY-bC-6lk" secondAttribute="leading" id="c4v-d5-gBB"/>
+                            <constraint firstItem="qbh-WI-FnV" firstAttribute="leading" secondItem="mfY-bC-6lk" secondAttribute="leading" id="chu-fT-H3l"/>
                             <constraint firstItem="mfY-bC-6lk" firstAttribute="trailing" secondItem="Laa-6T-bK8" secondAttribute="trailing" id="lsM-aB-wCI"/>
+                            <constraint firstItem="qbh-WI-FnV" firstAttribute="top" secondItem="v4g-2l-84b" secondAttribute="top" constant="55" id="uj8-lb-1l5"/>
                             <constraint firstItem="mfY-bC-6lk" firstAttribute="bottom" secondItem="Laa-6T-bK8" secondAttribute="bottom" id="zWk-ns-2AY"/>
                         </constraints>
                     </view>
@@ -217,7 +186,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zor-mQ-Bx9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1432" y="-63"/>
+            <point key="canvasLocation" x="3289.2307692307691" y="-63.270142180094787"/>
+        </scene>
+        <!--NickNameViewController-->
+        <scene sceneID="ywf-Tl-0hX">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="NickNameViewController" storyboardName="NickNameViewController" referencedIdentifier="NickNameViewController" id="YQJ-7R-e6V" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zW6-0r-ZAh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4220" y="-15"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iWt-fE-Wds">
@@ -226,7 +203,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="dI2-Qj-SYx"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="10k-ue-9bt">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -260,6 +237,7 @@
     </scenes>
     <resources>
         <image name="CampusIn_logo" width="181" height="62.5"/>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
