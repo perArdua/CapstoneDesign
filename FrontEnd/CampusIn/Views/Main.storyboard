@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GIo-Gp-z0y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GIo-Gp-z0y">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -120,6 +120,9 @@
                                         <rect key="frame" x="124" y="0.0" width="83" height="34.333333333333336"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="자유"/>
+                                        <connections>
+                                            <segue destination="9XX-TD-tIs" kind="show" id="h7n-qI-HIh"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLn-Vb-4Rz">
                                         <rect key="frame" x="248" y="0.0" width="83" height="34.333333333333336"/>
@@ -142,6 +145,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOJ-3U-Jt6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1523.0769230769231" y="625.5924170616114"/>
+        </scene>
+        <!--GeneralPostingViewController-->
+        <scene sceneID="eHb-Tn-TTt">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GeneralPostingViewController" referencedIdentifier="GeneralPostingViewController" id="9XX-TD-tIs" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="2o7-aS-TBb"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wl6-tS-C0H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1524" y="1030"/>
         </scene>
         <!--Social View Controller-->
         <scene sceneID="Ero-8t-LOC">
