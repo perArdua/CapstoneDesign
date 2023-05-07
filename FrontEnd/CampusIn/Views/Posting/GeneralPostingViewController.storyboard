@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -165,6 +165,9 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="완료"/>
+                                <connections>
+                                    <action selector="doneBtnTapped:" destination="2cd-gg-HaX" eventType="touchUpInside" id="Dai-f0-uTC"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="M1I-c6-CyR">
                                 <rect key="frame" x="0.0" y="87" width="390" height="573"/>
@@ -386,6 +389,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentTV" destination="cib-RW-Uge" id="pMX-h8-haN"/>
                         <outlet property="img0" destination="A8g-qJ-0VB" id="AjQ-Kf-kNr"/>
                         <outlet property="img1" destination="rgK-Bp-Bq2" id="JUr-N6-dv5"/>
                         <outlet property="img2" destination="bWf-vt-AFK" id="g8R-gv-R7f"/>
@@ -396,6 +400,7 @@
                         <outlet property="stView2" destination="nos-Rv-f9q" id="h39-hK-RLw"/>
                         <outlet property="stView3" destination="yUo-5b-Wae" id="FwS-y2-Igk"/>
                         <outlet property="stView4" destination="ekq-2m-Ai7" id="iLo-bu-8hr"/>
+                        <outlet property="titleTV" destination="wII-hj-f9T" id="9df-ho-99W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gO7-4v-Akh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

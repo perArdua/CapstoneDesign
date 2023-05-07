@@ -32,16 +32,20 @@ class GeneralPostingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        array = manager.getPostings()
-        view.addSubview(addBtn)
-        addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.dataSource = self
+        tableView.delegate = self
+        array = manager.getPostings()
+        
+        view.addSubview(addBtn)
+        addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
         addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 105, width: 60, height: 60)
+        print("array count")
+        print(array.count)
+        tableView.reloadData()
     }
     
     //MARK: 글쓰기 버튼을 누를 경우 실행
@@ -58,7 +62,7 @@ extension GeneralPostingViewController : UITableViewDelegate, UITableViewDataSou
     
     //테이블 뷰에 몇개의 셀을 보여줄 것인지 결정하는 함수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return array.count
     }
     
     //각 테이블 뷰 셀의 내용을 결정하는 함수
