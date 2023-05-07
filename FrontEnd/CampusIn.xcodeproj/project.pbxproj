@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		313F7DB82A07DE7500182CDA /* GeneralPostingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313F7DB72A07DE7500182CDA /* GeneralPostingSearchViewController.swift */; };
 		3165CBE82A03FE24005E34AC /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165CBE72A03FE24005E34AC /* temp.swift */; };
 		3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */; };
 		3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165EDC32A02A3C100D91856 /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 		3165EDE52A02A3C100D91856 /* CampusInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165EDE42A02A3C100D91856 /* CampusInUITests.swift */; };
 		3165EDE72A02A3C100D91856 /* CampusInUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165EDE62A02A3C100D91856 /* CampusInUITestsLaunchTests.swift */; };
 		3165EDF72A02A86700D91856 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165EDF62A02A86700D91856 /* Main.storyboard */; };
+		317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317667BB2A07EFEB002F829C /* GeneralSearchTableViewCell.swift */; };
 		31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD9162A054DE20068689B /* GeneralPostingViewController.swift */; };
 		31FCD91D2A054E050068689B /* GeneralPostingCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD91A2A054E050068689B /* GeneralPostingCommentTableViewCell.swift */; };
 		31FCD91E2A054E050068689B /* GeneralPostingContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD91B2A054E050068689B /* GeneralPostingContentTableViewCell.swift */; };
@@ -52,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		313F7DB72A07DE7500182CDA /* GeneralPostingSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingSearchViewController.swift; sourceTree = "<group>"; };
 		3165CBE72A03FE24005E34AC /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = temp.swift; path = CampusIn/Models/temp.swift; sourceTree = SOURCE_ROOT; };
 		3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralPostingViewController.storyboard; sourceTree = "<group>"; };
 		3165EDC02A02A3C100D91856 /* CampusIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +70,7 @@
 		3165EDE42A02A3C100D91856 /* CampusInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusInUITests.swift; sourceTree = "<group>"; };
 		3165EDE62A02A3C100D91856 /* CampusInUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusInUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3165EDF62A02A86700D91856 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		317667BB2A07EFEB002F829C /* GeneralSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSearchTableViewCell.swift; sourceTree = "<group>"; };
 		31FCD9162A054DE20068689B /* GeneralPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingViewController.swift; sourceTree = "<group>"; };
 		31FCD91A2A054E050068689B /* GeneralPostingCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingCommentTableViewCell.swift; sourceTree = "<group>"; };
 		31FCD91B2A054E050068689B /* GeneralPostingContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingContentTableViewCell.swift; sourceTree = "<group>"; };
@@ -80,7 +84,7 @@
 		5D4ADF962A054A1B00195CA9 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		5D4ADF9B2A0555BA00195CA9 /* NickNameViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NickNameViewController.storyboard; sourceTree = "<group>"; };
 		5D4ADF9D2A0555D900195CA9 /* NickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
-		5D4ADF9F2A0555E600195CA9 /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyChain.swift; path = ../../../campusKeyChain/CapstonDesign/Models/KeyChain.swift; sourceTree = "<group>"; };
+		5D4ADF9F2A0555E600195CA9 /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		60AC818441A9B94A12F2B12F /* Pods-CampusIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusIn.release.xcconfig"; path = "Target Support Files/Pods-CampusIn/Pods-CampusIn.release.xcconfig"; sourceTree = "<group>"; };
 		B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -217,6 +221,7 @@
 		31FCD9152A054DD70068689B /* GeneralPosting */ = {
 			isa = PBXGroup;
 			children = (
+				313F7DB72A07DE7500182CDA /* GeneralPostingSearchViewController.swift */,
 				31FCD9162A054DE20068689B /* GeneralPostingViewController.swift */,
 				31FCD9262A054F380068689B /* GeneralPostingDetailViewController.swift */,
 				31FCD9282A0551E00068689B /* GeneralPostingAddViewController.swift */,
@@ -237,6 +242,7 @@
 			children = (
 				31FCD91A2A054E050068689B /* GeneralPostingCommentTableViewCell.swift */,
 				31FCD91B2A054E050068689B /* GeneralPostingContentTableViewCell.swift */,
+				317667BB2A07EFEB002F829C /* GeneralSearchTableViewCell.swift */,
 				31FCD91C2A054E050068689B /* GeneralPostingTableViewCell.swift */,
 			);
 			path = GeneralPosting;
@@ -453,6 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				313F7DB82A07DE7500182CDA /* GeneralPostingSearchViewController.swift in Sources */,
 				3165EDC82A02A3C100D91856 /* ViewController.swift in Sources */,
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
 				3165EDC62A02A3C100D91856 /* SceneDelegate.swift in Sources */,
@@ -466,6 +473,7 @@
 				31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */,
 				5D4ADF9E2A0555D900195CA9 /* NickNameViewController.swift in Sources */,
 				31FCD9242A054E2D0068689B /* GeneralPostingContent.swift in Sources */,
+				317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */,
 				31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */,
 				31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */,
 				3165CBE82A03FE24005E34AC /* temp.swift in Sources */,
@@ -645,6 +653,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -673,6 +682,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
