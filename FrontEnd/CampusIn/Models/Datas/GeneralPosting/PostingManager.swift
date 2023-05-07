@@ -8,7 +8,7 @@
 import UIKit
 
 class PostingManager{
-    var postingArray: [GeneralPostingContent] = [
+    static var postingArray: [GeneralPostingContent] = [
         GeneralPostingContent(title: "첫번째 글", content: "헤일 그리워 추억과 동경과 오면 내린 듯합니다. 멀듯이, 시인의 불러 소녀들의 차 위에 봅니다. 멀듯이, 피어나듯이 별 위에도 봅니다. 된 오면 어머니, 나는 가난한 내 밤을 하늘에는 이 버리었습니다. 위에 이름과, 내 하나에 비둘기, 헤는 위에 있습니다. 했던 지나고 아스라히 너무나 시인의 않은 사람들의 별 까닭입니다. 아직 딴은 이네들은 언덕 하나의 너무나 하나에 내일 파란 까닭입니다. 이름과, 별 남은 위에 무엇인지 이런 경, 헤는 아침이 듯합니다. 이웃 가득 애기 이름을 소녀들의 말 봅니다.", date: "04/15", user: "이동현", img0: UIImage(named: "1"), img1: UIImage(named: "3"), img2: UIImage(named: "2")),
         GeneralPostingContent(title: "두번째 글", content: "시간 복잡도 계산하는 꿀팁있으면 알려주세요,, 배고파요,, 알려주세요,, 배고파요,,", date: "04/15", user: "최다경", img0:UIImage(named: "4"), img1: UIImage(named: "5")),
         GeneralPostingContent(title: "세번째 글", content: "  이름과, 풀이 아무 경, 보고, 이름을 프랑시스 나의 있습니다. 나는 차 같이 별을 토끼, 별 한 이제 듯합니다. 하나에 파란 나는 릴케 어머님, 하나에 듯합니다. 지나가는 헤는 옥 이름과, 하나에 어머님, 나의 거외다. 하나에 경, 이름자 봅니다. 멀리 추억과 지나가는 듯합니다. 흙으로 별을 이름과, 자랑처럼 봅니다. 별 어머니, 마디씩 거외다. 까닭이요, 당신은 경, 어머니 멀듯이, 듯합니다.", date: "04/14", user: "이동현", img0: UIImage(named: "4"), img1: UIImage(named: "9"), img2: UIImage(named: "6"), img3: UIImage(named: "10")),
@@ -29,6 +29,9 @@ class PostingManager{
     ]
     
     func getPostings()-> [GeneralPostingContent]{
-        return postingArray
+        return PostingManager.postingArray
+    }
+    func setPostings(post : GeneralPostingContent){
+        PostingManager.postingArray.append(post)
     }
 }

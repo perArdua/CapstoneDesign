@@ -15,39 +15,42 @@ class GeneralPostingViewController: UIViewController {
     var manager = PostingManager()
     var array :[GeneralPostingContent] = []
     
-    var addBtn = UIButton(type: .custom)
+    let addBtn: UIButton = {
+        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
+        btn.layer.masksToBounds = true
+        btn.layer.cornerRadius = 30
+        btn.tintColor = .white
+        btn.backgroundColor = .gray
+        btn.layer.shadowRadius = 6
+        btn.layer.shadowOpacity = 0.3
+        btn.setImage(UIImage(systemName: "pencil.tip.crop.circle"), for: .normal )
+        btn.setPreferredSymbolConfiguration(.init(pointSize: 30, weight: .regular, scale: .default), forImageIn: .normal)
+
+        return btn
+    }()
     
-    //MARK: 글쓰기 버튼을 테이블 뷰 위에 띄우는 함수
-    func floatingButton(){
-        addBtn.frame = CGRect(x: self.view.frame.size.width - 60, y: self.view.frame.size.height - 60, width: 40, height: 40)
-        addBtn.setImage(UIImage(named: "add"), for: .normal)
-        addBtn.backgroundColor = .white
-        addBtn.clipsToBounds = true
-        addBtn.layer.cornerRadius = 4
-        addBtn.layer.borderColor = UIColor.clear.cgColor
-        addBtn.layer.borderWidth = 3.0
-        addBtn.addTarget(self, action: #selector(addBtnTapped), for:
-                .touchUpInside)
-        if let window = UIApplication.shared.keyWindow {
-            window.addSubview(addBtn)
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        array = manager.getPostings()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        floatingButton()
+        tableView.dataSource = self
+        tableView.delegate = self
+        array = manager.getPostings()
+        
+        view.addSubview(addBtn)
+        addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
+        addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 105, width: 60, height: 60)
+        print("array count")
+        print(array.count)
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        addBtn.removeFromSuperview()
     }
     
     //MARK: 글쓰기 버튼을 누를 경우 실행
@@ -75,7 +78,7 @@ extension GeneralPostingViewController : UITableViewDelegate, UITableViewDataSou
     
     //테이블 뷰에 몇개의 셀을 보여줄 것인지 결정하는 함수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return array.count
     }
     
     //각 테이블 뷰 셀의 내용을 결정하는 함수
