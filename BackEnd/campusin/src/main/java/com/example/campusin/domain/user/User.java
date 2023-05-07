@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "USERS")
-public class Users extends BaseTimeEntity {
+public class User extends BaseTimeEntity {
     @JsonIgnore
     @Id
     @Column(name = "USER_SEQ")
@@ -66,7 +66,7 @@ public class Users extends BaseTimeEntity {
 //    private List<Comment> commentList = new ArrayList<>();
 
     @Builder
-    public Users(
+    public User(
             @NotNull @Size(max = 64) String userId,
             @NotNull @Size(max = 100) String username,
             @NotNull @Size(max = 512) String profileImageUrl,
