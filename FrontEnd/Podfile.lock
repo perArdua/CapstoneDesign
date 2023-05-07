@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (5.6.4)
   - BSImagePicker (3.3.1)
+  - lottie-ios (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
   - BSImagePicker (~> 3.1)
+  - lottie-ios
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - BSImagePicker
+    - lottie-ios
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
+  lottie-ios: 809ecf2d460ed650a6aed7aa88b2ec45fab4779c
 
-PODFILE CHECKSUM: 32f7b5065be519a91b2852d41dd618c8da271a90
+PODFILE CHECKSUM: f127f9c67063436c48e05353cf9a7fbd8c4935e1
 
 COCOAPODS: 1.12.0

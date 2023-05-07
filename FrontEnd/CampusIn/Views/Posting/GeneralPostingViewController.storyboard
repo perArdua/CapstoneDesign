@@ -799,6 +799,9 @@
                                             <imageReference key="image" image="magnifyingglass.circle" catalog="system" variableValue="1"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
                                         </state>
+                                        <connections>
+                                            <action selector="searchBtnTapped:" destination="V7a-hh-9Ce" eventType="touchUpInside" id="78B-fp-RyA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -806,7 +809,7 @@
                                 <rect key="frame" x="0.0" y="161" width="390" height="649"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GeneralPostingTableViewCell" rowHeight="86" id="ShZ-na-lkb" customClass="GeneralSearchTableViewCell" customModule="CampusIn" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GeneralSearchTableViewCell" rowHeight="86" id="ShZ-na-lkb" customClass="GeneralSearchTableViewCell" customModule="CampusIn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="390" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ShZ-na-lkb" id="aMB-PT-0y0">
@@ -903,6 +906,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="nvp-PK-BOO"/>
                     <connections>
+                        <outlet property="searchTF" destination="l2B-aL-as1" id="PD4-HU-Ihw"/>
                         <outlet property="tableView" destination="pX4-nq-UI1" id="m9z-E2-vu7"/>
                     </connections>
                 </viewController>
