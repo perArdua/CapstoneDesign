@@ -4,7 +4,7 @@ package com.example.campusin.domain.oauth;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.domain.user.Users;
+import com.example.campusin.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +28,7 @@ import java.util.Map;
 public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
     private final String userId;
     private final String password;
+    private final Long userSeq;
     private final ProviderType providerType;
     private final RoleType roleType;
     private final Collection<GrantedAuthority> authorities;
@@ -88,18 +89,19 @@ public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
         return null;
     }
 
-    public static UserPrincipal create(Users users) {
+    public static UserPrincipal create(User user) {
         return new UserPrincipal(
-                users.getUserId(),
-                users.getPassword(),
-                users.getProviderType(),
+                user.getUserId(),
+                user.getPassword(),
+                user.getUserSeq(),
+                user.getProviderType(),
                 RoleType.USER,
                 Collections.singletonList(new SimpleGrantedAuthority(RoleType.USER.getCode()))
         );
     }
 
-    public static UserPrincipal create(Users users, Map<String, Object> attributes) {
-        UserPrincipal userPrincipal = create(users);
+    public static UserPrincipal create(User user, Map<String, Object> attributes) {
+        UserPrincipal userPrincipal = create(user);
         userPrincipal.setAttributes(attributes);
 
         return userPrincipal;
