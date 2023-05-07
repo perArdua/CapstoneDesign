@@ -32,7 +32,6 @@ class GeneralPostingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,27 +48,12 @@ class GeneralPostingViewController: UIViewController {
         tableView.reloadData()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
     //MARK: 글쓰기 버튼을 누를 경우 실행
     @objc func addBtnTapped(){
         let nextVC = storyboard?.instantiateViewController(withIdentifier: "GeneralPostingAddViewController") as! GeneralPostingAddViewController
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true, completion: nil)
         print("addBtn tapped")
-    }
-}
-
-//MARK: ios13 버전 이상일 경우 keyWindow가 deprecated되기 떄문에 아래 코드를 추가해주어야 한다.
-extension UIWindow{
-    static var key: UIWindow?{
-        if #available(iOS 13, *){
-            return UIApplication.shared.windows.first{ $0.isKeyWindow}
-        }else{
-            return UIApplication.shared.keyWindow
-        }
     }
 }
  
