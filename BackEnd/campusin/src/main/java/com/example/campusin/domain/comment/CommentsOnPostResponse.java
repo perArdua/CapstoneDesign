@@ -1,6 +1,6 @@
 package com.example.campusin.domain.comment;
 
-import com.example.campusin.domain.user.Users;
+import com.example.campusin.domain.user.User;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import com.querydsl.core.annotations.QueryProjection;
@@ -23,13 +23,13 @@ public class CommentsOnPostResponse extends CommentResponse{
     }
 
     public static CommentsOnPostResponse of(Comment comment) {
-        Users users = comment.getUsers();
+        User user = comment.getUser();
         Comment parent = comment.getParent();
-        String name = users.getUsername();
-        String content = comment.getIsDelete() || users == null ? "삭제된 댓글입니다." : comment.getContent();
+        String name = user.getUsername();
+        String content = comment.getIsDelete() || user == null ? "삭제된 댓글입니다." : comment.getContent();
 
         return new CommentsOnPostResponse(
-                users == null ? null : users.getUserId(),
+                user == null ? null : user.getUserId(),
                 parent == null ? null : parent.getId(),
                 comment.getId(),
                 name,

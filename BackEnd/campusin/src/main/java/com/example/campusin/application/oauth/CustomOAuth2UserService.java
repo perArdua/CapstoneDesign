@@ -5,7 +5,7 @@ package com.example.campusin.application.oauth;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.domain.user.Users;
+import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.user.UserRepository;
 import com.example.campusin.domain.oauth.ProviderType;
 import com.example.campusin.domain.oauth.RoleType;
@@ -48,26 +48,26 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         ProviderType providerType = ProviderType.valueOf(userRequest.getClientRegistration().getRegistrationId().toUpperCase());
 
         OAuth2UserInfo userInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(providerType, user.getAttributes());
-        Users savedUsers = userRepository.findByUserId(userInfo.getId());
+        User savedUser = userRepository.findByUserId(userInfo.getId());
 
-        if (savedUsers != null) {
-            if (providerType != savedUsers.getProviderType()) {
+        if (savedUser != null) {
+            if (providerType != savedUser.getProviderType()) {
                 throw new OAuthProviderMissMatchException(
                         "Looks like you're signed up with " + providerType +
-                        " account. Please use your " + savedUsers.getProviderType() + " account to login."
+                        " account. Please use your " + savedUser.getProviderType() + " account to login."
                 );
             }
-            updateUser(savedUsers, userInfo);
+            updateUser(savedUser, userInfo);
         } else {
-            savedUsers = createUser(userInfo, providerType);
+            savedUser = createUser(userInfo, providerType);
         }
 
-        return UserPrincipal.create(savedUsers, user.getAttributes());
+        return UserPrincipal.create(savedUser, user.getAttributes());
     }
 
-    private Users createUser(OAuth2UserInfo userInfo, ProviderType providerType) {
+    private User createUser(OAuth2UserInfo userInfo, ProviderType providerType) {
         LocalDateTime now = LocalDateTime.now();
-        Users users = new Users(
+        User user = new User(
                 userInfo.getId(),
                 userInfo.getName(),
                 userInfo.getImageUrl(),
@@ -77,18 +77,18 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 now
         );
 
-        return userRepository.saveAndFlush(users);
+        return userRepository.saveAndFlush(user);
     }
 
-    private Users updateUser(Users users, OAuth2UserInfo userInfo) {
-        if (userInfo.getName() != null && !users.getUsername().equals(userInfo.getName())) {
-            users.setUsername(userInfo.getName());
+    private User updateUser(User user, OAuth2UserInfo userInfo) {
+        if (userInfo.getName() != null && !user.getUsername().equals(userInfo.getName())) {
+            user.setUsername(userInfo.getName());
         }
 
-        if (userInfo.getImageUrl() != null && !users.getProfileImageUrl().equals(userInfo.getImageUrl())) {
-            users.setProfileImageUrl(userInfo.getImageUrl());
+        if (userInfo.getImageUrl() != null && !user.getProfileImageUrl().equals(userInfo.getImageUrl())) {
+            user.setProfileImageUrl(userInfo.getImageUrl());
         }
 
-        return users;
+        return user;
     }
 }

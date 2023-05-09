@@ -2,7 +2,7 @@ package com.example.campusin.domain.comment;
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.post.Post;
-import com.example.campusin.domain.user.Users;
+import com.example.campusin.domain.user.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -39,7 +39,7 @@ public class Comment extends BaseTimeEntity {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id")
-    private Users users;
+    private User user;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "post_id")
@@ -49,10 +49,10 @@ public class Comment extends BaseTimeEntity {
     private Boolean isDelete;
 
     @Builder
-    public Comment(Comment parent,Users users, Post post, String content) {
+    public Comment(Comment parent,User user, Post post, String content) {
 
         setPost(post);
-        this.users = users;
+        this.user = user;
         setParent(parent);
         this.isDelete = false;
         this.content = content;

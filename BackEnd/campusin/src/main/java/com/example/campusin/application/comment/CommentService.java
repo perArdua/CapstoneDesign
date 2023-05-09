@@ -2,7 +2,7 @@ package com.example.campusin.application.comment;
 
 import com.example.campusin.domain.comment.*;
 import com.example.campusin.domain.post.Post;
-import com.example.campusin.domain.user.Users;
+import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.comment.CommentRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.user.UserRepository;
@@ -25,11 +25,11 @@ public class CommentService {
 
     public CommentCreateResponse createComment(String userId, CommentCreateDto commentCreateDto){
 
-        Users currentUser = getCurrentUser(userId);
+        User currentUser = getCurrentUser(userId);
         Post post = getPost(commentCreateDto.getPostId());
         Comment parent = commentCreateDto.getParentId() == null ? null : getComment(commentCreateDto.getParentId());
         Comment comment = Comment.builder()
-                .users(currentUser)
+                .user(currentUser)
                 .post(post)
                 .parent(parent)
                 .content(commentCreateDto.getContent())
@@ -59,7 +59,7 @@ public class CommentService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 comment 없습니다 id = " + commentId));
     }
 
-    private Users getCurrentUser(String userId){
+    private User getCurrentUser(String userId){
         return userRepository.findByUserId(userId);
     }
 
