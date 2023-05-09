@@ -5,7 +5,7 @@ package com.example.campusin.application.oauth;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.domain.user.Users;
+import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.user.UserRepository;
 import com.example.campusin.domain.oauth.UserPrincipal;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +22,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users users = userRepository.findByUserId(username);
-        if (users == null) {
+        User user = userRepository.findByUserId(username);
+        if (user == null) {
             throw new UsernameNotFoundException("Can not find username.");
         }
-        return UserPrincipal.create(users);
+        return UserPrincipal.create(user);
     }
 }

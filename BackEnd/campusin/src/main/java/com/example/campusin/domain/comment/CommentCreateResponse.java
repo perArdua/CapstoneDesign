@@ -1,7 +1,7 @@
 package com.example.campusin.domain.comment;
 
 import com.example.campusin.domain.post.Post;
-import com.example.campusin.domain.user.Users;
+import com.example.campusin.domain.user.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +27,7 @@ public class CommentCreateResponse {
         this.content = content;
     }
 
-    public static CommentCreateResponse of(Users user, Post post, Comment comment){
+    public static CommentCreateResponse of(User user, Post post, Comment comment){
         Comment parent = comment.getParent();
         Long parentId = parent == null ? null : parent.getId();
 
