@@ -2,6 +2,7 @@ package com.example.campusin.domain.post;
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.board.Board;
+import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.photo.Photo;
 import com.example.campusin.domain.post.dto.request.PostUpdateRequest;
 import com.example.campusin.domain.user.User;
@@ -45,8 +46,8 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name = "board_id", referencedColumnName = "board_id")
     private Board board;
 
-//    @OneToMany(mappedBy = "post")
-//    private List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
@@ -89,5 +90,9 @@ public class Post extends BaseTimeEntity {
     public void removePhoto(final Photo photo) {
         photos.remove(photo);
         photo.setPost(null);
+    }
+    
+    public List<Comment> getCommentList() {
+        return comments;
     }
 }
