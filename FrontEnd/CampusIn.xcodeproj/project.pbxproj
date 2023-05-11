@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311E085B2A0D37D20048F5FB /* StudyManage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311E085A2A0D37D20048F5FB /* StudyManage.storyboard */; };
 		313F7DB82A07DE7500182CDA /* GeneralPostingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313F7DB72A07DE7500182CDA /* GeneralPostingSearchViewController.swift */; };
 		3165CBE82A03FE24005E34AC /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165CBE72A03FE24005E34AC /* temp.swift */; };
 		3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		311E085A2A0D37D20048F5FB /* StudyManage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyManage.storyboard; sourceTree = "<group>"; };
 		313F7DB72A07DE7500182CDA /* GeneralPostingSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingSearchViewController.swift; sourceTree = "<group>"; };
 		3165CBE72A03FE24005E34AC /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = temp.swift; path = CampusIn/Models/temp.swift; sourceTree = SOURCE_ROOT; };
 		3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralPostingViewController.storyboard; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				3165CBE92A03FE5B005E34AC /* Posting */,
 				3165EDF62A02A86700D91856 /* Main.storyboard */,
 				5D4ADF9B2A0555BA00195CA9 /* NickNameViewController.storyboard */,
+				311E085A2A0D37D20048F5FB /* StudyManage.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				3165EDD02A02A3C100D91856 /* LaunchScreen.storyboard in Resources */,
 				3165EDCD2A02A3C100D91856 /* Assets.xcassets in Resources */,
 				5D4ADF9C2A0555BA00195CA9 /* NickNameViewController.storyboard in Resources */,
+				311E085B2A0D37D20048F5FB /* StudyManage.storyboard in Resources */,
 				3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
