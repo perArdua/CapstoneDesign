@@ -19,8 +19,6 @@ class NickNameViewController: UIViewController, UITextFieldDelegate {
         nickNameTF.delegate = self
         setUpTF()
         NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextField.textDidChangeNotification, object: nickNameTF)
-        
-        
     }
     
     func setUpTF(){
