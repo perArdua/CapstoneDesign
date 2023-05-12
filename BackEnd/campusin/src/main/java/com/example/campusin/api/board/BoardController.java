@@ -54,4 +54,9 @@ public class BoardController {
     ) {
         return ApiResponse.success("게시글 생성", postService.createPost(boardId, principal.getUserSeq(), request));
     }
+
+    @GetMapping("/init")
+    public ApiResponse initBoard() {
+        return ApiResponse.success("게시판 초기화", postService.initBoard());
+    }
 }
