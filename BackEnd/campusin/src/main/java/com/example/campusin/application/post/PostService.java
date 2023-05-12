@@ -1,6 +1,7 @@
 package com.example.campusin.application.post;
 
 import com.example.campusin.domain.board.Board;
+import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
 import com.example.campusin.domain.photo.Photo;
 import com.example.campusin.domain.post.Post;
@@ -91,6 +92,18 @@ public class PostService {
                 .map(PostSimpleResponse::new);
     }
 
+
+    public boolean initBoard() {
+        if (boardRepository.count() == 0) {
+            for (BoardType boardType : BoardType.values()) {
+                boardRepository.save(Board.builder()
+                        .boardType(boardType)
+                        .build());
+            }
+            return true;
+        }
+        return false;
+    }
     private Board findBoard(Long boardId) {
         return boardRepository.findById(boardId).orElseThrow(
                 () -> new IllegalArgumentException("BOARD NOT FOUND")
