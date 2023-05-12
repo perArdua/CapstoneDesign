@@ -50,7 +50,7 @@ public class BoardController {
     public ApiResponse createPost(
             @PathVariable(name = "boardId") Long boardId,
             @AuthenticationPrincipal UserPrincipal principal,
-            @ModelAttribute @Validated PostCreateRequest request
+            @RequestBody @Validated PostCreateRequest request
     ) {
         return ApiResponse.success("게시글 생성", postService.createPost(boardId, principal.getUserSeq(), request));
     }
