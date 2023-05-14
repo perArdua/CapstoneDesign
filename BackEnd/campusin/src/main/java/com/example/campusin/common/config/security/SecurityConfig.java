@@ -5,6 +5,7 @@ package com.example.campusin.common.config.security;
  * Github : http://github.com/perArdua
  */
 
+import com.example.campusin.common.config.swagger.AuthenticatedMatchers;
 import com.example.campusin.infra.user.UserRefreshTokenRepository;
 import com.example.campusin.common.config.properties.AppProperties;
 import com.example.campusin.common.config.properties.CorsProperties;
@@ -42,7 +43,7 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig{
+public class SecurityConfig {
 
     private final CorsProperties corsProperties;
     private final AppProperties appProperties;
@@ -52,8 +53,8 @@ public class SecurityConfig{
     private final TokenAccessDeniedHandler tokenAccessDeniedHandler;
     private final UserRefreshTokenRepository userRefreshTokenRepository;
     /*
-    * UserDetailsService 설정
-    * */
+     * UserDetailsService 설정
+     * */
 
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.userDetailsService(userDetailsService)
@@ -63,45 +64,48 @@ public class SecurityConfig{
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                    .cors()
+                .cors()
                 .and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                    .csrf().disable()
-                    .formLogin().disable()
-                    .httpBasic().disable()
-                    .exceptionHandling()
-                    .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-                    .accessDeniedHandler(tokenAccessDeniedHandler)
+                .csrf().disable()
+                .formLogin().disable()
+                .httpBasic().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .accessDeniedHandler(tokenAccessDeniedHandler)
                 .and()
-                    .authorizeRequests()
-                    .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                    .antMatchers("/api/**").hasAnyAuthority(RoleType.USER.getCode())
-                    .antMatchers("/api/**/admin/**").hasAnyAuthority(RoleType.ADMIN.getCode())
-                    .anyRequest().authenticated()
+                .authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .antMatchers("/api/**").hasAnyAuthority(RoleType.USER.getCode())
+                .antMatchers("/api/**/admin/**").hasAnyAuthority(RoleType.ADMIN.getCode())
+                //--수정
+                .antMatchers(AuthenticatedMatchers.swaggerArray).permitAll()
+                //.antMatchers("/","/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                    .oauth2Login()
-                    .authorizationEndpoint()
-                    .baseUri("/oauth2/authorization")
-                    .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
+                .oauth2Login()
+                .authorizationEndpoint()
+                .baseUri("/oauth2/authorization")
+                .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
                 .and()
-                    .redirectionEndpoint()
-                    .baseUri("/*/oauth2/code/*")
+                .redirectionEndpoint()
+                .baseUri("/*/oauth2/code/*")
                 .and()
-                    .userInfoEndpoint()
-                    .userService(oAuth2UserService)
+                .userInfoEndpoint()
+                .userService(oAuth2UserService)
                 .and()
-                    .successHandler(oAuth2AuthenticationSuccessHandler())
-                    .failureHandler(oAuth2AuthenticationFailureHandler());
+                .successHandler(oAuth2AuthenticationSuccessHandler())
+                .failureHandler(oAuth2AuthenticationFailureHandler());
 
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
     /*
-    * auth 매니저 설정
-    * */
+     * auth 매니저 설정
+     * */
 //    @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Bean
     protected AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -109,33 +113,33 @@ public class SecurityConfig{
     }
 
     /*
-    * security 설정 시, 사용할 인코더 설정
-    * */
+     * security 설정 시, 사용할 인코더 설정
+     * */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     /*
-    * 토큰 필터 설정
-    * */
+     * 토큰 필터 설정
+     * */
     @Bean
     public TokenAuthenticationFilter tokenAuthenticationFilter() {
         return new TokenAuthenticationFilter(tokenProvider);
     }
 
     /*
-    * 쿠키 기반 인가 Repository
-    * 인가 응답을 연계 하고 검증할 때 사용.
-    * */
+     * 쿠키 기반 인가 Repository
+     * 인가 응답을 연계 하고 검증할 때 사용.
+     * */
     @Bean
     public OAuth2AuthorizationRequestBasedOnCookieRepository oAuth2AuthorizationRequestBasedOnCookieRepository() {
         return new OAuth2AuthorizationRequestBasedOnCookieRepository();
     }
 
     /*
-    * Oauth 인증 성공 핸들러
-    * */
+     * Oauth 인증 성공 핸들러
+     * */
     @Bean
     public OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler() {
         return new OAuth2AuthenticationSuccessHandler(
@@ -155,8 +159,8 @@ public class SecurityConfig{
     }
 
     /*
-    * Cors 설정
-    * */
+     * Cors 설정
+     * */
     @Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource corsConfigSource = new UrlBasedCorsConfigurationSource();
