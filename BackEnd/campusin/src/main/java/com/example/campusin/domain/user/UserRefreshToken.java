@@ -21,16 +21,15 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "USER_REFRESH_TOKEN")
 public class UserRefreshToken {
-    @JsonIgnore
     @Id
     @Column(name = "REFRESH_TOKEN_SEQ")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long refreshTokenSeq;
 
-    @Column(name = "USER_ID", length = 64, unique = true)
+    @Column(name = "LOGIN_ID", length = 64, unique = true)
     @NotNull
     @Size(max = 64)
-    private String userId;
+    private String loginId;
 
     @Column(name = "REFRESH_TOKEN", length = 256)
     @NotNull
@@ -38,10 +37,10 @@ public class UserRefreshToken {
     private String refreshToken;
 
     public UserRefreshToken(
-            @NotNull @Size(max = 64) String userId,
+            @NotNull @Size(max = 64) String loginId,
             @NotNull @Size(max = 256) String refreshToken
     ) {
-        this.userId = userId;
+        this.loginId = loginId;
         this.refreshToken = refreshToken;
     }
 }

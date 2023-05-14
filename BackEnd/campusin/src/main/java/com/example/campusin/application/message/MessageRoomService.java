@@ -91,7 +91,7 @@ public class MessageRoomService {
         Pageable pageable = PageRequest.of(0, 20, Sort.by("createdAt").descending());
         Page<Message> messages = messageRoomRepository.findMessagesByMessageRoomId(
                 messageRoom.getId(), pageable);
-        User interlocutor = currentUser.getEmail() == messageRoom.getInitialSender().getEmail()
+        User interlocutor = currentUser.getLoginId() == messageRoom.getInitialSender().getLoginId()
                 ? messageRoom.getInitialReceiver() : messageRoom.getInitialSender();
         return MessageRoomResponse.builder()
                 .messages(messages)
@@ -158,8 +158,8 @@ public class MessageRoomService {
 
     // 쪽지방 수정(삭제, 차단) 권한 확인
     private void checkUserAuthority(User user, MessageRoom messageRoom) {
-        if (!(messageRoom.getInitialSender().getEmail() == user.getEmail()) &&
-                !(messageRoom.getInitialReceiver().getEmail() == user.getEmail())) {
+        if (!(messageRoom.getInitialSender().getLoginId() == user.getLoginId()) &&
+                !(messageRoom.getInitialReceiver().getLoginId() == user.getLoginId())) {
             throw new IllegalArgumentException("PERMISSION DENIED EXCEPTION : NO PERMISSION TO SEND MESSAGE");
         }
     }

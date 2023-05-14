@@ -14,13 +14,13 @@ import javax.persistence.*;
  * Github : http://github.com/perArdua
  */
 @Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "UPDATE photo SET deleted_at = CURRENT_TIMESTAMP where id = ?")
+@SQLDelete(sql = "UPDATE photo SET deleted_at = CURRENT_TIMESTAMP where photo_id = ?")
 @Getter
 @NoArgsConstructor
 @Entity
 public class Photo extends BaseTimeEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "photo_id")
     private Long id;
 

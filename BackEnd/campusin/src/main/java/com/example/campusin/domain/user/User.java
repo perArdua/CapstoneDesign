@@ -23,19 +23,19 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "UPDATE users SET deleted_at = CURRENT_TIMESTAMP where id = ?")
+@SQLDelete(sql = "UPDATE users SET deleted_at = CURRENT_TIMESTAMP where USER_ID = ?")
 @Table(name = "USERS")
 public class User extends BaseTimeEntity {
-    @JsonIgnore
+
     @Id
     @Column(name = "USER_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "EMAIL", length = 64, unique = true)
+    @Column(name = "LOGIN_ID", length = 64, unique = true)
     @NotNull
     @Size(max = 64)
-    private String email;
+    private String loginId;
 
     @Column(name = "USERNAME", length = 100, unique = true)
     @NotNull
@@ -71,7 +71,7 @@ public class User extends BaseTimeEntity {
 
     @Builder
     public User(
-            @NotNull @Size(max = 64) String email,
+            @NotNull @Size(max = 64) String loginId,
             @NotNull @Size(max = 100) String username,
             @NotNull @Size(max = 512) String profileImageUrl,
             @NotNull ProviderType providerType,
@@ -79,7 +79,7 @@ public class User extends BaseTimeEntity {
             @NotNull LocalDateTime createdAt,
             @NotNull LocalDateTime modifiedAt
     ) {
-        this.email = email;
+        this.loginId = loginId;
         this.username = username;
         this.password = "NO_PASS";
         this.profileImageUrl = profileImageUrl != null ? profileImageUrl : "";

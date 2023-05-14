@@ -18,9 +18,9 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name="board")
+@Table(name = "board")
 @Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "UPDATE board SET deleted_at = CURRENT_TIMESTAMP where id = ?")
+@SQLDelete(sql = "UPDATE board SET deleted_at = CURRENT_TIMESTAMP where board_id = ?")
 public class Board extends BaseTimeEntity {
 
     @Id
@@ -36,5 +36,4 @@ public class Board extends BaseTimeEntity {
     public Board(BoardType boardType) {
         this.boardType = boardType;
     }
-
 }

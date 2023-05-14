@@ -7,6 +7,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -17,6 +19,9 @@ import java.util.List;
 @Table(name = "message_room")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE message_room SET deleted_at = CURRENT_TIMESTAMP where message_room_id = ?")
+
 public class MessageRoom extends BaseTimeEntity {
 
     @Id

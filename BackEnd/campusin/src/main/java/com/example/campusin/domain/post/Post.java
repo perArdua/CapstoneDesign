@@ -22,13 +22,14 @@ import java.util.List;
  */
 
 @Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "UPDATE post SET deleted_at = CURRENT_TIMESTAMP where id = ?")
+@SQLDelete(sql = "UPDATE post SET deleted_at = CURRENT_TIMESTAMP where post_id = ?")
+@Table(name = "post")
 @Getter
 @NoArgsConstructor
 @Entity
 public class Post extends BaseTimeEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "post_id")
     private Long id;
 
