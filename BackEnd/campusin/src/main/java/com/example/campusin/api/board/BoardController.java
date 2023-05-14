@@ -62,7 +62,7 @@ public class BoardController {
             @AuthenticationPrincipal UserPrincipal principal,
             @Parameter(description = "파라미터 설명") @RequestBody @Validated PostCreateRequest request
     ) {
-        return ApiResponse.success("게시글 생성", postService.createPost(boardId, principal.getUserSeq(), request));
+        return ApiResponse.success("게시글 생성", postService.createPost(boardId, principal.getUserId(), request));
     }
 
     @Operation(summary = "게시판 초기화")

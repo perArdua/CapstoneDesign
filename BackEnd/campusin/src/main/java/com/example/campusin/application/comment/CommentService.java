@@ -12,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -23,9 +21,9 @@ public class CommentService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
-    public CommentCreateResponse createComment(String userId, CommentCreateDto commentCreateDto){
+    public CommentCreateResponse createComment(String email, CommentCreateDto commentCreateDto){
 
-        User currentUser = getCurrentUser(userId);
+        User currentUser = getCurrentUser(email);
         Post post = getPost(commentCreateDto.getPostId());
         Comment parent = commentCreateDto.getParentId() == null ? null : getComment(commentCreateDto.getParentId());
         Comment comment = Comment.builder()
@@ -45,7 +43,7 @@ public class CommentService {
         checkPostExist(postId);
         return commentRepository.findByPost(postId, pageable); //조회 기능 미완
     }
-    public void deleteComment(String userId, Long commentId){
+    public void deleteComment(String email, Long commentId){
         Comment comment = getComment(commentId);
         comment.updateDelete();
     }
@@ -59,8 +57,8 @@ public class CommentService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 comment 없습니다 id = " + commentId));
     }
 
-    private User getCurrentUser(String userId){
-        return userRepository.findByUserId(userId);
+    private User getCurrentUser(String email){
+        return userRepository.findByEmail(email);
     }
 
     private void checkPostExist(Long postId){

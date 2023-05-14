@@ -51,7 +51,7 @@ public class MessageService {
 
         Page<Message> messages = messageRoomRepository.findMessagesByMessageRoomId(
                 messageRoomId, pageable);
-        User interlocutor = currentUser.getUserId() == messageRoom.getInitialSender().getUserId()
+        User interlocutor = currentUser.getEmail() == messageRoom.getInitialSender().getEmail()
                 ? messageRoom.getInitialReceiver() : messageRoom.getInitialSender();
         return messages.map(message -> new MessageResponse(message, interlocutor));
     }
@@ -59,8 +59,8 @@ public class MessageService {
     //쪽지 전송 권한 확인
 
     private void checkUserAuthority(User user, MessageRoom messageRoom) {
-        if (!(messageRoom.getInitialSender().getUserId() == user.getUserId()) &&
-                !(messageRoom.getInitialReceiver().getUserId() == user.getUserId())) {
+        if (!(messageRoom.getInitialSender().getEmail() == user.getEmail()) &&
+                !(messageRoom.getInitialReceiver().getEmail() == user.getEmail())) {
             throw new IllegalArgumentException("PERMISSION DENIED EXCEPTION : NO PERMISSION TO SEND MESSAGE");
         }
     }
@@ -80,9 +80,9 @@ public class MessageService {
     private void checkMessageRoomIsDeleted(MessageRoom messageRoom, Long userId) {
         VisibilityState visibility = messageRoom.getVisibilityTo();
         if (visibility.equals(VisibilityState.NO_ONE) ||
-                (messageRoom.getInitialSender().getUserSeq() == userId &&
+                (messageRoom.getInitialSender().getId() == userId &&
                         visibility.equals(VisibilityState.ONLY_INITIAL_RECEIVER)) ||
-                (messageRoom.getInitialReceiver().getUserSeq() == userId &&
+                (messageRoom.getInitialReceiver().getId() == userId &&
                         visibility.equals(VisibilityState.ONLY_INITIAL_SENDER))) {
             throw new IllegalArgumentException("PERMISSION DENIED EXCEPTION : NO PERMISSION TO READ DATA");
         }

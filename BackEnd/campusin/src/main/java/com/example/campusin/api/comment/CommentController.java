@@ -28,7 +28,7 @@ public class CommentController {
             @AuthenticationPrincipal UserPrincipal userPrincipal,
             @Validated @RequestBody CommentCreateDto commentCreateDto
             ) throws URISyntaxException {
-        CommentCreateResponse response = commentService.createComment(userPrincipal.getUserId(), commentCreateDto);
+        CommentCreateResponse response = commentService.createComment(userPrincipal.getEmail(), commentCreateDto);
         URI location = new URI("/api/v1/post/" + commentCreateDto.getPostId());
 
         return ResponseEntity.created(location).body(ApiResponse.success("댓글 생성 success", response));

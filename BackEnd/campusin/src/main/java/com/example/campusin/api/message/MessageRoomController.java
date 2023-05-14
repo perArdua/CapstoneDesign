@@ -34,13 +34,13 @@ public class MessageRoomController {
                                          @Valid @RequestBody final MessageRoomCreateRequest request,
                                          RedirectAttributes redirectAttributes) throws URISyntaxException {
 
-        Optional<Long> maybeMessageRoomId = messageRoomService.getMessageRoomId(principal.getUserSeq(), request.getCreatedFrom(), request.getReceiverId());
+        Optional<Long> maybeMessageRoomId = messageRoomService.getMessageRoomId(principal.getUserId(), request.getCreatedFrom(), request.getReceiverId());
 
         URI redirectUri = null;
         if (maybeMessageRoomId.isPresent()) {
             redirectUri = new URI(
                     new StringBuilder().append("/api/v1/message-rooms/").append(maybeMessageRoomId.get())
-                            .append("/redirect-message?userId=").append(principal.getUserSeq()).toString()
+                            .append("/redirect-message?userId=").append(principal.getUserId()).toString()
             );
         }
 
@@ -56,7 +56,7 @@ public class MessageRoomController {
                                       @PathVariable("messageRoomId") Long messageRoomId) {
 
         MessageRoomGetRequest request = new MessageRoomGetRequest(messageRoomId);
-        MessageRoomResponse response = messageRoomService.getMessageRoom(principal.getUserSeq(), request);
+        MessageRoomResponse response = messageRoomService.getMessageRoom(principal.getUserId(), request);
 
         return ApiResponse.success("쪽지방 조회가 완료되었습니다.", response);
     }
@@ -67,7 +67,7 @@ public class MessageRoomController {
     public ApiResponse getMessageRooms(@AuthenticationPrincipal UserPrincipal principal,
                                        @PageableDefault(size = 20, sort = "updated_at", direction = Sort.Direction.DESC) final Pageable pageable) {
 
-        Page<MessageRoomListResponse> response = messageRoomService.getMessageRooms(principal.getUserSeq(), pageable);
+        Page<MessageRoomListResponse> response = messageRoomService.getMessageRooms(principal.getUserId(), pageable);
         return ApiResponse.success("쪽지방 리스트 조회가 완료되었습니다.", response);
     }
 
@@ -75,7 +75,7 @@ public class MessageRoomController {
     public ApiResponse blockMessageRoom(@AuthenticationPrincipal UserPrincipal principal,
                                         @PathVariable("messageRoomId") Long messageRoomId) {
 
-        messageRoomService.blockMessageRoom(principal.getUserSeq(), messageRoomId);
+        messageRoomService.blockMessageRoom(principal.getUserId(), messageRoomId);
 
         return ApiResponse.success("쪽지방 차단이 완료되었습니다.", "MESSAGE ROOM IS BLOCKED SUCCESSFULLY");
     }
@@ -84,7 +84,7 @@ public class MessageRoomController {
     public ApiResponse deleteMessageRoom(@AuthenticationPrincipal UserPrincipal principal,
                                          @PathVariable("messageRoomId") Long messageRoomId) {
 
-        messageRoomService.deleteMessageRoom(principal.getUserSeq(), messageRoomId);
+        messageRoomService.deleteMessageRoom(principal.getUserId(), messageRoomId);
         return ApiResponse.success("쪽지방 삭제가 완료되었습니다.", "DELETE MESSAGE SUCCESSFULLY");
     }
 }
