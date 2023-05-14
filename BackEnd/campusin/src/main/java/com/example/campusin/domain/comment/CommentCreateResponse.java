@@ -32,7 +32,7 @@ public class CommentCreateResponse {
         Long parentId = parent == null ? null : parent.getId();
 
         return CommentCreateResponse.builder()
-                .userId(user.getEmail())
+                .userId(user.getLoginId())
                 .postId(post.getId())
                 .parentId(parentId)
                 .commentId(comment.getId())

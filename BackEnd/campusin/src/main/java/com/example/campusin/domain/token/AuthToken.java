@@ -22,9 +22,9 @@ public class AuthToken {
 
     private static final String AUTHORITIES_KEY = "role";
 
-    AuthToken(String id, Date expiry, Key key) {
+    AuthToken(String loginId, Date expiry, Key key) {
         this.key = key;
-        this.token = createAuthToken(id, expiry);
+        this.token = createAuthToken(loginId, expiry);
     }
 
     AuthToken(String id, String role, Date expiry, Key key) {

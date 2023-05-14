@@ -29,7 +29,7 @@ public class CommentsOnPostResponse extends CommentResponse{
         String content = comment.getIsDelete() || user == null ? "삭제된 댓글입니다." : comment.getContent();
 
         return new CommentsOnPostResponse(
-                user == null ? null : user.getEmail(),
+                user == null ? null : user.getLoginId(),
                 parent == null ? null : parent.getId(),
                 comment.getId(),
                 name,

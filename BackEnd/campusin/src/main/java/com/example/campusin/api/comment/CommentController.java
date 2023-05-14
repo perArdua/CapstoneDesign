@@ -28,7 +28,7 @@ public class CommentController {
             @AuthenticationPrincipal UserPrincipal userPrincipal,
             @Validated @RequestBody CommentCreateDto commentCreateDto
             ) throws URISyntaxException {
-        CommentCreateResponse response = commentService.createComment(userPrincipal.getEmail(), commentCreateDto);
+        CommentCreateResponse response = commentService.createComment(userPrincipal.getLoginId(), commentCreateDto);
         URI location = new URI("/api/v1/post/" + commentCreateDto.getPostId());
 
         return ResponseEntity.created(location).body(ApiResponse.success("댓글 생성 success", response));
@@ -37,7 +37,7 @@ public class CommentController {
 
     @DeleteMapping("/{commentId}")
     public ApiResponse deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal OAuth2UserInfo userInfo){
-        commentService.deleteComment(userInfo.getId(), commentId);
+        commentService.deleteComment(userInfo.getLoginId(), commentId);
         return ApiResponse.success("delete comment", "Comment deleted successfully");
     }
 

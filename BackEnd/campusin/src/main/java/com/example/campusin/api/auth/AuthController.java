@@ -52,21 +52,21 @@ public class AuthController {
     ) {
         log.info("/login");
         System.out.println("/login");
-        System.out.println(authReqModel.getId());
+        System.out.println(authReqModel.getLoginId());
         System.out.println(authReqModel.getPassword());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        authReqModel.getId(),
+                        authReqModel.getLoginId(),
                         authReqModel.getPassword()
                 )
         );
 
-        String userId = authReqModel.getId();
+        String loginId = authReqModel.getLoginId();
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         Date now = new Date();
         AuthToken accessToken = tokenProvider.createAuthToken(
-                userId,
+                loginId,
                 ((UserPrincipal) authentication.getPrincipal()).getRoleType().getCode(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
@@ -78,10 +78,10 @@ public class AuthController {
         );
 
         // userId refresh token 으로 DB 확인
-        UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserId(userId);
+        UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByLoginId(loginId);
         if (userRefreshToken == null) {
             // 없는 경우 새로 등록
-            userRefreshToken = new UserRefreshToken(userId, refreshToken.getToken());
+            userRefreshToken = new UserRefreshToken(loginId, refreshToken.getToken());
             userRefreshTokenRepository.saveAndFlush(userRefreshToken);
         } else {
             // DB에 refresh 토큰 업데이트
@@ -111,7 +111,7 @@ public class AuthController {
             return ApiResponse.notExpiredTokenYet();
         }
 
-        String userId = claims.getSubject();
+        String loginId = claims.getSubject();
         RoleType roleType = RoleType.of(claims.get("role", String.class));
 
         // refresh token
@@ -124,15 +124,15 @@ public class AuthController {
             return ApiResponse.invalidRefreshToken();
         }
 
-        // userId refresh token 으로 DB 확인
-        UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserIdAndRefreshToken(userId, refreshToken);
+        // email refresh token 으로 DB 확인
+        UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByLoginIdAndRefreshToken(loginId, refreshToken);
         if (userRefreshToken == null) {
             return ApiResponse.invalidRefreshToken();
         }
 
         Date now = new Date();
         AuthToken newAccessToken = tokenProvider.createAuthToken(
-                userId,
+                loginId,
                 roleType.getCode(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );

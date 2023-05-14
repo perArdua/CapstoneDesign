@@ -21,9 +21,9 @@ public class CommentService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
-    public CommentCreateResponse createComment(String email, CommentCreateDto commentCreateDto){
+    public CommentCreateResponse createComment(String loginId, CommentCreateDto commentCreateDto){
 
-        User currentUser = getCurrentUser(email);
+        User currentUser = getCurrentUser(loginId);
         Post post = getPost(commentCreateDto.getPostId());
         Comment parent = commentCreateDto.getParentId() == null ? null : getComment(commentCreateDto.getParentId());
         Comment comment = Comment.builder()
@@ -43,7 +43,7 @@ public class CommentService {
         checkPostExist(postId);
         return commentRepository.findByPost(postId, pageable); //조회 기능 미완
     }
-    public void deleteComment(String email, Long commentId){
+    public void deleteComment(String loginId, Long commentId){
         Comment comment = getComment(commentId);
         comment.updateDelete();
     }
@@ -57,8 +57,8 @@ public class CommentService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 comment 없습니다 id = " + commentId));
     }
 
-    private User getCurrentUser(String email){
-        return userRepository.findByEmail(email);
+    private User getCurrentUser(String loginId){
+        return userRepository.findByLoginId(loginId);
     }
 
     private void checkPostExist(Long postId){
