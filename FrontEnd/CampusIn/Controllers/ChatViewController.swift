@@ -36,6 +36,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        // TabBar 숨기기
+        self.tabBarController?.tabBar.isHidden = true
+
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
