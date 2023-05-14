@@ -13,6 +13,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+//        let rightButton = UIBarButtonItem(image: UIImage(named: "line.3.horizontal"), style: .plain, target: self, action: #selector(rightButtonTapped))
+//        navigationItem.rightBarButtonItem = rightButton
+        
     
     }
 
@@ -31,6 +34,13 @@ class ViewController: UIViewController {
 //        }
 //    }
 
+//    @IBAction func rightButtonTapped(_ sender: UIBarButtonItem) {
+//        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "SideMenuNavigationController")
+//
+//        self.navigationController?.pushViewController(pushVC!, animated: true)
+//    }
+    
 
 }
+
 
