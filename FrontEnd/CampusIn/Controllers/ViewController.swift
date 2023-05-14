@@ -9,10 +9,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         
+        let sideBtn = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(rightBtnTapped))
+        navigationItem.rightBarButtonItem = sideBtn
+
+
 //        let rightButton = UIBarButtonItem(image: UIImage(named: "line.3.horizontal"), style: .plain, target: self, action: #selector(rightButtonTapped))
 //        navigationItem.rightBarButtonItem = rightButton
         
@@ -39,6 +45,12 @@ class ViewController: UIViewController {
 //
 //        self.navigationController?.pushViewController(pushVC!, animated: true)
 //    }
+    
+    @objc func rightBtnTapped(){
+        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "SideMenuNavigationController")
+        //self.navigationController?.pushViewController(nextVC!, animated: true)
+        self.present(nextVC!, animated: true)
+    }
     
 
 }
