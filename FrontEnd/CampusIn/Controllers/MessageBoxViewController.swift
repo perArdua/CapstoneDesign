@@ -20,6 +20,10 @@ class MessageBoxViewController: UIViewController, UITableViewDelegate, UITableVi
         self.navigationItem.title = "쪽지함"
         tableView.delegate = self
         tableView.dataSource = self
+        
+        // TabBar 숨기기
+        self.tabBarController?.tabBar.isHidden = true
+
     }
     
     

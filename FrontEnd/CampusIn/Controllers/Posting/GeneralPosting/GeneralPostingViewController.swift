@@ -32,6 +32,9 @@ class GeneralPostingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // TabBar 숨기기
+        self.tabBarController?.tabBar.isHidden = true
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
