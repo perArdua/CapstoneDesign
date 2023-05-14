@@ -35,7 +35,7 @@ public class PostResponse {
         this(
                 entity.getId(),
                 entity.getBoard().getBoardType(),
-                entity.getUser().getUserSeq(),
+                entity.getUser().getId(),
                 entity.getTitle(),
                 entity.getContent(),
                 entity.getPhotos()

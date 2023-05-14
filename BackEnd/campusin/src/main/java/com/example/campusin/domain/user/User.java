@@ -9,6 +9,8 @@ import com.example.campusin.domain.oauth.ProviderType;
 import com.example.campusin.domain.oauth.RoleType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,18 +22,20 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE users SET deleted_at = CURRENT_TIMESTAMP where id = ?")
 @Table(name = "USERS")
 public class User extends BaseTimeEntity {
     @JsonIgnore
     @Id
-    @Column(name = "USER_SEQ")
+    @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userSeq;
+    private Long id;
 
-    @Column(name = "USER_ID", length = 64, unique = true)
+    @Column(name = "EMAIL", length = 64, unique = true)
     @NotNull
     @Size(max = 64)
-    private String userId;
+    private String email;
 
     @Column(name = "USERNAME", length = 100, unique = true)
     @NotNull
@@ -67,7 +71,7 @@ public class User extends BaseTimeEntity {
 
     @Builder
     public User(
-            @NotNull @Size(max = 64) String userId,
+            @NotNull @Size(max = 64) String email,
             @NotNull @Size(max = 100) String username,
             @NotNull @Size(max = 512) String profileImageUrl,
             @NotNull ProviderType providerType,
@@ -75,7 +79,7 @@ public class User extends BaseTimeEntity {
             @NotNull LocalDateTime createdAt,
             @NotNull LocalDateTime modifiedAt
     ) {
-        this.userId = userId;
+        this.email = email;
         this.username = username;
         this.password = "NO_PASS";
         this.profileImageUrl = profileImageUrl != null ? profileImageUrl : "";

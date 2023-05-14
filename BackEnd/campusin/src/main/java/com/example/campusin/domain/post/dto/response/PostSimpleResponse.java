@@ -35,8 +35,8 @@ public class PostSimpleResponse {
         this(
                 entity.getId(),
                 new BoardSimpleResponse(entity.getBoard()),
-                entity.getUser().getUserSeq(),
-                entity.getUser().getUserId(),
+                entity.getUser().getId(),
+                entity.getUser().getEmail(),
                 entity.getTitle(),
                 entity.getContent()
         );
