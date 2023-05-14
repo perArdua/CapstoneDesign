@@ -14,7 +14,7 @@ public class MessageResponse {
     private final String content;
 
     public MessageResponse(Message message, User interlocutor) {
-        this.isReceived = interlocutor.getUserId() == message.getWriter().getUserId() ? true : false;
+        this.isReceived = interlocutor.getEmail() == message.getWriter().getEmail() ? true : false;
         this.createdAt = message.getCreatedAt();
         this.content = message.getContent();
     }

@@ -26,7 +26,7 @@ public class MessageController {
                                    @PathVariable("messageRoomId") Long messageRoomId,
                                    @Valid @RequestBody final MessageSendRequest request) {
 
-        messageService.sendMessage(principal.getUserSeq(), messageRoomId, request);
+        messageService.sendMessage(principal.getUserId(), messageRoomId, request);
         return ApiResponse.success("쪽지 전송 완료", "Message send successfully");
     }
 
@@ -36,7 +36,7 @@ public class MessageController {
                                              @RequestBody String message) {
 
         MessageSendRequest request = new MessageSendRequest(message);
-        messageService.sendMessage(principal.getUserSeq(), messageRoomId, request);
+        messageService.sendMessage(principal.getUserId(), messageRoomId, request);
 
         return ApiResponse.success("쪽지 재전송 완료", "Redirect Message send successfully");
     }
@@ -45,9 +45,9 @@ public class MessageController {
     public ApiResponse getAllMessages(@AuthenticationPrincipal UserPrincipal principal, @PathVariable("messageRoomId") Long messageRoomId,
                                                       @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) final Pageable pageable) {
 
-        Page<MessageResponse> allMessages = messageService.getAllMessages(principal.getUserSeq(), messageRoomId, pageable);
+        Page<MessageResponse> allMessages = messageService.getAllMessages(principal.getUserId(), messageRoomId, pageable);
 
-        return ApiResponse.success("쪽지 리스트 조회 완료", messageService.getAllMessages(principal.getUserSeq(), messageRoomId, pageable));
+        return ApiResponse.success("쪽지 리스트 조회 완료", messageService.getAllMessages(principal.getUserId(), messageRoomId, pageable));
 
     }
 }

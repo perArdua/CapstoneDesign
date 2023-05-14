@@ -91,7 +91,7 @@ public class MessageRoomService {
         Pageable pageable = PageRequest.of(0, 20, Sort.by("createdAt").descending());
         Page<Message> messages = messageRoomRepository.findMessagesByMessageRoomId(
                 messageRoom.getId(), pageable);
-        User interlocutor = currentUser.getUserId() == messageRoom.getInitialSender().getUserId()
+        User interlocutor = currentUser.getEmail() == messageRoom.getInitialSender().getEmail()
                 ? messageRoom.getInitialReceiver() : messageRoom.getInitialSender();
         return MessageRoomResponse.builder()
                 .messages(messages)
@@ -108,7 +108,7 @@ public class MessageRoomService {
                 .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
 
         Page<MessageRoomsWithLastMessages> messageRooms = messageRoomRepository.findMessageRoomsAndLastMessagesByUserId(
-                currentUser.getUserSeq(), pageable);
+                currentUser.getId(), pageable);
 
         Page<MessageRoomListResponse> responses = messageRooms.map(messageRoom -> {
             Long interlocutorId = userId == messageRoom.getInitialReceiverId().longValue() ?
@@ -158,8 +158,8 @@ public class MessageRoomService {
 
     // 쪽지방 수정(삭제, 차단) 권한 확인
     private void checkUserAuthority(User user, MessageRoom messageRoom) {
-        if (!(messageRoom.getInitialSender().getUserId() == user.getUserId()) &&
-                !(messageRoom.getInitialReceiver().getUserId() == user.getUserId())) {
+        if (!(messageRoom.getInitialSender().getEmail() == user.getEmail()) &&
+                !(messageRoom.getInitialReceiver().getEmail() == user.getEmail())) {
             throw new IllegalArgumentException("PERMISSION DENIED EXCEPTION : NO PERMISSION TO SEND MESSAGE");
         }
     }
@@ -167,7 +167,7 @@ public class MessageRoomService {
     // 현재 user가 최초 발신자인지 확인
 
     private boolean isInitialSender(User user, MessageRoom messageRoom) {
-        if (messageRoom.getInitialSender().getUserSeq() == user.getUserSeq()) {
+        if (messageRoom.getInitialSender().getId() == user.getId()) {
             return true;
         }
         return false;
@@ -179,9 +179,9 @@ public class MessageRoomService {
     private void checkMessageRoomIsDeleted(MessageRoom messageRoom, Long userId) {
         VisibilityState visibility = messageRoom.getVisibilityTo();
         if (visibility.equals(VisibilityState.NO_ONE) ||
-                (messageRoom.getInitialSender().getUserSeq() == userId &&
+                (messageRoom.getInitialSender().getId() == userId &&
                         visibility.equals(VisibilityState.ONLY_INITIAL_RECEIVER)) ||
-                (messageRoom.getInitialReceiver().getUserSeq() == userId &&
+                (messageRoom.getInitialReceiver().getId() == userId &&
                         visibility.equals(VisibilityState.ONLY_INITIAL_SENDER))) {
             throw new IllegalArgumentException("PERMISSION DENIED EXCEPTION : NO PERMISSION TO SEND MESSAGE");
         }
