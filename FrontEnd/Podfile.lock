@@ -1,24 +1,42 @@
 PODS:
   - Alamofire (5.6.4)
   - BSImagePicker (3.3.1)
+  - InputBarAccessoryView (5.5.0):
+    - InputBarAccessoryView/Core (= 5.5.0)
+  - InputBarAccessoryView/Core (5.5.0)
   - lottie-ios (4.2.0)
+  - MessageKit (3.8.0):
+    - InputBarAccessoryView (~> 5.5.0)
+  - SideMenu (6.5.0)
+  - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - Alamofire
   - BSImagePicker (~> 3.1)
   - lottie-ios
+  - MessageKit
+  - SideMenu
+  - SnapKit (~> 5.6.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - BSImagePicker
+    - InputBarAccessoryView
     - lottie-ios
+    - MessageKit
+    - SideMenu
+    - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
+  InputBarAccessoryView: 1d7b0a672b36e370f01f264b3907ef39d03328e3
   lottie-ios: 809ecf2d460ed650a6aed7aa88b2ec45fab4779c
+  MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: f127f9c67063436c48e05353cf9a7fbd8c4935e1
+PODFILE CHECKSUM: 5fcf82eeff17eb43e30754e25e1b157bc0b31833
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.8.4

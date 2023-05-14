@@ -30,11 +30,17 @@
 		31FCD9252A054E2D0068689B /* PostingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD9232A054E2D0068689B /* PostingManager.swift */; };
 		31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD9262A054F380068689B /* GeneralPostingDetailViewController.swift */; };
 		31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD9282A0551E00068689B /* GeneralPostingAddViewController.swift */; };
+		5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D25704B2A10CE8B00E03713 /* ChatViewController.swift */; };
+		5D25704E2A10D1F700E03713 /* MessageBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */; };
+		5D2570502A10EA3800E03713 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D25704F2A10EA3800E03713 /* ChatMessage.swift */; };
+		5D2570522A10EABE00E03713 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2570512A10EABE00E03713 /* ChatTableViewCell.swift */; };
 		5D4ADF972A054A1B00195CA9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4ADF952A054A1B00195CA9 /* LoginViewController.swift */; };
 		5D4ADF982A054A1B00195CA9 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4ADF962A054A1B00195CA9 /* SocialViewController.swift */; };
 		5D4ADF9C2A0555BA00195CA9 /* NickNameViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D4ADF9B2A0555BA00195CA9 /* NickNameViewController.storyboard */; };
 		5D4ADF9E2A0555D900195CA9 /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4ADF9D2A0555D900195CA9 /* NickNameViewController.swift */; };
 		5D4ADFA02A0555E600195CA9 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4ADF9F2A0555E600195CA9 /* KeyChain.swift */; };
+		5D507AEC2A0DDDA800EB5CA9 /* MessageBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D507AEB2A0DDDA800EB5CA9 /* MessageBoxViewController.swift */; };
+		5DC33E362A0D45C200C061BC /* MessageBoxViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */; };
 		D84B6C380D6E83EA5CA1188E /* Pods_CampusIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,11 +90,17 @@
 		31FCD9262A054F380068689B /* GeneralPostingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingDetailViewController.swift; sourceTree = "<group>"; };
 		31FCD9282A0551E00068689B /* GeneralPostingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingAddViewController.swift; sourceTree = "<group>"; };
 		565A28D9AB05323A781AEE9C /* Pods-CampusIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusIn.debug.xcconfig"; path = "Target Support Files/Pods-CampusIn/Pods-CampusIn.debug.xcconfig"; sourceTree = "<group>"; };
+		5D25704B2A10CE8B00E03713 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBoxTableViewCell.swift; sourceTree = "<group>"; };
+		5D25704F2A10EA3800E03713 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		5D2570512A10EABE00E03713 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		5D4ADF952A054A1B00195CA9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5D4ADF962A054A1B00195CA9 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		5D4ADF9B2A0555BA00195CA9 /* NickNameViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NickNameViewController.storyboard; sourceTree = "<group>"; };
 		5D4ADF9D2A0555D900195CA9 /* NickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		5D4ADF9F2A0555E600195CA9 /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		5D507AEB2A0DDDA800EB5CA9 /* MessageBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBoxViewController.swift; sourceTree = "<group>"; };
+		5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MessageBoxViewController.storyboard; sourceTree = "<group>"; };
 		60AC818441A9B94A12F2B12F /* Pods-CampusIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusIn.release.xcconfig"; path = "Target Support Files/Pods-CampusIn/Pods-CampusIn.release.xcconfig"; sourceTree = "<group>"; };
 		B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -188,6 +200,7 @@
 				5D4ADF9F2A0555E600195CA9 /* KeyChain.swift */,
 				31FCD9202A054E180068689B /* Datas */,
 				3165CBE72A03FE24005E34AC /* temp.swift */,
+				5D25704F2A10EA3800E03713 /* ChatMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -199,6 +212,7 @@
 				3165CBE92A03FE5B005E34AC /* Posting */,
 				3165EDF62A02A86700D91856 /* Main.storyboard */,
 				5D4ADF9B2A0555BA00195CA9 /* NickNameViewController.storyboard */,
+				5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */,
 				311E085A2A0D37D20048F5FB /* StudyManage.storyboard */,
 			);
 			path = Views;
@@ -212,6 +226,8 @@
 				5D4ADF952A054A1B00195CA9 /* LoginViewController.swift */,
 				5D4ADF962A054A1B00195CA9 /* SocialViewController.swift */,
 				5D4ADF9D2A0555D900195CA9 /* NickNameViewController.swift */,
+				5D507AEB2A0DDDA800EB5CA9 /* MessageBoxViewController.swift */,
+				5D25704B2A10CE8B00E03713 /* ChatViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -247,6 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				31FCD9192A054DF90068689B /* GeneralPosting */,
+				5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */,
+				5D2570512A10EABE00E03713 /* ChatTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -404,6 +422,7 @@
 			files = (
 				3165EDF72A02A86700D91856 /* Main.storyboard in Resources */,
 				31C7184A2A080EE800C7731A /* loading_check.json in Resources */,
+				5DC33E362A0D45C200C061BC /* MessageBoxViewController.storyboard in Resources */,
 				3165EDD02A02A3C100D91856 /* LaunchScreen.storyboard in Resources */,
 				3165EDCD2A02A3C100D91856 /* Assets.xcassets in Resources */,
 				5D4ADF9C2A0555BA00195CA9 /* NickNameViewController.storyboard in Resources */,
@@ -480,11 +499,15 @@
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
 				3165EDC62A02A3C100D91856 /* SceneDelegate.swift in Sources */,
 				31FCD91F2A054E050068689B /* GeneralPostingTableViewCell.swift in Sources */,
+				5D2570502A10EA3800E03713 /* ChatMessage.swift in Sources */,
 				31FCD91D2A054E050068689B /* GeneralPostingCommentTableViewCell.swift in Sources */,
 				5D4ADFA02A0555E600195CA9 /* KeyChain.swift in Sources */,
+				5D2570522A10EABE00E03713 /* ChatTableViewCell.swift in Sources */,
+				5D507AEC2A0DDDA800EB5CA9 /* MessageBoxViewController.swift in Sources */,
 				5D4ADF982A054A1B00195CA9 /* SocialViewController.swift in Sources */,
 				31FCD9252A054E2D0068689B /* PostingManager.swift in Sources */,
 				31FCD91E2A054E050068689B /* GeneralPostingContentTableViewCell.swift in Sources */,
+				5D25704E2A10D1F700E03713 /* MessageBoxTableViewCell.swift in Sources */,
 				5D4ADF972A054A1B00195CA9 /* LoginViewController.swift in Sources */,
 				31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */,
 				5D4ADF9E2A0555D900195CA9 /* NickNameViewController.swift in Sources */,
@@ -492,6 +515,7 @@
 				317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */,
 				31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */,
 				31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */,
+				5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */,
 				3165CBE82A03FE24005E34AC /* temp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
