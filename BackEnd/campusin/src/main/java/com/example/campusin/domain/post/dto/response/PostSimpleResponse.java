@@ -3,6 +3,7 @@ package com.example.campusin.domain.post.dto.response;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
 import com.example.campusin.domain.post.Post;
 import lombok.Builder;
+import lombok.Getter;
 
 /**
  * Created by kok8454@gmail.com on 2023-05-07
@@ -10,7 +11,7 @@ import lombok.Builder;
  */
 
 
-
+@Getter
 public class PostSimpleResponse {
     Long postId;
     BoardSimpleResponse boardSimpleResponse;
