@@ -24,7 +24,8 @@ public class Photo extends BaseTimeEntity {
     @Column(name = "photo_id")
     private Long id;
 
-    @Column(name = "path", nullable = false, length = 300)
+    @Lob
+    @Column(name = "content")
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)

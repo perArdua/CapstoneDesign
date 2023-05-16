@@ -92,7 +92,6 @@ public class PostService {
                 .map(PostSimpleResponse::new);
     }
 
-
     public boolean initBoard() {
         if (boardRepository.count() == 0) {
             for (BoardType boardType : BoardType.values()) {
@@ -103,6 +102,10 @@ public class PostService {
             return true;
         }
         return false;
+    }
+
+    public Page<BoardSimpleResponse> getBoardIds(Pageable pageable) {
+        return boardRepository.findAll(pageable).map(BoardSimpleResponse::new);
     }
     private Board findBoard(Long boardId) {
         return boardRepository.findById(boardId).orElseThrow(
