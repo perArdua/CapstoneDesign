@@ -22,6 +22,8 @@
 		3165EDF72A02A86700D91856 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165EDF62A02A86700D91856 /* Main.storyboard */; };
 		317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317667BB2A07EFEB002F829C /* GeneralSearchTableViewCell.swift */; };
 		31C7184A2A080EE800C7731A /* loading_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 31C718492A080EE800C7731A /* loading_check.json */; };
+		31D57E4F2A13B7830049E57A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D57E4E2A13B7830049E57A /* Response.swift */; };
+		31D57E512A13CE160049E57A /* GeneralPostingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D57E502A13CE160049E57A /* GeneralPostingMain.swift */; };
 		31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD9162A054DE20068689B /* GeneralPostingViewController.swift */; };
 		31FCD91D2A054E050068689B /* GeneralPostingCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD91A2A054E050068689B /* GeneralPostingCommentTableViewCell.swift */; };
 		31FCD91E2A054E050068689B /* GeneralPostingContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD91B2A054E050068689B /* GeneralPostingContentTableViewCell.swift */; };
@@ -82,6 +84,8 @@
 		3165EDF62A02A86700D91856 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		317667BB2A07EFEB002F829C /* GeneralSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSearchTableViewCell.swift; sourceTree = "<group>"; };
 		31C718492A080EE800C7731A /* loading_check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_check.json; sourceTree = "<group>"; };
+		31D57E4E2A13B7830049E57A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		31D57E502A13CE160049E57A /* GeneralPostingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPostingMain.swift; sourceTree = "<group>"; };
 		31FCD9162A054DE20068689B /* GeneralPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingViewController.swift; sourceTree = "<group>"; };
 		31FCD91A2A054E050068689B /* GeneralPostingCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingCommentTableViewCell.swift; sourceTree = "<group>"; };
 		31FCD91B2A054E050068689B /* GeneralPostingContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingContentTableViewCell.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				31FCD9212A054E1E0068689B /* GeneralPosting */,
+				31D57E4E2A13B7830049E57A /* Response.swift */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 			children = (
 				31FCD9222A054E2D0068689B /* GeneralPostingContent.swift */,
 				31FCD9232A054E2D0068689B /* PostingManager.swift */,
+				31D57E502A13CE160049E57A /* GeneralPostingMain.swift */,
 			);
 			path = GeneralPosting;
 			sourceTree = "<group>";
@@ -515,12 +521,14 @@
 				31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */,
 				5D4ADF9E2A0555D900195CA9 /* NickNameViewController.swift in Sources */,
 				31FCD9242A054E2D0068689B /* GeneralPostingContent.swift in Sources */,
+				31D57E512A13CE160049E57A /* GeneralPostingMain.swift in Sources */,
 				317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */,
 				5D4B9D552A114F2C003F3E86 /* StudyManageViewController.swift in Sources */,
 				31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */,
 				31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */,
 				5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */,
 				3165CBE82A03FE24005E34AC /* temp.swift in Sources */,
+				31D57E4F2A13B7830049E57A /* Response.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@ import UIKit
 //사진 다중 선택을 지원하는 imagePicker 오픈소스
 import BSImagePicker
 import Photos
+import Alamofire
 
 class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
     
@@ -47,6 +48,7 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
         imgs.insert(img2, at: 2)
         imgs.insert(img3, at: 3)
         imgs.insert(img4, at: 4)
+        
         stView0.isHidden = true
         stView1.isHidden = true
         stView2.isHidden = true
@@ -138,58 +140,54 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
     
     @IBAction func doneBtnTapped(_ sender: UIButton) {
         print("done tapped")
-        if (titleTV.text == ""){
+        var params: Parameters = [:]
+        
+        if let titleData = titleTV.text{
+            params["title"] = titleData
+        }else{
             let alert = UIAlertController(title: "경고", message: "제목을 채워주세요", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default) { _ in
-                print("empty title")
-       }
+            let okAction = UIAlertAction(title: "확인", style: .default) { _ in print("empty title") }
             alert.addAction(okAction)
             present(alert, animated: true)
-        }else if(contentTV.text == ""){
+        }
+        if let contentData = contentTV.text{
+            params["content"] = contentData
+        }else{
             let alert = UIAlertController(title: "경고", message: "내용을 채워주세요", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default) { _ in
-                print("empty contents")
-       }
+            let okAction = UIAlertAction(title: "확인", style: .default) { _ in print("empty contents")}
             alert.addAction(okAction)
             present(alert, animated: true)
         }
         
-        let currentDate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd"
-        let dateString = dateFormatter.string(from: currentDate)
-        
-        switch img_cnt{
-        case 0:
-            post = .init(title: titleTV.text, content: contentTV.text, date: dateString, user: "최다경")
-            PM.setPostings(post: post)
-            print(PM.getPostings())
-        case 1:
-            post = .init(title: titleTV.text, content: contentTV.text, date: dateString, user: "최다경", img0: img0.image)
-            PM.setPostings(post: post)
-        case 2:
-            post = .init(title: titleTV.text, content: contentTV.text, date: dateString, user: "최다경", img0: img0.image, img1: img1.image)
-            PM.setPostings(post: post)
-        case 3:
-            post = .init(title: titleTV.text, content: contentTV.text, date: dateString, user: "최다경", img0: img0.image, img1: img1.image, img2: img2.image)
-            PM.setPostings(post: post)
-        case 4:
-            post = .init(title: titleTV.text, content: contentTV.text, date: dateString, user: "최다경", img0: img0.image, img1: img1.image, img2: img2.image, img3: img3.image)
-            PM.setPostings(post: post)
-        case 5:
-            post = .init(title: titleTV.text, content: contentTV.text, date: dateString, user: "최다경", img0: img0.image, img1: img1.image, img2: img2.image, img3: img3.image, img4: img4.image)
-            PM.setPostings(post: post)
+        var img_temp : [String] = []
+        print("img_cnt : \(img_cnt)")
+        for i in 0..<img_cnt{
+            img_temp.append(imgs[i].image!.base64)
+        }
 
-        default:
-            print("error")
-        }
+            
+        params["photos"] = img_temp
+        print("###############")
+        print(params)
+        print("###############")
+        
+        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTc1OTAxODUxODIzMjI0MzE0NTEiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0MjUyMjY0fQ.g8XE818SkSm5LQt-c_CMMd6D7uW8oZVHrHs6fe3BnbU"
+
+        AF.request("http://localhost:8080/api/v1/boards/2/posts", method: .post, parameters: params, encoding: JSONEncoding.default, headers: HTTPHeaders(["Authorization": "Bearer \(token)"])).responseDecodable(of: DataResponse.self, completionHandler: { response in
+            print("***************")
+            print(response)
+            print("***************")
+        })
+        
+        
         let alert = UIAlertController(title: "알림", message: "글쓰기가 완료되었습니다.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style: .default){_ in self.dismiss(animated: true)
-        }
+        let ok = UIAlertAction(title: "확인", style: .default){_ in self.dismiss(animated: true) }
         let cancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true)
+        
+        
     }
    
     
@@ -219,3 +217,24 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
 }
 
 
+extension UIImage {
+
+    public var base64: String {
+        return self.jpegData(compressionQuality: 1.0)!.base64EncodedString()
+    }
+
+    convenience init?(base64: String, withPrefix: Bool) {
+        var finalData: Data?
+
+        if withPrefix {
+            guard let url = URL(string: base64) else { return nil }
+            finalData = try? Data(contentsOf: url)
+        } else {
+            finalData = Data(base64Encoded: base64)
+        }
+
+        guard let data = finalData else { return nil }
+        self.init(data: data)
+    }
+
+}

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class GeneralPostingViewController: UIViewController {
     
@@ -13,7 +14,7 @@ class GeneralPostingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var manager = PostingManager()
-    var array :[GeneralPostingContent] = []
+    var array :[GeneralPostingMainContent] = []
     
     let addBtn: UIButton = {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
@@ -25,7 +26,7 @@ class GeneralPostingViewController: UIViewController {
         btn.layer.shadowOpacity = 0.3
         btn.setImage(UIImage(systemName: "pencil.tip.crop.circle"), for: .normal )
         btn.setPreferredSymbolConfiguration(.init(pointSize: 30, weight: .regular, scale: .default), forImageIn: .normal)
-
+        
         return btn
     }()
     
@@ -33,7 +34,9 @@ class GeneralPostingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // TabBar 숨기기
+        self.getData()
         self.tabBarController?.tabBar.isHidden = true
+        
 
     }
     
@@ -41,7 +44,6 @@ class GeneralPostingViewController: UIViewController {
         super.viewWillAppear(animated)
         tableView.dataSource = self
         tableView.delegate = self
-        array = manager.getPostings()
         
         view.addSubview(addBtn)
         addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
@@ -49,6 +51,38 @@ class GeneralPostingViewController: UIViewController {
         print("array count")
         print(array.count)
         tableView.reloadData()
+        
+        print("1231313131231231231313123")
+        print(array.count)
+        tableView.reloadData()
+        print("reload")
+        
+        self.getData()
+        self.tableView.reloadData()
+    }
+    
+    func getData(){
+        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTc1OTAxODUxODIzMjI0MzE0NTEiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0MjU0MDQyfQ.c6ksPbw6L01dOt3jAn-ST4lSTBv9L-A4ytuIBI4GdSo"
+        let url = "http://localhost:8080/api/v1/boards/2/posts"
+        
+        AF.request(url, method: .get, headers: HTTPHeaders(["Authorization": "Bearer \(token)"])).responseDecodable(of: GeneralPostingMainData.self, completionHandler: { response in
+            print("***************")
+            print(type(of: response.value))
+            print(response.result)
+            if let res = response.value{
+                self.array = res.body.게시글목록.content
+            }
+            else{
+                print("정보 없음")
+                print(response.result)
+            }
+            
+            print(self.array.count)
+//            print(self.array)
+            print("***************")
+            
+        
+        })
     }
     
     //MARK: 글쓰기 버튼을 누를 경우 실행
@@ -76,8 +110,8 @@ extension GeneralPostingViewController : UITableViewDelegate, UITableViewDataSou
         
         cell.titleLabel.text = temp.title
         cell.contentLabel.text = temp.content
-        cell.dateLabel.text = temp.date
-        cell.userLabel.text = temp.user
+        cell.dateLabel.text = "날짜 없음"
+        cell.userLabel.text = temp.writer
         cell.commentLabel.text = "5"
 
         return cell
