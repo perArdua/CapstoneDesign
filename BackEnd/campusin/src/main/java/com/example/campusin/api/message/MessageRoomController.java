@@ -65,7 +65,7 @@ public class MessageRoomController {
 
     @GetMapping
     public ApiResponse getMessageRooms(@AuthenticationPrincipal UserPrincipal principal,
-                                       @PageableDefault(size = 20, sort = "updated_at", direction = Sort.Direction.DESC) final Pageable pageable) {
+                                       @PageableDefault(size = 20, sort = "MODIFIED_AT", direction = Sort.Direction.DESC) final Pageable pageable) {
 
         Page<MessageRoomListResponse> response = messageRoomService.getMessageRooms(principal.getUserId(), pageable);
         return ApiResponse.success("쪽지방 리스트 조회가 완료되었습니다.", response);
