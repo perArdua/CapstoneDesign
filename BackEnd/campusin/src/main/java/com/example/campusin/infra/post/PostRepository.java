@@ -1,5 +1,6 @@
 package com.example.campusin.infra.post;
 
+import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.post.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,4 +50,13 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             countQuery = "select count(p) from Post p where p.board.id = :boardId and (upper(function('replace', p.title, ' ', '')) like concat('%', upper(function('replace', :keyword, ' ', '')), '%') or upper(function('replace', p.content, ' ', '')) like concat('%', upper(function('replace', :keyword, ' ', '')), '%'))")
     Page<Post> searchPostsAtBoard(@Param("keyword") String keyword, @Param("boardId") Long boardId,
                                   Pageable pageable);
+
+    @Query("select distinct c.post.id from Comment c where c.user.id = :userId")
+    List<Long> findPostIdsThatUserCommentedAt(@Param("userId") Long userId);
+
+    @Query(value = "select c from Comment c join fetch c.user where c.post.id = :postId",
+            countQuery = "select count(c) from Comment c where c.post.id = :postId")
+    Page<Comment> findCommentsByPost(@Param("postId") Long postId, Pageable pageable);
+
+
 }
