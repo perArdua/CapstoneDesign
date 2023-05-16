@@ -18,5 +18,12 @@ struct GeneralPostingContent{
     var img2: UIImage?
     var img3: UIImage?
     var img4: UIImage?
-    
 }
+
+struct PostGeneralPosting: Codable{
+    let content: String
+    let photos: [String]
+    let title: String
+}
+
+
