@@ -15,7 +15,7 @@ public interface MessageRoomRepository extends JpaRepository<MessageRoom, Long> 
             value = "select * from message_room "
                     + "where created_from=:created_from"
                     + "AND (initial_receiver_id=:first_interlocutor_id AND initial_sender_id=:second_interlocutor_id)  "
-                    + "OR (initial_receiver_id=:second_interlocutor_id AND initial_sender_id=:first_interlocutor_id)",
+                    + "OR (initial_receiver_id=:second_interlocutor_id AND initial_sender_id=:first_interlocutor_id) ",
             nativeQuery = true)
     Optional<MessageRoom> findMessageRoomByInfo(@Param("created_from") Long createdFrom,
                                                 @Param("first_interlocutor_id") Long firstInterlocutorId,
@@ -23,9 +23,9 @@ public interface MessageRoomRepository extends JpaRepository<MessageRoom, Long> 
 
     @Query(
             value = "select message_room_id from message_room "
-                    + "where created_from=:created_from"
+                    + "where created_from=:created_from "
                     + "AND (initial_receiver_id=:first_interlocutor_id AND initial_sender_id=:second_interlocutor_id)  "
-                    + "OR (initial_receiver_id=:second_interlocutor_id AND initial_sender_id=:first_interlocutor_id)",
+                    + "OR (initial_receiver_id=:second_interlocutor_id AND initial_sender_id=:first_interlocutor_id) ",
             nativeQuery = true)
     Optional<Long> findIdByInfo(@Param("created_from") Long createdFrom,
                                 @Param("first_interlocutor_id") Long firstInterlocutorId,
@@ -42,8 +42,8 @@ public interface MessageRoomRepository extends JpaRepository<MessageRoom, Long> 
                          @Param("second_interlocutor_id") Long secondInterlocutorId);
 
     @Query(
-            value = "select m from Message m join fetch m.messageRoom join fetch m.writer where m.messageRoom.id=:id",
-            countQuery = "select count(m) from Message m where m.id=:id")
+            value = "select m from Message m join fetch m.messageRoom join fetch m.writer where m.messageRoom.id=:id ",
+            countQuery = "select count(m) from Message m where m.id=:id ")
     Page<Message> findMessagesByMessageRoomId(@Param("id") Long messageRoomId, Pageable pageable);
 
     @Query(
