@@ -74,4 +74,13 @@ public class BoardController {
     public ApiResponse initBoard() {
         return ApiResponse.success("게시판 초기화", postService.initBoard());
     }
+
+    @Operation(summary = "게시판 고유 id값 얻기")
+    @GetMapping("/boards/ids")
+    public ApiResponse getBoardIds(@PageableDefault(
+            sort = {"createdAt"},
+            direction = Sort.Direction.DESC
+    ) Pageable pageable) {
+        return ApiResponse.success("게시판 고유 id값 얻기", postService.getBoardIds(pageable));
+    }
 }
