@@ -11,9 +11,10 @@ import Foundation
 
 struct APIConstants {
     static let baseURL = "http://localhost:8080/api/v1"
+    static let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTc1OTAxODUxODIzMjI0MzE0NTEiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0MzM2MTQyfQ.eMnQwQTXMwDTqvqTWXTO7nKRFVWJm1jornijnvBgyKM"
     
     struct Board{
-        static let showPostByBoard = baseURL + "/boards" // 모든 게시글 불러오기
+        static let showPostByBoard = baseURL + "/boards/%d/posts" // 모든 게시글 불러오기
         static let createPost = baseURL + "/boards/%d/posts" // 게시글 생성(아래 사용 예시 참고)
         //사용 예시
         //let endpoint = String(format: APIConstants.Board.createPost, boardId)
@@ -58,3 +59,15 @@ struct APIConstants {
     
 }
 
+
+extension String
+{
+    func encodeUrl() -> String?
+    {
+        return self.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)
+    }
+    func decodeUrl() -> String?
+    {
+        return self.removingPercentEncoding
+    }
+}
