@@ -43,6 +43,7 @@
 		5D4ADFA02A0555E600195CA9 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4ADF9F2A0555E600195CA9 /* KeyChain.swift */; };
 		5D4B9D552A114F2C003F3E86 /* StudyManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B9D542A114F2C003F3E86 /* StudyManageViewController.swift */; };
 		5D507AEC2A0DDDA800EB5CA9 /* MessageBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D507AEB2A0DDDA800EB5CA9 /* MessageBoxViewController.swift */; };
+		5D6013672A14D5D400159F63 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6013662A14D5D400159F63 /* APIConstants.swift */; };
 		5DC33E362A0D45C200C061BC /* MessageBoxViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */; };
 		D84B6C380D6E83EA5CA1188E /* Pods_CampusIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */; };
 /* End PBXBuildFile section */
@@ -106,6 +107,7 @@
 		5D4ADF9F2A0555E600195CA9 /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		5D4B9D542A114F2C003F3E86 /* StudyManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyManageViewController.swift; sourceTree = "<group>"; };
 		5D507AEB2A0DDDA800EB5CA9 /* MessageBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBoxViewController.swift; sourceTree = "<group>"; };
+		5D6013662A14D5D400159F63 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MessageBoxViewController.storyboard; sourceTree = "<group>"; };
 		60AC818441A9B94A12F2B12F /* Pods-CampusIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusIn.release.xcconfig"; path = "Target Support Files/Pods-CampusIn/Pods-CampusIn.release.xcconfig"; sourceTree = "<group>"; };
 		B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -292,6 +294,7 @@
 			children = (
 				31FCD9212A054E1E0068689B /* GeneralPosting */,
 				31D57E4E2A13B7830049E57A /* Response.swift */,
+				5D6013662A14D5D400159F63 /* APIConstants.swift */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				5D4B9D552A114F2C003F3E86 /* StudyManageViewController.swift in Sources */,
 				31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */,
 				31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */,
+				5D6013672A14D5D400159F63 /* APIConstants.swift in Sources */,
 				5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */,
 				3165CBE82A03FE24005E34AC /* temp.swift in Sources */,
 				31D57E4F2A13B7830049E57A /* Response.swift in Sources */,

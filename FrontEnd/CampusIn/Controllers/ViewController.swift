@@ -21,8 +21,6 @@ class ViewController: UIViewController {
         // TabBar 보이기
         self.tabBarController?.tabBar.isHidden = false
 
-
-
 //        let rightButton = UIBarButtonItem(image: UIImage(named: "line.3.horizontal"), style: .plain, target: self, action: #selector(rightButtonTapped))
 //        navigationItem.rightBarButtonItem = rightButton
         
