@@ -50,19 +50,15 @@ class GeneralPostingViewController: UIViewController {
         addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 105, width: 60, height: 60)
         print("array count")
         print(array.count)
-        tableView.reloadData()
         
-        print("1231313131231231231313123")
-        print(array.count)
-        tableView.reloadData()
         print("reload")
         
         self.getData()
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
     
     func getData(){
-        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTc1OTAxODUxODIzMjI0MzE0NTEiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0MjU0MDQyfQ.c6ksPbw6L01dOt3jAn-ST4lSTBv9L-A4ytuIBI4GdSo"
+        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTc1OTAxODUxODIzMjI0MzE0NTEiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0MzI3MzIxfQ.9aFPgAxWK8eK8xO8lMgAcEz8r_2Xjyu57CiuXYTD60Y"
         let url = "http://localhost:8080/api/v1/boards/2/posts"
         
         AF.request(url, method: .get, headers: HTTPHeaders(["Authorization": "Bearer \(token)"])).responseDecodable(of: GeneralPostingMainData.self, completionHandler: { response in
@@ -70,7 +66,8 @@ class GeneralPostingViewController: UIViewController {
             print(type(of: response.value))
             print(response.result)
             if let res = response.value{
-                self.array = res.body.게시글목록.content
+                self.array = res.body.generalPostingMainList.content
+                self.tableView.reloadData()
             }
             else{
                 print("정보 없음")
