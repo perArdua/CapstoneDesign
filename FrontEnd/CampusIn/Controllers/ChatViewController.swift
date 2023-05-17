@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import InputBarAccessoryView
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
@@ -36,6 +35,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+        self.view.addGestureRecognizer(tapGesture)
         // TabBar 숨기기
         self.tabBarController?.tabBar.isHidden = true
 
@@ -44,10 +45,13 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         }
+    
+    @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
+        messageTextField.resignFirstResponder()
+    }
    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -113,7 +117,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "ChatTableViewCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ChatTableViewCell
-
+        
         let chatMessage = chatMessages[indexPath.row]
         cell.selectionStyle = .none
         cell.configure(with: chatMessage)
@@ -134,8 +138,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func setChatMessages(){
-        let c1: ChatMessage = ChatMessage(text: "hihihihihihi", isSentByCurrentUser: true)
-        let c2: ChatMessage = ChatMessage(text: "hellohihhi", isSentByCurrentUser: false)
+        let c1: ChatMessage = ChatMessage(text: "1", isSentByCurrentUser: true)
+        let c2: ChatMessage = ChatMessage(text: "2", isSentByCurrentUser: false)
         chatMessages.append(c1)
         chatMessages.append(c2)
     }
