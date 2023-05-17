@@ -8,8 +8,8 @@
 import Foundation
 
 struct ChatMessage {
-    let text: String
-    let isSentByCurrentUser: Bool
+    var text: String
+    var isSentByCurrentUser: Bool
     
     
 }
