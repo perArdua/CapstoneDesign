@@ -8,16 +8,16 @@
 import Foundation
 
 struct DataResponse: Codable {
-    let body: Body
-    let header: Header
+    let body: DataBody
+    let header: DataHeader
 }
 
 // MARK: - Body
-struct Body: Codable {
+struct DataBody: Codable {
 }
 
 // MARK: - Header
-struct Header: Codable {
+struct DataHeader: Codable {
     let code: Int
     let message: String
 }

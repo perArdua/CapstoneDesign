@@ -13,8 +13,8 @@ class GeneralPostingViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var manager = PostingManager()
-    var array :[GeneralPostingMainContent] = []
+    
+    var array :[PostListContent] = []
     
     let addBtn: UIButton = {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
@@ -57,29 +57,22 @@ class GeneralPostingViewController: UIViewController {
         tableView.reloadData()
     }
     
+    // MARK: - 검색 API 요청하는 함수
     func getData(){
-        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTc1OTAxODUxODIzMjI0MzE0NTEiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0MzI3MzIxfQ.9aFPgAxWK8eK8xO8lMgAcEz8r_2Xjyu57CiuXYTD60Y"
-        let url = "http://localhost:8080/api/v1/boards/2/posts"
-        
-        AF.request(url, method: .get, headers: HTTPHeaders(["Authorization": "Bearer \(token)"])).responseDecodable(of: GeneralPostingMainData.self, completionHandler: { response in
-            print("***************")
-            print(type(of: response.value))
-            print(response.result)
-            if let res = response.value{
-                self.array = res.body.generalPostingMainList.content
-                self.tableView.reloadData()
+        BoardManager.showPostbyBoard(boardID: 2){[weak self] result in
+            // 데이터를 받아온 후 실행되는 완료 핸들러
+            switch result {
+            case .success(let posts):
+                // 데이터를 받아와서 배열에 저장
+                self?.array = posts
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Error: \(error)")
             }
-            else{
-                print("정보 없음")
-                print(response.result)
-            }
-            
-            print(self.array.count)
-//            print(self.array)
-            print("***************")
-            
-        
-        })
+        }
+        print(array)
     }
     
     //MARK: 글쓰기 버튼을 누를 경우 실행

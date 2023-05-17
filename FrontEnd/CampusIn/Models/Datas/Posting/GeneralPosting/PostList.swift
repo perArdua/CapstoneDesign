@@ -6,43 +6,38 @@
 //
 
 import Foundation
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let posting = try? JSONDecoder().decode(Posting.self, from: jsonData)
-
-import Foundation
+// MARK: - 게시글 목록 json 파싱용 구조체
 
 // MARK: - Posting
-struct GeneralPostingMainData: Codable {
-    let header: GeneralPostingMainHeader
-    let body: GeneralPostingMainBody
+struct PostList: Codable {
+    let header: PostListHeader
+    let body: PostListBody
 }
 
 // MARK: - Body
-struct GeneralPostingMainBody: Codable {
-    let generalPostingMainList: GeneralPostingMainList
+struct PostListBody: Codable {
+    let postListArray: PostListArray
 
     enum CodingKeys: String, CodingKey {
-        case generalPostingMainList = "게시글 목록"
+        case postListArray = "게시글 목록"
     }
 }
 
 // MARK: - 게시글목록
-struct GeneralPostingMainList: Codable {
-    let content: [GeneralPostingMainContent]
-    let pageable: GeneralPostingMainPageable
+struct PostListArray: Codable {
+    let content: [PostListContent]
+    let pageable: PostListPageable
     let totalPages, totalElements: Int
     let last: Bool
     let numberOfElements, number: Int
     let first: Bool
-    let sort: GeneralPostingMainSort
+    let sort: PostListSort
     let size: Int
     let empty: Bool
 }
 
 // MARK: - Content
-struct GeneralPostingMainContent: Codable {
+struct PostListContent: Codable {
     let postID: Int
     let boardSimpleResponse: BoardSimpleResponse
     let userID: Int
@@ -68,19 +63,19 @@ struct BoardSimpleResponse: Codable {
 }
 
 // MARK: - Pageable
-struct GeneralPostingMainPageable: Codable {
-    let sort: GeneralPostingMainSort
+struct PostListPageable: Codable {
+    let sort: PostListSort
     let pageNumber, pageSize, offset: Int
     let paged, unpaged: Bool
 }
 
 // MARK: - Sort
-struct GeneralPostingMainSort: Codable {
+struct PostListSort: Codable {
     let unsorted, sorted, empty: Bool
 }
 
 // MARK: - Header
-struct GeneralPostingMainHeader: Codable {
+struct PostListHeader: Codable {
     let code: Int
     let message: String
 }

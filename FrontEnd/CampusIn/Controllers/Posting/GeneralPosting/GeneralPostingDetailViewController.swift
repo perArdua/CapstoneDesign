@@ -11,8 +11,8 @@ class GeneralPostingDetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var manager = PostingManager()
-    var array :[GeneralPostingContent] = []
+//    var manager = PostingManager()
+    var array :[PostListContent] = []
     var postingIndex: Int?
     
     override func viewDidLoad() {
@@ -23,7 +23,7 @@ class GeneralPostingDetailViewController: UIViewController {
         tableView.sectionFooterHeight = 0
         tableView.sectionHeaderHeight = 25
         
-        array = manager.getPostings()
+//        array = manager.getPostings()
     }
 
 }
@@ -67,26 +67,26 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
             cell.img3.isHidden = true
             cell.img4.isHidden = true
             
-            if let img = temp.img0 {
-                cell.img0.image = img
-                cell.img0.isHidden = false
-            }
-            if let img = temp.img1 {
-                cell.img1.image = img
-                cell.img1.isHidden = false
-            }
-            if let img = temp.img2 {
-                cell.img2.image = img
-                cell.img2.isHidden = false
-            }
-            if let img = temp.img3 {
-                cell.img3.image = img
-                cell.img3.isHidden = false
-            }
-            if let img = temp.img4 {
-                cell.img4.image = img
-                cell.img4.isHidden = false
-            }
+//            if let img = temp.img0 {
+//                cell.img0.image = img
+//                cell.img0.isHidden = false
+//            }
+//            if let img = temp.img1 {
+//                cell.img1.image = img
+//                cell.img1.isHidden = false
+//            }
+//            if let img = temp.img2 {
+//                cell.img2.image = img
+//                cell.img2.isHidden = false
+//            }
+//            if let img = temp.img3 {
+//                cell.img3.image = img
+//                cell.img3.isHidden = false
+//            }
+//            if let img = temp.img4 {
+//                cell.img4.image = img
+//                cell.img4.isHidden = false
+//            }
             return cell
         }
         else{

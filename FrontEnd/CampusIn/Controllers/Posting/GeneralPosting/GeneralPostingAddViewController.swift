@@ -30,8 +30,8 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var contentTV: UITextView!
     var imgs : [UIImageView] = []
     var img_cnt = 0
-    var post : GeneralPostingContent!
-    var PM = PostingManager()
+//    var post : GeneralPostingContent!
+//    var PM = PostingManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,17 +164,9 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
         for i in 0..<img_cnt{
             img_temp.append(imgs[i].image!.base64)
         }
-
         params["photos"] = img_temp
         
-        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTc1OTAxODUxODIzMjI0MzE0NTEiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0MzI3MzIxfQ.9aFPgAxWK8eK8xO8lMgAcEz8r_2Xjyu57CiuXYTD60Y"
-
-        AF.request("http://localhost:8080/api/v1/boards/2/posts", method: .post, parameters: params, encoding: JSONEncoding.default, headers: HTTPHeaders(["Authorization": "Bearer \(token)"])).responseDecodable(of: DataResponse.self, completionHandler: { response in
-            print("***************")
-            print(response)
-            print("***************")
-        })
-        
+        postData(boardID: 2, params: params)
         
         let alert = UIAlertController(title: "알림", message: "글쓰기가 완료되었습니다.", preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style: .default){_ in self.dismiss(animated: true) }
@@ -186,6 +178,9 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
         
     }
    
+    func postData(boardID: Int, params: Parameters){
+        BoardManager.createPost(boardID: boardID, params: params)
+    }
     
     //MARK: - title textView의 place holder 기능
     func textViewDidBeginEditing(_ textView: UITextView) {

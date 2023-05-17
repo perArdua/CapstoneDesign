@@ -14,7 +14,7 @@ class GeneralPostingSearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchTF: UITextField!
     
-    var searcharry :[PostingSearchContent] = []
+    var searcharry :[PostSearchContent] = []
     
     
     let tempLabel: UILabel = {
@@ -72,12 +72,26 @@ class GeneralPostingSearchViewController: UIViewController {
         tempLabel.isHidden = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.getData(keyword: keyword)
-            self.searchPosting()
+            self.handleAnimation()
+        }
+    }
+
+    func getData(keyword: String){
+        BoardManager.searchPost(boardID: 2, keyword: keyword){[weak self] result in
+            switch result {
+            case .success(let posts):
+                // 데이터를 받아와서 배열에 저장
+                self?.searcharry = posts
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
         }
     }
     
-    func searchPosting(){
-        
+    func handleAnimation(){
         //검색된 게시글이 없는 경우
         if searcharry.count == 0{
             animationView!.stop()
@@ -92,29 +106,6 @@ class GeneralPostingSearchViewController: UIViewController {
         }
         tableView.reloadData()
     }
-    
-    func getData(keyword: String){
-        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTc1OTAxODUxODIzMjI0MzE0NTEiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0MzI3MzIxfQ.9aFPgAxWK8eK8xO8lMgAcEz8r_2Xjyu57CiuXYTD60Y"
-        let url = "http://localhost:8080/api/v1/boards/2/posts/search?keyword=\(keyword.encodeUrl()!)"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
-//        AF.request(url, method: .get, headers: headers).responseJSON{ response in
-//                    print(response)
-//
-//                }
-//
-        AF.request(url, method: .get, headers: headers).responseDecodable(of: PostingSearch.self) { response in
-            if let res = response.value{
-                print(response.value)
-                self.searcharry = res.body.postingSearchList.content
-                self.tableView.reloadData()
-            }else{
-                print("실패")
-                print(response)
-            }
-            
-        }
-    }
-
 }
 
 
@@ -146,16 +137,5 @@ extension GeneralPostingSearchViewController : UITableViewDelegate, UITableViewD
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "GeneralPostingDetailViewController") as? GeneralPostingDetailViewController else { return }
         nextVC.postingIndex = indexPath.row
                 self.navigationController?.pushViewController(nextVC, animated: true)
-    }
-}
-extension String
-{
-    func encodeUrl() -> String?
-    {
-        return self.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)
-    }
-    func decodeUrl() -> String?
-    {
-        return self.removingPercentEncoding
     }
 }
