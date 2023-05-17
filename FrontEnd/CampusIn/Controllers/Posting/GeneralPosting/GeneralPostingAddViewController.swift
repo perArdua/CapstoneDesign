@@ -165,13 +165,9 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
             img_temp.append(imgs[i].image!.base64)
         }
 
-            
         params["photos"] = img_temp
-        print("###############")
-        print(params)
-        print("###############")
         
-        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTc1OTAxODUxODIzMjI0MzE0NTEiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0MjUyMjY0fQ.g8XE818SkSm5LQt-c_CMMd6D7uW8oZVHrHs6fe3BnbU"
+        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTc1OTAxODUxODIzMjI0MzE0NTEiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0MzI3MzIxfQ.9aFPgAxWK8eK8xO8lMgAcEz8r_2Xjyu57CiuXYTD60Y"
 
         AF.request("http://localhost:8080/api/v1/boards/2/posts", method: .post, parameters: params, encoding: JSONEncoding.default, headers: HTTPHeaders(["Authorization": "Bearer \(token)"])).responseDecodable(of: DataResponse.self, completionHandler: { response in
             print("***************")

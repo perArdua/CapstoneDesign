@@ -21,10 +21,10 @@ struct GeneralPostingMainData: Codable {
 
 // MARK: - Body
 struct GeneralPostingMainBody: Codable {
-    let 게시글목록: GeneralPostingMainList
+    let generalPostingMainList: GeneralPostingMainList
 
     enum CodingKeys: String, CodingKey {
-        case 게시글목록 = "게시글 목록"
+        case generalPostingMainList = "게시글 목록"
     }
 }
 
