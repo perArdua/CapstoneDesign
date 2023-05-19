@@ -4,6 +4,7 @@ import com.example.campusin.application.message.MessageRoomService;
 import com.example.campusin.common.response.ApiResponse;
 import com.example.campusin.domain.message.dto.request.MessageRoomCreateRequest;
 import com.example.campusin.domain.message.dto.request.MessageRoomGetRequest;
+import com.example.campusin.domain.message.dto.response.MessageRoomIdResponse;
 import com.example.campusin.domain.message.dto.response.MessageRoomListResponse;
 import com.example.campusin.domain.message.dto.response.MessageRoomResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
@@ -36,19 +37,30 @@ public class MessageRoomController {
 
         Optional<Long> maybeMessageRoomId = messageRoomService.getMessageRoomId(principal.getUserId(), request.getCreatedFrom(), request.getReceiverId());
 
-        URI redirectUri = null;
+
         if (maybeMessageRoomId.isPresent()) {
-            redirectUri = new URI(
+            URI redirectUri = new URI(
                     new StringBuilder().append("/api/v1/message-rooms/").append(maybeMessageRoomId.get())
                             .append("/redirect-message?userId=").append(principal.getUserId()).toString()
             );
+
+
+            redirectAttributes.addFlashAttribute("message", request.getFirstMessage());
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setLocation(redirectUri);
+
+            return ApiResponse.success("이미 존재하는 쪽지방입니다.", "쪽지 전송 요청으로 리디렉트 되었습니다.");
         }
 
-        redirectAttributes.addFlashAttribute("message", request.getFirstMessage());
+        MessageRoomIdResponse response = messageRoomService.saveMessageRoom(principal.getUserId(), request);
+
+        URI redirectUri = new URI(
+                new StringBuilder().append("/api/v1/message-rooms/").append(response.getMessageRoomId())
+                        .append("?userId=").append(principal.getUserId()).toString());
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(redirectUri);
 
-        return ApiResponse.success("이미 존재하는 쪽지방입니다.", "쪽지 전송 요청으로 리디렉트 되었습니다.");
+        return ApiResponse.success("쪽지방 생성이 완료되었습니다.", "MessageRoom create Successfully");
     }
 
     @GetMapping("/{messageRoomId}")
