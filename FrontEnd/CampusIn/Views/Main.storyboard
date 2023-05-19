@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,50 +42,48 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="LgB-dx-DFx">
-                                <rect key="frame" x="130" y="495" width="130" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbH-6R-ifb">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="6xU-2t-9Di"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="google"/>
-                                        <connections>
-                                            <action selector="loginButtonTapped:" destination="oAr-a4-H4b" eventType="touchUpInside" id="c56-e0-5M2"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vC9-HN-wNa">
-                                        <rect key="frame" x="80" y="0.0" width="50" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="Y8D-MT-58d"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="kakao"/>
-                                        <connections>
-                                            <action selector="loginButtonTapped:" destination="oAr-a4-H4b" eventType="touchUpInside" id="xf3-Rd-sc9"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhz-54-Xrt">
-                                <rect key="frame" x="153.33333333333334" y="575" width="83.333333333333343" height="34.333333333333371"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhz-54-Xrt">
+                                <rect key="frame" x="154" y="586" width="83.333333333333343" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="To Main"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbH-6R-ifb">
+                                <rect key="frame" x="50" y="475" width="290" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7Gy-rm-6jv"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="googleLogin3">
+                                    <color key="titleColor" name="avatarViewBackground"/>
+                                </state>
+                                <connections>
+                                    <action selector="googleLoginBtnTapped:" destination="oAr-a4-H4b" eventType="touchUpInside" id="Gfp-qo-53Y"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vC9-HN-wNa">
+                                <rect key="frame" x="106" y="535" width="192" height="45"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="kakao" image="kakaoLogin"/>
+                                <connections>
+                                    <action selector="kakaoLoginBtnTapped:" destination="oAr-a4-H4b" eventType="touchUpInside" id="g4j-dO-i4f"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BMj-8k-iRU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vhz-54-Xrt" firstAttribute="top" secondItem="LgB-dx-DFx" secondAttribute="bottom" constant="50" id="7WS-mU-5Ya"/>
+                            <constraint firstItem="XbH-6R-ifb" firstAttribute="leading" secondItem="BMj-8k-iRU" secondAttribute="leading" constant="50" id="2Uo-dE-0MC"/>
                             <constraint firstItem="vhz-54-Xrt" firstAttribute="centerX" secondItem="6uT-dY-JXf" secondAttribute="centerX" id="9xJ-uJ-haR"/>
-                            <constraint firstItem="LgB-dx-DFx" firstAttribute="top" secondItem="5nj-Kv-GpW" secondAttribute="bottom" constant="50" id="P0J-Tp-9NX"/>
+                            <constraint firstItem="BMj-8k-iRU" firstAttribute="trailing" secondItem="XbH-6R-ifb" secondAttribute="trailing" constant="50" id="Bz6-J7-7Uc"/>
                             <constraint firstItem="5nj-Kv-GpW" firstAttribute="centerY" secondItem="6uT-dY-JXf" secondAttribute="centerY" id="PKC-T2-oXH"/>
+                            <constraint firstItem="XbH-6R-ifb" firstAttribute="top" secondItem="5nj-Kv-GpW" secondAttribute="bottom" constant="30" id="SUa-Xx-g9e"/>
+                            <constraint firstItem="vC9-HN-wNa" firstAttribute="leading" secondItem="BMj-8k-iRU" secondAttribute="leading" constant="106" id="bii-XV-vd9"/>
                             <constraint firstItem="5nj-Kv-GpW" firstAttribute="centerX" secondItem="6uT-dY-JXf" secondAttribute="centerX" id="dJB-4J-CiR"/>
                             <constraint firstItem="IEv-Wj-JFP" firstAttribute="top" secondItem="BMj-8k-iRU" secondAttribute="top" constant="70" id="i7h-IE-Q2Y"/>
+                            <constraint firstItem="vC9-HN-wNa" firstAttribute="top" secondItem="XbH-6R-ifb" secondAttribute="bottom" constant="10" id="jXF-8W-ods"/>
                             <constraint firstItem="IEv-Wj-JFP" firstAttribute="centerX" secondItem="6uT-dY-JXf" secondAttribute="centerX" id="ooo-DU-jQk"/>
-                            <constraint firstItem="LgB-dx-DFx" firstAttribute="centerX" secondItem="6uT-dY-JXf" secondAttribute="centerX" id="plj-F2-JuW"/>
+                            <constraint firstItem="BMj-8k-iRU" firstAttribute="trailing" secondItem="vC9-HN-wNa" secondAttribute="trailing" constant="92" id="r5V-5n-wyx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WX1-ki-M7K"/>
@@ -237,10 +236,10 @@
             </objects>
             <point key="canvasLocation" x="7623.0769230769229" y="634.83412322274876"/>
         </scene>
-        <!--View Controller-->
+        <!--Side Menu View Controller-->
         <scene sceneID="SK8-A9-3EM">
             <objects>
-                <viewController storyboardIdentifier="VC" id="O8s-I0-8Ld" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VC" id="O8s-I0-8Ld" customClass="SideMenuViewController" customModule="CampusIn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wHH-aH-ULT">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -297,6 +296,9 @@
                                     </attributedString>
                                     <color key="baseForegroundColor" systemColor="labelColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="logoutBtnTapped:" destination="O8s-I0-8Ld" eventType="touchUpInside" id="uEd-F4-IFJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cc3-4g-VQt">
                                 <rect key="frame" x="14" y="236" width="123" height="36"/>
@@ -332,6 +334,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="HnH-Lh-1FW"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="a58-Kt-JF9">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </tabBar>
                     <connections>
@@ -377,8 +380,13 @@
     <resources>
         <image name="CampusIn_logo" width="181" height="62.5"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <image name="googleLogin3" width="191" height="46"/>
+        <image name="kakaoLogin" width="183" height="45"/>
         <image name="menubar.rectangle" catalog="system" width="128" height="93"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
+        <namedColor name="avatarViewBackground">
+            <color red="0.55699998140335083" green="0.55699998140335083" blue="0.57599997520446777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -11,7 +11,9 @@ class LoginViewController: UIViewController {
 
 
     
-    
+    override func viewDidLoad() {
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         let defaults = UserDefaults.standard
         let check = defaults.value(forKey: "isLoggedIn")
@@ -19,29 +21,25 @@ class LoginViewController: UIViewController {
             self.dismiss(animated: false, completion: nil)
         }
     }
-    
-    @IBAction func loginButtonTapped(_ sender: UIButton) {
-        let social = sender.currentTitle
+
+
+    @IBAction func googleLoginBtnTapped(_ sender: UIButton) {
         var socialURL : String
-        guard let social = social else { return }
-        print(social)
-        switch social{
-        case "google":
-            socialURL = "http://localhost:8080/oauth2/authorization/google"
-        case "kakao":
-            socialURL = "https://accounts.kakao.com/login/?continue=https%3A%2F%2Fcs.kakao.com%2Fhelps%3Fcategory%3D166%26locale%3Dko%26service%3D52#webTalkLogin"
-        default:
-            socialURL = ""
-        }
-        
+        socialURL = "http://localhost:8080/oauth2/authorization/google"
         let socialVC = self.storyboard?.instantiateViewController(withIdentifier: "socialLogin") as! SocialViewController
         socialVC.socialURL = socialURL
-        print("dddd")
-        
-//        debugPrint(self.navigationController?.pushViewController(socialVC, animated: true))
         socialVC.modalTransitionStyle = .coverVertical
         socialVC.modalPresentationStyle = .fullScreen
         self.present(socialVC, animated: false, completion: nil)
-
+    }
+    
+    @IBAction func kakaoLoginBtnTapped(_ sender: Any) {
+        var socialURL : String
+        socialURL = "https://accounts.kakao.com/login/?continue=https%3A%2F%2Fcs.kakao.com%2Fhelps%3Fcategory%3D166%26locale%3Dko%26service%3D52#webTalkLogin"
+        let socialVC = self.storyboard?.instantiateViewController(withIdentifier: "socialLogin") as! SocialViewController
+        socialVC.socialURL = socialURL
+        socialVC.modalTransitionStyle = .coverVertical
+        socialVC.modalPresentationStyle = .fullScreen
+        self.present(socialVC, animated: false, completion: nil)
     }
 }
