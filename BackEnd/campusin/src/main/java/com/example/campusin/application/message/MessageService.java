@@ -21,7 +21,7 @@ public class MessageService {
 
     private final MessageRepository messageRepository;
     private final MessageRoomRepository messageRoomRepository;
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     // 쪽지 전송
     @Transactional
