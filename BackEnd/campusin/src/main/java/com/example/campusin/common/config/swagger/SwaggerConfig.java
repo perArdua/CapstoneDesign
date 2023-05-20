@@ -1,8 +1,13 @@
 package com.example.campusin.common.config.swagger;
 
 import com.fasterxml.classmate.TypeResolver;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -18,10 +23,8 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.awt.print.Pageable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
 
 /**
  * Created by kok8454@gmail.com on 2023-05-13
@@ -41,10 +44,11 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .alternateTypeRules(
+                        AlternateTypeRules.newRule(typeResolver.resolve(Pageable.class), typeResolver.resolve(Page.class)))
                 .ignoredParameterTypes(AuthenticationPrincipal.class)
                 .securityContexts(List.of(securityContext()))
                 .securitySchemes(List.of(apiKey()))
-                .alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Pageable.class), typeResolver.resolve(List.class, Pageable.class)))
                 .useDefaultResponseMessages(true)
                 .apiInfo(apiInfo())
                 .select()
@@ -81,4 +85,18 @@ public class SwaggerConfig {
         return new ApiKey("Authorization", "Authorization", "header");
     }
 
+    @Getter
+    @Setter
+    @ApiModel
+    static class Page {
+
+        @ApiModelProperty(value = "페이지 번호")
+        private Integer page;
+
+        @ApiModelProperty(value = "페이지 크기")
+        private Integer size;
+
+        @ApiModelProperty(value = "정렬(사용법: 컬럼명,ASC|DESC) : 뛰어쓰기금지", example = "createdAt,ASC")
+        private List<String> sort;
+    }
 }
