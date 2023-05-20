@@ -2,8 +2,8 @@ package com.example.campusin.api.comment;
 
 import com.example.campusin.application.comment.CommentService;
 import com.example.campusin.common.response.ApiResponse;
-import com.example.campusin.domain.comment.CommentCreateDto;
-import com.example.campusin.domain.comment.CommentCreateResponse;
+import com.example.campusin.domain.comment.request.CommentCreateDto;
+import com.example.campusin.domain.comment.response.CommentCreateResponse;
 import com.example.campusin.domain.loginInfo.OAuth2UserInfo;
 import com.example.campusin.domain.oauth.UserPrincipal;
 import lombok.RequiredArgsConstructor;
@@ -36,8 +36,8 @@ public class CommentController {
 
 
     @DeleteMapping("/{commentId}")
-    public ApiResponse deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal OAuth2UserInfo userInfo){
-        commentService.deleteComment(userInfo.getLoginId(), commentId);
+    public ApiResponse deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserPrincipal userPrincipal){
+        commentService.deleteComment(userPrincipal.getLoginId(), commentId);
         return ApiResponse.success("delete comment", "Comment deleted successfully");
     }
 

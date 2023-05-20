@@ -1,12 +1,14 @@
-package com.example.campusin.domain.comment;
+package com.example.campusin.domain.comment.request;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class CommentCreateDto {
 
     @NotNull

@@ -1,5 +1,6 @@
-package com.example.campusin.domain.comment;
+package com.example.campusin.domain.comment.response;
 
+import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.post.Post;
 import com.example.campusin.domain.user.User;
 import lombok.AccessLevel;

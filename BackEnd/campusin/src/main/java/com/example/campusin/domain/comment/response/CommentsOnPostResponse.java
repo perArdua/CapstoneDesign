@@ -1,12 +1,15 @@
-package com.example.campusin.domain.comment;
+package com.example.campusin.domain.comment.response;
 
+import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.user.User;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import com.querydsl.core.annotations.QueryProjection;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentsOnPostResponse extends CommentResponse{
 
@@ -15,7 +18,6 @@ public class CommentsOnPostResponse extends CommentResponse{
     @QueryProjection
     public CommentsOnPostResponse(String userId, Long parentId, Long commentId, String name, String content) {
         super(userId, parentId, commentId, name, content);
-        this.children = children;
     }
 
     public void setChildren(List<CommentsOnPostResponse> children){
