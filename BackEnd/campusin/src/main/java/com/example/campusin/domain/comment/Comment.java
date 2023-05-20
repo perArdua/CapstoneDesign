@@ -24,7 +24,7 @@ import static javax.persistence.GenerationType.AUTO;
 @Table(name = "COMMENT")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "UPDATE COMMENT SET deleted_at = CURRENT_TIMESTAMP where id = ?")
+@SQLDelete(sql = "UPDATE COMMENT SET deleted_at = CURRENT_TIMESTAMP where comment_id = ?")
 
 public class Comment extends BaseTimeEntity {
 
@@ -32,6 +32,7 @@ public class Comment extends BaseTimeEntity {
     @GeneratedValue(strategy = AUTO)
     @Column(name = "comment_id")
     private Long id;
+
     @Column(name = "content", nullable = false, length = 300)
     private String content;
 

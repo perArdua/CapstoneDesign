@@ -1,7 +1,7 @@
 package com.example.campusin.infra.comment;
 
 import com.example.campusin.domain.comment.Comment;
-import com.example.campusin.domain.comment.CommentsOnPostResponse;
+import com.example.campusin.domain.comment.response.CommentsOnPostResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

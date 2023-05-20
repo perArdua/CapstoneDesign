@@ -35,7 +35,7 @@ public class PostController {
         return ApiResponse.success("게시글 상세", postService.readPost(postId));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{postId}")
     public ApiResponse delete(@PathVariable(name = "postId") Long postId) {
         postService.deletePost(postId);
         return ApiResponse.success("게시글 삭제", "Post deleted successfully");

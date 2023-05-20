@@ -1,6 +1,9 @@
 package com.example.campusin.application.comment;
 
 import com.example.campusin.domain.comment.*;
+import com.example.campusin.domain.comment.request.CommentCreateDto;
+import com.example.campusin.domain.comment.response.CommentCreateResponse;
+import com.example.campusin.domain.comment.response.CommentsOnPostResponse;
 import com.example.campusin.domain.post.Post;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.comment.CommentRepository;

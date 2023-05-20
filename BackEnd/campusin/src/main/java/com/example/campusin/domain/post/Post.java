@@ -92,7 +92,7 @@ public class Post extends BaseTimeEntity {
         photos.remove(photo);
         photo.setPost(null);
     }
-    
+
     public List<Comment> getCommentList() {
         return comments;
     }
