@@ -8,6 +8,9 @@ import com.example.campusin.domain.message.dto.response.MessageRoomIdResponse;
 import com.example.campusin.domain.message.dto.response.MessageRoomListResponse;
 import com.example.campusin.domain.message.dto.response.MessageRoomResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +25,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
-
+@Api(tags = {"쪽지방 API"})
 @RestController
 @RequestMapping("/api/v1/message-rooms")
 @RequiredArgsConstructor
@@ -30,6 +33,8 @@ public class MessageRoomController {
 
     private final MessageRoomService messageRoomService;
 
+
+    @ApiOperation(value = "쪽지방 생성하기", notes = "쪽지방을 생성하는 요청 입니다. MessageRoom ID 반환")
     @PostMapping
     public ApiResponse createMessageRoom(@AuthenticationPrincipal UserPrincipal principal,
                                          @Valid @RequestBody final MessageRoomCreateRequest request,
@@ -62,7 +67,7 @@ public class MessageRoomController {
 
         return ApiResponse.success("쪽지방 생성이 완료되었습니다.", "MessageRoom create Successfully");
     }
-
+    @ApiOperation(value = "쪽지방 정보와 최근 쪽지 조회하기")
     @GetMapping("/{messageRoomId}")
     public ApiResponse getMessageRoom(@AuthenticationPrincipal UserPrincipal principal,
                                       @PathVariable("messageRoomId") Long messageRoomId) {
@@ -74,7 +79,7 @@ public class MessageRoomController {
     }
 
     //쪽지방 리스트 조회
-
+    @ApiOperation(value = "쪽지방 리스트 조회하기")
     @GetMapping
     public ApiResponse getMessageRooms(@AuthenticationPrincipal UserPrincipal principal,
                                        @PageableDefault(size = 20, sort = "MODIFIED_AT", direction = Sort.Direction.DESC) final Pageable pageable) {
@@ -83,6 +88,7 @@ public class MessageRoomController {
         return ApiResponse.success("쪽지방 리스트 조회가 완료되었습니다.", response);
     }
 
+    @ApiOperation(value = "쪽지방 차단하기")
     @PatchMapping("/{messageRoomId}/block")
     public ApiResponse blockMessageRoom(@AuthenticationPrincipal UserPrincipal principal,
                                         @PathVariable("messageRoomId") Long messageRoomId) {
@@ -91,7 +97,7 @@ public class MessageRoomController {
 
         return ApiResponse.success("쪽지방 차단이 완료되었습니다.", "MESSAGE ROOM IS BLOCKED SUCCESSFULLY");
     }
-
+    @ApiOperation(value = "쪽지방 삭제하기")
     @PatchMapping("/{messageRoomId}/delete")
     public ApiResponse deleteMessageRoom(@AuthenticationPrincipal UserPrincipal principal,
                                          @PathVariable("messageRoomId") Long messageRoomId) {
