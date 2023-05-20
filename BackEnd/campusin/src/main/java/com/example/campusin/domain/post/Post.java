@@ -96,4 +96,12 @@ public class Post extends BaseTimeEntity {
     public List<Comment> getCommentList() {
         return comments;
     }
+
+    public void increaseCommentCount() {
+        commentCount++;
+    }
+
+    public void increaseLikeCount() {
+        likeCount++;
+    }
 }
