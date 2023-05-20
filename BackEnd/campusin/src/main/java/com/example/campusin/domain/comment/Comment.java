@@ -55,7 +55,6 @@ public class Comment extends BaseTimeEntity {
 
     @Builder
     public Comment(Comment parent,User user, Post post, String content) {
-
         setPost(post);
         this.user = user;
         setParent(parent);
