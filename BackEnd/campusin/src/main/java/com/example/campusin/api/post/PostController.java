@@ -2,11 +2,13 @@ package com.example.campusin.api.post;
 
 import com.example.campusin.application.post.PostService;
 import com.example.campusin.common.response.ApiResponse;
+import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.domain.post.dto.request.PostUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,4 +49,24 @@ public class PostController {
                                    ) Pageable pageable) {
         return ApiResponse.success("게시글 검색", postService.searchPosts(keyword, pageable));
     }
+
+    @GetMapping("/mypost")
+    public ApiResponse showMyPosts(@AuthenticationPrincipal UserPrincipal principal,
+                                   @PageableDefault(
+                                           sort = {"createdAt"},
+                                           direction = Sort.Direction.DESC
+                                   ) Pageable pageable) {
+
+        return ApiResponse.success("내가 작성한 게시글 목록", postService.getPostsByUser(principal.getUserId(), pageable));
+    }
+
+    @GetMapping("/mycomment")
+    public ApiResponse showMyComments(@AuthenticationPrincipal UserPrincipal principal,
+                                      @PageableDefault(
+                                              sort = {"createdAt"},
+                                              direction = Sort.Direction.DESC
+                                      ) Pageable pageable) {
+        return ApiResponse.success("내가 작성한 댓글의 게시글 목록", postService.getPostsThatUserCommentedAt(principal.getUserId(), pageable));
+    }
+
 }
