@@ -71,8 +71,8 @@ class NickNameViewController: UIViewController, UITextFieldDelegate {
     @IBAction func doneBtnTapped(_ sender: UIButton) {
         let defaults = UserDefaults.standard
         if isValidNickName(nickName: nickNameTF.text){
-            defaults.set(nickNameTF.text, forKey: "nickName")
-            print("nickname setup complete, \(defaults.value(forKey: "nickName"))")
+            defaults.set(nickNameTF.text, forKey: "nickname")
+            print("nickname setup complete, \(defaults.value(forKey: "nickname"))")
             let alert = UIAlertController(title: "알림", message: "닉네임 설정이 완료되었습니다.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
                 self.dismiss(animated: false, completion: nil)

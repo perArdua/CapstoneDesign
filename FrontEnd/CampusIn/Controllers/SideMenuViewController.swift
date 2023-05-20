@@ -12,21 +12,25 @@ class SideMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func logoutBtnTapped(_ sender: UIButton) {
-       
+        let defaults = UserDefaults.standard
+
+        defaults.set(false, forKey: "isLoggedIn")
+        defaults.removeObject(forKey: "nickname")
+        print("login status changed: \(defaults.value(forKey: "isLoggedIn"))")
+        print("nickname removed")
+        
+        KeyChain.delete(key: "token")
+        print("token deleted")
+        
+        let loginVC = storyboard!.instantiateViewController(withIdentifier: "loginViewController") as! LoginViewController
+        loginVC.modalTransitionStyle = .coverVertical
+        loginVC.modalPresentationStyle = .fullScreen
+        
+        print("move to LoginViewController")
+        self.present(loginVC, animated: false, completion: nil)
     }
     
 }
