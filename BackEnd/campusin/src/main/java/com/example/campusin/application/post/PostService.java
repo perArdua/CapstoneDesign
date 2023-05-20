@@ -16,13 +16,12 @@ import com.example.campusin.infra.photo.PhotoRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -103,6 +102,24 @@ public class PostService {
         }
         return false;
     }
+
+    @Transactional(readOnly = true)
+    public Page<PostSimpleResponse> getPostsByUser(Long userId, Pageable pageable){
+        findUser(userId);
+        Page<Post> posts = postRepository.findPostsByUserId(userId, pageable);
+        return posts.map(PostSimpleResponse::new);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<PostSimpleResponse> getPostsThatUserCommentedAt(Long userId, Pageable pageable){
+        List<Long> postIds = postRepository.findPostIdsThatUserCommentedAt(userId);
+        if(postIds.isEmpty()){
+            return new PageImpl<>(new ArrayList<>());
+        }
+        Page<Post> posts = postRepository.findPostsThatUserCommentedAt(postIds, pageable);
+        return posts.map(PostSimpleResponse::new);
+    }
+
 
     public Page<BoardSimpleResponse> getBoardIds(Pageable pageable) {
         return boardRepository.findAll(pageable).map(BoardSimpleResponse::new);
