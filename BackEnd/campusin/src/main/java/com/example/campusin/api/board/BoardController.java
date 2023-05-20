@@ -2,12 +2,17 @@ package com.example.campusin.api.board;
 
 import com.example.campusin.application.post.PostService;
 import com.example.campusin.common.response.ApiResponse;
+import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.domain.post.dto.request.PostCreateRequest;
+import com.example.campusin.domain.post.dto.response.PostIdResponse;
+import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -30,6 +35,12 @@ public class BoardController {
 
     private final PostService postService;
 
+    @ApiResponses(
+            value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시판별 게시글 목록 조회 성공", response = PostSimpleResponse.class, responseContainer = "Page")
+            }
+    )
+    @Operation(summary = "게시판별 게시글 목록 조회")
     @GetMapping("/{boardId}/posts")
     public ApiResponse showPostsByBoard(
             @PathVariable(name = "boardId") Long boardId,
@@ -40,6 +51,13 @@ public class BoardController {
     ) {
         return ApiResponse.success("게시글 목록", postService.getPostsByBoard(boardId, pageable));
     }
+
+    @ApiResponses(
+            value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시판별 게시글 검색 성공", response = PostSimpleResponse.class, responseContainer = "Page")
+            }
+    )
+    @Operation(summary = "게시판별 게시글 검색")
     @GetMapping("/{boardId}/posts/search")
     public ApiResponse searchPostsAtBoard(
             @PathVariable(name = "boardId") Long boardId,
@@ -52,10 +70,10 @@ public class BoardController {
         return ApiResponse.success("게시판별 게시글 목록/검색", postService.searchPostsAtBoard(boardId, keyword, pageable));
     }
 
-    @Operation(summary = "게시글 생성")
     @ApiResponses({
-            @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 생성 성공, 생성된 게시글의 id 반환"),
+            @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 생성 성공, 생성된 게시글의 id 반환", response = PostIdResponse.class),
     })
+    @Operation(summary = "게시글 생성")
     @PostMapping("/{boardId}/posts")
     public ApiResponse createPost(
             @PathVariable(name = "boardId") Long boardId,
@@ -65,16 +83,21 @@ public class BoardController {
         return ApiResponse.success("게시글 생성", postService.createPost(boardId, principal.getUserId(), request));
     }
 
-    @Operation(summary = "게시판 초기화")
     @ApiResponses({
             @io.swagger.annotations.ApiResponse(code = 200, message = "게시판 초기화 성공"),
             @io.swagger.annotations.ApiResponse(code = 500, message = "서버 에러")
     })
+    @Operation(summary = "게시판 초기화")
     @GetMapping("/init")
     public ApiResponse initBoard() {
         return ApiResponse.success("게시판 초기화", postService.initBoard());
     }
 
+    @ApiResponses(
+            value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시판 고유 id값 얻기 성공", response = BoardSimpleResponse.class, responseContainer = "Page")
+            }
+    )
     @Operation(summary = "게시판 고유 id값 얻기")
     @GetMapping("/boards/ids")
     public ApiResponse getBoardIds(@PageableDefault(

@@ -17,6 +17,9 @@ import com.example.campusin.domain.token.AuthTokenProvider;
 import com.example.campusin.common.utils.CookieUtil;
 import com.example.campusin.common.utils.HeaderUtil;
 import io.jsonwebtoken.Claims;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
+@Api(tags = {"인증 API"})
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
@@ -44,6 +48,7 @@ public class AuthController {
     private final static long THREE_DAYS_MSEC = 259200000;
     private final static String REFRESH_TOKEN = "refresh_token";
 
+    @Operation(summary = "사용 금지")
     @PostMapping("/login")
     public ApiResponse login(
             HttpServletRequest request,
@@ -96,6 +101,7 @@ public class AuthController {
         return ApiResponse.success("token", accessToken.getToken());
     }
 
+    @Operation(summary = "만료된 토큰인 경우 새 토큰 발급")
     @GetMapping("/refresh")
     public ApiResponse refreshToken (HttpServletRequest request, HttpServletResponse response) {
         // access token 확인
