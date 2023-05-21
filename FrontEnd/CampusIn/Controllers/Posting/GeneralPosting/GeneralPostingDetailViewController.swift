@@ -8,7 +8,7 @@
 import UIKit
 
 class GeneralPostingDetailViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
 //    var manager = PostingManager()

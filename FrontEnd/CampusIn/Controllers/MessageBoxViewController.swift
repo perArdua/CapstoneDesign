@@ -10,7 +10,7 @@ import UIKit
 class MessageBoxViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
-
+    
     @IBOutlet weak var tableView: UITableView!
     let names: [String] = ["이동현", "김태호", "정소영"]
     let previews: [String] = ["ㅎㅇㅎㅇ", "ㅋㅋㅋㅋㅋㅋ", "ㅂㅇㅂㅇ"]
