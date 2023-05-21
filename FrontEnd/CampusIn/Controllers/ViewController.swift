@@ -46,6 +46,9 @@ class ViewController: UIViewController {
             
             self.present(loginVC, animated: false, completion: nil)
         }
+        else{
+            BoardManager.initBoard()
+        }
     }
 
     @IBAction func rightButtonTapped(_ sender: UIBarButtonItem) {

@@ -100,8 +100,8 @@ extension GeneralPostingViewController : UITableViewDelegate, UITableViewDataSou
         
         cell.titleLabel.text = temp.title
         cell.contentLabel.text = temp.content
-        cell.dateLabel.text = "날짜 없음"
-        cell.userLabel.text = temp.writer
+        cell.dateLabel.text = String(temp.createdAt[1])+"/"+String(temp.createdAt[1])
+        cell.userLabel.text = String(temp.userID)
         cell.commentLabel.text = "5"
 
         return cell

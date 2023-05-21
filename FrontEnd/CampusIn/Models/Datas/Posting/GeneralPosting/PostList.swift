@@ -41,13 +41,15 @@ struct PostListContent: Codable {
     let postID: Int
     let boardSimpleResponse: BoardSimpleResponse
     let userID: Int
-    let writer, title, content: String
-
+    let nickname: String?
+    let title, content: String
+    let createdAt: [Int]
+    
     enum CodingKeys: String, CodingKey {
         case postID = "postId"
         case boardSimpleResponse
         case userID = "userId"
-        case writer, title, content
+        case nickname, title, content, createdAt
     }
 }
 

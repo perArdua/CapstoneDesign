@@ -8,12 +8,17 @@
 import Foundation
 
 struct DataResponse: Codable {
-    let body: DataBody
     let header: DataHeader
+    let body: DataBody
 }
 
 // MARK: - Body
 struct DataBody: Codable {
+    let boardInit: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case boardInit = "게시판 초기화"
+    }
 }
 
 // MARK: - Header
