@@ -27,8 +27,6 @@ public class PostSimpleResponse {
     @Schema(name = "게시판 정보")
     BoardSimpleResponse boardSimpleResponse;
 
-    @Schema(name = "유저 id", example = "1")
-    Long userId;
 
     @Schema(name = "닉네임", example = "user1")
     String nickname;
@@ -42,10 +40,9 @@ public class PostSimpleResponse {
     @Schema(name = "게시글 생성일", example = "2023-05-21 00:00:00")
     private LocalDateTime createdAt;
     @Builder
-    public PostSimpleResponse(Long postId, BoardSimpleResponse boardSimpleResponse, Long userId, String nickname, String title, String content, LocalDateTime createdAt) {
+    public PostSimpleResponse(Long postId, BoardSimpleResponse boardSimpleResponse, String nickname, String title, String content, LocalDateTime createdAt) {
         this.postId = postId;
         this.boardSimpleResponse = boardSimpleResponse;
-        this.userId = userId;
         this.nickname = nickname;
         this.title = title;
         this.content = content;
@@ -57,7 +54,6 @@ public class PostSimpleResponse {
         this(
                 entity.getId(),
                 new BoardSimpleResponse(entity.getBoard()),
-                entity.getUser().getId(),
                 entity.getUser().getNickname(),
                 entity.getTitle(),
                 entity.getContent(),
