@@ -30,9 +30,6 @@ public class PostResponse {
     @Schema(name = "게시판 타입", example = "FREE")
     private BoardType boardType;
 
-    @Schema(name = "유저 id", example = "1")
-    private Long userId;
-
     @Schema(name = "닉네임", example = "nickname")
     private String nickname;
 

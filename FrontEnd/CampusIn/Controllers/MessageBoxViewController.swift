@@ -30,6 +30,7 @@ class MessageBoxViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("진입")
         MessageRoomManager.getAllMessageRooms(){
             [weak self] result in
             switch result {

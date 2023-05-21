@@ -87,7 +87,7 @@ class BoardManager{
                         for id in boardIDs {
                             defaults.set(id.boardID, forKey: id.boardType)
                             print("게시판 아이디 가져오기 성공")
-                            
+
                             print("자유 게시판",getBoardID(boardName: "Free"))
                             print("질의 응답 게시판",getBoardID(boardName: "Question"))
                             print("책방",getBoardID(boardName: "Book"))
@@ -106,24 +106,24 @@ class BoardManager{
             }
         }
     }
-    
+
     static func getBoardID(completion: @escaping (Result<[BoardContent], Error>) -> Void){
         let endpoint = APIConstants.Board.getBoardIds
-        
+
         AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: BoardData.self) { response in
             switch response.result{
             case .success(let boardID):
                 print("hh 요청 성공")
                 completion(.success(boardID.body.boardID.content))
-                
+
             case .failure(let error):
                 print("게시글 검색 요청 실패")
                 completion(.failure(error))
             }
         }
-        
+
     }
-    
+
     static func getBoardID(boardName : String) -> Int{
         let defaults = UserDefaults.standard
         if let id = defaults.integer(forKey: boardName) as Optional<Int>{
