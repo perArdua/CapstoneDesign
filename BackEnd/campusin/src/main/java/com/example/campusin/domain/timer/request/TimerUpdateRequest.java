@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
  * Github : http://github.com/perArdua
  */
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class TimerUpdateRequest {
 
     private Long elapsedTime;

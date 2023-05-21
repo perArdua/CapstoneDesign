@@ -9,8 +9,12 @@ import lombok.NoArgsConstructor;
  * Github : http://github.com/perArdua
  */
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class TimerIdResponse {
 
     private Long id;
+
+    public TimerIdResponse(Long id) {
+        this.id = id;
+    }
 }

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  */
 
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class TimerCreateRequest {
 
     private String subject;

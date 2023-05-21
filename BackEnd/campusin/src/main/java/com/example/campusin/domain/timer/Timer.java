@@ -1,8 +1,10 @@
 package com.example.campusin.domain.timer;
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
+import com.example.campusin.domain.timer.request.TimerUpdateRequest;
 import com.example.campusin.domain.user.User;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
@@ -36,4 +38,16 @@ public class Timer extends BaseTimeEntity {
 
     @Column(name = "elapsed_time")
     private Long elapsedTime;
+
+    @Builder
+    public Timer(Long id, User user, String subject, Long elapsedTime) {
+        this.id = id;
+        this.user = user;
+        this.subject = subject;
+        this.elapsedTime = elapsedTime;
+    }
+
+    public void updateTimer(TimerUpdateRequest timerUpdateRequest){
+        this.elapsedTime += timerUpdateRequest.getElapsedTime();
+    }
 }
