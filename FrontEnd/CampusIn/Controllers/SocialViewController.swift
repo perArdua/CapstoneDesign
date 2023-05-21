@@ -105,7 +105,7 @@ class SocialViewController: UIViewController, WKNavigationDelegate{
                             //로그인 완료 시 메인 화면으로 이동
 //                            let mainVC = self.storyboard!.instantiateViewController(withIdentifier: "mainViewController") as! ViewController
 //                            self.dismiss(animated: false, completion: nil)
-                            
+                            BoardManager.initBoard()
                             //닉네임 입력 화면 이동
                             let nickVC = self.storyboard!.instantiateViewController(withIdentifier: "NickNameViewController") as! NickNameViewController
                             nickVC.modalTransitionStyle = .coverVertical
