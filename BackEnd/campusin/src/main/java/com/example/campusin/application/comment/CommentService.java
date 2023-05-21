@@ -1,9 +1,9 @@
 package com.example.campusin.application.comment;
 
 import com.example.campusin.domain.comment.*;
-import com.example.campusin.domain.comment.request.CommentCreateDto;
-import com.example.campusin.domain.comment.response.CommentCreateResponse;
-import com.example.campusin.domain.comment.response.CommentsOnPostResponse;
+import com.example.campusin.domain.comment.dto.request.CommentCreateRequest;
+import com.example.campusin.domain.comment.dto.response.CommentCreateResponse;
+import com.example.campusin.domain.comment.dto.response.CommentsOnPostResponse;
 import com.example.campusin.domain.post.Post;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.comment.CommentRepository;
@@ -24,29 +24,35 @@ public class CommentService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
-    public CommentCreateResponse createComment(String loginId, CommentCreateDto commentCreateDto){
+    @Transactional
+    public CommentCreateResponse createComment(Long userId, CommentCreateRequest commentCreateRequest) {
 
-        User currentUser = getCurrentUser(loginId);
-        Post post = getPost(commentCreateDto.getPostId());
-        Comment parent = commentCreateDto.getParentId() == null ? null : getComment(commentCreateDto.getParentId());
+        User currentUser = getCurrentUser(userId);
+        Post post = getPost(commentCreateRequest.getPostId());
+        Comment parent = commentCreateRequest.getParentId() != null ? commentRepository.findById(commentCreateRequest.getParentId()).orElseThrow(() -> new IllegalArgumentException("COMMENT NOT FOUND")) : null;
+
         Comment comment = Comment.builder()
                 .user(currentUser)
                 .post(post)
                 .parent(parent)
-                .content(commentCreateDto.getContent())
+                .content(commentCreateRequest.getContent())
                 .build();
 
         commentRepository.save(comment);
 
-        return CommentCreateResponse.of(currentUser, post, comment);
+        return CommentCreateResponse.convertComment(comment);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CommentsOnPostResponse> searchCommentByPost(Long postId, Pageable pageable) {
+        checkPostExist(postId);
+        return commentRepository.findByPost(postId, pageable);
     }
 
     @Transactional
-    public Page<CommentsOnPostResponse> searchCommentByPost(Long postId, Pageable pageable) {
-        checkPostExist(postId);
-        return commentRepository.findByPost(postId, pageable); //조회 기능 미완
-    }
-    public void deleteComment(String loginId, Long commentId){
+    public void deleteComment(Long userId, Long commentId){
+        getCurrentUser(userId);
+
         Comment comment = getComment(commentId);
         comment.updateDelete();
     }
@@ -60,12 +66,13 @@ public class CommentService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 comment 없습니다 id = " + commentId));
     }
 
-    private User getCurrentUser(String loginId){
-        return userRepository.findByLoginId(loginId);
+    private User getCurrentUser(Long userId){
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
     }
 
     private void checkPostExist(Long postId){
-        if(postRepository.existsById(postId)) {
+        if(!postRepository.existsById(postId)) {
             throw new IllegalArgumentException("해당 게시물이 없습니다.");
         }
     }
