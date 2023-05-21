@@ -22,6 +22,11 @@
 		317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317667BB2A07EFEB002F829C /* GeneralSearchTableViewCell.swift */; };
 		3183ABDB2A14D3DB009CA636 /* PostSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183ABDA2A14D3DB009CA636 /* PostSearch.swift */; };
 		3183ABE22A150A51009CA636 /* BoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183ABE12A150A51009CA636 /* BoardManager.swift */; };
+		31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */; };
+		31B2B1682A190735005A3D4E /* TimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */; };
+		31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */; };
+		31B2B16E2A191401005A3D4E /* TimerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B16D2A191401005A3D4E /* TimerData.swift */; };
+		31B2B1722A1916AE005A3D4E /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B1712A1916AE005A3D4E /* TimerManager.swift */; };
 		31C7184A2A080EE800C7731A /* loading_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 31C718492A080EE800C7731A /* loading_check.json */; };
 		31D57E4F2A13B7830049E57A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D57E4E2A13B7830049E57A /* Response.swift */; };
 		31D57E512A13CE160049E57A /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D57E502A13CE160049E57A /* PostList.swift */; };
@@ -86,6 +91,11 @@
 		317667BB2A07EFEB002F829C /* GeneralSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSearchTableViewCell.swift; sourceTree = "<group>"; };
 		3183ABDA2A14D3DB009CA636 /* PostSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearch.swift; sourceTree = "<group>"; };
 		3183ABE12A150A51009CA636 /* BoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManager.swift; sourceTree = "<group>"; };
+		31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewCell.swift; sourceTree = "<group>"; };
+		31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCell.swift; sourceTree = "<group>"; };
+		31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCellDelegate.swift; sourceTree = "<group>"; };
+		31B2B16D2A191401005A3D4E /* TimerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerData.swift; sourceTree = "<group>"; };
+		31B2B1712A1916AE005A3D4E /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		31C718492A080EE800C7731A /* loading_check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_check.json; sourceTree = "<group>"; };
 		31D57E4E2A13B7830049E57A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		31D57E502A13CE160049E57A /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
@@ -207,6 +217,7 @@
 		3165EDF32A02A82400D91856 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				31B2B1692A190C25005A3D4E /* Study */,
 				3183ABDC2A150A1D009CA636 /* Network */,
 				5D4ADF9F2A0555E600195CA9 /* KeyChain.swift */,
 				31FCD9202A054E180068689B /* Datas */,
@@ -230,6 +241,7 @@
 		3165EDF52A02A82E00D91856 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				31B2B16C2A190CB8005A3D4E /* Study */,
 				31FCD9142A054DCF0068689B /* Posting */,
 				3165EDC72A02A3C100D91856 /* ViewController.swift */,
 				5D4ADF952A054A1B00195CA9 /* LoginViewController.swift */,
@@ -237,7 +249,6 @@
 				5D4ADF9D2A0555D900195CA9 /* NickNameViewController.swift */,
 				5D507AEB2A0DDDA800EB5CA9 /* MessageBoxViewController.swift */,
 				5D25704B2A10CE8B00E03713 /* ChatViewController.swift */,
-				5D4B9D542A114F2C003F3E86 /* StudyManageViewController.swift */,
 				5D14AB332A15158A00807A2B /* SideMenuViewController.swift */,
 			);
 			path = Controllers;
@@ -266,6 +277,40 @@
 				3183ABE12A150A51009CA636 /* BoardManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		31B2B1662A190717005A3D4E /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */,
+				31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
+		31B2B1692A190C25005A3D4E /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */,
+				31B2B1712A1916AE005A3D4E /* TimerManager.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
+		31B2B16C2A190CB8005A3D4E /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B9D542A114F2C003F3E86 /* StudyManageViewController.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
+		31B2B16F2A191693005A3D4E /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				31B2B16D2A191401005A3D4E /* TimerData.swift */,
+			);
+			path = Study;
 			sourceTree = "<group>";
 		};
 		31C718482A080ECD00C7731A /* Animations */ = {
@@ -298,6 +343,7 @@
 		31FCD9182A054DEB0068689B /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				31B2B1662A190717005A3D4E /* Study */,
 				31FCD9192A054DF90068689B /* GeneralPosting */,
 				5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */,
 				5D2570512A10EABE00E03713 /* ChatTableViewCell.swift */,
@@ -319,6 +365,7 @@
 		31FCD9202A054E180068689B /* Datas */ = {
 			isa = PBXGroup;
 			children = (
+				31B2B16F2A191693005A3D4E /* Study */,
 				5D25704F2A10EA3800E03713 /* ChatMessage.swift */,
 				3183ABD92A14D3A6009CA636 /* Posting */,
 				31D57E4E2A13B7830049E57A /* Response.swift */,
@@ -537,16 +584,20 @@
 				313F7DB82A07DE7500182CDA /* GeneralPostingSearchViewController.swift in Sources */,
 				3165EDC82A02A3C100D91856 /* ViewController.swift in Sources */,
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
+				31B2B16E2A191401005A3D4E /* TimerData.swift in Sources */,
 				3165EDC62A02A3C100D91856 /* SceneDelegate.swift in Sources */,
 				31FCD91F2A054E050068689B /* GeneralPostingTableViewCell.swift in Sources */,
 				5D14AB342A15158A00807A2B /* SideMenuViewController.swift in Sources */,
 				5D2570502A10EA3800E03713 /* ChatMessage.swift in Sources */,
+				31B2B1722A1916AE005A3D4E /* TimerManager.swift in Sources */,
+				31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */,
 				31FCD91D2A054E050068689B /* GeneralPostingCommentTableViewCell.swift in Sources */,
 				5D4ADFA02A0555E600195CA9 /* KeyChain.swift in Sources */,
 				5D2570522A10EABE00E03713 /* ChatTableViewCell.swift in Sources */,
 				5D507AEC2A0DDDA800EB5CA9 /* MessageBoxViewController.swift in Sources */,
 				5D4ADF982A054A1B00195CA9 /* SocialViewController.swift in Sources */,
 				31FCD9252A054E2D0068689B /* PostingManager.swift in Sources */,
+				31B2B1682A190735005A3D4E /* TimerTableViewCell.swift in Sources */,
 				31FCD91E2A054E050068689B /* GeneralPostingContentTableViewCell.swift in Sources */,
 				5D25704E2A10D1F700E03713 /* MessageBoxTableViewCell.swift in Sources */,
 				5D4ADF972A054A1B00195CA9 /* LoginViewController.swift in Sources */,
@@ -554,6 +605,7 @@
 				31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */,
 				5D4ADF9E2A0555D900195CA9 /* NickNameViewController.swift in Sources */,
 				31D57E512A13CE160049E57A /* PostList.swift in Sources */,
+				31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */,
 				317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */,
 				5D4B9D552A114F2C003F3E86 /* StudyManageViewController.swift in Sources */,
 				31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */,
