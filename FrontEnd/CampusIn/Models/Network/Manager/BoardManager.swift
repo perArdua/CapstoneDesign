@@ -24,6 +24,22 @@ class BoardManager{
         })
     }
     
+    // MARK: - 게시글을 읽는 함수
+    static func readPost(postID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
+        let endpoint = APIConstants.Posts.
+        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostDetail.self) { response in
+            switch response.result{
+            case .success(let postList):
+                print("게시판 목록 요청 성공")
+                completion(.success(postList.body.postListArray.content))
+            case .failure(let error):
+                print("게시판 목록 요청 실패")
+                completion(.failure(error))
+            }
+        }
+        
+    }
+    
     // MARK: - 게시판 목록을 요청하는 함수
     static func showPostbyBoard(boardID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
         let endpoint = String(format: APIConstants.Board.showPostByBoard, boardID)
@@ -78,7 +94,7 @@ class BoardManager{
                             print("스터디 게시판",getBoardID(boardName: "Study"))
                         }
                     case .failure(_):
-                        //                        print("Error: \(error)")
+                        //print("Error: \(error)")
                         print("게시판 아이디 가져오기 실패")
                     }
                 }
