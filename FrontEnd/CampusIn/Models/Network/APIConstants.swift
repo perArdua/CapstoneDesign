@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import Alamofire
 
 //message 관련 api 완성 시 구조체 추가 요망
 
 struct APIConstants {
     static let baseURL = "http://localhost:8080/api/v1"
+    static let token = String(KeyChain.read(key: "token")!)
+    static let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
     
     struct Board{
         static let showPostByBoard = baseURL + "/boards/%d/posts" // 모든 게시글 불러오기
@@ -22,7 +25,7 @@ struct APIConstants {
         //사용 예시
         //let endpoint = String(format: APIConstants.Board.searchPosts, boardId, keyword)
 
-        static let getBoardIds = baseURL + "/boards/boards/ids" // 게시판 id 얻기
+        static let getBoardIds = baseURL + "/boards/ids" // 게시판 id 얻기
         static let initBoards = baseURL + "/boards/init" // 게시판 초기화
     }
     
@@ -54,6 +57,20 @@ struct APIConstants {
         //사용 예시
         //let endpoint = String(format: APIConstants.Posts.deletePost or showPost or updatePost, postId)
         
+    }
+    
+    struct MessageRoom{
+        static let getAllMessageRooms = baseURL + "/message-rooms" // 전체 쪽지방 조회
+        static let createMessageRoom = baseURL + "/message-rooms" // 쪽지방 생성
+        static let getMessageInfo = baseURL + "/message-rooms/%d" // 쪽지방 정보 및 최근 쪽지 조회
+        static let blockMessageRoom = baseURL + "/message-rooms/%d/block" // 쪽지방 차단하기
+        static let deleteMessageRoom = baseURL + "/message-rooms/%d/delete" // 쪽지방 삭제하기
+    }
+    
+    struct Messages{
+        static let getAllMessages = baseURL + "/message-rooms/%d/messages" // 모든 쪽지 조회
+        static let sendMessage = baseURL + "/message-rooms/%d/messages" // 쪽지 보내기
+        static let sendRedirectMessage = baseURL + "/message-rooms/%d/redirect-message" // 리다이렉트 쪽지 보내기
     }
     
 }
