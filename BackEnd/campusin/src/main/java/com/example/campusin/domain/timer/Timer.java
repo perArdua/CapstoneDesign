@@ -11,6 +11,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Created by kok8454@gmail.com on 2023-05-21
@@ -48,6 +49,9 @@ public class Timer extends BaseTimeEntity {
     }
 
     public void updateTimer(TimerUpdateRequest timerUpdateRequest){
+        if (Objects.isNull(elapsedTime))
+            this.elapsedTime = 0L;
+
         this.elapsedTime += timerUpdateRequest.getElapsedTime();
     }
 }
