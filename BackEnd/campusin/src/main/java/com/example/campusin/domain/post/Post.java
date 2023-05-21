@@ -92,8 +92,16 @@ public class Post extends BaseTimeEntity {
         photos.remove(photo);
         photo.setPost(null);
     }
-    
+
     public List<Comment> getCommentList() {
         return comments;
+    }
+
+    public void increaseCommentCount() {
+        commentCount++;
+    }
+
+    public void increaseLikeCount() {
+        likeCount++;
     }
 }

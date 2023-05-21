@@ -18,5 +18,6 @@ public class AuthenticatedMatchers {
             "/swagger-resources/**",
             "/webjars/**",
             "/swagger/**",
+            "/api/v1/auth/refresh"
     };
 }

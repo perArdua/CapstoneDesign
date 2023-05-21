@@ -3,6 +3,7 @@ package com.example.campusin.domain.post.dto.request;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,17 +22,17 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@ApiModel(value = "게시글 생성 요청", description = "게시글 제목, 게시글 내용, 게시글 사진 전송)")
+@Schema(name = "게시글 생성 요청", description = "게시글 제목, 게시글 내용, 게시글 사진 전송")
 public class PostCreateRequest {
 
-    @ApiModelProperty(value = "게시글 제목", required = true, example = "title")
+    @Schema(name = "게시글 제목", description = "게시글 제목", required = true, example = "title")
     @NotBlank
     private String title;
 
-    @ApiModelProperty(value = "게시글 내용", required = true, example = "content")
+    @Schema(name = "게시글 내용", description = "게시글 내용", required = true, example = "content")
     private String content;
 
-    @ApiModelProperty(value = "게시글 사진", required = true, example = "[\"photo1\", \"photo2\", \"photo3\"]")
+    @Schema(name = "게시글 사진", description = "게시글 사진", required = true, example = "[\"photo1\", \"photo2\", \"photo3\"]")
     @NotNull
     private List<String> photos = new ArrayList<>();
 

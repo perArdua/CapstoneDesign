@@ -5,8 +5,10 @@ package com.example.campusin.domain.user;
  */
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
+import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.oauth.ProviderType;
 import com.example.campusin.domain.oauth.RoleType;
+import com.example.campusin.domain.post.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -16,6 +18,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -42,6 +46,9 @@ public class User extends BaseTimeEntity {
     @Size(max = 100)
     private String username;
 
+    @Column(name = "NICKNAME", length = 100)
+    private String nickname;
+
     @JsonIgnore
     @Column(name = "PASSWORD", length = 128)
     @NotNull
@@ -63,12 +70,6 @@ public class User extends BaseTimeEntity {
     @NotNull
     private RoleType roleType;
 
-//    @OneToMany(mappedBy = "writer", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Post> postList = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "writer", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Comment> commentList = new ArrayList<>();
-
     @Builder
     public User(
             @NotNull @Size(max = 64) String loginId,
@@ -77,7 +78,8 @@ public class User extends BaseTimeEntity {
             @NotNull ProviderType providerType,
             @NotNull RoleType roleType,
             @NotNull LocalDateTime createdAt,
-            @NotNull LocalDateTime modifiedAt
+            @NotNull LocalDateTime modifiedAt,
+            String nickname
     ) {
         this.loginId = loginId;
         this.username = username;
@@ -85,13 +87,6 @@ public class User extends BaseTimeEntity {
         this.profileImageUrl = profileImageUrl != null ? profileImageUrl : "";
         this.providerType = providerType;
         this.roleType = roleType;
+        this.nickname = nickname;
     }
-
-//    public void addPost(Post post) {
-//        postList.add(post);
-//    }
-//
-//    public void addComment(Comment comment) {
-//        commentList.add(comment);
-//    }
 }

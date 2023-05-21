@@ -96,7 +96,7 @@ public class SwaggerConfig {
         @ApiModelProperty(value = "페이지 크기")
         private Integer size;
 
-        @ApiModelProperty(value = "정렬(사용법: 컬럼명,ASC|DESC) : 뛰어쓰기금지", example = "createdAt,ASC")
+        @ApiModelProperty(value = "정렬(사용법: 컬럼명,ASC|DESC) : 띄어쓰기금지", example = "createdAt,ASC")
         private List<String> sort;
     }
 }
