@@ -1,5 +1,6 @@
 package com.example.campusin.domain.timer.response;
 
+import com.example.campusin.domain.timer.Timer;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -11,19 +12,28 @@ import lombok.NoArgsConstructor;
  */
 
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class TimerResponse {
 
     private Long id;
     private String subject;
     private Long elapsedTime;
-    private String loginId;
+    private Long userId;
 
     @Builder
-    public TimerResponse(Long id, String subject, Long elapsedTime, String loginId) {
+    public TimerResponse(Long id, String subject, Long elapsedTime, Long userId) {
         this.id = id;
         this.subject = subject;
         this.elapsedTime = elapsedTime;
-        this.loginId = loginId;
+        this.userId = userId;
+    }
+
+    public TimerResponse(Timer timer) {
+        this(
+                timer.getId(),
+                timer.getSubject(),
+                timer.getElapsedTime(),
+                timer.getUser().getId()
+        );
     }
 }
