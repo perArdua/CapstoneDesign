@@ -9,7 +9,7 @@ import UIKit
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
-    var chatMessages: [ChatMessage] = []
+    var chatMessages: [ChattingMessage] = []
     
     @IBOutlet weak var inputBarView: UIView!
     
@@ -17,18 +17,18 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    let refreshControl = UIRefreshControl()
     var chatTitle: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = chatTitle
         
-        setChatMessages()
-        
+        //setChatMessages()
         tableView.dataSource = self
         tableView.delegate = self
-        
+       
         messageTextField.delegate = self
-        
+    
         sendBtn.setTitle("", for: .normal)
         sendBtn.setTitleColor(.clear, for: .normal)
         
@@ -39,85 +39,150 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addGestureRecognizer(tapGesture)
         // TabBar 숨기기
         self.tabBarController?.tabBar.isHidden = true
-
+        initRefreshControl()
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        reloadTableView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         }
+            func initRefreshControl() {
+            refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+            tableView.refreshControl = refreshControl
+        }
+        
+    @objc func handleRefreshControl() {
+        // 당겨서 새로고침 시 수행할 작업
+        MessageManager.getAllMessages(roomID: 11) { result in
+            switch result {
+            case .success(let messages):
+                // 메시지 배열을 받아와서 처리
+                self.chatMessages = messages.reversed()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.scrollToBottom()
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+        self.refreshControl.endRefreshing()
+    }
+
+    func scrollToBottom() {
+        guard tableView.numberOfSections > 0 else { return }
+        let lastSection = tableView.numberOfSections - 1
+        let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
+        let indexPath = IndexPath(row: lastRow, section: lastSection)
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
+
     
+    func reloadTableView(){
+        MessageManager.getAllMessages(roomID: 11) { result in
+            switch result {
+            case .success(let messages):
+                // 메시지 배열을 받아와서 처리
+                self.chatMessages = messages.reversed()
+                for message in messages {
+                    // 각 메시지에 대한 처리 로직을 구현
+                    print("Message: \(message.content)")
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+
     @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
         messageTextField.resignFirstResponder()
     }
-   
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         return true
         }
-    
+
     @IBAction func sendBtnTapped(_ sender: Any) {
         sendMessage()
         tableView.reloadData()
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             textField.resignFirstResponder()
             return true
         }
-        
+
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
               let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else {
             return
         }
-        
+
         let keyboardHeight = keyboardFrame.size.height
         UIView.animate(withDuration: duration) {
             self.inputBarBottomConstraint.constant = keyboardHeight + 10
             self.view.layoutIfNeeded()
         }
     }
-    
+
     @objc func keyboardWillHide(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else {
             return
         }
-        
+
         UIView.animate(withDuration: duration) {
             self.inputBarBottomConstraint.constant = 50
             self.view.layoutIfNeeded()
         }
     }
-    
+
     func sendMessage() {
         guard let message = messageTextField.text else {
             return
         }
+        if message != "" {
+            MessageManager.sendMessage(roomID: 11, message: message) { result in
+                switch result {
+                case .success:
+                    print("Message sent successfully.")
+                    self.reloadTableView()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                case .failure(let error):
+                    print("Error sending message: \(error)")
+                }
+            }
+        }
         
-        let msg: ChatMessage = ChatMessage(text: message, isSentByCurrentUser: true)
-        chatMessages.append(msg)
-        // 메시지 전송 로직 실행 후 텍스트 필드 초기화
         messageTextField.text = ""
+        self.scrollToBottom()
         //messageTextField.resignFirstResponder()
-        
-        // ...
     }
 
-    
+
     // UITableViewDataSource 메서드 구현
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatMessages.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "ChatTableViewCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ChatTableViewCell
-        
+
         let chatMessage = chatMessages[indexPath.row]
         cell.selectionStyle = .none
         cell.configure(with: chatMessage)
@@ -126,23 +191,17 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
 
-    
+
     // UITableViewDelegate 메서드 구현
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-    
+
+
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    
-    func setChatMessages(){
-        let c1: ChatMessage = ChatMessage(text: "1", isSentByCurrentUser: true)
-        let c2: ChatMessage = ChatMessage(text: "2", isSentByCurrentUser: false)
-        chatMessages.append(c1)
-        chatMessages.append(c2)
-    }
+
 
 }
 

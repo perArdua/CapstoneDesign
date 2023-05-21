@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Alamofire
 class ViewController: UIViewController {
 
     
@@ -24,12 +24,13 @@ class ViewController: UIViewController {
 //        let rightButton = UIBarButtonItem(image: UIImage(named: "line.3.horizontal"), style: .plain, target: self, action: #selector(rightButtonTapped))
 //        navigationItem.rightBarButtonItem = rightButton
         
+        
     
     }
     override func viewWillAppear(_ animated: Bool) {
         // TabBar 보이기
         self.tabBarController?.tabBar.isHidden = false
-
+        
     }
 
     override func loadView() {

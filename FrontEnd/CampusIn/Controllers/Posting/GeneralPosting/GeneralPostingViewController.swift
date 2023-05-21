@@ -37,7 +37,7 @@ class GeneralPostingViewController: UIViewController {
         self.getData()
         self.tabBarController?.tabBar.isHidden = true
         
-
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
