@@ -102,10 +102,7 @@ class SocialViewController: UIViewController, WKNavigationDelegate{
                         let alert = UIAlertController(title: "로그인 결과", message: "성공하셨습니다.", preferredStyle: .alert)
                         // 확인 버튼 클릭 시 액션 구현
                         let action1 = UIAlertAction(title: "확인", style: .default) { (action: UIAlertAction!) -> Void in
-                            //로그인 완료 시 메인 화면으로 이동
-//                            let mainVC = self.storyboard!.instantiateViewController(withIdentifier: "mainViewController") as! ViewController
-//                            self.dismiss(animated: false, completion: nil)
-                            //BoardManager.initBoard()
+                            BoardManager.initBoard()
                             //닉네임 입력 화면 이동
                             let nickVC = self.storyboard!.instantiateViewController(withIdentifier: "NickNameViewController") as! NickNameViewController
                             nickVC.modalTransitionStyle = .coverVertical

@@ -25,20 +25,20 @@ class BoardManager{
     }
     
     // MARK: - 게시글을 읽는 함수
-    static func readPost(postID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
-        let endpoint = APIConstants.Posts.
-        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostDetail.self) { response in
-            switch response.result{
-            case .success(let postList):
-                print("게시판 목록 요청 성공")
-                completion(.success(postList.body.postListArray.content))
-            case .failure(let error):
-                print("게시판 목록 요청 실패")
-                completion(.failure(error))
-            }
-        }
-        
-    }
+//    static func readPost(postID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
+//        let endpoint = APIConstants.Posts.
+//        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostDetail.self) { response in
+//            switch response.result{
+//            case .success(let postList):
+//                print("게시판 목록 요청 성공")
+//                completion(.success(postList.body.postListArray.content))
+//            case .failure(let error):
+//                print("게시판 목록 요청 실패")
+//                completion(.failure(error))
+//            }
+//        }
+//        
+//    }
     
     // MARK: - 게시판 목록을 요청하는 함수
     static func showPostbyBoard(boardID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
@@ -79,7 +79,7 @@ class BoardManager{
             switch response.result{
             case .success(let res):
                 print("게시판 초기화 요청 성공")
-                print(res.body.boardInit)
+                //print(res.body.boardInit)
                 getBoardID {result in
                     switch result{
                     case .success(let boardIDs):
