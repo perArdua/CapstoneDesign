@@ -14,7 +14,7 @@ class MessageManager{
     static func getAllMessages(roomID: Int, completion: @escaping (Result<[ChattingMessage], Error>) -> Void) {
         let endPoint = String(format: APIConstants.Messages.getAllMessages, roomID)
         AF.request(endPoint, method: .get, headers: APIConstants.headers).responseDecodable(of: ChattingMessageListResponse.self) { response in
-            print(APIConstants.headers)
+
             switch response.result {
             case .success(let messageListResponse):
                 
@@ -29,12 +29,12 @@ class MessageManager{
     //MARK: - 메세지 보내기
     static func sendMessage(roomID: Int, message: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let endPoint = String(format: APIConstants.Messages.sendMessage, roomID)
-        
+        print(endPoint)
         let parameters: [String: Any] = [
             "message": message
         ]
         
-        AF.request(endPoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: APIConstants.headers).responseDecodable(of: DataResponse.self) { response in
+        AF.request(endPoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: APIConstants.headers).response { response in
             switch response.result {
             case .success:
                 completion(.success(()))

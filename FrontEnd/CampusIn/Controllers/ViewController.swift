@@ -47,7 +47,7 @@ class ViewController: UIViewController {
             self.present(loginVC, animated: false, completion: nil)
         }
         else{
-            //BoardManager.initBoard()
+            BoardManager.initBoard()
         }
     }
 

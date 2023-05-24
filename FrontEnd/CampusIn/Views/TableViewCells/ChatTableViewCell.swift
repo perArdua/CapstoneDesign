@@ -36,8 +36,7 @@ class ChatTableViewCell: UITableViewCell {
 
         //cacheKey를 통해 기존 셀에 대한 접근을 가능하게 해줌(재사용 되어도 이 값은 동일)
         let cacheKey = reuseIdentifier ?? ""
-        print("cache")
-        print(cacheKey)
+        
         //캐시값 있을 경우 기존의 Layout을 deactivate, 없으면 새로 할당할 수 있게 제약조건 비 활성화
         if let cachedConstraints = layoutConstraintsCache[cacheKey] {
             NSLayoutConstraint.deactivate(cachedConstraints)

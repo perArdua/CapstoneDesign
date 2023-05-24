@@ -57,7 +57,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
             tableView.refreshControl = refreshControl
         }
-        
+    //MARK: - 당겨서 새로고침 구현
     @objc func handleRefreshControl() {
         // 당겨서 새로고침 시 수행할 작업
         MessageManager.getAllMessages(roomID: 11) { result in
@@ -77,14 +77,13 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func scrollToBottom() {
-        guard tableView.numberOfSections > 0 else { return }
-        let lastSection = tableView.numberOfSections - 1
-        let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
-        let indexPath = IndexPath(row: lastRow, section: lastSection)
-        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        guard chatMessages.count > 1 else { return }
+
+        let lastIndexPath = IndexPath(row: chatMessages.count - 1, section: 0)
+        tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
     }
 
-    
+    //MARK: - 테이블 뷰 새로고침 구현
     func reloadTableView(){
         MessageManager.getAllMessages(roomID: 11) { result in
             switch result {
@@ -97,6 +96,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.scrollToBottom()
                 }
             case .failure(let error):
                 print("Error: \(error)")
@@ -104,25 +104,30 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+    //MARK: -   메세지 입력창 탭 제스쳐 구현
     @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
         messageTextField.resignFirstResponder()
     }
 
+    //MARK: - textField editing 시작하면 키보드 올라옴
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         return true
         }
 
+    //MARK: - 메세지 전송 버튼 클릭 시 이벤트 구현
     @IBAction func sendBtnTapped(_ sender: Any) {
         sendMessage()
         tableView.reloadData()
     }
 
+    //MARK: - 키보드에서 return 버튼 눌렀을 때 이벤트 구현
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             textField.resignFirstResponder()
             return true
         }
 
+    //MARK: - 키보드 나타나는 에니메이션 구현
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
@@ -137,6 +142,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+    //MARK: - 키보드 숨기는 에니메이션 구현
     @objc func keyboardWillHide(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else {
@@ -148,19 +154,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.view.layoutIfNeeded()
         }
     }
-
+    //MARK: - 메세지 전송 함수 구현
     func sendMessage() {
         guard let message = messageTextField.text else {
             return
         }
+        print("send message 진입")
         if message != "" {
             MessageManager.sendMessage(roomID: 11, message: message) { result in
+                print(result)
                 switch result {
                 case .success:
                     print("Message sent successfully.")
-                    self.reloadTableView()
+                    
                     DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                        self.reloadTableView()
+                        self.scrollToBottom()
                     }
                 case .failure(let error):
                     print("Error sending message: \(error)")

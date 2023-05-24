@@ -25,7 +25,7 @@ struct APIConstants {
         //사용 예시
         //let endpoint = String(format: APIConstants.Board.searchPosts, boardId, keyword)
 
-        static let getBoardIds = baseURL + "/boards/ids" // 게시판 id 얻기
+        static let getBoardIds = baseURL + "/boards/boards/ids" // 게시판 id 얻기
         static let initBoards = baseURL + "/boards/init" // 게시판 초기화
     }
     
