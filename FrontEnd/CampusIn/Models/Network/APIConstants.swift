@@ -45,6 +45,8 @@ struct APIConstants {
     
     struct User{
         static let getUserInfo = baseURL + "/users" // 유저 정보 가져오기
+        static let isExistingMember = baseURL + "/users/nickname"
+        static let setNickname = baseURL + "/users/nickname?nickname=%@"
     }
     
     struct Posts{

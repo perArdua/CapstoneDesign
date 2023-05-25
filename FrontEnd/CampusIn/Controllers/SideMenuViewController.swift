@@ -18,10 +18,9 @@ class SideMenuViewController: UIViewController {
         let defaults = UserDefaults.standard
 
         defaults.set(false, forKey: "isLoggedIn")
-        defaults.removeObject(forKey: "nickname")
-        print("login status changed: \(defaults.value(forKey: "isLoggedIn"))")
-        print("nickname removed")
         
+        print("login status changed: \(defaults.value(forKey: "isLoggedIn"))")
+
         KeyChain.delete(key: "token")
         print("token deleted")
         
