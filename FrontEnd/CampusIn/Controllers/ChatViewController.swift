@@ -10,7 +10,6 @@ import UIKit
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     var chatMessages: [ChattingMessage] = []
-    var receivedRoomID: Int = 0
     
     @IBOutlet weak var inputBarView: UIView!
     
@@ -23,7 +22,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = chatTitle
-        print(receivedRoomID)
+        
         //setChatMessages()
         tableView.dataSource = self
         tableView.delegate = self
@@ -54,14 +53,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         }
-        func initRefreshControl() {
-        refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
-        tableView.refreshControl = refreshControl
-    }
+            func initRefreshControl() {
+            refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+            tableView.refreshControl = refreshControl
+        }
     //MARK: - 당겨서 새로고침 구현
     @objc func handleRefreshControl() {
         // 당겨서 새로고침 시 수행할 작업
-        MessageManager.getAllMessages(roomID: receivedRoomID) { result in
+        MessageManager.getAllMessages(roomID: 11) { result in
             switch result {
             case .success(let messages):
                 // 메시지 배열을 받아와서 처리
@@ -86,7 +85,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     //MARK: - 테이블 뷰 새로고침 구현
     func reloadTableView(){
-        MessageManager.getAllMessages(roomID: receivedRoomID) { result in
+        MessageManager.getAllMessages(roomID: 11) { result in
             switch result {
             case .success(let messages):
                 // 메시지 배열을 받아와서 처리
@@ -162,7 +161,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         print("send message 진입")
         if message != "" {
-            MessageManager.sendMessage(roomID: receivedRoomID, message: message) { result in
+            MessageManager.sendMessage(roomID: 11, message: message) { result in
                 print(result)
                 switch result {
                 case .success:
