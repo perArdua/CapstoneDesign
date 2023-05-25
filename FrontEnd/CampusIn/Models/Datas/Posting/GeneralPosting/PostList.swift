@@ -40,7 +40,6 @@ struct PostListArray: Codable {
 struct PostListContent: Codable {
     let postID: Int
     let boardSimpleResponse: BoardSimpleResponse
-    let userID: Int
     let nickname: String?
     let title, content: String
     let createdAt: [Int]
@@ -48,7 +47,7 @@ struct PostListContent: Codable {
     enum CodingKeys: String, CodingKey {
         case postID = "postId"
         case boardSimpleResponse
-        case userID = "userId"
+//        case userID = "userId"
         case nickname, title, content, createdAt
     }
 }
