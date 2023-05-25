@@ -42,7 +42,7 @@ struct CommentDataContent: Codable {
     let commentID: Int
     let name: String?
     let content: String
-    let children: Int?
+    let children: [Int]
     let childrenSize: Int
 
     enum CodingKeys: String, CodingKey {

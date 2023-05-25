@@ -23,6 +23,11 @@
 		3183ABDB2A14D3DB009CA636 /* PostSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183ABDA2A14D3DB009CA636 /* PostSearch.swift */; };
 		3183ABE22A150A51009CA636 /* BoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183ABE12A150A51009CA636 /* BoardManager.swift */; };
 		31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */; };
+		31AF26B92A1F91D300B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26B82A1F91D200B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift */; };
+		31AF26BB2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26BA2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift */; };
+		31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26BC2A1F972700B1CEC7 /* CommentManager.swift */; };
+		31AF26BF2A1F9B4300B1CEC7 /* CommentAddResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26BE2A1F9B4300B1CEC7 /* CommentAddResponse.swift */; };
+		31AF26C12A1F9BE000B1CEC7 /* CommentDeleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26C02A1F9BE000B1CEC7 /* CommentDeleteResponse.swift */; };
 		31B2B1682A190735005A3D4E /* TimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */; };
 		31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */; };
 		31B2B16E2A191401005A3D4E /* TimerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B16D2A191401005A3D4E /* TimerData.swift */; };
@@ -101,6 +106,11 @@
 		3183ABDA2A14D3DB009CA636 /* PostSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearch.swift; sourceTree = "<group>"; };
 		3183ABE12A150A51009CA636 /* BoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManager.swift; sourceTree = "<group>"; };
 		31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewCell.swift; sourceTree = "<group>"; };
+		31AF26B82A1F91D200B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPostingCommentAddTableViewCell.swift; sourceTree = "<group>"; };
+		31AF26BA2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCommentCellDelegate.swift; sourceTree = "<group>"; };
+		31AF26BC2A1F972700B1CEC7 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
+		31AF26BE2A1F9B4300B1CEC7 /* CommentAddResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAddResponse.swift; sourceTree = "<group>"; };
+		31AF26C02A1F9BE000B1CEC7 /* CommentDeleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDeleteResponse.swift; sourceTree = "<group>"; };
 		31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCell.swift; sourceTree = "<group>"; };
 		31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		31B2B16D2A191401005A3D4E /* TimerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerData.swift; sourceTree = "<group>"; };
@@ -294,6 +304,7 @@
 			children = (
 				3183ABE12A150A51009CA636 /* BoardManager.swift */,
 				5D69A3DF2A1A9C9600E9BBB4 /* MessageManager.swift */,
+				31AF26BC2A1F972700B1CEC7 /* CommentManager.swift */,
 				5D69A3E12A1A9CDB00E9BBB4 /* MessageRoomManager.swift */,
 				5D547FF22A1F5ACF00376E09 /* UserManager.swift */,
 			);
@@ -379,6 +390,7 @@
 				31FCD91B2A054E050068689B /* GeneralPostingContentTableViewCell.swift */,
 				317667BB2A07EFEB002F829C /* GeneralSearchTableViewCell.swift */,
 				31FCD91C2A054E050068689B /* GeneralPostingTableViewCell.swift */,
+				31AF26B82A1F91D200B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift */,
 			);
 			path = GeneralPosting;
 			sourceTree = "<group>";
@@ -403,7 +415,10 @@
 				31D57E502A13CE160049E57A /* PostList.swift */,
 				3183ABDA2A14D3DB009CA636 /* PostSearch.swift */,
 				31D96F5F2A1A9A140086FD7D /* PostDetail.swift */,
+				31AF26BE2A1F9B4300B1CEC7 /* CommentAddResponse.swift */,
+				31AF26C02A1F9BE000B1CEC7 /* CommentDeleteResponse.swift */,
 				31D96F612A1A9BC00086FD7D /* CommetData.swift */,
+				31AF26BA2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift */,
 			);
 			path = GeneralPosting;
 			sourceTree = "<group>";
@@ -626,10 +641,12 @@
 				3183ABDB2A14D3DB009CA636 /* PostSearch.swift in Sources */,
 				313F7DB82A07DE7500182CDA /* GeneralPostingSearchViewController.swift in Sources */,
 				3165EDC82A02A3C100D91856 /* ViewController.swift in Sources */,
+				31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */,
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
 				31B2B16E2A191401005A3D4E /* TimerData.swift in Sources */,
 				3165EDC62A02A3C100D91856 /* SceneDelegate.swift in Sources */,
 				5D69A3E42A1A9D1400E9BBB4 /* MessageRooms.swift in Sources */,
+				31AF26B92A1F91D300B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift in Sources */,
 				31FCD91F2A054E050068689B /* GeneralPostingTableViewCell.swift in Sources */,
 				5D14AB342A15158A00807A2B /* SideMenuViewController.swift in Sources */,
 				31B2B1722A1916AE005A3D4E /* TimerManager.swift in Sources */,
@@ -637,12 +654,14 @@
 				5D547FEE2A1F58E100376E09 /* UserData.swift in Sources */,
 				31FCD91D2A054E050068689B /* GeneralPostingCommentTableViewCell.swift in Sources */,
 				5D4ADFA02A0555E600195CA9 /* KeyChain.swift in Sources */,
+				31AF26C12A1F9BE000B1CEC7 /* CommentDeleteResponse.swift in Sources */,
 				5D2570522A10EABE00E03713 /* ChatTableViewCell.swift in Sources */,
 				5D507AEC2A0DDDA800EB5CA9 /* MessageBoxViewController.swift in Sources */,
 				5D4ADF982A054A1B00195CA9 /* SocialViewController.swift in Sources */,
 				31FCD9252A054E2D0068689B /* PostingManager.swift in Sources */,
 				5D69A3E62A1A9D3C00E9BBB4 /* Chats.swift in Sources */,
 				31B2B1682A190735005A3D4E /* TimerTableViewCell.swift in Sources */,
+				31AF26BB2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift in Sources */,
 				31D96F622A1A9BC00086FD7D /* CommetData.swift in Sources */,
 				31FCD91E2A054E050068689B /* GeneralPostingContentTableViewCell.swift in Sources */,
 				5D25704E2A10D1F700E03713 /* MessageBoxTableViewCell.swift in Sources */,
@@ -658,6 +677,7 @@
 				31D96F602A1A9A140086FD7D /* PostDetail.swift in Sources */,
 				317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */,
 				5D4B9D552A114F2C003F3E86 /* StudyManageViewController.swift in Sources */,
+				31AF26BF2A1F9B4300B1CEC7 /* CommentAddResponse.swift in Sources */,
 				31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */,
 				31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */,
 				31D96F642A1A9E610086FD7D /* BoardData.swift in Sources */,

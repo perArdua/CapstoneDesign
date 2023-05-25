@@ -35,10 +35,11 @@ struct APIConstants {
     }
     
     struct Comment{
-        static let postComment = baseURL + "/post/%d/comments" // 댓글 달기(아래 사용 예시 참고)
+        static let readComment = baseURL + "/posts/%d/comments"
+        static let postComment = baseURL + "/posts/%d/comments" // 댓글 달기(아래 사용 예시 참고)
         //사용 예시
         //let endpoint = String(format: APIConstants.Post.getComments, postId)
-        static let deleteComment = baseURL + "/post/%d/comments/%d" // 댓글 삭제(아래 사용 예시 참고)
+        static let deleteComment = baseURL + "/posts/%d/comments/%d" // 댓글 삭제(아래 사용 예시 참고)
         //사용 예시
         //let endpoint = String(format: APIConstants.Post.getComment, postId, commentId)
     }

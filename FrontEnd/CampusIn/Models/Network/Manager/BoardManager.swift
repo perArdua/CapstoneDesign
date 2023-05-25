@@ -25,20 +25,21 @@ class BoardManager{
     }
     
     // MARK: - 게시글을 읽는 함수
-//    static func readPost(postID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
-//        let endpoint = APIConstants.Posts.
-//        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostDetail.self) { response in
-//            switch response.result{
-//            case .success(let postList):
-//                print("게시판 목록 요청 성공")
-//                completion(.success(postList.body.postListArray.content))
-//            case .failure(let error):
-//                print("게시판 목록 요청 실패")
-//                completion(.failure(error))
-//            }
-//        }
-//        
-//    }
+    static func readPost(postID: Int, completion: @escaping (Result<PostDetailContent, Error>) -> Void){
+        let endpoint = String(format: APIConstants.Posts.showPost, postID)
+
+        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostDetail.self) { response in
+            switch response.result{
+            case .success(let post):
+                print("게시판 상세 요청 성공")
+                completion(.success(post.body.postDetailContent))
+            case .failure(let error):
+                print("게시판 상세 요청 실패")
+                completion(.failure(error))
+            }
+        }
+        
+    }
     
     // MARK: - 게시판 목록을 요청하는 함수
     static func showPostbyBoard(boardID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
@@ -51,6 +52,7 @@ class BoardManager{
                 completion(.success(postList.body.postListArray.content))
             case .failure(let error):
                 print("게시판 목록 요청 실패")
+                print(KeyChain.read(key: "token"))
                 completion(.failure(error))
             }
         }
@@ -107,6 +109,7 @@ class BoardManager{
         }
     }
 
+    // MARK: - 게시판 아이디를 요청하는 함수
     static func getBoardID(completion: @escaping (Result<[BoardContent], Error>) -> Void){
         let endpoint = APIConstants.Board.getBoardIds
 
@@ -124,6 +127,7 @@ class BoardManager{
 
     }
 
+    // MARK: - userdefault에 저장된 게시판 아이디를 얻는 함수
     static func getBoardID(boardName : String) -> Int{
         let defaults = UserDefaults.standard
         if let id = defaults.integer(forKey: boardName) as Optional<Int>{
@@ -131,4 +135,5 @@ class BoardManager{
         }
         return -1
     }
+    
 }

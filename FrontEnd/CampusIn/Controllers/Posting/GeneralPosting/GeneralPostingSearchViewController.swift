@@ -77,7 +77,7 @@ class GeneralPostingSearchViewController: UIViewController {
     }
 
     func getData(keyword: String){
-        BoardManager.searchPost(boardID: 2, keyword: keyword){[weak self] result in
+        BoardManager.searchPost(boardID: BoardManager.getBoardID(boardName: "Free"), keyword: keyword){[weak self] result in
             switch result {
             case .success(let posts):
                 // 데이터를 받아와서 배열에 저장
@@ -106,6 +106,33 @@ class GeneralPostingSearchViewController: UIViewController {
         }
         tableView.reloadData()
     }
+    
+    // MARK: - 테이블 뷰에서 게시글을 탭했을때 게시글의 정보를 가져오는 함수
+    func getPostDetail(postID : Int, completion: @escaping (PostDetailContent) -> Void){
+        BoardManager.readPost(postID: postID) { result in
+            switch result{
+            case .success(let post):
+                DispatchQueue.main.async {
+                    completion(post)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    func getComment(postID : Int, completion: @escaping ([CommentDataContent]) -> Void){
+        CommentManager.readComment(postID: postID) { result in
+            switch result{
+            case .success(let comments):
+                DispatchQueue.main.async {
+                    completion(comments)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
 }
 
 
@@ -125,8 +152,8 @@ extension GeneralPostingSearchViewController : UITableViewDelegate, UITableViewD
         
         cell.titleLabel.text = temp.title
         cell.contentLabel.text = temp.content
-        cell.dateLabel.text = "5/8"
-        cell.userLabel.text = temp.writer
+        cell.dateLabel.text = String(temp.createdAt[1]) + "/" + String(temp.createdAt[2])
+        cell.userLabel.text = temp.nickname
         cell.commentLabel.text = "5"
 
         return cell
@@ -135,7 +162,17 @@ extension GeneralPostingSearchViewController : UITableViewDelegate, UITableViewD
     //테이블 뷰 셀이 클릭되면 어떤 동작을 할지 정하는 함수
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "GeneralPostingDetailViewController") as? GeneralPostingDetailViewController else { return }
-        nextVC.postingIndex = indexPath.row
+        
+        getPostDetail(postID: searcharry[indexPath.row].postID){ [self]
+            postDetail in
+            nextVC.postDetail = postDetail
+            print(nextVC.postDetail)
+            getComment(postID: searcharry[indexPath.row].postID){
+                comments in
+                nextVC.comments = comments
+                print(comments)
                 self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
     }
 }

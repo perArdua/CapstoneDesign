@@ -28,24 +28,24 @@ struct PostSearchList: Codable {
     let pageable: PostSearchPageable
     let totalPages, totalElements: Int
     let last: Bool
-    let numberOfElements: Int
+    let numberOfElements, size: Int
+    let first: Bool
     let sort: PostSearchSort
-    let size, number: Int
-    let first, empty: Bool
+    let number: Int
+    let empty: Bool
 }
 
 // MARK: - Content
 struct PostSearchContent: Codable {
     let postID: Int
     let boardSimpleResponse: PostSearchBoardSimpleResponse
-    let userID: Int
-    let writer, title, content: String
-
+    let nickname: String?
+    let title, content: String
+    let createdAt: [Int]
+    
     enum CodingKeys: String, CodingKey {
         case postID = "postId"
-        case boardSimpleResponse
-        case userID = "userId"
-        case writer, title, content
+        case boardSimpleResponse, nickname, title, content, createdAt
     }
 }
 
