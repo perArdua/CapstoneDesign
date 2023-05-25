@@ -104,10 +104,23 @@ class SocialViewController: UIViewController, WKNavigationDelegate{
                         let action1 = UIAlertAction(title: "확인", style: .default) { (action: UIAlertAction!) -> Void in
                             BoardManager.initBoard()
                             //닉네임 입력 화면 이동
-                            let nickVC = self.storyboard!.instantiateViewController(withIdentifier: "NickNameViewController") as! NickNameViewController
-                            nickVC.modalTransitionStyle = .coverVertical
-                            nickVC.modalPresentationStyle = .fullScreen
-                            self.present(nickVC, animated: false, completion: nil)
+                            UserManager.isExistingMember(){ result in
+                                switch result{
+                                case .success(let isExisting):
+                                    if isExisting {
+                                        self.dismiss(animated: false, completion: nil)
+                                    } else{
+                                        let nickVC = self.storyboard!.instantiateViewController(withIdentifier: "NickNameViewController") as! NickNameViewController
+                                        nickVC.modalTransitionStyle = .coverVertical
+                                        nickVC.modalPresentationStyle = .fullScreen
+                                        self.present(nickVC, animated: false, completion: nil)
+                                    }
+                                case .failure(let error):
+                                    print("error: \(error)")
+                                }
+                                
+                            }
+                            
 
                         }
                         alert.addAction(action1)

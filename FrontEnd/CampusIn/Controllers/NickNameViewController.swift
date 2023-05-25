@@ -21,6 +21,7 @@ class NickNameViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextField.textDidChangeNotification, object: nickNameTF)
     }
     
+    //MARK: - text field setup
     func setUpTF(){
         nickNameTF.borderStyle = .none
         let border = CALayer()
@@ -30,6 +31,7 @@ class NickNameViewController: UIViewController, UITextFieldDelegate {
         nickNameTF.layer.addSublayer(border)
     }
     
+    //MARK: - 텍스트 필드 변경 시 이벤트 처리
     @objc private func textDidChange(_ notification: Notification) {
             if let textField = notification.object as? UITextField {
                 if let text = textField.text {
@@ -59,7 +61,7 @@ class NickNameViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    //유효한 닉네임인지 검사
+    //MARK: - 유효한 닉네임인지 검사
     func isValidNickName(nickName: String?) -> Bool {
         guard nickName != nil else { return false }
 
@@ -68,16 +70,30 @@ class NickNameViewController: UIViewController, UITextFieldDelegate {
         return pred.evaluate(with: nickName)
     }
     
+    //MARK: - 완료 버튼 클릭 시 이벤트 구현
     @IBAction func doneBtnTapped(_ sender: UIButton) {
         let defaults = UserDefaults.standard
         if isValidNickName(nickName: nickNameTF.text){
-            defaults.set(nickNameTF.text, forKey: "nickname")
-            print("nickname setup complete, \(defaults.value(forKey: "nickname"))")
-            let alert = UIAlertController(title: "알림", message: "닉네임 설정이 완료되었습니다.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
-                self.dismiss(animated: false, completion: nil)
-            })
-            self.present(alert, animated: true, completion: nil)
+            defaults.set(String(nickNameTF.text!), forKey: "nickname")
+            UserManager.setNickname(nickName: String(nickNameTF.text!)){ result in
+                switch result{
+                case .success:
+                    print("nickname setup complete, \(defaults.value(forKey: "nickname"))")
+                    let alert = UIAlertController(title: "알림", message: "닉네임 설정이 완료되었습니다.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
+                        self.dismiss(animated: false, completion: nil)
+                    })
+                    self.present(alert, animated: true, completion: nil)
+                case .failure:
+                    print("nickname setting fail")
+                    let alert = UIAlertController(title: "오류", message: "서버 에러 발생", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
+                    })
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+            
+            
         }else{
             let alert = UIAlertController(title: "오류", message: "닉네임 규칙을 지켜 다시 입력해주세요.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
