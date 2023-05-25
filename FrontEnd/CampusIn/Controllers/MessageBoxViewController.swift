@@ -12,9 +12,7 @@ class MessageBoxViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     @IBOutlet weak var tableView: UITableView!
-    let names: [String] = ["이동현", "김태호", "정소영"]
-    let previews: [String] = ["ㅎㅇㅎㅇ", "ㅋㅋㅋㅋㅋㅋ", "ㅂㅇㅂㅇ"]
-    let dates: [String] = ["22/03/21 14:22", "22/03/21 14:22", "22/03/21 14:22"]
+    
     var rooms: [MessageRoom] = []
     let refreshControl = UIRefreshControl()
     override func viewDidLoad() {
@@ -33,6 +31,7 @@ class MessageBoxViewController: UIViewController, UITableViewDelegate, UITableVi
         print("진입")
         MessageRoomManager.getAllMessageRooms(){
             [weak self] result in
+            
             switch result {
             case .success(let messageRooms):
                 // 데이터를 받아와서 배열에 저장
@@ -107,6 +106,7 @@ class MessageBoxViewController: UIViewController, UITableViewDelegate, UITableVi
         //move to selected chatting
         let chatVC = storyboard!.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
         chatVC.chatTitle = rooms[indexPath.row].interlocutorNickname
+        chatVC.receivedRoomID = rooms[indexPath.row].messageRoomId
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
