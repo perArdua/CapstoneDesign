@@ -365,10 +365,10 @@
             </objects>
             <point key="canvasLocation" x="5230.7692307692305" y="625.5924170616114"/>
         </scene>
-        <!--StudyManageViewController-->
+        <!--StudyNavigationController-->
         <scene sceneID="5U9-k4-S8f">
             <objects>
-                <viewControllerPlaceholder storyboardName="StudyManageViewController" referencedIdentifier="StudyManageViewController" id="Ieu-hb-A6q" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="StudyNavigationController" storyboardName="StudyNavigationController" referencedIdentifier="StudyNavigationController" id="Ieu-hb-A6q" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="학습 관리" image="pencil" catalog="system" id="MgP-uS-J5R"/>
                     <navigationItem key="navigationItem" id="gbf-Vw-bjp"/>
                 </viewControllerPlaceholder>

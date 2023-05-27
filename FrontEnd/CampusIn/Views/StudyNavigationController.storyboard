@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lqg-fU-cEl">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -70,7 +70,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="book.closed.fill" catalog="system"/>
                                         <connections>
-                                            <segue destination="8Ul-Ho-aJG" kind="show" id="zFK-ci-ae5"/>
+                                            <action selector="todoBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gLZ-Uv-KTK"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 : 00 :00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGf-5g-EfU">
@@ -683,20 +683,20 @@
         <!--플래너-->
         <scene sceneID="bii-Uu-Vvu">
             <objects>
-                <viewController id="8Ul-Ho-aJG" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ToDoViewController" id="8Ul-Ho-aJG" customClass="ToDoViewController" customModule="CampusIn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T8V-dX-RnL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80H-FY-M6A">
-                                <rect key="frame" x="0.0" y="103" width="393" height="30"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="30"/>
                                 <color key="backgroundColor" red="0.44313728810000003" green="0.86274516580000005" blue="0.44705885649999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7dJ-lZ-TLY"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N4b-oL-60w">
-                                <rect key="frame" x="98.666666666666671" y="153" width="195.66666666666663" height="24"/>
+                                <rect key="frame" x="98.666666666666671" y="109" width="195.66666666666663" height="24"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQY-vs-DdF">
                                         <rect key="frame" x="0.0" y="0.0" width="27" height="24"/>
@@ -719,94 +719,56 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vjA-jW-QKi">
-                                <rect key="frame" x="0.0" y="187" width="393" height="482"/>
+                                <rect key="frame" x="0.0" y="143" width="393" height="575"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="73" id="skO-vv-pQj">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ToDoTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoTableViewCell" rowHeight="73" id="skO-vv-pQj" customClass="ToDoTableViewCell" customModule="CampusIn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="skO-vv-pQj" id="imJ-oj-0zM">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ktw-TA-nOv">
-                                                    <rect key="frame" x="29.999999999999986" y="24.666666666666671" width="236.66666666666663" height="24"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8FS-l4-yPR">
-                                                            <rect key="frame" x="0.0" y="0.0" width="25" height="24"/>
-                                                            <color key="tintColor" systemColor="labelColor"/>
-                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                            <state key="normal" image="square" catalog="system"/>
-                                                        </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="캡스톤 Todo List UI 구현" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBf-L4-JAr">
-                                                            <rect key="frame" x="34.999999999999986" y="0.0" width="201.66666666666663" height="24"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRG-t5-1AX">
-                                                    <rect key="frame" x="359.33333333333331" y="27.666666666666671" width="23.666666666666686" height="18"/>
-                                                    <color key="tintColor" systemColor="labelColor"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="ellipsis" catalog="system"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zj-W8-lw8">
+                                                    <rect key="frame" x="30" y="21" width="49" height="31"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="square" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="doneBtnTapped:" destination="8Ul-Ho-aJG" eventType="touchUpInside" id="J2S-1n-RHb"/>
+                                                        <action selector="todoBtnTapped:" destination="skO-vv-pQj" eventType="touchUpInside" id="Mmj-j7-tK4"/>
+                                                    </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CL8-gU-S0D">
+                                                    <rect key="frame" x="89" y="21" width="41.333333333333343" height="31"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Ktw-TA-nOv" firstAttribute="leading" secondItem="imJ-oj-0zM" secondAttribute="leadingMargin" constant="10" id="2AK-tT-eQ2"/>
-                                                <constraint firstAttribute="trailing" secondItem="WRG-t5-1AX" secondAttribute="trailing" constant="10" id="7P8-vw-q6v"/>
-                                                <constraint firstItem="Ktw-TA-nOv" firstAttribute="centerY" secondItem="imJ-oj-0zM" secondAttribute="centerY" id="QFN-4X-M06"/>
-                                                <constraint firstItem="WRG-t5-1AX" firstAttribute="centerY" secondItem="imJ-oj-0zM" secondAttribute="centerY" id="Zmp-Jc-Z6R"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="CL8-gU-S0D" secondAttribute="bottom" constant="10" id="839-rb-V1o"/>
+                                                <constraint firstItem="7zj-W8-lw8" firstAttribute="top" secondItem="imJ-oj-0zM" secondAttribute="topMargin" constant="10" id="DRm-1t-pg0"/>
+                                                <constraint firstItem="7zj-W8-lw8" firstAttribute="leading" secondItem="imJ-oj-0zM" secondAttribute="leadingMargin" constant="10" id="Nhp-ms-1MA"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="7zj-W8-lw8" secondAttribute="bottom" constant="10" id="R4G-pz-rFA"/>
+                                                <constraint firstItem="CL8-gU-S0D" firstAttribute="leading" secondItem="7zj-W8-lw8" secondAttribute="trailing" constant="10" id="mYF-DE-fP3"/>
+                                                <constraint firstItem="CL8-gU-S0D" firstAttribute="top" secondItem="imJ-oj-0zM" secondAttribute="topMargin" constant="10" id="xpk-L0-reI"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="73" id="ens-uM-xee">
-                                        <rect key="frame" x="0.0" y="123" width="393" height="73"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ens-uM-xee" id="0HU-6s-vYg">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="73"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MRG-VS-AM0">
-                                                    <rect key="frame" x="29.999999999999986" y="24.666666666666671" width="236.66666666666663" height="24"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lF-8p-nGG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="25" height="24"/>
-                                                            <color key="tintColor" systemColor="labelColor"/>
-                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                            <state key="normal" image="checkmark.square" catalog="system"/>
-                                                        </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="캡스톤 Todo List UI 구현" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztN-Mz-cAf">
-                                                            <rect key="frame" x="34.999999999999986" y="0.0" width="201.66666666666663" height="24"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTi-vj-nj7">
-                                                    <rect key="frame" x="359.33333333333331" y="27.666666666666671" width="23.666666666666686" height="18"/>
-                                                    <color key="tintColor" systemColor="labelColor"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="ellipsis" catalog="system"/>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="MRG-VS-AM0" firstAttribute="leading" secondItem="0HU-6s-vYg" secondAttribute="leadingMargin" constant="10" id="QL8-Lb-06r"/>
-                                                <constraint firstAttribute="trailing" secondItem="xTi-vj-nj7" secondAttribute="trailing" constant="10" id="Tlb-AW-gUO"/>
-                                                <constraint firstItem="MRG-VS-AM0" firstAttribute="centerY" secondItem="0HU-6s-vYg" secondAttribute="centerY" id="dKL-ae-IjY"/>
-                                                <constraint firstItem="xTi-vj-nj7" firstAttribute="centerY" secondItem="0HU-6s-vYg" secondAttribute="centerY" id="eSK-dK-Gwf"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="todoBtn" destination="7zj-W8-lw8" id="7dZ-QR-zKI"/>
+                                            <outlet property="todoLable" destination="CL8-gU-S0D" id="U4D-qr-lR4"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="441-Zx-too">
-                                <rect key="frame" x="267" y="674" width="106" height="23.666666666666629"/>
+                                <rect key="frame" x="267" y="723" width="106" height="23.666666666666629"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title=" add a Todo" image="plus.app" catalog="system"/>
+                                <connections>
+                                    <action selector="addBtnTapped:" destination="8Ul-Ho-aJG" eventType="touchUpInside" id="VuY-WI-vdg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rD3-8f-Ytg"/>
@@ -826,15 +788,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="플래너" id="DQY-2j-nXW"/>
+                    <connections>
+                        <outlet property="tableView" destination="vjA-jW-QKi" id="KYU-6E-DZQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V1A-OU-9Gs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2005" y="5"/>
+            <point key="canvasLocation" x="1925.9541984732823" y="4.9295774647887329"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Study Navigation Controller-->
         <scene sceneID="zb5-XZ-hVg">
             <objects>
-                <navigationController storyboardIdentifier="studyManagerNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="lqg-fU-cEl" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="StudyNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="lqg-fU-cEl" customClass="StudyNavigationController" customModule="CampusIn" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Ip-Ax-O4y">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -856,8 +821,6 @@
         <image name="book" catalog="system" width="128" height="99"/>
         <image name="book.closed.fill" catalog="system" width="115" height="128"/>
         <image name="calendar" catalog="system" width="128" height="107"/>
-        <image name="checkmark.square" catalog="system" width="128" height="114"/>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="pencil.line" catalog="system" width="128" height="98"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>

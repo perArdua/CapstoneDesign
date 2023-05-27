@@ -9,7 +9,7 @@ import Foundation
 
 struct UserNicknameResponse: Codable {
     let header: UserHeader
-    let body: UserBody
+    let body: UserNicknameBody
 }
 
 struct UserNicknameHeader: Codable {

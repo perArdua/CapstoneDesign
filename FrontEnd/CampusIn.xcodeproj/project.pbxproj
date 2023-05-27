@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		311E085B2A0D37D20048F5FB /* StudyManageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311E085A2A0D37D20048F5FB /* StudyManageViewController.storyboard */; };
+		311E085B2A0D37D20048F5FB /* StudyNavigationController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311E085A2A0D37D20048F5FB /* StudyNavigationController.storyboard */; };
 		313F7DB82A07DE7500182CDA /* GeneralPostingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313F7DB72A07DE7500182CDA /* GeneralPostingSearchViewController.swift */; };
 		3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */; };
 		3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165EDC32A02A3C100D91856 /* AppDelegate.swift */; };
@@ -59,11 +59,17 @@
 		5D547FEE2A1F58E100376E09 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D547FED2A1F58E100376E09 /* UserData.swift */; };
 		5D547FF02A1F593F00376E09 /* UserNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D547FEF2A1F593F00376E09 /* UserNickname.swift */; };
 		5D547FF32A1F5ACF00376E09 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D547FF22A1F5ACF00376E09 /* UserManager.swift */; };
+		5D547FF52A1F8FCE00376E09 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D547FF42A1F8FCE00376E09 /* ToDoViewController.swift */; };
+		5D547FFB2A1F98F900376E09 /* StudyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D547FFA2A1F98F900376E09 /* StudyNavigationController.swift */; };
+		5D547FFD2A1F9D7000376E09 /* ToDoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D547FFC2A1F9D7000376E09 /* ToDoTableViewCell.swift */; };
 		5D6013672A14D5D400159F63 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6013662A14D5D400159F63 /* APIConstants.swift */; };
 		5D69A3E02A1A9C9600E9BBB4 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69A3DF2A1A9C9600E9BBB4 /* MessageManager.swift */; };
 		5D69A3E22A1A9CDB00E9BBB4 /* MessageRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69A3E12A1A9CDB00E9BBB4 /* MessageRoomManager.swift */; };
 		5D69A3E42A1A9D1400E9BBB4 /* MessageRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69A3E32A1A9D1400E9BBB4 /* MessageRooms.swift */; };
 		5D69A3E62A1A9D3C00E9BBB4 /* Chats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69A3E52A1A9D3C00E9BBB4 /* Chats.swift */; };
+		5D7703592A20FC5B00AF0903 /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7703582A20FC5B00AF0903 /* TodoList.swift */; };
+		5D77035B2A20FCA300AF0903 /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D77035A2A20FCA300AF0903 /* TodoManager.swift */; };
+		5D77035D2A21188B00AF0903 /* TodoCreationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D77035C2A21188B00AF0903 /* TodoCreationResponse.swift */; };
 		5DC33E362A0D45C200C061BC /* MessageBoxViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */; };
 		D84B6C380D6E83EA5CA1188E /* Pods_CampusIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */; };
 /* End PBXBuildFile section */
@@ -86,7 +92,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		311E085A2A0D37D20048F5FB /* StudyManageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyManageViewController.storyboard; sourceTree = "<group>"; };
+		311E085A2A0D37D20048F5FB /* StudyNavigationController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyNavigationController.storyboard; sourceTree = "<group>"; };
 		313F7DB72A07DE7500182CDA /* GeneralPostingSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingSearchViewController.swift; sourceTree = "<group>"; };
 		3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralPostingViewController.storyboard; sourceTree = "<group>"; };
 		3165EDC02A02A3C100D91856 /* CampusIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,11 +149,17 @@
 		5D547FED2A1F58E100376E09 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		5D547FEF2A1F593F00376E09 /* UserNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNickname.swift; sourceTree = "<group>"; };
 		5D547FF22A1F5ACF00376E09 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		5D547FF42A1F8FCE00376E09 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
+		5D547FFA2A1F98F900376E09 /* StudyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyNavigationController.swift; sourceTree = "<group>"; };
+		5D547FFC2A1F9D7000376E09 /* ToDoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewCell.swift; sourceTree = "<group>"; };
 		5D6013662A14D5D400159F63 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		5D69A3DF2A1A9C9600E9BBB4 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		5D69A3E12A1A9CDB00E9BBB4 /* MessageRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomManager.swift; sourceTree = "<group>"; };
 		5D69A3E32A1A9D1400E9BBB4 /* MessageRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRooms.swift; sourceTree = "<group>"; };
 		5D69A3E52A1A9D3C00E9BBB4 /* Chats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chats.swift; sourceTree = "<group>"; };
+		5D7703582A20FC5B00AF0903 /* TodoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
+		5D77035A2A20FCA300AF0903 /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
+		5D77035C2A21188B00AF0903 /* TodoCreationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreationResponse.swift; sourceTree = "<group>"; };
 		5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MessageBoxViewController.storyboard; sourceTree = "<group>"; };
 		60AC818441A9B94A12F2B12F /* Pods-CampusIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusIn.release.xcconfig"; path = "Target Support Files/Pods-CampusIn/Pods-CampusIn.release.xcconfig"; sourceTree = "<group>"; };
 		B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,7 +273,7 @@
 				3165EDF62A02A86700D91856 /* Main.storyboard */,
 				5D4ADF9B2A0555BA00195CA9 /* NickNameViewController.storyboard */,
 				5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */,
-				311E085A2A0D37D20048F5FB /* StudyManageViewController.storyboard */,
+				311E085A2A0D37D20048F5FB /* StudyNavigationController.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -307,6 +319,7 @@
 				31AF26BC2A1F972700B1CEC7 /* CommentManager.swift */,
 				5D69A3E12A1A9CDB00E9BBB4 /* MessageRoomManager.swift */,
 				5D547FF22A1F5ACF00376E09 /* UserManager.swift */,
+				5D77035A2A20FCA300AF0903 /* TodoManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -316,6 +329,7 @@
 			children = (
 				31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */,
 				31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */,
+				5D547FFC2A1F9D7000376E09 /* ToDoTableViewCell.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -333,6 +347,8 @@
 			isa = PBXGroup;
 			children = (
 				5D4B9D542A114F2C003F3E86 /* StudyManageViewController.swift */,
+				5D547FF42A1F8FCE00376E09 /* ToDoViewController.swift */,
+				5D547FFA2A1F98F900376E09 /* StudyNavigationController.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -398,6 +414,7 @@
 		31FCD9202A054E180068689B /* Datas */ = {
 			isa = PBXGroup;
 			children = (
+				5D7703572A20FC4900AF0903 /* ToDoList */,
 				5D547FF12A1F594C00376E09 /* Users */,
 				5D547FEB2A1F589E00376E09 /* Chatting */,
 				31B2B16F2A191693005A3D4E /* Study */,
@@ -447,6 +464,15 @@
 				5D547FEF2A1F593F00376E09 /* UserNickname.swift */,
 			);
 			path = Users;
+			sourceTree = "<group>";
+		};
+		5D7703572A20FC4900AF0903 /* ToDoList */ = {
+			isa = PBXGroup;
+			children = (
+				5D7703582A20FC5B00AF0903 /* TodoList.swift */,
+				5D77035C2A21188B00AF0903 /* TodoCreationResponse.swift */,
+			);
+			path = ToDoList;
 			sourceTree = "<group>";
 		};
 		D57CA3ACE76BBD1D544D55D7 /* Pods */ = {
@@ -570,7 +596,7 @@
 				3165EDD02A02A3C100D91856 /* LaunchScreen.storyboard in Resources */,
 				3165EDCD2A02A3C100D91856 /* Assets.xcassets in Resources */,
 				5D4ADF9C2A0555BA00195CA9 /* NickNameViewController.storyboard in Resources */,
-				311E085B2A0D37D20048F5FB /* StudyManageViewController.storyboard in Resources */,
+				311E085B2A0D37D20048F5FB /* StudyNavigationController.storyboard in Resources */,
 				3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,11 +677,13 @@
 				5D14AB342A15158A00807A2B /* SideMenuViewController.swift in Sources */,
 				31B2B1722A1916AE005A3D4E /* TimerManager.swift in Sources */,
 				31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */,
+				5D77035B2A20FCA300AF0903 /* TodoManager.swift in Sources */,
 				5D547FEE2A1F58E100376E09 /* UserData.swift in Sources */,
 				31FCD91D2A054E050068689B /* GeneralPostingCommentTableViewCell.swift in Sources */,
 				5D4ADFA02A0555E600195CA9 /* KeyChain.swift in Sources */,
 				31AF26C12A1F9BE000B1CEC7 /* CommentDeleteResponse.swift in Sources */,
 				5D2570522A10EABE00E03713 /* ChatTableViewCell.swift in Sources */,
+				5D547FFB2A1F98F900376E09 /* StudyNavigationController.swift in Sources */,
 				5D507AEC2A0DDDA800EB5CA9 /* MessageBoxViewController.swift in Sources */,
 				5D4ADF982A054A1B00195CA9 /* SocialViewController.swift in Sources */,
 				31FCD9252A054E2D0068689B /* PostingManager.swift in Sources */,
@@ -665,10 +693,13 @@
 				31D96F622A1A9BC00086FD7D /* CommetData.swift in Sources */,
 				31FCD91E2A054E050068689B /* GeneralPostingContentTableViewCell.swift in Sources */,
 				5D25704E2A10D1F700E03713 /* MessageBoxTableViewCell.swift in Sources */,
+				5D547FFD2A1F9D7000376E09 /* ToDoTableViewCell.swift in Sources */,
 				5D4ADF972A054A1B00195CA9 /* LoginViewController.swift in Sources */,
 				3183ABE22A150A51009CA636 /* BoardManager.swift in Sources */,
 				31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */,
 				5D547FF02A1F593F00376E09 /* UserNickname.swift in Sources */,
+				5D7703592A20FC5B00AF0903 /* TodoList.swift in Sources */,
+				5D77035D2A21188B00AF0903 /* TodoCreationResponse.swift in Sources */,
 				5D69A3E22A1A9CDB00E9BBB4 /* MessageRoomManager.swift in Sources */,
 				5D547FF32A1F5ACF00376E09 /* UserManager.swift in Sources */,
 				5D4ADF9E2A0555D900195CA9 /* NickNameViewController.swift in Sources */,
@@ -684,6 +715,7 @@
 				5D6013672A14D5D400159F63 /* APIConstants.swift in Sources */,
 				5D69A3E02A1A9C9600E9BBB4 /* MessageManager.swift in Sources */,
 				5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */,
+				5D547FF52A1F8FCE00376E09 /* ToDoViewController.swift in Sources */,
 				31D57E4F2A13B7830049E57A /* Response.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

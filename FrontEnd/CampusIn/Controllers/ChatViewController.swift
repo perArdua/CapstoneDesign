@@ -23,8 +23,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = chatTitle
-        print(receivedRoomID)
-        //setChatMessages()
+        
         tableView.dataSource = self
         tableView.delegate = self
        
