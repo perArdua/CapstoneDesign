@@ -75,6 +75,13 @@ struct APIConstants {
         static let sendRedirectMessage = baseURL + "/message-rooms/%d/redirect-message" // 리다이렉트 쪽지 보내기
     }
     
+    struct TodoList{
+        static let getAllTodoList = baseURL + "/todo"
+        static let addTodo = baseURL + "/todo"
+        static let editTodo = baseURL + "/todo/%d"
+        static let deleteTodo = baseURL + "/todo/%d/delete"
+    }
+    
 }
 
 
