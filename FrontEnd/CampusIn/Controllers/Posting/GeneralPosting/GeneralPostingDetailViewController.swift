@@ -16,6 +16,13 @@ class GeneralPostingDetailViewController: UIViewController {
     var comments: [CommentDataContent] = []
     var imgCnt: Int = 0
     
+    let pullDownBtn: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+        
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -23,6 +30,12 @@ class GeneralPostingDetailViewController: UIViewController {
         //UITableView의 footer 영역을 없애줌.
         tableView.sectionFooterHeight = 0
         tableView.sectionHeaderHeight = 25
+        
+        pullDownBtn.addTarget(self, action: #selector(pullDownBtnTapped), for: .touchUpInside)
+        let navigationItem = self.navigationItem
+        //네비게이션 바의 오른쪽에 pullDownBtn을 추가한다.
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: pullDownBtn)
+    
     }
     
     func getComment(postID : Int, completion: @escaping ([CommentDataContent]) -> Void){
@@ -38,7 +51,49 @@ class GeneralPostingDetailViewController: UIViewController {
         }
     }
     
-    
+    @objc func pullDownBtnTapped(){
+        let nickname = UserDefaults.standard.string(forKey: "nickname")!
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        if postDetail?.nickname == nickname{
+            
+            let editAction = UIAlertAction(title: "수정하기", style: .default) { [self] _ in
+                let nextVC = self.storyboard?.instantiateViewController(identifier: "GeneralPostingAddViewController") as! GeneralPostingAddViewController
+                nextVC.postDetail = postDetail
+                
+                nextVC.modalPresentationStyle = .fullScreen
+                present(nextVC, animated: true)
+            }
+            let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [self]_ in
+                let deleteAlert = UIAlertController(title: "알림", message: "글을 삭제하시겠습니까?", preferredStyle: .alert)
+                let deleteOK = UIAlertAction(title: "예", style: .destructive){ _ in
+                    BoardManager.deletePost(postID: self.postDetail!.postID){
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+                let deleteNO = UIAlertAction(title: "취소", style: .cancel)
+                deleteAlert.addAction(deleteOK)
+                deleteAlert.addAction(deleteNO)
+                present(deleteAlert, animated: true)
+                
+            }
+            alert.addAction(editAction)
+            alert.addAction(deleteAction)
+        }
+        
+        else{
+            let sendMsgAction = UIAlertAction(title: "쪽지 보내기", style: .default) { _ in
+                // 쪽지 보내기 버튼이 눌렸을 때의 동작을 처리하는 코드 작성
+            }
+            let reportAction = UIAlertAction(title: "신고하기", style: .destructive) { _ in
+                // 신고하기 버튼이 눌렸을 때의 동작을 처리하는 코드 작성
+            }
+            alert.addAction(sendMsgAction)
+            alert.addAction(reportAction)
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK: - 테이블 뷰 설정

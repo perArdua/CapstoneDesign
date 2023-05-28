@@ -30,6 +30,7 @@ class GeneralPostingViewController: UIViewController {
         return btn
     }()
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +38,11 @@ class GeneralPostingViewController: UIViewController {
         self.getData()
         self.tabBarController?.tabBar.isHidden = true
         
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("게시판 목록 화면 출력")
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -109,6 +110,8 @@ class GeneralPostingViewController: UIViewController {
             }
         }
     }
+    
+
     
     
 }

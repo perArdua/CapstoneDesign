@@ -18,9 +18,18 @@ class BoardManager{
         let endpoint = String(format: APIConstants.Board.createPost, boardID)
         
         AF.request(endpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: DataResponse.self, completionHandler: { response in
-            print("***************")
+            print("게시글 생성요청")
             print(response)
-            print("***************")
+        })
+    }
+    
+    // MARK: - 게시글 수정 요청 함수
+    static func updatePost(postID: Int, params: Parameters){
+        let endpoint = String(format: APIConstants.Posts.updatePost, postID)
+        
+        AF.request(endpoint, method: .patch, parameters: params, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: DataResponse.self, completionHandler: { response in
+            print("게시글 수정 요청")
+            print(response)
         })
     }
     
@@ -39,6 +48,17 @@ class BoardManager{
             }
         }
         
+    }
+    
+    // MARK: - 게시글 삭제 요청함수
+    static func deletePost(postID: Int, completion: @escaping () -> Void){
+        let endpoint = String(format: APIConstants.Posts.deletePost, postID)
+        
+        AF.request(endpoint, method: .delete, headers: headers).responseDecodable(of: Response.self, completionHandler: { response in
+            print("게시글 삭제 요청")
+            print(response)
+            completion()
+        })
     }
     
     // MARK: - 게시판 목록을 요청하는 함수

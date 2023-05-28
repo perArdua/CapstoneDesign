@@ -828,7 +828,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P7H-et-zE6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3656.9230769230767" y="1.4218009478672986"/>
+            <point key="canvasLocation" x="3925" y="1"/>
         </scene>
         <!--General Posting Search View Controller-->
         <scene sceneID="eSy-Ay-04w">

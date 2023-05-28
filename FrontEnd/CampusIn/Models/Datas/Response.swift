@@ -2,27 +2,23 @@
 //  Response.swift
 //  CampusIn
 //
-//  Created by 이동현 on 2023/05/16.
+//  Created by 이동현 on 2023/05/28.
 //
 
 import Foundation
 
-struct DataResponse: Codable {
-    let header: DataHeader
-    let body: DataBody
+
+struct Response: Codable {
+    let body: Body
+    let header: Header
 }
 
 // MARK: - Body
-struct DataBody: Codable {
-    let boardInit: Bool
-
-    enum CodingKeys: String, CodingKey {
-        case boardInit = "게시판 초기화"
-    }
+struct Body: Codable {
 }
 
 // MARK: - Header
-struct DataHeader: Codable {
+struct Header: Codable {
     let code: Int
     let message: String
 }
