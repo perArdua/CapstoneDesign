@@ -43,6 +43,7 @@ class ViewController: UIViewController {
         }
         else{
             BoardManager.initBoard()
+            print(defaults.value(forKey: "UserId"))
         }
     }
 

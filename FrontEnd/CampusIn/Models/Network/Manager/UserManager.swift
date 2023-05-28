@@ -27,18 +27,19 @@ class UserManager{
         }
     
     //MARK: - 닉네임 설정
-    static func setNickname(nickName: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    static func setNickname(nickName: String, completion: @escaping (Result<Int, Error>) -> Void) {
         let endPoint = String(format: APIConstants.User.setNickname, nickName)
         
-        AF.request(endPoint, method: .post, encoding: JSONEncoding.default, headers: APIConstants.headers).response { response in
+        AF.request(endPoint, method: .post, encoding: JSONEncoding.default, headers: APIConstants.headers).responseDecodable(of: UserNicknameResponse.self) { response in
             switch response.result {
-            case .success:
-                completion(.success(()))
+            case .success(let nicknameResponse):
+                let id = nicknameResponse.body.nickname.id
+                completion(.success(id))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
-
     }
+
     
 }

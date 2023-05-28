@@ -83,6 +83,18 @@ class StudyManageViewController: UIViewController{
         }
     }
 
+    @IBAction func todoBtnTapped(_ sender: UIButton) {
+        print("tap!")
+        let todoVC = storyboard!.instantiateViewController(withIdentifier: "ToDoViewController") as! ToDoViewController
+        self.navigationController?.pushViewController(todoVC, animated: true)
+        print(self.navigationController)
+//        let todoVC = self.storyboard?.instantiateViewController(withIdentifier: "ToDoViewController")
+//        todoVC?.modalPresentationStyle = .fullScreen
+//        todoVC?.modalTransitionStyle = .coverVertical
+//        self.present(todoVC!, animated: true, completion: nil)
+    }
+    
+    
 }
 
 
