@@ -12,7 +12,7 @@ import Photos
 import Alamofire
 
 class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
-    
+    var postDetail: PostDetailContent?
     
     @IBOutlet weak var img0: UIImageView!
     @IBOutlet weak var img1: UIImageView!
@@ -35,19 +35,6 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleTV.delegate = self
-        titleTV.text = "제목"
-        titleTV.textColor = UIColor.lightGray
-        contentTV.delegate = self
-        contentTV.text = "내용"
-        contentTV.textColor = UIColor.lightGray
-
-        
-        imgs.insert(img0, at: 0)
-        imgs.insert(img1, at: 1)
-        imgs.insert(img2, at: 2)
-        imgs.insert(img3, at: 3)
-        imgs.insert(img4, at: 4)
         
         stView0.isHidden = true
         stView1.isHidden = true
@@ -55,6 +42,44 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
         stView3.isHidden = true
         stView4.isHidden = true
         
+        if let detail = postDetail{
+            titleTV.text = detail.content
+            contentTV.text = detail.title
+            
+            if detail.photoList.count >= 1 {
+                img0.image = UIImage(base64: (postDetail?.photoList[0].content)!, withPrefix: false)
+                stView0.isHidden = false
+            }
+            if detail.photoList.count >= 2 {
+                img1.image = UIImage(base64: (postDetail?.photoList[1].content)!, withPrefix: false)
+                stView1.isHidden = false
+            }
+            if detail.photoList.count >= 3{
+                img2.image = UIImage(base64: (postDetail?.photoList[2].content)!, withPrefix: false)
+                stView2.isHidden = false
+            }
+            if detail.photoList.count >= 4{
+                img3.image = UIImage(base64: (postDetail?.photoList[3].content)!, withPrefix: false)
+                stView3.isHidden = false
+            }
+            if detail.photoList.count >= 5{
+                img4.image = UIImage(base64: (postDetail?.photoList[4].content)!, withPrefix: false)
+                stView4.isHidden = false
+            }
+        }else{
+            titleTV.delegate = self
+            titleTV.text = "제목"
+            titleTV.textColor = UIColor.lightGray
+            contentTV.delegate = self
+            contentTV.text = "내용"
+            contentTV.textColor = UIColor.lightGray
+            
+            imgs.insert(img0, at: 0)
+            imgs.insert(img1, at: 1)
+            imgs.insert(img2, at: 2)
+            imgs.insert(img3, at: 3)
+            imgs.insert(img4, at: 4)
+        }
         
     }
     
@@ -166,20 +191,32 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
         }
         params["photos"] = img_temp
         
-        postData(boardID: 2, params: params)
-        
-        let alert = UIAlertController(title: "알림", message: "글쓰기가 완료되었습니다.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style: .default){_ in self.dismiss(animated: true) }
-        let cancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
-        alert.addAction(cancel)
-        alert.addAction(ok)
-        present(alert, animated: true)
-        
-        
+        if let detail = postDetail{
+            patchData(postID: detail.postID, params: params)
+            let alert = UIAlertController(title: "알림", message: "수정이 완료되었습니다.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "확인", style: .default){_ in self.dismiss(animated: true) }
+            let cancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            present(alert, animated: true)
+        }
+        else{
+            postData(boardID: 2, params: params)
+            let alert = UIAlertController(title: "알림", message: "글쓰기가 완료되었습니다.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "확인", style: .default){_ in self.dismiss(animated: true) }
+            let cancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            present(alert, animated: true)
+        }
     }
    
     func postData(boardID: Int, params: Parameters){
         BoardManager.createPost(boardID: boardID, params: params)
+    }
+    
+    func patchData(postID: Int, params:Parameters){
+        BoardManager.updatePost(postID: postID, params: params)
     }
     
     //MARK: - title textView의 place holder 기능
