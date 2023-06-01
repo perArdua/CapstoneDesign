@@ -127,6 +127,7 @@ extension ToDoViewController: UITableViewDataSource, UITableViewDelegate {
         //Completed 상태에 따라 text 색상 조정
         cell.todoLable?.textColor = todo.completed ? UIColor.gray : UIColor.black
         
+    
         cell.selectionStyle = .none
        
         return cell
