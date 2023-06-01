@@ -25,10 +25,10 @@ public class CommentService {
     private final PostRepository postRepository;
 
     @Transactional
-    public CommentCreateResponse createComment(Long userId, CommentCreateRequest commentCreateRequest) {
+    public CommentCreateResponse createComment(Long userId, CommentCreateRequest commentCreateRequest, Long postId) {
 
         User currentUser = getCurrentUser(userId);
-        Post post = getPost(commentCreateRequest.getPostId());
+        Post post = getPost(postId);
         Comment parent = commentCreateRequest.getParentId() != null ? commentRepository.findById(commentCreateRequest.getParentId()).orElseThrow(() -> new IllegalArgumentException("COMMENT NOT FOUND")) : null;
 
         Comment comment = Comment.builder()

@@ -18,10 +18,6 @@ import javax.validation.constraints.NotNull;
 @ApiModel(value = "댓글 생성 요청", description = "댓글 생성 요청")
 public class CommentCreateRequest{
 
-    @NotNull
-    @ApiModelProperty(value = "게시글 id", example = "1")
-    private Long postId;
-
     @ApiModelProperty(value = "부모 댓글 id(대댓글 달성시 parent id 기입)", example = "null")
     private Long parentId;
 

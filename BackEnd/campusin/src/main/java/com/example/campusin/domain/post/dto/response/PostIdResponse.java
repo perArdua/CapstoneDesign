@@ -14,8 +14,8 @@ import lombok.Getter;
 public class PostIdResponse {
 
     @Schema(name = "게시글 id", example = "1")
-    private Long id;
-    public PostIdResponse(Long id) {
-        this.id = id;
+    private Long postId;
+    public PostIdResponse(Long postId) {
+        this.postId = postId;
     }
 }
