@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by kok8454@gmail.com on 2023-05-21
  * Github : http://github.com/perArdua
@@ -29,6 +31,7 @@ public class TimerService {
     public TimerIdResponse createTimer(Long userId, TimerCreateRequest timerCreateRequest) {
         User user = findUser(userId);
         Timer timer = Timer.builder()
+                        .elapsedTime(0L)
                         .subject(timerCreateRequest.getSubject())
                         .user(user)
                         .build();
@@ -54,6 +57,13 @@ public class TimerService {
         findUser(userId);
         findTimer(timerId);
         timerRepository.deleteById(timerId);
+    }
+
+    @Transactional
+    public LocalDateTime getLastDateTime(Long userId) {
+        findUser(userId);
+        Timer timer = timerRepository.findTopByUserIdOrderByModifiedAtDesc(userId);
+        return timer != null ? timer.getModifiedAt() : null;
     }
 
     private User findUser(Long userId) {

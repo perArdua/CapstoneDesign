@@ -18,6 +18,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by kok8454@gmail.com on 2023-05-21
  * Github : http://github.com/perArdua
@@ -76,5 +78,16 @@ public class TimerController {
                                             direction = Sort.Direction.DESC
                                     ) final Pageable pageable) {
         return ApiResponse.success("Timer 조회가 완료되었습니다.", timerService.getAllTimerList(principal.getUserId(), pageable));
+    }
+
+    @ApiResponses(
+            value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = LocalDateTime.class),
+            }
+    )
+    @Operation(summary = "Timer 마지막 시간 조회", description = "Timer 마지막 시간을 조회합니다.")
+    @GetMapping("/lastDateTime")
+    public ApiResponse getLastDateTime(@AuthenticationPrincipal UserPrincipal principal) {
+        return ApiResponse.success("가장 마지막에 사용한 Timer의 DateTime 조회가 완료되었습니다.", timerService.getLastDateTime(principal.getUserId()));
     }
 }

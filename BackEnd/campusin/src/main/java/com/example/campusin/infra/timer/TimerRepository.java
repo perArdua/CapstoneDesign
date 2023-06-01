@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Github : http://github.com/perArdua
  */
 public interface TimerRepository extends JpaRepository<Timer, Long> {
+
+    public Timer findTopByUserIdOrderByModifiedAtDesc(Long userId);
 }
