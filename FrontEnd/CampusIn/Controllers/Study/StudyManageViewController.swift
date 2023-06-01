@@ -32,7 +32,8 @@ class StudyManageViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        array = timerManager.getArray()
+
+       // array = timerManager.getArray()
         tableView.dataSource = self
         tableView.delegate = self
         collectionView.dataSource = self
@@ -44,6 +45,13 @@ class StudyManageViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.backgroundColor = .systemGreen
+        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+
 //        array = timerManager.getArray()
         view.addSubview(addBtn)
         addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
