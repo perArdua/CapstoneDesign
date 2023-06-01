@@ -36,10 +36,11 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<ApiResponse> create(
             @AuthenticationPrincipal UserPrincipal userPrincipal,
+            @PathVariable Long postId,
             @Validated @RequestBody CommentCreateRequest request
     ) throws URISyntaxException {
-        CommentCreateResponse response = commentService.createComment(userPrincipal.getUserId(), request);
-        URI location = new URI("/api/v1/posts/" + request.getPostId());
+        CommentCreateResponse response = commentService.createComment(userPrincipal.getUserId(), request, postId);
+        URI location = new URI("/api/v1/posts/" + postId);
 
         return ResponseEntity.created(location).body(ApiResponse.success("댓글 생성 success", response));
     }

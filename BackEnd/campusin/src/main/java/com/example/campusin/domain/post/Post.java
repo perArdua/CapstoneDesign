@@ -80,17 +80,10 @@ public class Post extends BaseTimeEntity {
     }
 
     public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
-
-    public void addPhoto(final Photo photo) {
-        photos.add(photo);
-        photo.setPost(this);
-    }
-
-    public void removePhoto(final Photo photo) {
-        photos.remove(photo);
-        photo.setPost(null);
+        this.photos.forEach(photo -> photo.setPost(null));
+        this.photos.clear();
+        this.photos.addAll(photos);
+        this.photos.forEach(photo -> photo.setPost(this));
     }
 
     public List<Comment> getCommentList() {
