@@ -43,27 +43,34 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
         stView4.isHidden = true
         
         if let detail = postDetail{
-            titleTV.text = detail.content
-            contentTV.text = detail.title
+            titleTV.text = detail.title
+            contentTV.text = detail.content
+            img_cnt = detail.photoList.count
+            print(img_cnt)
             
-            if detail.photoList.count >= 1 {
+            if img_cnt >= 1 {
                 img0.image = UIImage(base64: (postDetail?.photoList[0].content)!, withPrefix: false)
+                imgs.insert(img0, at: 0)
                 stView0.isHidden = false
             }
-            if detail.photoList.count >= 2 {
+            if img_cnt >= 2 {
                 img1.image = UIImage(base64: (postDetail?.photoList[1].content)!, withPrefix: false)
+                imgs.insert(img1, at: 1)
                 stView1.isHidden = false
             }
-            if detail.photoList.count >= 3{
+            if img_cnt >= 3{
                 img2.image = UIImage(base64: (postDetail?.photoList[2].content)!, withPrefix: false)
+                imgs.insert(img2, at: 2)
                 stView2.isHidden = false
             }
-            if detail.photoList.count >= 4{
+            if img_cnt >= 4{
                 img3.image = UIImage(base64: (postDetail?.photoList[3].content)!, withPrefix: false)
+                imgs.insert(img3, at: 3)
                 stView3.isHidden = false
             }
-            if detail.photoList.count >= 5{
+            if img_cnt >= 5{
                 img4.image = UIImage(base64: (postDetail?.photoList[4].content)!, withPrefix: false)
+                imgs.insert(img4, at: 4)
                 stView4.isHidden = false
             }
         }else{
@@ -122,9 +129,12 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
     
     // MARK: - 사진 추가 버튼 누르기
     @IBAction func photoAlbumBtnTapped(_ sender: UIButton) {
+        print("tkw")
         let imagePicker = ImagePickerController()
+        print("tkw2")
         imagePicker.settings.selection.max = 5 - img_cnt
         imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
+        print("tkw3")
         presentImagePicker(imagePicker, select: { (asset) in
             //이미지 피커뷰에서 사진을 선택시 동작을 정의
         }, deselect: { (asset) in

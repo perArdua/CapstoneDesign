@@ -12,6 +12,7 @@ class GeneralPostingDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var postID: Int?
     var postDetail: PostDetailContent?
     var comments: [CommentDataContent] = []
     var imgCnt: Int = 0
@@ -38,15 +39,15 @@ class GeneralPostingDetailViewController: UIViewController {
     
     }
     
-    func getComment(postID : Int, completion: @escaping ([CommentDataContent]) -> Void){
-        CommentManager.readComment(postID: postID) { result in
-            switch result{
-            case .success(let comments):
-                DispatchQueue.main.async {
-                    completion(comments)
-                }
-            case .failure(let error):
-                print("Error: \(error)")
+    override func viewWillAppear(_ animated: Bool) {
+        getPostDetail(postID: postID!){
+            postDetail in
+            self.postDetail = postDetail
+            self.getComment(postID: self.postID!){
+                comments in
+                self.comments = comments
+                self.tableView.reloadData()
+                print(comments)
             }
         }
     }
@@ -93,6 +94,34 @@ class GeneralPostingDetailViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - 게시글의 정보를 가져오는 함수
+    func getPostDetail(postID : Int, completion: @escaping (PostDetailContent) -> Void){
+        BoardManager.readPost(postID: postID) { result in
+            switch result{
+            case .success(let post):
+                DispatchQueue.main.async {
+                    completion(post)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    // MARK: - 게시글의 댓글을 가져오는 함수
+    func getComment(postID : Int, completion: @escaping ([CommentDataContent]) -> Void){
+        CommentManager.readComment(postID: postID) { result in
+            switch result{
+            case .success(let comments):
+                DispatchQueue.main.async {
+                    completion(comments)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
     }
 }
 
