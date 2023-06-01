@@ -32,7 +32,7 @@ class StudyManageViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        array = timerManager.getArray()
+//        array = timerManager.getArray()
         tableView.dataSource = self
         tableView.delegate = self
         collectionView.dataSource = self
@@ -44,7 +44,7 @@ class StudyManageViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        array = timerManager.getArray()
+//        array = timerManager.getArray()
         view.addSubview(addBtn)
         addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
         addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 200, width: 60, height: 60)
@@ -58,7 +58,7 @@ class StudyManageViewController: UIViewController{
             guard let textField = alert.textFields?.first, let name = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {return}
             let newTimer = TimerData(label: name, cnt: 0)
             self.array.append(newTimer)
-            self.timerManager.updateArray(array: self.array)
+//            self.timerManager.updateArray(array: self.array)
             self.tableView.reloadData()
         }
         let cancel = UIAlertAction(title: "취소", style: .default)
@@ -127,12 +127,12 @@ extension StudyManageViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete_action = UIContextualAction(style: .destructive, title: nil) { action, view, completion in
             self.array.remove(at: indexPath.row)
-            self.timerManager.updateArray(array: self.array)
+//            self.timerManager.updateArray(array: self.array)
             tableView.reloadData()
             completion(true)
         }
         delete_action.title = "삭제"
-        delete_action.backgroundColor = .red
+//        delete_action.backgroundColor = .red
         let swipe_configuration = UISwipeActionsConfiguration(actions: [delete_action])
         return swipe_configuration
     }
