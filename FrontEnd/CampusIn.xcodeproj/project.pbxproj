@@ -21,6 +21,11 @@
 		3165EDF72A02A86700D91856 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165EDF62A02A86700D91856 /* Main.storyboard */; };
 		317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317667BB2A07EFEB002F829C /* GeneralSearchTableViewCell.swift */; };
 		3179137B2A23545A00BC86FE /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3179137A2A23545A00BC86FE /* Response.swift */; };
+		3179137D2A23906E00BC86FE /* TimerReadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3179137C2A23906E00BC86FE /* TimerReadResponse.swift */; };
+		3179137F2A23911D00BC86FE /* TimerAddResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3179137E2A23911D00BC86FE /* TimerAddResponse.swift */; };
+		317913812A23917900BC86FE /* TimerDeleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317913802A23917900BC86FE /* TimerDeleteResponse.swift */; };
+		317913832A23927E00BC86FE /* TimerUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317913822A23927E00BC86FE /* TimerUpdateResponse.swift */; };
+		317913852A2393AB00BC86FE /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317913842A2393AB00BC86FE /* TimerManager.swift */; };
 		3183ABDB2A14D3DB009CA636 /* PostSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183ABDA2A14D3DB009CA636 /* PostSearch.swift */; };
 		3183ABE22A150A51009CA636 /* BoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183ABE12A150A51009CA636 /* BoardManager.swift */; };
 		31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */; };
@@ -32,7 +37,6 @@
 		31B2B1682A190735005A3D4E /* TimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */; };
 		31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */; };
 		31B2B16E2A191401005A3D4E /* TimerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B16D2A191401005A3D4E /* TimerData.swift */; };
-		31B2B1722A1916AE005A3D4E /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B1712A1916AE005A3D4E /* TimerManager.swift */; };
 		31C7184A2A080EE800C7731A /* loading_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 31C718492A080EE800C7731A /* loading_check.json */; };
 		31D57E4F2A13B7830049E57A /* BoardInitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D57E4E2A13B7830049E57A /* BoardInitResponse.swift */; };
 		31D57E512A13CE160049E57A /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D57E502A13CE160049E57A /* PostList.swift */; };
@@ -110,6 +114,11 @@
 		3165EDF62A02A86700D91856 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		317667BB2A07EFEB002F829C /* GeneralSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSearchTableViewCell.swift; sourceTree = "<group>"; };
 		3179137A2A23545A00BC86FE /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		3179137C2A23906E00BC86FE /* TimerReadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerReadResponse.swift; sourceTree = "<group>"; };
+		3179137E2A23911D00BC86FE /* TimerAddResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAddResponse.swift; sourceTree = "<group>"; };
+		317913802A23917900BC86FE /* TimerDeleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDeleteResponse.swift; sourceTree = "<group>"; };
+		317913822A23927E00BC86FE /* TimerUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerUpdateResponse.swift; sourceTree = "<group>"; };
+		317913842A2393AB00BC86FE /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		3183ABDA2A14D3DB009CA636 /* PostSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearch.swift; sourceTree = "<group>"; };
 		3183ABE12A150A51009CA636 /* BoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManager.swift; sourceTree = "<group>"; };
 		31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -121,7 +130,6 @@
 		31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCell.swift; sourceTree = "<group>"; };
 		31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		31B2B16D2A191401005A3D4E /* TimerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerData.swift; sourceTree = "<group>"; };
-		31B2B1712A1916AE005A3D4E /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		31C718492A080EE800C7731A /* loading_check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_check.json; sourceTree = "<group>"; };
 		31D57E4E2A13B7830049E57A /* BoardInitResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardInitResponse.swift; sourceTree = "<group>"; };
 		31D57E502A13CE160049E57A /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
@@ -320,6 +328,7 @@
 				5D69A3E12A1A9CDB00E9BBB4 /* MessageRoomManager.swift */,
 				5D547FF22A1F5ACF00376E09 /* UserManager.swift */,
 				5D77035A2A20FCA300AF0903 /* TodoManager.swift */,
+				317913842A2393AB00BC86FE /* TimerManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -338,7 +347,6 @@
 			isa = PBXGroup;
 			children = (
 				31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */,
-				31B2B1712A1916AE005A3D4E /* TimerManager.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -357,6 +365,10 @@
 			isa = PBXGroup;
 			children = (
 				31B2B16D2A191401005A3D4E /* TimerData.swift */,
+				317913802A23917900BC86FE /* TimerDeleteResponse.swift */,
+				3179137E2A23911D00BC86FE /* TimerAddResponse.swift */,
+				317913822A23927E00BC86FE /* TimerUpdateResponse.swift */,
+				3179137C2A23906E00BC86FE /* TimerReadResponse.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -670,13 +682,15 @@
 				31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */,
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
 				31B2B16E2A191401005A3D4E /* TimerData.swift in Sources */,
+				3179137F2A23911D00BC86FE /* TimerAddResponse.swift in Sources */,
+				317913832A23927E00BC86FE /* TimerUpdateResponse.swift in Sources */,
 				3179137B2A23545A00BC86FE /* Response.swift in Sources */,
 				3165EDC62A02A3C100D91856 /* SceneDelegate.swift in Sources */,
 				5D69A3E42A1A9D1400E9BBB4 /* MessageRooms.swift in Sources */,
 				31AF26B92A1F91D300B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift in Sources */,
 				31FCD91F2A054E050068689B /* GeneralPostingTableViewCell.swift in Sources */,
+				317913852A2393AB00BC86FE /* TimerManager.swift in Sources */,
 				5D14AB342A15158A00807A2B /* SideMenuViewController.swift in Sources */,
-				31B2B1722A1916AE005A3D4E /* TimerManager.swift in Sources */,
 				31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */,
 				5D77035B2A20FCA300AF0903 /* TodoManager.swift in Sources */,
 				5D547FEE2A1F58E100376E09 /* UserData.swift in Sources */,
@@ -684,6 +698,7 @@
 				5D4ADFA02A0555E600195CA9 /* KeyChain.swift in Sources */,
 				31AF26C12A1F9BE000B1CEC7 /* CommentDeleteResponse.swift in Sources */,
 				5D2570522A10EABE00E03713 /* ChatTableViewCell.swift in Sources */,
+				3179137D2A23906E00BC86FE /* TimerReadResponse.swift in Sources */,
 				5D547FFB2A1F98F900376E09 /* StudyNavigationController.swift in Sources */,
 				5D507AEC2A0DDDA800EB5CA9 /* MessageBoxViewController.swift in Sources */,
 				5D4ADF982A054A1B00195CA9 /* SocialViewController.swift in Sources */,
@@ -709,6 +724,7 @@
 				317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */,
 				5D4B9D552A114F2C003F3E86 /* StudyManageViewController.swift in Sources */,
 				31AF26BF2A1F9B4300B1CEC7 /* CommentAddResponse.swift in Sources */,
+				317913812A23917900BC86FE /* TimerDeleteResponse.swift in Sources */,
 				31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */,
 				31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */,
 				31D96F642A1A9E610086FD7D /* BoardData.swift in Sources */,
