@@ -142,6 +142,7 @@ extension GeneralPostingViewController : UITableViewDelegate, UITableViewDataSou
     //테이블 뷰 셀이 클릭되면 어떤 동작을 할지 정하는 함수
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "GeneralPostingDetailViewController") as? GeneralPostingDetailViewController else { return }
+        nextVC.postID = array[indexPath.row].postID
         
         getPostDetail(postID: array[indexPath.row].postID){ [self]
             postDetail in
