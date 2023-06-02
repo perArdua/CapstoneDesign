@@ -1,6 +1,7 @@
 package com.example.campusin.domain.statistics.dto.response;
 
 import com.example.campusin.domain.statistics.Statistics;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +15,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Schema(description = "통계 응답")
 public class StatisticsResponse {
 
+    @Schema(description = "총 학습 시간")
     private Long totalElapsedTime;
+
+    @Schema(description = "질문 수")
     private Long numberOfQuestions;
+
+    @Schema(description = "답변 수")
     private Long numberOfAnswers;
+
+    @Schema(description = "채택된 답변 수")
     private Long numberOfAdoptedAnswers;
 
     @Builder
