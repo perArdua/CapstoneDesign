@@ -11,6 +11,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -19,7 +21,7 @@ import java.util.Objects;
  */
 
 @Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "UPDATE timer SET deleted_at = CURRENT_TIMESTAMP where timer_id = ?")
+@SQLDelete(sql = "UPDATE TIMER SET deleted_at = CURRENT_TIMESTAMP where timer_id = ?")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -49,9 +51,6 @@ public class Timer extends BaseTimeEntity {
     }
 
     public void updateTimer(TimerUpdateRequest timerUpdateRequest){
-        if (Objects.isNull(elapsedTime))
-            this.elapsedTime = 0L;
-
         this.elapsedTime += timerUpdateRequest.getElapsedTime();
     }
 }
