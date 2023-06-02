@@ -27,6 +27,9 @@ public class PostResponse {
     @Schema(name = "게시글 id", example = "1")
     private Long postId;
 
+    @Schema(name = "유저 id", example = "1")
+    private Long userId;
+
     @Schema(name = "게시판 타입", example = "FREE")
     private BoardType boardType;
 
@@ -49,8 +52,9 @@ public class PostResponse {
     private LocalDateTime createdAt;
 
     @Builder
-    public PostResponse(Long postId, BoardType boardType, String nickname, String title, String content, List<PhotoResponse> photoList, LocalDateTime createdAt, Long price) {
+    public PostResponse(Long postId, Long userId, BoardType boardType, String nickname, String title, String content, List<PhotoResponse> photoList, LocalDateTime createdAt, Long price) {
         this.postId = postId;
+        this.userId = userId;
         this.boardType = boardType;
         this.nickname = nickname;
         this.title = title;
@@ -64,6 +68,7 @@ public class PostResponse {
     public PostResponse(Post entity) {
         this(
                 entity.getId(),
+                entity.getUser().getId(),
                 entity.getBoard().getBoardType(),
                 entity.getUser().getNickname(),
                 entity.getTitle(),

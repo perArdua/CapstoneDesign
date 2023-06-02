@@ -6,6 +6,7 @@ package com.example.campusin.application.user;
  */
 
 import com.example.campusin.domain.user.User;
+import com.example.campusin.domain.user.dto.response.UserIdResponse;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,10 @@ public class UserService {
         User user = userRepository.findByLoginId(loginId);
         user.setNickname(nickname);
         return userRepository.save(user);
+    }
+
+    public UserIdResponse getUserId(String loginId) {
+        User user = userRepository.findByLoginId(loginId);
+        return new UserIdResponse(user.getId());
     }
 }
