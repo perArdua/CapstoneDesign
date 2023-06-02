@@ -63,4 +63,10 @@ public class CommentController {
         return ApiResponse.success("댓글 조회 성공", commentService.searchCommentByPost(postId, pageable));
     }
 
+    @Operation(summary = "답변 채택", description = "답변을 채택합니다.")
+    @GetMapping("/{commentId}/accept")
+    public ApiResponse acceptAnswer(@PathVariable Long commentId, @AuthenticationPrincipal UserPrincipal principal){
+        commentService.updateIsAdopted(commentId, principal.getUserId());
+        return ApiResponse.success("답변 채택 성공", "ACCEPT ANSWER SUCCESSFULLY");
+    }
 }

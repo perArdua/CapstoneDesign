@@ -57,6 +57,4 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query(value = "select c from Comment c join fetch c.user where c.post.id = :postId",
             countQuery = "select count(c) from Comment c where c.post.id = :postId")
     Page<Comment> findCommentsByPost(@Param("postId") Long postId, Pageable pageable);
-
-
 }

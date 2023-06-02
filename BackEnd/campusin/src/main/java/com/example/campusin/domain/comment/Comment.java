@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -54,9 +55,11 @@ public class Comment extends BaseTimeEntity {
     @Column(name = "is_deleted")
     private Boolean isDelete;
 
+    @ColumnDefault("false")
     @Column(name = "is_answer")
     private Boolean isAnswer;
 
+    @ColumnDefault("false")
     @Column(name = "is_adopted")
     private Boolean isAdopted;
 
@@ -84,6 +87,9 @@ public class Comment extends BaseTimeEntity {
         post.getCommentList().add(this);
     }
 
+    public void setIsAnswer(Boolean isAnswer) {
+        this.isAnswer = isAnswer;
+    }
     public void setIsAdopted(Boolean isAdopted) {
         this.isAdopted = isAdopted;
     }

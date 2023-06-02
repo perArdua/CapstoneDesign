@@ -10,3 +10,7 @@
 - message room 생성을 위해 userId를 제공함
 UserApi에 자신의 userId를 알 수 있는 api만듬 + post response에서 post를 작성한 user의 id도 주도록 함
 
+패치노트 1.0.1 (23-06-03)
+
+- 질의응답 게시판에서 답변을 달은 댓글을 채택할 수 있는 Comment api 추가
+

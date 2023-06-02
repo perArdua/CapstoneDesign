@@ -1,11 +1,13 @@
 package com.example.campusin.application.comment;
 
+import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.comment.*;
 import com.example.campusin.domain.comment.dto.request.CommentCreateRequest;
 import com.example.campusin.domain.comment.dto.response.CommentCreateResponse;
 import com.example.campusin.domain.comment.dto.response.CommentsOnPostResponse;
 import com.example.campusin.domain.post.Post;
 import com.example.campusin.domain.user.User;
+import com.example.campusin.infra.board.BoardRepository;
 import com.example.campusin.infra.comment.CommentRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.user.UserRepository;
@@ -23,7 +25,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
-
+    private final BoardRepository boardRepository;
     @Transactional
     public CommentCreateResponse createComment(Long userId, CommentCreateRequest commentCreateRequest, Long postId) {
 
@@ -37,6 +39,10 @@ public class CommentService {
                 .parent(parent)
                 .content(commentCreateRequest.getContent())
                 .build();
+
+        if(post.getBoard().getBoardType().equals(BoardType.Question)){
+            comment.setIsAnswer(true);
+        }
 
         commentRepository.save(comment);
 
@@ -57,6 +63,15 @@ public class CommentService {
         comment.updateDelete();
     }
 
+    @Transactional
+    public void updateIsAdopted(Long commentId, Long userId){
+        Comment comment = getComment(commentId);
+        if (comment.getPost().getUser().getId().equals(userId)) {
+            comment.setIsAdopted(true);
+        } else {
+            throw new IllegalArgumentException("해당 유저는 답변 채택 권한이 없습니다.");
+        }
+    }
     private Post getPost(Long postId){
         return postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + postId));
     }
