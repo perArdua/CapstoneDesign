@@ -39,6 +39,9 @@ public class PostResponse {
     @Schema(name = "게시글 내용", example = "content")
     private String content;
 
+    @Schema(name = "책 가격", example = "10000")
+    private Long price;
+
     @Schema(name = "게시글 사진", example = "[\"photo1\", \"photo2\", \"photo3\"]")
     private List<PhotoResponse> photoList;
 
@@ -46,7 +49,7 @@ public class PostResponse {
     private LocalDateTime createdAt;
 
     @Builder
-    public PostResponse(Long postId, BoardType boardType, String nickname, String title, String content, List<PhotoResponse> photoList, LocalDateTime createdAt) {
+    public PostResponse(Long postId, BoardType boardType, String nickname, String title, String content, List<PhotoResponse> photoList, LocalDateTime createdAt, Long price) {
         this.postId = postId;
         this.boardType = boardType;
         this.nickname = nickname;
@@ -54,6 +57,7 @@ public class PostResponse {
         this.content = content;
         this.photoList = photoList;
         this.createdAt = createdAt;
+        this.price = price;
     }
 
     @Builder
@@ -65,7 +69,8 @@ public class PostResponse {
                 entity.getTitle(),
                 entity.getContent(),
                 entity.getPhotos().stream().map(PhotoResponse::new).collect(Collectors.toList()),
-                entity.getCreatedAt()
+                entity.getCreatedAt(),
+                entity.getPrice()
         );
     }
 }

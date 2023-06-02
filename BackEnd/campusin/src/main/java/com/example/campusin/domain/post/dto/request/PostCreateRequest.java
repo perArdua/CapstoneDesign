@@ -33,13 +33,15 @@ public class PostCreateRequest {
     private String content;
 
     @Schema(name = "게시글 사진", description = "게시글 사진", required = true, example = "[\"photo1\", \"photo2\", \"photo3\"]")
-    @NotNull
     private List<String> photos = new ArrayList<>();
-
+    
+    @Schema(name = "책 가격", description = "책 가격", example = "10000")
+    private Long price;
     @Builder
-    public PostCreateRequest(String title, String content, List<String> photos) {
+    public PostCreateRequest(String title, String content, List<String> photos, Long price) {
         this.title = title;
         this.content = content;
+        this.photos = photos;
         if (Objects.nonNull(photos)) {
             this.photos = photos;
         }
