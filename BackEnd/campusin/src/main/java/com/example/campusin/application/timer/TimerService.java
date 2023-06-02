@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kok8454@gmail.com on 2023-05-21
@@ -26,7 +28,6 @@ public class TimerService {
 
     private final TimerRepository timerRepository;
     private final UserRepository userRepository;
-
     @Transactional
     public TimerIdResponse createTimer(Long userId, TimerCreateRequest timerCreateRequest) {
         User user = findUser(userId);
@@ -52,6 +53,22 @@ public class TimerService {
         return new TimerIdResponse(timerRepository.save(timer).getId());
     }
 
+    @Transactional
+    public Page<TimerResponse> initTimer(Long userId, Pageable pageable) {
+        findUser(userId);
+        List<Timer> oldTimers = timerRepository.findAllByUserId(userId);
+        List<Timer> newTimers = new ArrayList<>();
+        for (Timer oldTimer : oldTimers) {
+            newTimers.add(Timer.builder()
+                    .elapsedTime(0L)
+                    .subject(oldTimer.getSubject())
+                    .user(oldTimer.getUser())
+                    .build());
+        }
+        timerRepository.deleteAll(oldTimers);
+        timerRepository.saveAll(newTimers);
+        return getAllTimerList(userId, pageable);
+    }
     @Transactional
     public void deleteTimer(Long userId, Long timerId) {
         findUser(userId);

@@ -90,4 +90,19 @@ public class TimerController {
     public ApiResponse getLastDateTime(@AuthenticationPrincipal UserPrincipal principal) {
         return ApiResponse.success("가장 마지막에 사용한 Timer의 DateTime 조회가 완료되었습니다.", timerService.getLastDateTime(principal.getUserId()));
     }
+
+    @ApiResponses(
+            value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "OK")
+            }
+    )
+    @Operation(summary = "Timer 초기화", description = "Timer를 초기화합니다.")
+    @GetMapping("/init")
+    public ApiResponse initTimer(@AuthenticationPrincipal UserPrincipal principal,
+                                @PageableDefault(
+                                        sort = {"createdAt"},
+                                        direction = Sort.Direction.DESC
+                                ) final Pageable pageable) {
+        return ApiResponse.success("Timer 초기화가 완료되었습니다.", timerService.initTimer(principal.getUserId(), pageable));
+    }
 }
