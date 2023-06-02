@@ -9,6 +9,7 @@ import com.example.campusin.application.user.UserService;
 import com.example.campusin.common.response.ApiResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.domain.user.User;
+import com.example.campusin.domain.user.dto.response.UserIdResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,5 +54,16 @@ public class UserController {
     @PostMapping("/nickname")
     public ApiResponse createNickname(@AuthenticationPrincipal UserPrincipal principal, String nickname) {
         return ApiResponse.success("nickname", userService.createNickname(principal.getLoginId(), nickname));
+    }
+
+    @ApiResponses(
+            value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "성공", response = UserIdResponse.class)
+            }
+    )
+    @Operation(summary = "유저 고유 식별자 반환", description = "유저 고유 식별자 반환")
+    @GetMapping("/id")
+    public ApiResponse getUserId(@AuthenticationPrincipal UserPrincipal principal) {
+        return ApiResponse.success("userId", userService.getUserId(principal.getLoginId()));
     }
 }
