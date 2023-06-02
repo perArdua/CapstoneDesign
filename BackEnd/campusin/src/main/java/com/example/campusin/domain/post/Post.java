@@ -39,6 +39,9 @@ public class Post extends BaseTimeEntity {
     @Column(name = "content", length = 65535)
     private String content;
 
+    @Column(name = "price")
+    private Long price;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
@@ -58,17 +61,19 @@ public class Post extends BaseTimeEntity {
 
 
     @Builder
-    public Post(String title, String content, User user, Board board) {
+    public Post(String title, String content, User user, Board board, Long price) {
         this.title = title;
         this.content = content;
         this.user = user;
         this.board = board;
+        this.price = price;
     }
 
     public void updatePost(PostUpdateRequest request) {
         setTitle(request.getTitle());
         setContent(request.getContent());
         setPhotos(request.getPhotos());
+        setPrice(request.getPrice());
     }
 
     public void setTitle(String title) {
@@ -78,7 +83,9 @@ public class Post extends BaseTimeEntity {
     public void setContent(String content) {
         this.content = content;
     }
-
+    public void setPrice(Long price) {
+        this.price = price;
+    }
     public void setPhotos(List<Photo> photos) {
         this.photos.forEach(photo -> photo.setPost(null));
         this.photos.clear();
