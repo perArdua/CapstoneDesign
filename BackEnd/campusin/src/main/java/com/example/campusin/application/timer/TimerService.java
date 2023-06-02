@@ -64,6 +64,7 @@ public class TimerService {
 
         Statistics statistics = statisticsRepository.findByDate(oldTimers.get(0).getModifiedAt().toLocalDate());
         statistics.updateElapsedTime(oldTimers.stream().map(Timer::getElapsedTime).reduce(0L, Long::sum));
+        statisticsRepository.save(statistics);
 
         List<Timer> newTimers = new ArrayList<>();
         for (Timer oldTimer : oldTimers) {
@@ -79,8 +80,14 @@ public class TimerService {
     }
     @Transactional
     public void deleteTimer(Long userId, Long timerId) {
-        findUser(userId);
-        findTimer(timerId);
+        User user = findUser(userId);
+        Timer timer = findTimer(timerId);
+        if (!timer.getUser().equals(user)) {
+            throw new IllegalArgumentException("USER NOT MATCH");
+        }
+        Statistics statistics = statisticsRepository.findByDate(timer.getModifiedAt().toLocalDate());
+        statistics.addElapsedTime(timer.getElapsedTime());
+        statisticsRepository.save(statistics);
         timerRepository.deleteById(timerId);
     }
 

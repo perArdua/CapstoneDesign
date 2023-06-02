@@ -9,6 +9,7 @@ import com.example.campusin.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -40,6 +41,7 @@ public class Post extends BaseTimeEntity {
     private String content;
 
     @Column(name = "price")
+    @ColumnDefault("0L")
     private Long price;
 
     @ManyToOne(fetch = FetchType.LAZY)

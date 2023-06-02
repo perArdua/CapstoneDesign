@@ -62,7 +62,7 @@ public class StatisticsService {
         statistics.updateNumberOfAnswers(numberOfAnswers);
         statistics.updateNumberOfAdoptedAnswers(numberOfAdoptedAnswers);
         statisticsRepository.save(statistics);
-        return new StatisticsResponse(totalElapsedTime, numberOfQuestions, numberOfAnswers, numberOfAdoptedAnswers);
+        return new StatisticsResponse(statistics.getElapsedTime(), statistics.getNumberOfQuestions(), statistics.getNumberOfAnswers(), statistics.getNumberOfAdoptedAnswers());
     }
 
     private User findUser(Long userId) {

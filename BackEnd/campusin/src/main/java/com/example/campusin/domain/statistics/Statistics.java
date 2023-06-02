@@ -63,6 +63,9 @@ public class Statistics extends BaseTimeEntity {
         this.elapsedTime = elapsedTime;
     }
 
+    public void addElapsedTime(Long elapsedTime) {
+        this.elapsedTime += elapsedTime;
+    }
 
     public void updateNumberOfQuestions(Long numberOfQuestions) {
         this.numberOfQuestions = numberOfQuestions;
