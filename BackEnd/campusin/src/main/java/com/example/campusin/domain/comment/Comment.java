@@ -51,16 +51,24 @@ public class Comment extends BaseTimeEntity {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @Column(name = "is_deleted", nullable = false)
+    @Column(name = "is_deleted")
     private Boolean isDelete;
 
+    @Column(name = "is_answer")
+    private Boolean isAnswer;
+
+    @Column(name = "is_adopted")
+    private Boolean isAdopted;
+
     @Builder
-    public Comment(Comment parent,User user, Post post, String content) {
+    public Comment(Comment parent,User user, Post post, String content, Boolean isAnswer, Boolean isAdopted) {
         setPost(post);
         this.user = user;
         setParent(parent);
         this.isDelete = false;
         this.content = content;
+        this.isAnswer = isAnswer;
+        this.isAdopted = isAdopted;
     }
 
     public void updateDelete() {
@@ -76,6 +84,9 @@ public class Comment extends BaseTimeEntity {
         post.getCommentList().add(this);
     }
 
+    public void setIsAdopted(Boolean isAdopted) {
+        this.isAdopted = isAdopted;
+    }
     public void setParent(Comment parent){
         if(Objects.isNull(parent)){
             return;

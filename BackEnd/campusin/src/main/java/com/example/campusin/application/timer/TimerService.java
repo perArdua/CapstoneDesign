@@ -1,11 +1,13 @@
 package com.example.campusin.application.timer;
 
+import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.timer.Timer;
 import com.example.campusin.domain.timer.request.TimerCreateRequest;
 import com.example.campusin.domain.timer.request.TimerUpdateRequest;
 import com.example.campusin.domain.timer.response.TimerIdResponse;
 import com.example.campusin.domain.timer.response.TimerResponse;
 import com.example.campusin.domain.user.User;
+import com.example.campusin.infra.statistics.StatisticsRepository;
 import com.example.campusin.infra.timer.TimerRepository;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.AllArgsConstructor;
@@ -28,6 +30,8 @@ public class TimerService {
 
     private final TimerRepository timerRepository;
     private final UserRepository userRepository;
+    private final StatisticsRepository statisticsRepository;
+
     @Transactional
     public TimerIdResponse createTimer(Long userId, TimerCreateRequest timerCreateRequest) {
         User user = findUser(userId);
@@ -57,6 +61,10 @@ public class TimerService {
     public Page<TimerResponse> initTimer(Long userId, Pageable pageable) {
         findUser(userId);
         List<Timer> oldTimers = timerRepository.findAllByUserId(userId);
+
+        Statistics statistics = statisticsRepository.findByDate(oldTimers.get(0).getModifiedAt().toLocalDate());
+        statistics.updateElapsedTime(oldTimers.stream().map(Timer::getElapsedTime).reduce(0L, Long::sum));
+
         List<Timer> newTimers = new ArrayList<>();
         for (Timer oldTimer : oldTimers) {
             newTimers.add(Timer.builder()

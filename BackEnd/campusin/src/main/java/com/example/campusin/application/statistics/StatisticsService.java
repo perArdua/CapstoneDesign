@@ -47,9 +47,7 @@ public class StatisticsService {
         User user = findUser(userId);
         Statistics statistics = findStatistics(statisticsId);
         LocalDate localDate = statistics.getDate();
-        if (localDate.isAfter(LocalDate.now())) {
-            return new StatisticsResponse(statistics);
-        }
+
         List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user, localDate, localDate.plusDays(1));
 
         Long totalElapsedTime = timerList.stream().mapToLong(Timer::getElapsedTime).sum();
@@ -57,7 +55,9 @@ public class StatisticsService {
         Long numberOfAnswers = statisticsRepository.countAnswersByUserAndModifiedAtBetweenAndIsAnswerTrue(user, localDate, localDate.plusDays(1));
         Long numberOfAdoptedAnswers = statisticsRepository.countAnswersByUserAndModifiedAtBetweenAndIsAdoptedTrue(user, localDate, localDate.plusDays(1));
 
-        statistics.updateElapsedTime(totalElapsedTime);
+        if (localDate.isEqual(LocalDate.now())) {
+            statistics.updateElapsedTime(totalElapsedTime);
+        }
         statistics.updateNumberOfQuestions(numberOfQuestions);
         statistics.updateNumberOfAnswers(numberOfAnswers);
         statistics.updateNumberOfAdoptedAnswers(numberOfAdoptedAnswers);
