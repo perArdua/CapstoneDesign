@@ -1,5 +1,6 @@
 package com.example.campusin.domain.studygroup.dto.request;
 
+import com.example.campusin.domain.studygroup.StudyGroupMember;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -8,17 +9,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@ApiModel(value = "StudyGroup 생성 요청", description = "StudyGroup name, StudyGroup limitedMemberSize")
-public class StudyGroupCreateRequest {
+@ApiModel(value = "StudyGroup 가입 요청", description = "StudyGroupId")
+public class StudyGroupJoinRequest {
     @NotNull
-    @ApiModelProperty(value = "StudyGroup name")
-    private String studygroupName;
-    @NotNull
-    @ApiModelProperty(value = "StudyGroup limitedMemberSize")
-    private int LimitedMemberSize;
+    @ApiModelProperty(value = "StudyGroup id")
+    private Long studygroupId;
+
 
 }
