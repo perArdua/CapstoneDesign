@@ -52,6 +52,26 @@ class MessageRoomManager{
             }
         }
     }
+    
+    //MARK: - 채팅방 만들기
+    static func createMessageRoom(postID: Int, userID: Int, completion: @escaping (Result<Void, Error>) -> Void){
+        let endPoint = APIConstants.MessageRoom.createMessageRoom
+        
+        let parameters: [String: Any] = [
+            "createdFrom": postID,
+            "firstMessage": "대화를 시작하세요!",
+            "receiverId": userID
+        ]
+        
+        AF.request(endPoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: APIConstants.headers).response { response in
+            switch response.result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 
 }
 

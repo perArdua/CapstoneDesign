@@ -84,6 +84,16 @@ class GeneralPostingDetailViewController: UIViewController {
         else{
             let sendMsgAction = UIAlertAction(title: "쪽지 보내기", style: .default) { _ in
                 // 쪽지 보내기 버튼이 눌렸을 때의 동작을 처리하는 코드 작성
+                MessageRoomManager.createMessageRoom(postID: self.postID!, userID: self.postDetail!.userID!){ result in
+                    switch result{
+                    case .success:
+                        print("create new message room!")
+                        let chatVC = self.storyboard!.instantiateViewController(withIdentifier: "MessageBoxViewController") as! MessageBoxViewController
+                        self.navigationController?.pushViewController(chatVC, animated: true)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
             }
             let reportAction = UIAlertAction(title: "신고하기", style: .destructive) { _ in
                 // 신고하기 버튼이 눌렸을 때의 동작을 처리하는 코드 작성
