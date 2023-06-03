@@ -28,7 +28,12 @@
 		317913852A2393AB00BC86FE /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317913842A2393AB00BC86FE /* TimerManager.swift */; };
 		3183ABDB2A14D3DB009CA636 /* PostSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183ABDA2A14D3DB009CA636 /* PostSearch.swift */; };
 		3183ABE22A150A51009CA636 /* BoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183ABE12A150A51009CA636 /* BoardManager.swift */; };
+		3185DF312A2A3FAA001E5265 /* StudyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF302A2A3FA9001E5265 /* StudyRecordViewController.swift */; };
+		3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */; };
+		3185DF352A2A3FC5001E5265 /* StudyRecordAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */; };
+		319815142A2B205400B8B010 /* StudyRecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319815132A2B205400B8B010 /* StudyRecordDelegate.swift */; };
 		31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */; };
+		31A77AFA2A2B806000AEC557 /* StudyRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A77AF92A2B806000AEC557 /* StudyRecordTableViewCell.swift */; };
 		31AF26B92A1F91D300B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26B82A1F91D200B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift */; };
 		31AF26BB2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26BA2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift */; };
 		31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26BC2A1F972700B1CEC7 /* CommentManager.swift */; };
@@ -121,7 +126,12 @@
 		317913842A2393AB00BC86FE /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		3183ABDA2A14D3DB009CA636 /* PostSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearch.swift; sourceTree = "<group>"; };
 		3183ABE12A150A51009CA636 /* BoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManager.swift; sourceTree = "<group>"; };
+		3185DF302A2A3FA9001E5265 /* StudyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordViewController.swift; sourceTree = "<group>"; };
+		3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDetailViewController.swift; sourceTree = "<group>"; };
+		3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordAddViewController.swift; sourceTree = "<group>"; };
+		319815132A2B205400B8B010 /* StudyRecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDelegate.swift; sourceTree = "<group>"; };
 		31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewCell.swift; sourceTree = "<group>"; };
+		31A77AF92A2B806000AEC557 /* StudyRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordTableViewCell.swift; sourceTree = "<group>"; };
 		31AF26B82A1F91D200B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPostingCommentAddTableViewCell.swift; sourceTree = "<group>"; };
 		31AF26BA2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCommentCellDelegate.swift; sourceTree = "<group>"; };
 		31AF26BC2A1F972700B1CEC7 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
@@ -199,6 +209,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3148ED612A2A3EE700CF1536 /* StudyRecord */ = {
+			isa = PBXGroup;
+			children = (
+				3185DF302A2A3FA9001E5265 /* StudyRecordViewController.swift */,
+				3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */,
+				3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */,
+			);
+			path = StudyRecord;
+			sourceTree = "<group>";
+		};
 		3165CBE92A03FE5B005E34AC /* Posting */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */,
+				31A77AF92A2B806000AEC557 /* StudyRecordTableViewCell.swift */,
 				31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */,
 				5D547FFC2A1F9D7000376E09 /* ToDoTableViewCell.swift */,
 			);
@@ -354,6 +375,7 @@
 		31B2B16C2A190CB8005A3D4E /* Study */ = {
 			isa = PBXGroup;
 			children = (
+				3148ED612A2A3EE700CF1536 /* StudyRecord */,
 				5D4B9D542A114F2C003F3E86 /* StudyManageViewController.swift */,
 				5D547FF42A1F8FCE00376E09 /* ToDoViewController.swift */,
 				5D547FFA2A1F98F900376E09 /* StudyNavigationController.swift */,
@@ -365,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				31B2B16D2A191401005A3D4E /* TimerData.swift */,
+				319815132A2B205400B8B010 /* StudyRecordDelegate.swift */,
 				317913802A23917900BC86FE /* TimerDeleteResponse.swift */,
 				3179137E2A23911D00BC86FE /* TimerAddResponse.swift */,
 				317913822A23927E00BC86FE /* TimerUpdateResponse.swift */,
@@ -682,12 +705,16 @@
 				31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */,
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
 				31B2B16E2A191401005A3D4E /* TimerData.swift in Sources */,
+				3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */,
 				3179137F2A23911D00BC86FE /* TimerAddResponse.swift in Sources */,
 				317913832A23927E00BC86FE /* TimerUpdateResponse.swift in Sources */,
+				3185DF352A2A3FC5001E5265 /* StudyRecordAddViewController.swift in Sources */,
 				3179137B2A23545A00BC86FE /* Response.swift in Sources */,
 				3165EDC62A02A3C100D91856 /* SceneDelegate.swift in Sources */,
 				5D69A3E42A1A9D1400E9BBB4 /* MessageRooms.swift in Sources */,
+				3185DF312A2A3FAA001E5265 /* StudyRecordViewController.swift in Sources */,
 				31AF26B92A1F91D300B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift in Sources */,
+				319815142A2B205400B8B010 /* StudyRecordDelegate.swift in Sources */,
 				31FCD91F2A054E050068689B /* GeneralPostingTableViewCell.swift in Sources */,
 				317913852A2393AB00BC86FE /* TimerManager.swift in Sources */,
 				5D14AB342A15158A00807A2B /* SideMenuViewController.swift in Sources */,
@@ -718,6 +745,7 @@
 				5D69A3E22A1A9CDB00E9BBB4 /* MessageRoomManager.swift in Sources */,
 				5D547FF32A1F5ACF00376E09 /* UserManager.swift in Sources */,
 				5D4ADF9E2A0555D900195CA9 /* NickNameViewController.swift in Sources */,
+				31A77AFA2A2B806000AEC557 /* StudyRecordTableViewCell.swift in Sources */,
 				31D57E512A13CE160049E57A /* PostList.swift in Sources */,
 				31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */,
 				31D96F602A1A9A140086FD7D /* PostDetail.swift in Sources */,

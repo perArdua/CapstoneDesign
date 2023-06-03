@@ -103,6 +103,10 @@ class StudyManageViewController: UIViewController{
     }
     
     
+    @IBAction func recordBtnTapped(_ sender: UIButton) {
+        let recordVC = storyboard?.instantiateViewController(identifier: "StudyRecordViewController") as! StudyRecordViewController
+        self.navigationController?.pushViewController(recordVC, animated: true)
+    }
 }
 
 
@@ -146,6 +150,7 @@ extension StudyManageViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
+// MARK: - collection View delegate, datasource extension
 extension StudyManageViewController: UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
@@ -160,6 +165,7 @@ extension StudyManageViewController: UICollectionViewDelegate,UICollectionViewDa
     
 }
 
+// MARK: - 테이블 뷰 셀 안의 timer 시작 버튼 눌렀을때 동작 정의
 extension StudyManageViewController: TimerTableViewCellDelegate{
 
     func timerBtnTapped(in cell: TimerTableViewCell) {
