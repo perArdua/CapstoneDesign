@@ -57,7 +57,7 @@ class StudyGroupManagementViewController: UIViewController {
         view.addSubview(addBtn)
         addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
         addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 200, width: 60, height: 60)
-        self.navigationItem.title = "그룹 추가"
+        self.navigationItem.title = "그룹 관리"
         prepareTableView()
     }
     
@@ -69,6 +69,8 @@ class StudyGroupManagementViewController: UIViewController {
 }
 
 extension StudyGroupManagementViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(groupItems.count)
         return groupItems.count
@@ -83,11 +85,18 @@ extension StudyGroupManagementViewController: UITableViewDataSource, UITableView
         print(group.userId)
         cell.groupName.text = String(group.studygroupName)
         print(group.studygroupName)
-        cell.groupSize.text = String(group.limitedMemberSize)
-        cell.selectionStyle = .none
+        cell.groupSize.text = String(group.limitedMemberSize) + " / 4"
+        //cell.selectionStyle = .none
        
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = storyboard!.instantiateViewController(withIdentifier: "StudyGroupDetailViewController") as! StudyGroupDetailViewController
+        detailVC.groupInfo = groupItems[indexPath.row]
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+
 
 }
 
