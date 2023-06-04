@@ -28,7 +28,7 @@ class GeneralPostingSearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tempLabel.isHidden = false
+        tempLabel.isHidden = true
         tempLabel.frame = CGRect(x: view.frame.size.width/2-75, y: view.frame.size.height/2, width: 150, height: 60)
         animationView?.frame = CGRect(x: view.frame.size.width/2-50, y: view.frame.size.height/2, width: 100, height: 100)
     }
@@ -72,21 +72,22 @@ class GeneralPostingSearchViewController: UIViewController {
         tempLabel.isHidden = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.getData(keyword: keyword)
-            self.handleAnimation()
+            
         }
     }
 
     func getData(keyword: String){
-        BoardManager.searchPost(boardID: BoardManager.getBoardID(boardName: "Free"), keyword: keyword){[weak self] result in
+        BoardManager.searchPost(boardID: BoardManager.getBoardID(boardName: "Free"), keyword: keyword){result in
             switch result {
             case .success(let posts):
                 // 데이터를 받아와서 배열에 저장
-                self?.searcharry = posts
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
+                self.searcharry = posts
+                self.tableView.reloadData()
+                self.handleAnimation()
+                
             case .failure(let error):
                 print("Error: \(error)")
+                self.handleAnimation()
             }
         }
     }
@@ -99,7 +100,7 @@ class GeneralPostingSearchViewController: UIViewController {
             tempLabel.isHidden = false
         }
         //검색된 게시글이 있는 경우
-        else{
+        else{print("검색결과 있음")
             animationView!.stop()
             animationView!.isHidden = true
             tempLabel.isHidden = true
@@ -162,6 +163,7 @@ extension GeneralPostingSearchViewController : UITableViewDelegate, UITableViewD
     //테이블 뷰 셀이 클릭되면 어떤 동작을 할지 정하는 함수
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "GeneralPostingDetailViewController") as? GeneralPostingDetailViewController else { return }
+        nextVC.postID = searcharry[indexPath.row].postID
         
         getPostDetail(postID: searcharry[indexPath.row].postID){ [self]
             postDetail in

@@ -25,6 +25,7 @@ struct TodoResponseBody: Codable {
     }
     
 }
+
 struct TodoContent: Codable {
     let content: [Todo]
     let pageable: Pageable
