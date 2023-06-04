@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lqg-fU-cEl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lqg-fU-cEl">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -432,17 +432,33 @@
             </objects>
             <point key="canvasLocation" x="1052.6717557251909" y="742.95774647887333"/>
         </scene>
+        <!--Study Group Add View Controller-->
+        <scene sceneID="3ZW-Gf-zhK">
+            <objects>
+                <viewController storyboardIdentifier="StudyGroupAddViewController" id="nhP-oa-PCC" customClass="StudyGroupAddViewController" customModule="CampusIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bri-wi-kbJ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="vj8-fL-55d"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4Pi-Tw-v6u"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b5h-Sh-2ax" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="210" y="1427"/>
+        </scene>
         <!--그룹 관리-->
         <scene sceneID="JIe-0h-OLT">
             <objects>
-                <viewController id="WWa-LG-HH8" sceneMemberID="viewController">
+                <viewController id="WWa-LG-HH8" customClass="StudyGroupManagementViewController" customModule="CampusIn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GDu-Ko-Jcn">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKw-EX-oY9">
                                 <rect key="frame" x="0.0" y="103" width="393" height="30"/>
-                                <color key="backgroundColor" red="0.44313728810000003" green="0.86274516580000005" blue="0.44705885649999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="GDQ-7O-HuW"/>
                                 </constraints>
@@ -451,33 +467,39 @@
                                 <rect key="frame" x="0.0" y="133" width="393" height="636"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="86" id="qxg-LP-QUr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudyGroupTableViewCell" rowHeight="86" id="qxg-LP-QUr" customClass="StudyGroupTableViewCell" customModule="CampusIn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qxg-LP-QUr" id="bye-Aw-7KQ">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알고리즘 청정수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cE-kP-M7i">
-                                                    <rect key="frame" x="50" y="31" width="126" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXP-a1-ZkW">
+                                                    <rect key="frame" x="30" y="31" width="42" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="( 2 / 4 )" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21U-Ee-YV3">
-                                                    <rect key="frame" x="279" y="31" width="64" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bpm-Dv-Pav">
+                                                    <rect key="frame" x="321" y="31" width="42" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="3cE-kP-M7i" firstAttribute="centerY" secondItem="bye-Aw-7KQ" secondAttribute="centerY" id="9mL-la-0MT"/>
-                                                <constraint firstItem="21U-Ee-YV3" firstAttribute="centerY" secondItem="bye-Aw-7KQ" secondAttribute="centerY" id="ZPS-r3-7Cv"/>
-                                                <constraint firstItem="3cE-kP-M7i" firstAttribute="leading" secondItem="bye-Aw-7KQ" secondAttribute="leadingMargin" constant="30" id="tod-vf-hMI"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="21U-Ee-YV3" secondAttribute="trailing" constant="30" id="waA-aY-ZA7"/>
+                                                <constraint firstItem="qXP-a1-ZkW" firstAttribute="leading" secondItem="bye-Aw-7KQ" secondAttribute="leadingMargin" constant="10" id="5XH-xZ-QmG"/>
+                                                <constraint firstItem="Bpm-Dv-Pav" firstAttribute="top" secondItem="bye-Aw-7KQ" secondAttribute="topMargin" constant="20" id="70O-fN-xGh"/>
+                                                <constraint firstItem="qXP-a1-ZkW" firstAttribute="top" secondItem="bye-Aw-7KQ" secondAttribute="topMargin" constant="20" id="LhE-o6-uc3"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qXP-a1-ZkW" secondAttribute="bottom" constant="20" id="T7o-aP-lsr"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Bpm-Dv-Pav" secondAttribute="trailing" constant="10" id="nuc-ha-DBT"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Bpm-Dv-Pav" secondAttribute="bottom" constant="20" id="qUK-0g-3D0"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="groupName" destination="qXP-a1-ZkW" id="Lhz-gd-azd"/>
+                                            <outlet property="groupSize" destination="Bpm-Dv-Pav" id="y7b-Tj-o1x"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -495,6 +517,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="그룹 관리" id="CBB-3o-yU5"/>
+                    <connections>
+                        <outlet property="tableView" destination="9Fk-QW-aJm" id="ro6-ER-mFc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pft-EF-yvO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -510,7 +535,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iUO-bY-rPG">
                                 <rect key="frame" x="0.0" y="59" width="393" height="30"/>
-                                <color key="backgroundColor" red="0.44313728810000003" green="0.86274516580000005" blue="0.44705885649999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="yqr-qA-yFl"/>
                                 </constraints>
@@ -657,7 +682,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWg-IV-Yuc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1925.9541984732823" y="1436.6197183098593"/>
+            <point key="canvasLocation" x="1926" y="1427"/>
         </scene>
         <!--Study Record Add View Controller-->
         <scene sceneID="o6h-21-wz3">

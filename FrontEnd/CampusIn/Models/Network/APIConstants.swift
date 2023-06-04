@@ -91,6 +91,13 @@ struct APIConstants {
         static let initTimer = baseURL + "/timer/init" //timer 시간 갱신 
     }
     
+    struct StudyGroup{
+        static let createStudyGroup = baseURL + "/studygroup"
+        static let showStudyGroup = baseURL + "/studygroup/%d"
+        static let deleteStudyGroup = baseURL + "studygroup/%d"
+        static let showMyStudyGroup = baseURL + "/studygroup/mystudygroup"
+    }
+    
 }
 
 

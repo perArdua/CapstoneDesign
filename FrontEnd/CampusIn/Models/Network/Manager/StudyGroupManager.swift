@@ -1,0 +1,84 @@
+//
+//  StudyGroupManager.swift
+//  CampusIn
+//
+//  Created by 최다경 on 2023/06/04.
+//
+
+import Foundation
+import Alamofire
+
+class StudyGroupManager{
+    
+    static func createStudyGroup(title: String, size: Int, completion: @escaping (Result<Void, Error>) -> Void){
+        let endPoint = APIConstants.StudyGroup.createStudyGroup
+        
+        let userId = UserDefaults.standard.value(forKey: "userId")!
+        let userIdString = String(describing: userId)
+        
+        let parameters: [String: Any] = [
+            "limitedMemberSize": size,
+            "studygroupName": title,
+            "userId": Int(userIdString)!
+        ]
+        
+        AF.request(endPoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: APIConstants.headers)
+            .validate()
+            .response { response in
+                switch response.result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+            }
+        }
+    }
+    
+    static func showStudyGroup(groupID: Int, completion: @escaping (Result<[StudyGroupDetails], Error>) -> Void){
+        let endPoint = String(format: APIConstants.StudyGroup.showStudyGroup, groupID)
+        
+        AF.request(endPoint, method: .get, headers: APIConstants.headers)
+            .validate()
+            .responseDecodable(of: StudyGroupResponse.self) { response in
+                switch response.result {
+                case .success(let studyGRes):
+                    let sgResponse = studyGRes.body.studyGroupDetails
+                    completion(.success(sgResponse))
+                case .failure(let error):
+                    completion(.failure(error))
+            }
+        }
+    }
+    
+    static func deleteStudyGroup(groupID: Int, size: Int, title: String, completion: @escaping (Result<Void, Error>) -> Void){
+        let endPoint = String(format: APIConstants.StudyGroup.deleteStudyGroup, groupID)
+        
+        AF.request(endPoint, method: .patch, headers: APIConstants.headers)
+            .validate()
+            .response { response in
+                switch response.result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+            }
+        }
+    }
+    
+    static func showMyStudyGroup(completion: @escaping(Result<[MyStudyGroupDetails], Error>) -> Void){
+        let endPoint = APIConstants.StudyGroup.showMyStudyGroup
+        
+        AF.request(endPoint, method: .get, headers: APIConstants.headers)
+            .validate()
+            .responseDecodable(of: MyStudyGroupResponse.self) { response in
+                switch response.result {
+                case .success(let studyGRes):
+                    let sgResponse = studyGRes.body.studyGroupDetails.content
+                    completion(.success(sgResponse))
+                case .failure(let error):
+                    completion(.failure(error))
+            }
+        }
+    }
+    
+}
