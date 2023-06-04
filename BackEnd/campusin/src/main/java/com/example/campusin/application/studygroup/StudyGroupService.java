@@ -4,7 +4,9 @@ import com.example.campusin.domain.studygroup.StudyGroup;
 import com.example.campusin.domain.studygroup.StudyGroupMember;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupCreateRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupJoinRequest;
+import com.example.campusin.domain.studygroup.dto.response.StudyGroupDetailResponse;
 import com.example.campusin.domain.studygroup.dto.response.StudyGroupIdResponse;
+import com.example.campusin.domain.studygroup.dto.response.StudyGroupMemberResponse;
 import com.example.campusin.domain.studygroup.dto.response.StudyGroupResponse;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.studygroup.StudyGroupMemberRepository;
@@ -117,9 +119,9 @@ public class StudyGroupService {
     }
 
     @Transactional(readOnly = true)
-    public StudyGroupResponse showStudyGroup(Long studygroupId) {
+    public StudyGroupDetailResponse showStudyGroup(Long studygroupId) {
         StudyGroup studyGroup = findStudyGroup(studygroupId);
-        return new StudyGroupResponse(studyGroup);
+        return new StudyGroupDetailResponse(studyGroup);
 
     }
 

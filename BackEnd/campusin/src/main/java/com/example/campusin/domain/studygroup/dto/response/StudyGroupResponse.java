@@ -25,19 +25,19 @@ public class StudyGroupResponse {
     @ApiModelProperty(value = "StudyGroup 현재인원", example = "3")
     private int CurrentMemberSize;
 
-    @ApiModelProperty(value = "StudyGroup userId", example = "1")
-    private Long userId;
+    @ApiModelProperty(value = "StudyGroup user Name", example = "1")
+    private String userName;
 
     @ApiModelProperty(value = "StudyGroup createdAt", example = "2021-05-08T00:00:00")
     private LocalDateTime createdAt;
 
     @Builder
-    public StudyGroupResponse(Long id, String studygroupName, int limitedMemberSize,int CurrentMemberSize, Long userId, LocalDateTime createdAt) {
+    public StudyGroupResponse(Long id, String studygroupName, int limitedMemberSize,int CurrentMemberSize, String userName, LocalDateTime createdAt) {
         this.id = id;
         this.studygroupName = studygroupName;
         this.limitedMemberSize = limitedMemberSize;
         this.CurrentMemberSize = CurrentMemberSize;
-        this.userId = userId;
+        this.userName = userName;
         this.createdAt = createdAt;
     }
 
@@ -48,7 +48,7 @@ public class StudyGroupResponse {
                 entity.getStudygroupName(),
                 entity.getLimitedMemberSize(),
                 entity.getCurrentMemberSize(),
-                entity.getUser().getId(),
+                entity.getUser().getNickname(),
                 entity.getCreatedAt()
         );
     }
@@ -60,7 +60,7 @@ public class StudyGroupResponse {
                 studyGroupMember.getStudyGroupId().getStudygroupName(),
                 studyGroupMember.getStudyGroupId().getLimitedMemberSize(),
                 studyGroupMember.getStudyGroupId().getCurrentMemberSize(),
-                studyGroupMember.getUser().getId(),
+                studyGroupMember.getUser().getNickname(),
                 studyGroupMember.getStudyGroupId().getCreatedAt()
         );
     }
