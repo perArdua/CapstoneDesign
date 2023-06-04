@@ -10,6 +10,7 @@ import Alamofire
 
 class StudyGroupManager{
     
+    //MARK: - create study group
     static func createStudyGroup(title: String, size: Int, completion: @escaping (Result<Void, Error>) -> Void){
         let endPoint = APIConstants.StudyGroup.createStudyGroup
         
@@ -34,6 +35,7 @@ class StudyGroupManager{
         }
     }
     
+    //MARK: - show all study group
     static func showStudyGroup(groupID: Int, completion: @escaping (Result<[StudyGroupDetails], Error>) -> Void){
         let endPoint = String(format: APIConstants.StudyGroup.showStudyGroup, groupID)
         
@@ -50,6 +52,7 @@ class StudyGroupManager{
         }
     }
     
+    //MARK: - delete study group
     static func deleteStudyGroup(groupID: Int, size: Int, title: String, completion: @escaping (Result<Void, Error>) -> Void){
         let endPoint = String(format: APIConstants.StudyGroup.deleteStudyGroup, groupID)
         
@@ -65,6 +68,7 @@ class StudyGroupManager{
         }
     }
     
+    //MARK: - show my study group
     static func showMyStudyGroup(completion: @escaping(Result<[MyStudyGroupDetails], Error>) -> Void){
         let endPoint = APIConstants.StudyGroup.showMyStudyGroup
         

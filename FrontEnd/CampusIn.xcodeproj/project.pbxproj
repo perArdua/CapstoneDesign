@@ -85,6 +85,7 @@
 		5DFF9BAE2A2C8E8E004C2DE5 /* MyStudyGroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF9BAD2A2C8E8E004C2DE5 /* MyStudyGroupData.swift */; };
 		5DFF9BB02A2C90B5004C2DE5 /* StudyGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF9BAF2A2C90B5004C2DE5 /* StudyGroupManager.swift */; };
 		5DFF9BB22A2C98C0004C2DE5 /* StudyGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF9BB12A2C98BF004C2DE5 /* StudyGroupTableViewCell.swift */; };
+		5DFF9BB42A2CA465004C2DE5 /* StudyGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF9BB32A2CA465004C2DE5 /* StudyGroupDetailViewController.swift */; };
 		D84B6C380D6E83EA5CA1188E /* Pods_CampusIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */; };
 /* End PBXBuildFile section */
 
@@ -189,6 +190,7 @@
 		5DFF9BAD2A2C8E8E004C2DE5 /* MyStudyGroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyGroupData.swift; sourceTree = "<group>"; };
 		5DFF9BAF2A2C90B5004C2DE5 /* StudyGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupManager.swift; sourceTree = "<group>"; };
 		5DFF9BB12A2C98BF004C2DE5 /* StudyGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupTableViewCell.swift; sourceTree = "<group>"; };
+		5DFF9BB32A2CA465004C2DE5 /* StudyGroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupDetailViewController.swift; sourceTree = "<group>"; };
 		60AC818441A9B94A12F2B12F /* Pods-CampusIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusIn.release.xcconfig"; path = "Target Support Files/Pods-CampusIn/Pods-CampusIn.release.xcconfig"; sourceTree = "<group>"; };
 		B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -528,6 +530,7 @@
 			children = (
 				5DFF9BA52A2C8796004C2DE5 /* StudyGroupManagementViewController.swift */,
 				5DFF9BA82A2C8A06004C2DE5 /* StudyGroupAddViewController.swift */,
+				5DFF9BB32A2CA465004C2DE5 /* StudyGroupDetailViewController.swift */,
 			);
 			path = StudyGroup;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				31D96F602A1A9A140086FD7D /* PostDetail.swift in Sources */,
 				317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */,
 				5D4B9D552A114F2C003F3E86 /* StudyManageViewController.swift in Sources */,
+				5DFF9BB42A2CA465004C2DE5 /* StudyGroupDetailViewController.swift in Sources */,
 				31AF26BF2A1F9B4300B1CEC7 /* CommentAddResponse.swift in Sources */,
 				317913812A23917900BC86FE /* TimerDeleteResponse.swift in Sources */,
 				31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */,
