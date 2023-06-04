@@ -39,11 +39,8 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public Page<PostSimpleResponse> getPostsByBoard(Long boardId, Pageable pageable) {
+        findBoard(boardId);
         Board board = findBoard(boardId);
-        if (board.getBoardType().equals(BoardType.AdminBadgeAccept)) {
-            throw new IllegalArgumentException("관리자 게시판은 조회할 수 없습니다.");
-        }
-
         Page<Post> posts = postRepository.findPostsByBoardId(boardId, pageable);
         return posts.map(PostSimpleResponse::new);
     }
