@@ -67,12 +67,13 @@ public class Post extends BaseTimeEntity {
 
 
     @Builder
-    public Post(String title, String content, User user, Board board, Long price) {
+    public Post(String title, String content, User user, Board board, Long price, Long studyGroupId) {
         this.title = title;
         this.content = content;
         this.user = user;
         this.board = board;
         this.price = price;
+        this.studyGroupId = studyGroupId;
     }
 
     public void updatePost(PostUpdateRequest request) {
@@ -80,6 +81,7 @@ public class Post extends BaseTimeEntity {
         setContent(request.getContent());
         setPhotos(request.getPhotos());
         setPrice(request.getPrice());
+        setStudyGroupId(request.getStudyGroupId());
     }
 
     public void setTitle(String title) {
@@ -99,6 +101,9 @@ public class Post extends BaseTimeEntity {
         this.photos.forEach(photo -> photo.setPost(this));
     }
 
+    public void setStudyGroupId(Long studyGroupId) {
+        this.studyGroupId = studyGroupId;
+    }
     public List<Comment> getCommentList() {
         return comments;
     }
