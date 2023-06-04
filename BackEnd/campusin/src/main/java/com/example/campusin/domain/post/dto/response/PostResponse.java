@@ -51,8 +51,11 @@ public class PostResponse {
     @Schema(name = "게시글 생성일", example = "2023-05-21 00:00:00")
     private LocalDateTime createdAt;
 
+    @Schema(name = "스터디 그룹 id", example = "1")
+    private Long studyGroupId;
+
     @Builder
-    public PostResponse(Long postId, Long userId, BoardType boardType, String nickname, String title, String content, List<PhotoResponse> photoList, LocalDateTime createdAt, Long price) {
+    public PostResponse(Long postId, Long userId, BoardType boardType, String nickname, String title, String content, List<PhotoResponse> photoList, LocalDateTime createdAt, Long price, Long studyGroupId) {
         this.postId = postId;
         this.userId = userId;
         this.boardType = boardType;
@@ -62,6 +65,7 @@ public class PostResponse {
         this.photoList = photoList;
         this.createdAt = createdAt;
         this.price = price;
+        this.studyGroupId = studyGroupId;
     }
 
     @Builder
@@ -75,7 +79,8 @@ public class PostResponse {
                 entity.getContent(),
                 entity.getPhotos().stream().map(PhotoResponse::new).collect(Collectors.toList()),
                 entity.getCreatedAt(),
-                entity.getPrice()
+                entity.getPrice(),
+                entity.getStudyGroupId()
         );
     }
 }

@@ -44,6 +44,10 @@ public class Post extends BaseTimeEntity {
     @ColumnDefault("0L")
     private Long price;
 
+    @Column(name = "study_group_id")
+    @ColumnDefault("-1L")
+    private Long studyGroupId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
