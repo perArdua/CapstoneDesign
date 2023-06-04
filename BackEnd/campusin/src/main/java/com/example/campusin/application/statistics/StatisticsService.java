@@ -30,6 +30,13 @@ public class StatisticsService {
     @Transactional
     public StatisticsIdResponse createStatistics(Long userId, StatisticsCreateRequest statisticsCreateRequest) {
         User user = findUser(userId);
+
+        Statistics oldStatistics = statisticsRepository.findByDate(statisticsCreateRequest.getLocalDate());
+
+        if (oldStatistics != null) {
+            return new StatisticsIdResponse(oldStatistics.getId());
+        }
+
         Statistics statistics = Statistics.builder()
                 .user(user)
                 .date(statisticsCreateRequest.getLocalDate())
