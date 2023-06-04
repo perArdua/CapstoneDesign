@@ -18,7 +18,6 @@ class StudyManageViewController: UIViewController{
     
     @IBOutlet weak var totalTimeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - 타이머 추가 버튼
     let addBtn: UIButton = {
@@ -58,9 +57,7 @@ class StudyManageViewController: UIViewController{
        // array = timerManager.getArray()
         tableView.dataSource = self
         tableView.delegate = self
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(TimerCollectionViewCell.self, forCellWithReuseIdentifier: "TimerCollectionViewCell")
+        
         timerFlag = false
         
     }
@@ -98,7 +95,7 @@ class StudyManageViewController: UIViewController{
 //        array = timerManager.getArray()
         view.addSubview(addBtn)
         addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
-        addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 200, width: 60, height: 60)
+        addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 250, width: 60, height: 60)
     }
     
     // MARK: - 타이머 추가 버튼을 눌렀을때 작동하는 함수
@@ -219,21 +216,6 @@ extension StudyManageViewController: UITableViewDelegate, UITableViewDataSource{
         let swipe_configuration = UISwipeActionsConfiguration(actions: [delete_action])
         return swipe_configuration
     }
-}
-
-// MARK: - collection View delegate, datasource extension
-extension StudyManageViewController: UICollectionViewDelegate,UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TimerCollectionViewCell", for: indexPath) as! TimerCollectionViewCell
-        
-        return cell
-    }
-    
-    
 }
 
 // MARK: - 테이블 뷰 셀 안의 timer 시작 버튼 눌렀을때 동작 정의
