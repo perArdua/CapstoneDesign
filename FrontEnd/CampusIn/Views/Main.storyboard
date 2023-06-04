@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JcG-49-NGf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JcG-49-NGf">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -340,6 +340,7 @@
                     <connections>
                         <segue destination="MA1-Yz-gmt" kind="relationship" relationship="viewControllers" id="zSy-f0-T2l"/>
                         <segue destination="Ieu-hb-A6q" kind="relationship" relationship="viewControllers" id="PZq-4P-IVA"/>
+                        <segue destination="WCI-No-jGS" kind="relationship" relationship="viewControllers" id="3ji-LN-r9D"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gsc-PH-wgh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -364,6 +365,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTD-2d-Ff5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5230.7692307692305" y="625.5924170616114"/>
+        </scene>
+        <!--RankingViewController-->
+        <scene sceneID="T96-Cp-8hG">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="RankingViewController" storyboardName="RankingViewController" referencedIdentifier="RankingViewController" id="WCI-No-jGS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="pPx-AZ-C9c"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0T4-Lh-B2Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3721" y="1130"/>
         </scene>
         <!--StudyNavigationController-->
         <scene sceneID="5U9-k4-S8f">
