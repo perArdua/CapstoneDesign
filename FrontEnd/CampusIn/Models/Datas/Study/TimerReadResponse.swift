@@ -39,7 +39,7 @@ struct TimerReadList: Codable {
 struct TimerReadContent: Codable {
     let id: Int
     let subject: String
-    let elapsedTime: Int?
+    let elapsedTime: Int
     let userID: Int
 
     enum CodingKeys: String, CodingKey {

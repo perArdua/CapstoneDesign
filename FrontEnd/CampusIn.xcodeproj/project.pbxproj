@@ -41,7 +41,6 @@
 		31AF26C12A1F9BE000B1CEC7 /* CommentDeleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26C02A1F9BE000B1CEC7 /* CommentDeleteResponse.swift */; };
 		31B2B1682A190735005A3D4E /* TimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */; };
 		31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */; };
-		31B2B16E2A191401005A3D4E /* TimerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B16D2A191401005A3D4E /* TimerData.swift */; };
 		31C7184A2A080EE800C7731A /* loading_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 31C718492A080EE800C7731A /* loading_check.json */; };
 		31D57E4F2A13B7830049E57A /* BoardInitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D57E4E2A13B7830049E57A /* BoardInitResponse.swift */; };
 		31D57E512A13CE160049E57A /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D57E502A13CE160049E57A /* PostList.swift */; };
@@ -139,7 +138,6 @@
 		31AF26C02A1F9BE000B1CEC7 /* CommentDeleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDeleteResponse.swift; sourceTree = "<group>"; };
 		31B2B1672A190735005A3D4E /* TimerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCell.swift; sourceTree = "<group>"; };
 		31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCellDelegate.swift; sourceTree = "<group>"; };
-		31B2B16D2A191401005A3D4E /* TimerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerData.swift; sourceTree = "<group>"; };
 		31C718492A080EE800C7731A /* loading_check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_check.json; sourceTree = "<group>"; };
 		31D57E4E2A13B7830049E57A /* BoardInitResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardInitResponse.swift; sourceTree = "<group>"; };
 		31D57E502A13CE160049E57A /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
@@ -386,7 +384,6 @@
 		31B2B16F2A191693005A3D4E /* Study */ = {
 			isa = PBXGroup;
 			children = (
-				31B2B16D2A191401005A3D4E /* TimerData.swift */,
 				319815132A2B205400B8B010 /* StudyRecordDelegate.swift */,
 				317913802A23917900BC86FE /* TimerDeleteResponse.swift */,
 				3179137E2A23911D00BC86FE /* TimerAddResponse.swift */,
@@ -704,7 +701,6 @@
 				3165EDC82A02A3C100D91856 /* ViewController.swift in Sources */,
 				31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */,
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
-				31B2B16E2A191401005A3D4E /* TimerData.swift in Sources */,
 				3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */,
 				3179137F2A23911D00BC86FE /* TimerAddResponse.swift in Sources */,
 				317913832A23927E00BC86FE /* TimerUpdateResponse.swift in Sources */,

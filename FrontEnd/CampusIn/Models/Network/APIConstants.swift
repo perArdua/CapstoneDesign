@@ -87,7 +87,8 @@ struct APIConstants {
         static let getTimer = baseURL + "/timer" //timer 조회
         static let addTimer = baseURL + "/timer" //timer 추가
         static let deleteTimer = baseURL + "/timer/%d" //timer 삭제
-        static let updateTimer = baseURL + "/timer/%d" //timer 시간 갱신 
+        static let updateTimer = baseURL + "/timer/%d" //timer 시간 갱신
+        static let initTimer = baseURL + "/timer/init" //timer 시간 갱신 
     }
     
 }
