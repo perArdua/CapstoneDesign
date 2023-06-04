@@ -63,6 +63,14 @@ public class TimerService {
         List<Timer> oldTimers = timerRepository.findAllByUserId(userId);
 
         Statistics statistics = statisticsRepository.findByDate(oldTimers.get(0).getModifiedAt().toLocalDate());
+
+        if (statistics == null) {
+            statistics = Statistics.builder()
+                    .date(oldTimers.get(0).getModifiedAt().toLocalDate())
+                    .elapsedTime(0L)
+                    .build();
+        }
+
         statistics.updateElapsedTime(oldTimers.stream().map(Timer::getElapsedTime).reduce(0L, Long::sum));
         statisticsRepository.save(statistics);
 
