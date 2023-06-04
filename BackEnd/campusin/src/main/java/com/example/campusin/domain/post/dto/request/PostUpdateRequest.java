@@ -34,14 +34,18 @@ public class PostUpdateRequest {
 
     @Schema(name = "책 가격", description = "게시글 가격", example = "10000")
     private Long price;
+
+    @Schema(name = "스터디 그룹 id", description = "스터디 그룹 id", example = "1")
+    private Long studyGroupId;
     @Builder
-    public PostUpdateRequest(String title, String content, List<Photo> photos, Long price) {
+    public PostUpdateRequest(String title, String content, List<Photo> photos, Long price, Long studyGroupId) {
         this.title = title;
         this.content = content;
         this.photos = photos;
-        this.price = price;
         if (Objects.nonNull(photos)) {
             this.photos = photos;
         }
+        this.price = price;
+        this.studyGroupId = studyGroupId;
     }
 }
