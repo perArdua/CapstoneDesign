@@ -39,7 +39,11 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public Page<PostSimpleResponse> getPostsByBoard(Long boardId, Pageable pageable) {
+<<<<<<< Updated upstream
         findBoard(boardId);
+=======
+        Board board = findBoard(boardId);
+>>>>>>> Stashed changes
         Page<Post> posts = postRepository.findPostsByBoardId(boardId, pageable);
         return posts.map(PostSimpleResponse::new);
     }
