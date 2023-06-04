@@ -13,6 +13,7 @@ class TimerTableViewCell: UITableViewCell {
     @IBOutlet weak var startBtn: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
+    var timerID :Int?
     
     weak var timer: Timer?
     weak var delegate: TimerTableViewCellDelegate?
