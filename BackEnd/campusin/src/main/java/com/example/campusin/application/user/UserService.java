@@ -40,4 +40,10 @@ public class UserService {
         User user = userRepository.findByLoginId(loginId);
         return new UserIdResponse(user.getId());
     }
+
+    public User makeAdmin(String loginId) {
+        User user = userRepository.findByLoginId(loginId);
+        user.setAdmin();
+        return userRepository.save(user);
+    }
 }

@@ -8,5 +8,6 @@ public enum BoardType {
     Free,
     Question,
     Book,
-    Study
+    Study,
+    AdminBadgeAccept
 }
