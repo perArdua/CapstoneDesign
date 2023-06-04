@@ -66,4 +66,10 @@ public class UserController {
     public ApiResponse getUserId(@AuthenticationPrincipal UserPrincipal principal) {
         return ApiResponse.success("userId", userService.getUserId(principal.getLoginId()));
     }
+
+    @Operation(summary = "나를 관리자로 만듦", description = "나를 관리자로 만듦 테스트용임")
+    @GetMapping("/make-admin")
+    public ApiResponse makeAdmin(@AuthenticationPrincipal UserPrincipal principal) {
+        return ApiResponse.success("SUCCESS", userService.makeAdmin(principal.getLoginId()));
+    }
 }

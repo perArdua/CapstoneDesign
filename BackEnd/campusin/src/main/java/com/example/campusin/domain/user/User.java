@@ -89,4 +89,8 @@ public class User extends BaseTimeEntity {
         this.roleType = roleType;
         this.nickname = nickname;
     }
+
+    public void setAdmin() {
+        this.roleType = RoleType.ADMIN;
+    }
 }
