@@ -3,7 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -340,6 +340,7 @@
                     <connections>
                         <segue destination="MA1-Yz-gmt" kind="relationship" relationship="viewControllers" id="zSy-f0-T2l"/>
                         <segue destination="Ieu-hb-A6q" kind="relationship" relationship="viewControllers" id="PZq-4P-IVA"/>
+                        <segue destination="wgU-dG-qBN" kind="relationship" relationship="viewControllers" id="zXp-wg-49e"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gsc-PH-wgh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -374,11 +375,22 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bcd-PD-wRb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3272" y="1164"/>
+            <point key="canvasLocation" x="2957" y="1155"/>
+        </scene>
+        <!--StatisticsViewController-->
+        <scene sceneID="mhX-Ei-R8R">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="StatisticsViewController" storyboardName="StatisticsViewController" referencedIdentifier="StatisticsViewController" id="wgU-dG-qBN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="통계" image="calendar" catalog="system" id="55C-h9-MCb"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XRb-xz-syd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3622" y="1162"/>
         </scene>
     </scenes>
     <resources>
         <image name="CampusIn_logo" width="181" height="62.5"/>
+        <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="googleLogin3" width="191" height="46"/>
         <image name="kakaoLogin" width="183" height="45"/>
