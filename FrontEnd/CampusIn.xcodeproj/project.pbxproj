@@ -80,6 +80,12 @@
 		5D77035B2A20FCA300AF0903 /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D77035A2A20FCA300AF0903 /* TodoManager.swift */; };
 		5D77035D2A21188B00AF0903 /* TodoCreationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D77035C2A21188B00AF0903 /* TodoCreationResponse.swift */; };
 		5DC33E362A0D45C200C061BC /* MessageBoxViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */; };
+		5DFF9BA62A2C8796004C2DE5 /* StudyGroupManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF9BA52A2C8796004C2DE5 /* StudyGroupManagementViewController.swift */; };
+		5DFF9BA92A2C8A06004C2DE5 /* StudyGroupAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF9BA82A2C8A06004C2DE5 /* StudyGroupAddViewController.swift */; };
+		5DFF9BAC2A2C8CF9004C2DE5 /* StudyGroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF9BAB2A2C8CF9004C2DE5 /* StudyGroupData.swift */; };
+		5DFF9BAE2A2C8E8E004C2DE5 /* MyStudyGroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF9BAD2A2C8E8E004C2DE5 /* MyStudyGroupData.swift */; };
+		5DFF9BB02A2C90B5004C2DE5 /* StudyGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF9BAF2A2C90B5004C2DE5 /* StudyGroupManager.swift */; };
+		5DFF9BB22A2C98C0004C2DE5 /* StudyGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF9BB12A2C98BF004C2DE5 /* StudyGroupTableViewCell.swift */; };
 		D84B6C380D6E83EA5CA1188E /* Pods_CampusIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */; };
 /* End PBXBuildFile section */
 
@@ -179,6 +185,12 @@
 		5D77035A2A20FCA300AF0903 /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
 		5D77035C2A21188B00AF0903 /* TodoCreationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreationResponse.swift; sourceTree = "<group>"; };
 		5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MessageBoxViewController.storyboard; sourceTree = "<group>"; };
+		5DFF9BA52A2C8796004C2DE5 /* StudyGroupManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupManagementViewController.swift; sourceTree = "<group>"; };
+		5DFF9BA82A2C8A06004C2DE5 /* StudyGroupAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupAddViewController.swift; sourceTree = "<group>"; };
+		5DFF9BAB2A2C8CF9004C2DE5 /* StudyGroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupData.swift; sourceTree = "<group>"; };
+		5DFF9BAD2A2C8E8E004C2DE5 /* MyStudyGroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyGroupData.swift; sourceTree = "<group>"; };
+		5DFF9BAF2A2C90B5004C2DE5 /* StudyGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupManager.swift; sourceTree = "<group>"; };
+		5DFF9BB12A2C98BF004C2DE5 /* StudyGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupTableViewCell.swift; sourceTree = "<group>"; };
 		60AC818441A9B94A12F2B12F /* Pods-CampusIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusIn.release.xcconfig"; path = "Target Support Files/Pods-CampusIn/Pods-CampusIn.release.xcconfig"; sourceTree = "<group>"; };
 		B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -349,6 +361,7 @@
 				5D547FF22A1F5ACF00376E09 /* UserManager.swift */,
 				5D77035A2A20FCA300AF0903 /* TodoManager.swift */,
 				317913842A2393AB00BC86FE /* TimerManager.swift */,
+				5DFF9BAF2A2C90B5004C2DE5 /* StudyGroupManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -360,6 +373,7 @@
 				31A77AF92A2B806000AEC557 /* StudyRecordTableViewCell.swift */,
 				31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */,
 				5D547FFC2A1F9D7000376E09 /* ToDoTableViewCell.swift */,
+				5DFF9BB12A2C98BF004C2DE5 /* StudyGroupTableViewCell.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -375,6 +389,7 @@
 		31B2B16C2A190CB8005A3D4E /* Study */ = {
 			isa = PBXGroup;
 			children = (
+				5DFF9BA72A2C89E6004C2DE5 /* StudyGroup */,
 				3148ED612A2A3EE700CF1536 /* StudyRecord */,
 				5D4B9D542A114F2C003F3E86 /* StudyManageViewController.swift */,
 				5D547FF42A1F8FCE00376E09 /* ToDoViewController.swift */,
@@ -449,6 +464,7 @@
 		31FCD9202A054E180068689B /* Datas */ = {
 			isa = PBXGroup;
 			children = (
+				5DFF9BAA2A2C8CCE004C2DE5 /* StudyGroup */,
 				5D7703572A20FC4900AF0903 /* ToDoList */,
 				5D547FF12A1F594C00376E09 /* Users */,
 				5D547FEB2A1F589E00376E09 /* Chatting */,
@@ -508,6 +524,24 @@
 				5D77035C2A21188B00AF0903 /* TodoCreationResponse.swift */,
 			);
 			path = ToDoList;
+			sourceTree = "<group>";
+		};
+		5DFF9BA72A2C89E6004C2DE5 /* StudyGroup */ = {
+			isa = PBXGroup;
+			children = (
+				5DFF9BA52A2C8796004C2DE5 /* StudyGroupManagementViewController.swift */,
+				5DFF9BA82A2C8A06004C2DE5 /* StudyGroupAddViewController.swift */,
+			);
+			path = StudyGroup;
+			sourceTree = "<group>";
+		};
+		5DFF9BAA2A2C8CCE004C2DE5 /* StudyGroup */ = {
+			isa = PBXGroup;
+			children = (
+				5DFF9BAB2A2C8CF9004C2DE5 /* StudyGroupData.swift */,
+				5DFF9BAD2A2C8E8E004C2DE5 /* MyStudyGroupData.swift */,
+			);
+			path = StudyGroup;
 			sourceTree = "<group>";
 		};
 		D57CA3ACE76BBD1D544D55D7 /* Pods */ = {
@@ -708,6 +742,8 @@
 				3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */,
 				3179137F2A23911D00BC86FE /* TimerAddResponse.swift in Sources */,
 				317913832A23927E00BC86FE /* TimerUpdateResponse.swift in Sources */,
+				5DFF9BB22A2C98C0004C2DE5 /* StudyGroupTableViewCell.swift in Sources */,
+				5DFF9BAC2A2C8CF9004C2DE5 /* StudyGroupData.swift in Sources */,
 				3185DF352A2A3FC5001E5265 /* StudyRecordAddViewController.swift in Sources */,
 				3179137B2A23545A00BC86FE /* Response.swift in Sources */,
 				3165EDC62A02A3C100D91856 /* SceneDelegate.swift in Sources */,
@@ -727,6 +763,7 @@
 				5D2570522A10EABE00E03713 /* ChatTableViewCell.swift in Sources */,
 				3179137D2A23906E00BC86FE /* TimerReadResponse.swift in Sources */,
 				5D547FFB2A1F98F900376E09 /* StudyNavigationController.swift in Sources */,
+				5DFF9BA62A2C8796004C2DE5 /* StudyGroupManagementViewController.swift in Sources */,
 				5D507AEC2A0DDDA800EB5CA9 /* MessageBoxViewController.swift in Sources */,
 				5D4ADF982A054A1B00195CA9 /* SocialViewController.swift in Sources */,
 				5D69A3E62A1A9D3C00E9BBB4 /* Chats.swift in Sources */,
@@ -739,6 +776,7 @@
 				5D4ADF972A054A1B00195CA9 /* LoginViewController.swift in Sources */,
 				3183ABE22A150A51009CA636 /* BoardManager.swift in Sources */,
 				31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */,
+				5DFF9BB02A2C90B5004C2DE5 /* StudyGroupManager.swift in Sources */,
 				5D547FF02A1F593F00376E09 /* UserNickname.swift in Sources */,
 				5D7703592A20FC5B00AF0903 /* TodoList.swift in Sources */,
 				5D77035D2A21188B00AF0903 /* TodoCreationResponse.swift in Sources */,
@@ -760,6 +798,8 @@
 				5D69A3E02A1A9C9600E9BBB4 /* MessageManager.swift in Sources */,
 				5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */,
 				31D57E4F2A13B7830049E57A /* BoardInitResponse.swift in Sources */,
+				5DFF9BAE2A2C8E8E004C2DE5 /* MyStudyGroupData.swift in Sources */,
+				5DFF9BA92A2C8A06004C2DE5 /* StudyGroupAddViewController.swift in Sources */,
 				5D547FF52A1F8FCE00376E09 /* ToDoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
