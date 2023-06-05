@@ -36,6 +36,9 @@ class StudyManageViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        
         totalTime = 0
         
         let dateFormatter = DateFormatter()
@@ -53,10 +56,6 @@ class StudyManageViewController: UIViewController{
         }
         else{UserDefaults.standard.set(dateString, forKey: "dateString")}
         
-    
-       // array = timerManager.getArray()
-        tableView.dataSource = self
-        tableView.delegate = self
         
         timerFlag = false
         
@@ -157,6 +156,7 @@ class StudyManageViewController: UIViewController{
             case.success(let timers):
                 print("타이머 조회 성공")
                 self.array = timers
+                print(timers)
                 self.totalTime = 0
                 self.tableView.reloadData()
                 
@@ -172,10 +172,13 @@ class StudyManageViewController: UIViewController{
 
 extension StudyManageViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        array.count
+        print("타이머 갯수:\(array.count)")
+        return array.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("*****")
+        print(indexPath.row)
         //타이머 시간을 "HH:mm:ss" 형식으로 바꾸기 위해 dateformatter 사용
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
@@ -186,6 +189,8 @@ extension StudyManageViewController: UITableViewDelegate, UITableViewDataSource{
         cell.delegate = self
         
         let temp = array[indexPath.row]
+        print("*****")
+        print(indexPath.row)
         cell.titleLabel.text = temp.subject
         cell.cnt = temp.elapsedTime
         let date = Date(timeIntervalSinceReferenceDate: TimeInterval(cell.cnt))
@@ -200,6 +205,9 @@ extension StudyManageViewController: UITableViewDelegate, UITableViewDataSource{
         
         return cell
     }
+    
+
+  
     
     // MARK: - 테이블 뷰 셀 밀어서 삭제하는 함수
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
