@@ -27,12 +27,13 @@
 		317913832A23927E00BC86FE /* TimerUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317913822A23927E00BC86FE /* TimerUpdateResponse.swift */; };
 		317913852A2393AB00BC86FE /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317913842A2393AB00BC86FE /* TimerManager.swift */; };
 		317BEC622A2CE6430029DA29 /* StatisticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317BEC612A2CE6430029DA29 /* StatisticsManager.swift */; };
+		317BEC652A2CF4A00029DA29 /* CreateStatisticsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317BEC642A2CF4A00029DA29 /* CreateStatisticsResponse.swift */; };
+		317BEC672A2CF50F0029DA29 /* StatisticsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317BEC662A2CF50F0029DA29 /* StatisticsResponse.swift */; };
 		3183ABDB2A14D3DB009CA636 /* PostSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183ABDA2A14D3DB009CA636 /* PostSearch.swift */; };
 		3183ABE22A150A51009CA636 /* BoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183ABE12A150A51009CA636 /* BoardManager.swift */; };
 		3185DF312A2A3FAA001E5265 /* StudyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF302A2A3FA9001E5265 /* StudyRecordViewController.swift */; };
 		3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */; };
 		3185DF352A2A3FC5001E5265 /* StudyRecordAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */; };
-		3197C6872A2CC69900674199 /* StatisticsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197C6862A2CC69900674199 /* StatisticsNavigationViewController.swift */; };
 		3197C68B2A2CCC3000674199 /* StatisticsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3197C68A2A2CCC3000674199 /* StatisticsViewController.storyboard */; };
 		319815142A2B205400B8B010 /* StudyRecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319815132A2B205400B8B010 /* StudyRecordDelegate.swift */; };
 		31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */; };
@@ -138,12 +139,13 @@
 		317913822A23927E00BC86FE /* TimerUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerUpdateResponse.swift; sourceTree = "<group>"; };
 		317913842A2393AB00BC86FE /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		317BEC612A2CE6430029DA29 /* StatisticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsManager.swift; sourceTree = "<group>"; };
+		317BEC642A2CF4A00029DA29 /* CreateStatisticsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStatisticsResponse.swift; sourceTree = "<group>"; };
+		317BEC662A2CF50F0029DA29 /* StatisticsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsResponse.swift; sourceTree = "<group>"; };
 		3183ABDA2A14D3DB009CA636 /* PostSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearch.swift; sourceTree = "<group>"; };
 		3183ABE12A150A51009CA636 /* BoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManager.swift; sourceTree = "<group>"; };
 		3185DF302A2A3FA9001E5265 /* StudyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordViewController.swift; sourceTree = "<group>"; };
 		3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDetailViewController.swift; sourceTree = "<group>"; };
 		3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordAddViewController.swift; sourceTree = "<group>"; };
-		3197C6862A2CC69900674199 /* StatisticsNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsNavigationViewController.swift; sourceTree = "<group>"; };
 		3197C68A2A2CCC3000674199 /* StatisticsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StatisticsViewController.storyboard; sourceTree = "<group>"; };
 		319815132A2B205400B8B010 /* StudyRecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDelegate.swift; sourceTree = "<group>"; };
 		31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -352,6 +354,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		317BEC632A2CF47E0029DA29 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				317BEC642A2CF4A00029DA29 /* CreateStatisticsResponse.swift */,
+				317BEC662A2CF50F0029DA29 /* StatisticsResponse.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		3183ABD92A14D3A6009CA636 /* Posting */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,7 +451,6 @@
 			isa = PBXGroup;
 			children = (
 				31CBDA882A2CC3E300E55924 /* StatisticsViewController.swift */,
-				3197C6862A2CC69900674199 /* StatisticsNavigationViewController.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -491,6 +501,7 @@
 		31FCD9202A054E180068689B /* Datas */ = {
 			isa = PBXGroup;
 			children = (
+				317BEC632A2CF47E0029DA29 /* Statistics */,
 				5DC8851C2A2CE61100631BC1 /* Ranking */,
 				5DFF9BAA2A2C8CCE004C2DE5 /* StudyGroup */,
 				5D7703572A20FC4900AF0903 /* ToDoList */,
@@ -806,7 +817,6 @@
 				31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */,
 				5D77035B2A20FCA300AF0903 /* TodoManager.swift in Sources */,
 				5D547FEE2A1F58E100376E09 /* UserData.swift in Sources */,
-				3197C6872A2CC69900674199 /* StatisticsNavigationViewController.swift in Sources */,
 				317BEC622A2CE6430029DA29 /* StatisticsManager.swift in Sources */,
 				31FCD91D2A054E050068689B /* GeneralPostingCommentTableViewCell.swift in Sources */,
 				5D4ADFA02A0555E600195CA9 /* KeyChain.swift in Sources */,
@@ -836,6 +846,7 @@
 				5D4ADF9E2A0555D900195CA9 /* NickNameViewController.swift in Sources */,
 				31A77AFA2A2B806000AEC557 /* StudyRecordTableViewCell.swift in Sources */,
 				31D57E512A13CE160049E57A /* PostList.swift in Sources */,
+				317BEC672A2CF50F0029DA29 /* StatisticsResponse.swift in Sources */,
 				31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */,
 				31D96F602A1A9A140086FD7D /* PostDetail.swift in Sources */,
 				317667BC2A07EFEB002F829C /* GeneralSearchTableViewCell.swift in Sources */,
@@ -853,6 +864,7 @@
 				5DFF9BAE2A2C8E8E004C2DE5 /* MyStudyGroupData.swift in Sources */,
 				5DFF9BA92A2C8A06004C2DE5 /* StudyGroupAddViewController.swift in Sources */,
 				5D547FF52A1F8FCE00376E09 /* ToDoViewController.swift in Sources */,
+				317BEC652A2CF4A00029DA29 /* CreateStatisticsResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

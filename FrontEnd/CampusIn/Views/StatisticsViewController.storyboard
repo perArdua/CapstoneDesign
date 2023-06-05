@@ -80,16 +80,16 @@
                                 <rect key="frame" x="30" y="534" width="333" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zKk-HH-3tc">
-                                        <rect key="frame" x="122.33333333333334" y="7.3333333333333712" width="88.333333333333343" height="45.333333333333336"/>
+                                        <rect key="frame" x="142.33333333333334" y="7.3333333333333712" width="48.666666666666657" height="45.333333333333336"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="질문 수" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLs-Dt-cIz">
-                                                <rect key="frame" x="0.0" y="0.0" width="88.333333333333329" height="20.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 : 00 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5C-fG-9fP">
-                                                <rect key="frame" x="0.0" y="25.333333333333258" width="88.333333333333329" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5C-fG-9fP">
+                                                <rect key="frame" x="0.0" y="25.333333333333258" width="48.666666666666664" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="YGO-wC-us8"/>
                                                 </constraints>
@@ -117,16 +117,16 @@
                                 <rect key="frame" x="30" y="604" width="333" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3gI-Bx-Q8y">
-                                        <rect key="frame" x="122.33333333333334" y="7.3333333333333712" width="88.333333333333343" height="45.333333333333336"/>
+                                        <rect key="frame" x="142.33333333333334" y="7.3333333333333712" width="48.666666666666657" height="45.333333333333336"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="답변 수" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofl-qb-8Qc">
-                                                <rect key="frame" x="0.0" y="0.0" width="88.333333333333329" height="20.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 : 00 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2T-1R-aO0">
-                                                <rect key="frame" x="0.0" y="25.333333333333258" width="88.333333333333329" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2T-1R-aO0">
+                                                <rect key="frame" x="0.0" y="25.333333333333258" width="48.666666666666664" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="z1O-bA-njx"/>
                                                 </constraints>
@@ -154,16 +154,16 @@
                                 <rect key="frame" x="30" y="674" width="333" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rZi-k2-xOP">
-                                        <rect key="frame" x="122.33333333333334" y="7.3333333333333712" width="88.333333333333343" height="45.333333333333336"/>
+                                        <rect key="frame" x="142.33333333333334" y="7.3333333333333712" width="48.666666666666657" height="45.333333333333336"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="채택 수" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KU-ni-098">
-                                                <rect key="frame" x="0.0" y="0.0" width="88.333333333333329" height="20.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 : 00 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoO-un-Wuq">
-                                                <rect key="frame" x="0.0" y="25.333333333333258" width="88.333333333333329" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoO-un-Wuq">
+                                                <rect key="frame" x="0.0" y="25.333333333333258" width="48.666666666666664" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="m2R-kr-s9g"/>
                                                 </constraints>
@@ -214,6 +214,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="adoptedLabel" destination="hoO-un-Wuq" id="ShB-RU-87u"/>
+                        <outlet property="answerLabel" destination="b2T-1R-aO0" id="Tm8-NV-I5o"/>
                         <outlet property="calendar" destination="ioQ-kD-btB" id="gPv-h5-73r"/>
                         <outlet property="dateLabel" destination="A0C-0d-SAH" id="0T9-5J-Fnn"/>
                         <outlet property="questionLabel" destination="Y5C-fG-9fP" id="QHQ-Z1-kW6"/>

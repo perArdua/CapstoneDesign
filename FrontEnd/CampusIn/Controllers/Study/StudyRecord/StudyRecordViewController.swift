@@ -15,6 +15,21 @@ class StudyRecordViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - 스터디 기록 추가 버튼
+    let addBtn: UIButton = {
+        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
+        btn.layer.masksToBounds = true
+        btn.layer.cornerRadius = 30
+        btn.tintColor = .white
+        btn.backgroundColor = .gray
+        btn.layer.shadowRadius = 6
+        btn.layer.shadowOpacity = 0.3
+        btn.setImage(UIImage(systemName: "pencil.tip.crop.circle"), for: .normal )
+        btn.setPreferredSymbolConfiguration(.init(pointSize: 30, weight: .regular, scale: .default), forImageIn: .normal)
+        
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -22,6 +37,15 @@ class StudyRecordViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        view.addSubview(addBtn)
+        addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
+        addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 150, width: 60, height: 60)
+    }
+    
+    @objc func addBtnTapped(){
+        print("스터디 기록 추가 버튼 tapped")
+    }
 
 
 }
