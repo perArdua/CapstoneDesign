@@ -22,31 +22,38 @@ import java.time.LocalDateTime;
 public class PostSimpleResponse {
 
     @Schema(name = "게시글 id", example = "1")
-    Long postId;
+    private Long postId;
 
     @Schema(name = "게시판 정보")
-    BoardSimpleResponse boardSimpleResponse;
-
+    private BoardSimpleResponse boardSimpleResponse;
 
     @Schema(name = "닉네임", example = "user1")
-    String nickname;
+    private String nickname;
 
     @Schema(name = "게시글 제목", example = "title")
-    String title;
+    private String title;
 
     @Schema(name = "게시글 내용", example = "content")
-    String content;
+    private String content;
 
     @Schema(name = "게시글 생성일", example = "2023-05-21 00:00:00")
     private LocalDateTime createdAt;
+
+    @Schema(name = "책 가격", example = "10000")
+    private Long price;
+
+    @Schema(name = "스터디 그룹 id", example = "1")
+    private Long studyGroupId;
     @Builder
-    public PostSimpleResponse(Long postId, BoardSimpleResponse boardSimpleResponse, String nickname, String title, String content, LocalDateTime createdAt) {
+    public PostSimpleResponse(Long postId, BoardSimpleResponse boardSimpleResponse, String nickname, String title, String content, LocalDateTime createdAt, Long studyGroupId, Long price) {
         this.postId = postId;
         this.boardSimpleResponse = boardSimpleResponse;
         this.nickname = nickname;
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
+        this.studyGroupId = studyGroupId;
+        this.price = price;
     }
 
     @Builder
@@ -57,7 +64,9 @@ public class PostSimpleResponse {
                 entity.getUser().getNickname(),
                 entity.getTitle(),
                 entity.getContent(),
-                entity.getCreatedAt()
+                entity.getCreatedAt(),
+                entity.getStudyGroupId(),
+                entity.getPrice()
         );
 
     }

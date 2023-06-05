@@ -40,6 +40,7 @@ public class PostService {
     @Transactional(readOnly = true)
     public Page<PostSimpleResponse> getPostsByBoard(Long boardId, Pageable pageable) {
         findBoard(boardId);
+        Board board = findBoard(boardId);
         Page<Post> posts = postRepository.findPostsByBoardId(boardId, pageable);
         return posts.map(PostSimpleResponse::new);
     }
@@ -53,6 +54,8 @@ public class PostService {
                 .user(user)
                 .title(request.getTitle())
                 .content(request.getContent())
+                .price(request.getPrice())
+                .studyGroupId(request.getStudyGroupId())
                 .build());
         for (String content : request.getPhotos()) {
             Photo savePhoto = new Photo(content);
@@ -86,11 +89,13 @@ public class PostService {
         return postRepository.searchPosts(keyword, pageable).map(PostSimpleResponse::new);
     }
 
+    @Transactional(readOnly = true)
     public Page<PostSimpleResponse> searchPostsAtBoard(Long boardId, String keyword, Pageable pageable) {
         return postRepository.searchPostsAtBoard(keyword, boardId, pageable)
                 .map(PostSimpleResponse::new);
     }
 
+    @Transactional
     public boolean initBoard() {
         if (boardRepository.count() == 0) {
             for (BoardType boardType : BoardType.values()) {
@@ -121,6 +126,7 @@ public class PostService {
     }
 
 
+    @Transactional(readOnly = true)
     public Page<BoardSimpleResponse> getBoardIds(Pageable pageable) {
         return boardRepository.findAll(pageable).map(BoardSimpleResponse::new);
     }
