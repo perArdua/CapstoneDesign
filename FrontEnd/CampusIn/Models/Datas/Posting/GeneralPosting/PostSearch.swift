@@ -42,10 +42,11 @@ struct PostSearchContent: Codable {
     let nickname: String?
     let title, content: String
     let createdAt: [Int]
+    let price: Int?
     
     enum CodingKeys: String, CodingKey {
         case postID = "postId"
-        case boardSimpleResponse, nickname, title, content, createdAt
+        case boardSimpleResponse, nickname, title, content, createdAt, price
     }
 }
 

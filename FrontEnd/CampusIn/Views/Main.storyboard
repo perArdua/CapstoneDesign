@@ -3,7 +3,6 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -343,7 +342,7 @@
                         <segue destination="Ieu-hb-A6q" kind="relationship" relationship="viewControllers" id="PZq-4P-IVA"/>
                         <segue destination="WCI-No-jGS" kind="relationship" relationship="viewControllers" id="3ji-LN-r9D"/>
                         <segue destination="wgU-dG-qBN" kind="relationship" relationship="viewControllers" id="zXp-wg-49e"/>
-
+                        <segue destination="rcE-nh-XVk" kind="relationship" relationship="viewControllers" id="jeB-TB-IHp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gsc-PH-wgh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -400,9 +399,20 @@
             </objects>
             <point key="canvasLocation" x="3622" y="1162"/>
         </scene>
+        <!--BookStoreNavigationController-->
+        <scene sceneID="A8D-dt-vin">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="BookStoreNavigationController" storyboardName="BookStoreNavigationController" referencedIdentifier="BookStoreNavigationController" id="rcE-nh-XVk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="책방" image="book" catalog="system" id="mf0-3O-8pz"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gVX-We-8zN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3304" y="1249"/>
+        </scene>
     </scenes>
     <resources>
         <image name="CampusIn_logo" width="181" height="62.5"/>
+        <image name="book" catalog="system" width="128" height="99"/>
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="googleLogin3" width="191" height="46"/>
