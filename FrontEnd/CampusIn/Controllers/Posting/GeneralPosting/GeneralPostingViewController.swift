@@ -43,6 +43,7 @@ class GeneralPostingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("게시판 목록 화면 출력")
+        print(KeyChain.read(key: "token"))
         tableView.dataSource = self
         tableView.delegate = self
         
