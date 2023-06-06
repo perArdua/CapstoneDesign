@@ -38,7 +38,7 @@ class StudyManageViewController: UIViewController{
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
+        tableView.allowsSelection = false
         totalTime = 0
         
         let dateFormatter = DateFormatter()

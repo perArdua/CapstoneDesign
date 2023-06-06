@@ -38,8 +38,10 @@
 		319815142A2B205400B8B010 /* StudyRecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319815132A2B205400B8B010 /* StudyRecordDelegate.swift */; };
 		31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */; };
 		31A77AFA2A2B806000AEC557 /* StudyRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A77AF92A2B806000AEC557 /* StudyRecordTableViewCell.swift */; };
+		31AA2F972A2F101900CEC3B3 /* GeneralPostingReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA2F962A2F101900CEC3B3 /* GeneralPostingReplyViewController.swift */; };
+		31AC40162A2F2362001D2D22 /* ReplyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC40152A2F2362001D2D22 /* ReplyCommentTableViewCell.swift */; };
+		31AC40182A2F49CB001D2D22 /* CommetCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC40172A2F49CB001D2D22 /* CommetCellDelegate.swift */; };
 		31AF26B92A1F91D300B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26B82A1F91D200B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift */; };
-		31AF26BB2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26BA2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift */; };
 		31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26BC2A1F972700B1CEC7 /* CommentManager.swift */; };
 		31AF26BF2A1F9B4300B1CEC7 /* CommentAddResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26BE2A1F9B4300B1CEC7 /* CommentAddResponse.swift */; };
 		31AF26C12A1F9BE000B1CEC7 /* CommentDeleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF26C02A1F9BE000B1CEC7 /* CommentDeleteResponse.swift */; };
@@ -150,8 +152,10 @@
 		319815132A2B205400B8B010 /* StudyRecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDelegate.swift; sourceTree = "<group>"; };
 		31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewCell.swift; sourceTree = "<group>"; };
 		31A77AF92A2B806000AEC557 /* StudyRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordTableViewCell.swift; sourceTree = "<group>"; };
+		31AA2F962A2F101900CEC3B3 /* GeneralPostingReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingReplyViewController.swift; sourceTree = "<group>"; };
+		31AC40152A2F2362001D2D22 /* ReplyCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCommentTableViewCell.swift; sourceTree = "<group>"; };
+		31AC40172A2F49CB001D2D22 /* CommetCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommetCellDelegate.swift; sourceTree = "<group>"; };
 		31AF26B82A1F91D200B1CEC7 /* GeneralPostingCommentAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPostingCommentAddTableViewCell.swift; sourceTree = "<group>"; };
-		31AF26BA2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCommentCellDelegate.swift; sourceTree = "<group>"; };
 		31AF26BC2A1F972700B1CEC7 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
 		31AF26BE2A1F9B4300B1CEC7 /* CommentAddResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAddResponse.swift; sourceTree = "<group>"; };
 		31AF26C02A1F9BE000B1CEC7 /* CommentDeleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDeleteResponse.swift; sourceTree = "<group>"; };
@@ -470,6 +474,7 @@
 				31FCD9162A054DE20068689B /* GeneralPostingViewController.swift */,
 				31FCD9262A054F380068689B /* GeneralPostingDetailViewController.swift */,
 				31FCD9282A0551E00068689B /* GeneralPostingAddViewController.swift */,
+				31AA2F962A2F101900CEC3B3 /* GeneralPostingReplyViewController.swift */,
 			);
 			path = GeneralPosting;
 			sourceTree = "<group>";
@@ -477,6 +482,7 @@
 		31FCD9182A054DEB0068689B /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				31AC40152A2F2362001D2D22 /* ReplyCommentTableViewCell.swift */,
 				31B2B1662A190717005A3D4E /* Study */,
 				31FCD9192A054DF90068689B /* GeneralPosting */,
 				5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */,
@@ -525,7 +531,7 @@
 				31AF26BE2A1F9B4300B1CEC7 /* CommentAddResponse.swift */,
 				31AF26C02A1F9BE000B1CEC7 /* CommentDeleteResponse.swift */,
 				31D96F612A1A9BC00086FD7D /* CommetData.swift */,
-				31AF26BA2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift */,
+				31AC40172A2F49CB001D2D22 /* CommetCellDelegate.swift */,
 			);
 			path = GeneralPosting;
 			sourceTree = "<group>";
@@ -821,6 +827,7 @@
 				31FCD91D2A054E050068689B /* GeneralPostingCommentTableViewCell.swift in Sources */,
 				5D4ADFA02A0555E600195CA9 /* KeyChain.swift in Sources */,
 				31AF26C12A1F9BE000B1CEC7 /* CommentDeleteResponse.swift in Sources */,
+				31AC40162A2F2362001D2D22 /* ReplyCommentTableViewCell.swift in Sources */,
 				5D2570522A10EABE00E03713 /* ChatTableViewCell.swift in Sources */,
 				3179137D2A23906E00BC86FE /* TimerReadResponse.swift in Sources */,
 				5DFF9BA62A2C8796004C2DE5 /* StudyGroupManagementViewController.swift in Sources */,
@@ -828,13 +835,13 @@
 				5D4ADF982A054A1B00195CA9 /* SocialViewController.swift in Sources */,
 				5D69A3E62A1A9D3C00E9BBB4 /* Chats.swift in Sources */,
 				31B2B1682A190735005A3D4E /* TimerTableViewCell.swift in Sources */,
-				31AF26BB2A1F924B00B1CEC7 /* GeneralCommentCellDelegate.swift in Sources */,
 				31D96F622A1A9BC00086FD7D /* CommetData.swift in Sources */,
 				5DC885202A2CF3E100631BC1 /* RankingTableViewCell.swift in Sources */,
 				31FCD91E2A054E050068689B /* GeneralPostingContentTableViewCell.swift in Sources */,
 				5D25704E2A10D1F700E03713 /* MessageBoxTableViewCell.swift in Sources */,
 				5D547FFD2A1F9D7000376E09 /* ToDoTableViewCell.swift in Sources */,
 				5D4ADF972A054A1B00195CA9 /* LoginViewController.swift in Sources */,
+				31AA2F972A2F101900CEC3B3 /* GeneralPostingReplyViewController.swift in Sources */,
 				3183ABE22A150A51009CA636 /* BoardManager.swift in Sources */,
 				31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */,
 				5DFF9BB02A2C90B5004C2DE5 /* StudyGroupManager.swift in Sources */,
@@ -861,6 +868,7 @@
 				5D69A3E02A1A9C9600E9BBB4 /* MessageManager.swift in Sources */,
 				5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */,
 				31D57E4F2A13B7830049E57A /* BoardInitResponse.swift in Sources */,
+				31AC40182A2F49CB001D2D22 /* CommetCellDelegate.swift in Sources */,
 				5DFF9BAE2A2C8E8E004C2DE5 /* MyStudyGroupData.swift in Sources */,
 				5DFF9BA92A2C8A06004C2DE5 /* StudyGroupAddViewController.swift in Sources */,
 				5D547FF52A1F8FCE00376E09 /* ToDoViewController.swift in Sources */,
@@ -1042,7 +1050,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1072,7 +1080,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

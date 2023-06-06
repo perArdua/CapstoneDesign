@@ -15,7 +15,11 @@ class GeneralPostingDetailViewController: UIViewController {
     var postID: Int?
     var postDetail: PostDetailContent?
     var comments: [CommentDataContent] = []
+    var comments_c: [CommentDataContent] = []
+    
     var imgCnt: Int = 0
+    
+    @IBOutlet weak var commentAddTf: UITextField!
     
     let pullDownBtn: UIButton = {
         let button = UIButton(type: .system)
@@ -31,15 +35,17 @@ class GeneralPostingDetailViewController: UIViewController {
         //UITableView의 footer 영역을 없애줌.
         tableView.sectionFooterHeight = 0
         tableView.sectionHeaderHeight = 25
+        tableView.allowsSelection = false
         
         pullDownBtn.addTarget(self, action: #selector(pullDownBtnTapped), for: .touchUpInside)
         let navigationItem = self.navigationItem
         //네비게이션 바의 오른쪽에 pullDownBtn을 추가한다.
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: pullDownBtn)
-    
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getPostDetail(postID: postID!){
             postDetail in
             self.postDetail = postDetail
@@ -133,6 +139,29 @@ class GeneralPostingDetailViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func commentAddBtnTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "알림", message: "댓글 작성이 완료되었습니다.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default){_ in
+            var params: Parameters = [:]
+            params["content"] = self.commentAddTf.text!
+            params["parentId"] = "null"
+            params["postId"] = self.postDetail!.postID
+            
+            CommentManager.postComment(postID: self.postDetail!.postID, params: params){
+                self.getComment(postID: self.postDetail!.postID){
+                    comments in
+                    self.comments = comments
+                    print(comments)
+                    self.tableView.reloadData()
+                }
+            }
+            self.tableView.reloadData()
+        }
+        alert.addAction(okAction)
+        
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - 테이블 뷰 설정
@@ -140,7 +169,7 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
     
     //테이블 뷰 영역을 "게시글, 댓글" 총 2개로 분리
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     //두번째 section 일때 section 이름을 "댓글"이라고 출력
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -155,10 +184,9 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
     //댓글을 한번에 몇개나 표시할 것인지 설정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {return 1}
-        else if section == 1 {return comments.count}
-        else {return 1}
+        else {return  comments.count}
     }
-
+    
     //table view에 표시할 내용을 정의한다.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //section 0일 경우 게시글을 표시
@@ -201,47 +229,67 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
             
             return cell
         }
-        else if indexPath.section == 1{
-            //section 0일 경우 댓글을 표시
+        else{
+            //section 1일 경우 댓글을 표시
             let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralPostingCommentTableViewCell", for: indexPath) as! GeneralPostingCommentTableViewCell
+            cell.delegate = self
             print(indexPath.section)
             print("show section2")
-//            cell.dateLabel.text = comments[indexPath.row].cr
             cell.contentLabel.text = comments[indexPath.row].content
             cell.nameLabel.text = comments[indexPath.row].name
-            return cell
-        }
-        else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralPostingCommentAddTableViewCell", for: indexPath) as! GeneralPostingCommentAddTableViewCell
-            cell.delegate = self
+            cell.commentID = comments[indexPath.row].commentID
+            cell.childComments = comments[indexPath.row].children
+            cell.dateLabel.text = "00/00"
+//            cell.dateLabel = String(comments_p[indexPath.row].c)
+//            cell.likeCnt
             return cell
         }
     }
 }
 
-extension GeneralPostingDetailViewController: GeneralCommentCellDelegate{
-    // MARK: - 댓글 작성 버튼 누를때
-    func addBtnTapped(in cell: GeneralPostingCommentAddTableViewCell) {
-        
-        let alert = UIAlertController(title: "알림", message: "댓글 작성이 완료되었습니다.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default)
-        alert.addAction(okAction)
-        
-        //API호출
-        var params: Parameters = [:]
-        params["content"] = cell.textField.text!
-        params["parentId"] = "null"
-        params["postId"] = postDetail!.postID
-        
-        CommentManager.postComment(postID: postDetail!.postID, params: params){
-            self.getComment(postID: self.postDetail!.postID){
-                comments in
-                self.comments = comments
-                print(comments)
-                self.tableView.reloadData()
+
+// MARK: - half modal로 뷰 컨트롤러 show
+extension GeneralPostingDetailViewController: ReplyBtnDelegate{
+    
+    func replyBtnTapped(in cell: GeneralPostingCommentTableViewCell){
+        print("딥글 버튼 눌림")
+        let replyVC = GeneralPostingReplyViewController()
+        replyVC.modalPresentationStyle = .pageSheet
+        replyVC.view.backgroundColor = .white
+        replyVC.array = cell.childComments ?? []
+        for i in comments{
+            if i.commentID == cell.commentID{
+                replyVC.parent_commentId = i.commentID
+                replyVC.comment = i
+                replyVC.postId = postDetail!.postID
+                break
             }
         }
-        self.tableView.reloadData()
-        present(alert, animated: true)
+        
+        if let sheet = replyVC.sheetPresentationController {
+            
+            //지원할 크기 지정
+            sheet.detents = [.medium(), .large()]
+            //크기 변하는거 감지
+            sheet.delegate = self
+            
+            //시트 상단에 그래버 표시 (기본 값은 false)
+            sheet.prefersGrabberVisible = true
+            
+            //처음 크기 지정 (기본 값은 가장 작은 크기)
+//            sheet.selectedDetentIdentifier = .large
+            
+            //뒤 배경 흐리게 제거 (기본 값은 모든 크기에서 배경 흐리게 됨)
+            sheet.largestUndimmedDetentIdentifier = .none
+        }
+        
+        present(replyVC, animated: true, completion: nil)
+    
+    }
+}
+extension GeneralPostingDetailViewController: UISheetPresentationControllerDelegate {
+    func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
+        //크기 변경 됐을 경우
+        print(sheetPresentationController.selectedDetentIdentifier == .large ? "large" : "medium")
     }
 }

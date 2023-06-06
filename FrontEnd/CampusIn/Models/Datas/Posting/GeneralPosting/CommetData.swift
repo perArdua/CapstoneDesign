@@ -40,9 +40,9 @@ struct CommentDataContent: Codable {
     let userID: Int
     let parentID: Int?
     let commentID: Int
-    let name: String?
+    let name: String
     let content: String
-    let children: [Int]
+    let children: [CommentDataContent]
     let childrenSize: Int
 
     enum CodingKeys: String, CodingKey {
