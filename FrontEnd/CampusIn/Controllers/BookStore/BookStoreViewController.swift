@@ -11,6 +11,8 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
     
     @IBOutlet weak var tableView: UITableView!
 
+    
+    @IBOutlet weak var bookTitle: UILabel!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var msgBtn: UIButton!
     @IBOutlet weak var addBtn: UIButton!
@@ -30,7 +32,7 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = true
-        
+        bookTitle.textColor = .white
         
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))

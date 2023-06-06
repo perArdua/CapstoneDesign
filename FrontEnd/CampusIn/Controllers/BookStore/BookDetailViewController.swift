@@ -9,6 +9,7 @@ import UIKit
 
 class BookDetailViewController: UIViewController {
 
+    @IBOutlet weak var bookTitle: UILabel!
     var bookName: String?
     var sellerName: String?
     var bookPrice: String?
@@ -20,6 +21,7 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var detailName: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        bookTitle.textColor = .white
         
     }
     
