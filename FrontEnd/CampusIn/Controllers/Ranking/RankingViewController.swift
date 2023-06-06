@@ -38,4 +38,9 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("tap~!@!~#~!#@!~!@#~!#~!@#~!@#~@!#!#~!@#")
+        print(")(*&(*7298&$298742974298470ㅂ98749187491827")
+    }
+    
 }
