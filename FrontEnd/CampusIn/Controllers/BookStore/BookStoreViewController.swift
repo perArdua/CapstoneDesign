@@ -22,22 +22,31 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
     let bookPrices: [Int] = [10000, 15000, 17000]
     let sellerNames: [String] = ["ooo", "ooo", "ooo"]
     var searchBar: UISearchBar?
-
+    var array: [PostListContent] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addBtn.setTitle("", for: .normal)
         msgBtn.setTitle("", for: .normal)
+        print("nick")
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.allowsSelection = true
         bookTitle.textColor = .white
-        
-        
+        getData()
+        //self.navigationController?.navigationBar.tintColor = .white
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         topView.addGestureRecognizer(tapGesture)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        getData()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.allowsSelection = true
+        print(array)
+        tableView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -55,14 +64,80 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
                 
             }
         }
+    // MARK: - 책 data 받아오는 함수
+    func getData(){
+        var boardID: Int = UserDefaults.standard.value(forKey: "Book") as! Int
+        print(boardID)
+        print("getdata")
+        BoardManager.showPostbyBoard(boardID: boardID){[weak self] result in
+            // 데이터를 받아온 후 실행되는 완료 핸들러
+            print("getdata")
+            print(result)
+            switch result {
+            case .success(let posts):
+                // 데이터를 받아와서 배열에 저장
+                self?.array = posts
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+        print(array)
+    }
+    
+    // MARK: - 책 detail 받아오는 함수
+    func getPostDetail(postID : Int, completion: @escaping (PostDetailContent) -> Void){
+        BoardManager.readPost(postID: postID) { result in
+            switch result{
+            case .success(let post):
+                DispatchQueue.main.async {
+                    completion(post)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
 
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
             view.endEditing(true) // 키보드를 닫습니다.
         }
     
+    func getSearchData(keyword: String){
+        BoardManager.searchPost(boardID: BoardManager.getBoardID(boardName: "Book"), keyword: keyword){result in
+            switch result {
+            case .success(let posts):
+                // 데이터를 받아와서 배열에 저장
+                //self.array = posts
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text {
             // 검색 버튼을 눌렀을 때 실행할 동작을 여기에 작성하세요
+            //두글자 미만 입력시 에러 메세지 출력
+            let alert = UIAlertController(title: "알림", message: "두 글자 이상 입력해주세요.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(ok)
+            
+            guard let keyword = searchBar.text else{
+                present(alert, animated: true)
+                return
+            }
+            if keyword.count < 2 {
+                present(alert, animated: true)
+                return
+            }
+            
+            self.getSearchData(keyword: keyword)
+            
             print("검색어: \(searchText)")
         }
             
@@ -74,16 +149,20 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bookImgs.count
+        return array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "BookStoreTableViewCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! BookStoreTableViewCell
-        cell.bookImgView.image = UIImage(named: bookImgs[indexPath.row])
-        cell.bookName.text = bookNames[indexPath.row]
-        cell.bookPrice.text = String(bookPrices[indexPath.row])
-        cell.sellerName.text = sellerNames[indexPath.row]
+        print(indexPath.row)
+        let bookInfo = array[indexPath.row]
+        
+        //cell.bookImgView.image = UIImage(base64: (bookInfo.postImage)!, withPrefix: false)
+        cell.bookName.text = bookInfo.title
+        cell.bookPrice.text = String(describing: bookInfo.price)
+        cell.sellerName.text = bookInfo.nickname
+        cell.selectionStyle = .none
         print("weoifjwe;ofjao;ewfj;oaiwejf")
         print(cell)
         return cell
@@ -91,12 +170,21 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = storyboard!.instantiateViewController(withIdentifier: "BookDetailViewController") as! BookDetailViewController
-        print(bookImgs[indexPath.row])
-        detailVC.bookName = bookNames[indexPath.row]
-        detailVC.sellerName = sellerNames[indexPath.row]
-        detailVC.bookImg = UIImage(named: bookImgs[indexPath.row])!
-        detailVC.bookPrice = String(bookPrices[indexPath.row])
-        self.navigationController?.pushViewController(detailVC, animated: true)
+        let bookInfo = array[indexPath.row]
+        getPostDetail(postID: bookInfo.postID){ [self]
+            postDetail in
+            print("res")
+            print(postDetail)
+            detailVC.bookDetail = postDetail
+            detailVC.bookName = bookInfo.title
+            detailVC.sellerName = bookInfo.nickname
+            //detailVC.bookImg = UIImage(base64: (bookInfo.postImage)!, withPrefix: false)
+            detailVC.bookPrice = String(describing: bookInfo.price)
+            self.navigationController?.pushViewController(detailVC, animated: true)
+            
+        }
+        
+       
     }
     
 }
