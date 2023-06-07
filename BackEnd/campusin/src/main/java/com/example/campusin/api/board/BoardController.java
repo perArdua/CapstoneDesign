@@ -67,7 +67,7 @@ public class BoardController {
                     direction = Sort.Direction.DESC
             ) Pageable pageable
     ) {
-        return ApiResponse.success("게시판별 게시글 목록/검색", postService.searchPostsAtBoard(boardId, keyword, pageable));
+        return ApiResponse.success("게시글 목록", postService.searchPostsAtBoard(boardId, keyword, pageable));
     }
 
     @ApiResponses({
