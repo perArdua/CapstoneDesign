@@ -61,7 +61,9 @@ class GeneralPostingViewController: UIViewController {
     
     // MARK: - 검색 API 요청하는 함수
     func getData(){
+
         BoardManager.showPostbyBoard(boardID: BoardManager.getBoardID(boardName: "Free")){[weak self] result in
+
             // 데이터를 받아온 후 실행되는 완료 핸들러
             switch result {
             case .success(let posts):
