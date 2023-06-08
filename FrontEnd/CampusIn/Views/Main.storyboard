@@ -298,6 +298,9 @@
                                                                 <color key="tintColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="스터디 그룹 모집 게시판 &gt;"/>
+                                                                <connections>
+                                                                    <segue destination="sM7-ZB-LR0" kind="show" id="aAA-gb-G3C"/>
+                                                                </connections>
                                                             </button>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="CkY-eQ-p5P">
                                                                 <rect key="frame" x="20" y="45.000000000000007" width="330" height="96.666666666666686"/>
@@ -382,6 +385,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wl6-tS-C0H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5773" y="1046"/>
+        </scene>
+        <!--StudyPostingViewController-->
+        <scene sceneID="5vi-ot-gLY">
+            <objects>
+                <viewControllerPlaceholder storyboardName="StudyPostingViewController" referencedIdentifier="StudyPostingViewController" id="sM7-ZB-LR0" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="K1A-EI-frD"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6fG-TU-u4O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6609" y="1034"/>
         </scene>
         <!--MessageBoxViewController-->
         <scene sceneID="x5q-zK-5I8">
@@ -626,7 +639,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XRb-xz-syd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3622" y="1162"/>
+            <point key="canvasLocation" x="3472" y="1162"/>
         </scene>
         <!--BookStoreNavigationController-->
         <scene sceneID="A8D-dt-vin">

@@ -1,14 +1,14 @@
 //
-//  GeneralPostingDetailViewController.swift
-//  CapstonDesign
+//  StudyPostingDetailViewController.swift
+//  CampusIn
 //
-//  Created by 이동현 on 2023/04/09.
+//  Created by 이동현 on 2023/06/08.
 //
 
 import UIKit
 import Alamofire
 
-class GeneralPostingDetailViewController: UIViewController {
+class StudyPostingDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -64,7 +64,7 @@ class GeneralPostingDetailViewController: UIViewController {
         if postDetail?.nickname == nickname{
             
             let editAction = UIAlertAction(title: "수정하기", style: .default) { [self] _ in
-                let nextVC = self.storyboard?.instantiateViewController(identifier: "GeneralPostingAddViewController") as! GeneralPostingAddViewController
+                let nextVC = self.storyboard?.instantiateViewController(identifier: "StudyPostingAddViewController") as! StudyPostingAddViewController
                 nextVC.postDetail = postDetail
                 
                 nextVC.modalPresentationStyle = .fullScreen
@@ -165,7 +165,7 @@ class GeneralPostingDetailViewController: UIViewController {
 }
 
 // MARK: - 테이블 뷰 설정
-extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDataSource{
+extension StudyPostingDetailViewController: UITableViewDelegate, UITableViewDataSource{
     
     //테이블 뷰 영역을 "게시글, 댓글" 총 2개로 분리
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -191,10 +191,14 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //section 0일 경우 게시글을 표시
         if indexPath.section == 0{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralPostingContentTableViewCell", for: indexPath) as! GeneralPostingContentTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "StudyPostingContentTableViewCell", for: indexPath) as! StudyPostingContentTableViewCell
+            cell.delegate = self
             
             cell.titleLabel.text = postDetail?.title
             cell.contentLabel.text = postDetail?.content
+            
+            //API 받기 전 임시
+            cell.tagLabel.text = "IT"
             
             cell.img0.isHidden = true
             cell.img1.isHidden = true
@@ -231,7 +235,7 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
         }
         else{
             //section 1일 경우 댓글을 표시
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralPostingCommentTableViewCell", for: indexPath) as! GeneralPostingCommentTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "StudyPostingCommentTableViewCell", for: indexPath) as! StudyPostingCommentTableViewCell
             cell.delegate = self
             print(indexPath.section)
             print("show section2")
@@ -249,9 +253,9 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
 
 
 // MARK: - half modal로 뷰 컨트롤러 show
-extension GeneralPostingDetailViewController: GeneralReplyBtnDelegate{
+extension StudyPostingDetailViewController: StudyReplyBtnDelegate{
     
-    func replyBtnTapped(in cell: GeneralPostingCommentTableViewCell){
+    func replyBtnTapped(in cell: StudyPostingCommentTableViewCell){
         print("딥글 버튼 눌림")
         let replyVC = PostingReplyViewController()
         replyVC.modalPresentationStyle = .pageSheet
@@ -287,10 +291,19 @@ extension GeneralPostingDetailViewController: GeneralReplyBtnDelegate{
     
     }
 }
-extension GeneralPostingDetailViewController: UISheetPresentationControllerDelegate {
+
+// MARK: - 답글 누르면 half modal 표시 관련 extension
+extension StudyPostingDetailViewController: UISheetPresentationControllerDelegate {
     func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
         //크기 변경 됐을 경우
         print(sheetPresentationController.selectedDetentIdentifier == .large ? "large" : "medium")
     }
 }
 
+// MARK: - 게시글에서 "가입하기" 버튼을 누른 경우 해당 스터디 그룹에 가입
+extension StudyPostingDetailViewController: StudyGroupPostingContentTVCellDelegate{
+    func registerBtnTapped(in cell: StudyPostingContentTableViewCell) {
+        print("그룹 가입 시도함")
+        //그룹 가입 API콜 하기
+    }
+}

@@ -1,14 +1,14 @@
 //
-//  GeneralPostingReplyViewController.swift
+//  PostingReplyViewController.swift
 //  CampusIn
 //
-//  Created by 이동현 on 2023/06/06.
+//  Created by 이동현 on 2023/06/08.
 //
 
 import UIKit
 import Alamofire
 
-class GeneralPostingReplyViewController: UIViewController {
+class PostingReplyViewController: UIViewController {
 
     var postId: Int?
     var parent_commentId: Int?
@@ -141,7 +141,7 @@ class GeneralPostingReplyViewController: UIViewController {
 
 }
 
-extension GeneralPostingReplyViewController: UITableViewDelegate, UITableViewDataSource{
+extension PostingReplyViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -188,5 +188,3 @@ extension GeneralPostingReplyViewController: UITableViewDelegate, UITableViewDat
         }
     }
 }
-
-
