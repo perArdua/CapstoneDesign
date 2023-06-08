@@ -15,6 +15,7 @@ class BookDetailViewController: UIViewController {
     var bookPrice: String?
     var bookImg: UIImage?
     var bookDetail: PostDetailContent?
+    
     @IBOutlet weak var sendMsgBtn: UIButton!
     @IBOutlet weak var detailPrice: UILabel!
     @IBOutlet weak var detailImg: UIImageView!
@@ -28,25 +29,40 @@ class BookDetailViewController: UIViewController {
         bookInfoTV.text = bookDetail?.content
         print("content")
         print(bookInfoTV.text = bookDetail?.content)
-        print(bookDetail)
-        bookInfoTV.isEditable = false
+        //print(bookDetail)
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-        
+        self.navigationController?.navigationBar.isHidden = false
         //본인 게시글이면 메세지 전송 버튼 안보이게
         var nickname: String = UserDefaults.standard.value(forKey: "nickname") as! String
         if(sellerName == nickname){
             sendMsgBtn.isHidden = true
         }
+        
+        
+        let editImage = UIImage(systemName: "plus")
+        let editButton = UIBarButtonItem(image: editImage, style: .plain, target: self, action: #selector(editButtonTapped))
+        editButton.tintColor = .white
+        navigationItem.rightBarButtonItem = editButton
 
         msgBtn.tintColor = UIColor(named: "btnColor")
         detailImg.image = bookImg
         detailPrice.text = bookPrice
         detailName.text = bookName
         detailSellerName.text = sellerName
+    }
+    
+    @objc func editButtonTapped() {
+        // 오른쪽 버튼이 눌렸을 때 수행할 동작
+        let nextVC = storyboard!.instantiateViewController(withIdentifier: "SellBookViewController") as! SellBookViewController
+        nextVC.titleString = "책 정보 수정하기"
+        nextVC.isEditable = true
+        nextVC.detail = bookDetail
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
     //MARK: - 메세지 전송 버튼 액션 구현
