@@ -1,15 +1,14 @@
 //
-//  GeneralPostingViewController.swift
-//  CapstonDesign
+//  StudyPostingViewController.swift
+//  CampusIn
 //
-//  Created by 최다경 on 2023/04/04.
+//  Created by 이동현 on 2023/06/07.
 //
 
 import UIKit
 import Alamofire
 
-class GeneralPostingViewController: UIViewController {
-    
+class StudyPostingViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -61,9 +60,7 @@ class GeneralPostingViewController: UIViewController {
     
     // MARK: - 검색 API 요청하는 함수
     func getData(){
-
-        BoardManager.showPostbyBoard(boardID: BoardManager.getBoardID(boardName: "Free")){[weak self] result in
-
+        BoardManager.showPostbyBoard(boardID: BoardManager.getBoardID(boardName: "Study")){[weak self] result in
             // 데이터를 받아온 후 실행되는 완료 핸들러
             switch result {
             case .success(let posts):
@@ -81,7 +78,7 @@ class GeneralPostingViewController: UIViewController {
     
     //MARK: 글쓰기 버튼을 누를 경우 실행
     @objc func addBtnTapped(){
-        let nextVC = storyboard?.instantiateViewController(withIdentifier: "GeneralPostingAddViewController") as! GeneralPostingAddViewController
+        let nextVC = storyboard?.instantiateViewController(withIdentifier: "StudyPostingAddViewController") as! StudyPostingAddViewController
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true, completion: nil)
         print("addBtn tapped")
@@ -120,7 +117,7 @@ class GeneralPostingViewController: UIViewController {
 }
  
 //MARK: 테이블 뷰 delegate, datasource
-extension GeneralPostingViewController : UITableViewDelegate, UITableViewDataSource{
+extension StudyPostingViewController : UITableViewDelegate, UITableViewDataSource{
     
     //테이블 뷰에 몇개의 셀을 보여줄 것인지 결정하는 함수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -129,7 +126,7 @@ extension GeneralPostingViewController : UITableViewDelegate, UITableViewDataSou
     
     //각 테이블 뷰 셀의 내용을 결정하는 함수
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralPostingTableViewCell", for: indexPath) as! GeneralPostingTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudyPostingTableViewCell", for: indexPath) as! StudyPostingTableViewCell
         
         let temp = array[indexPath.row]
         
@@ -144,7 +141,7 @@ extension GeneralPostingViewController : UITableViewDelegate, UITableViewDataSou
     
     //테이블 뷰 셀이 클릭되면 어떤 동작을 할지 정하는 함수
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "GeneralPostingDetailViewController") as? GeneralPostingDetailViewController else { return }
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "StudyPostingDetailViewController") as? StudyPostingDetailViewController else { return }
         nextVC.postID = array[indexPath.row].postID
         
         getPostDetail(postID: array[indexPath.row].postID){ [self]

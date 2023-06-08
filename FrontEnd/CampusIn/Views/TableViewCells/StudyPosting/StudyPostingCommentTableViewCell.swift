@@ -1,13 +1,13 @@
 //
-//  GeneralPostingCommentTableViewCell.swift
-//  CapstonDesign
+//  StudyPostingCommentTableViewCell.swift
+//  CampusIn
 //
-//  Created by 이동현 on 2023/04/10.
+//  Created by 이동현 on 2023/06/08.
 //
 
 import UIKit
 
-class GeneralPostingCommentTableViewCell: UITableViewCell {
+class StudyPostingCommentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userImg: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -20,7 +20,7 @@ class GeneralPostingCommentTableViewCell: UITableViewCell {
     var is_check: Bool?
     var childComments: [CommentDataContent]?
     
-    weak var delegate: GeneralReplyBtnDelegate?
+    weak var delegate: StudyReplyBtnDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

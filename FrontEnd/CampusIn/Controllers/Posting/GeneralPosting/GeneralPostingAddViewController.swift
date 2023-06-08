@@ -211,11 +211,9 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
             present(alert, animated: true)
         }
         else{
-            postData(boardID: 2, params: params)
+            postData(boardID: BoardManager.getBoardID(boardName: "Free"), params: params)
             let alert = UIAlertController(title: "알림", message: "글쓰기가 완료되었습니다.", preferredStyle: .alert)
             let ok = UIAlertAction(title: "확인", style: .default){_ in self.dismiss(animated: true) }
-            let cancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
-            alert.addAction(cancel)
             alert.addAction(ok)
             present(alert, animated: true)
         }
@@ -254,25 +252,3 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
 
 }
 
-
-extension UIImage {
-
-    public var base64: String {
-        return self.jpegData(compressionQuality: 1.0)!.base64EncodedString()
-    }
-
-    convenience init?(base64: String, withPrefix: Bool) {
-        var finalData: Data?
-
-        if withPrefix {
-            guard let url = URL(string: base64) else { return nil }
-            finalData = try? Data(contentsOf: url)
-        } else {
-            finalData = Data(base64Encoded: base64)
-        }
-
-        guard let data = finalData else { return nil }
-        self.init(data: data)
-    }
-
-}

@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol GeneralCommentCellDelegate: AnyObject {
-    func addBtnTapped(in cell: GeneralPostingCommentAddTableViewCell)
+protocol GeneralReplyBtnDelegate: AnyObject {
+    func replyBtnTapped(in cell: GeneralPostingCommentTableViewCell)
 }
 
-protocol ReplyBtnDelegate: AnyObject {
-    func replyBtnTapped(in cell: GeneralPostingCommentTableViewCell)
+protocol StudyReplyBtnDelegate: AnyObject {
+    func replyBtnTapped(in cell: StudyPostingCommentTableViewCell)
 }
 
 
