@@ -30,5 +30,6 @@ UserApi에 자신의 userId를 알 수 있는 api만듬 + post response에서 po
 - 게시글 응답 요청에 studygroupId, price 을 추가함
 - 통계 관련 API 오류 수정완료
 - 타이머 관련 API 오류 수정완료
+- 스터디그룹 가입하기 API 추가함
 x tag 관련한 내용은 추후 만들 예정
 x 다른 기기 고려하는 내용은 다 만들고 나서 에러처리등과 한꺼번에 만들 예정
