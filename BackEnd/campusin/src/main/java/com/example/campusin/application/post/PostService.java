@@ -40,9 +40,8 @@ public class PostService {
     @Transactional(readOnly = true)
     public Page<PostSimpleResponse> getPostsByBoard(Long boardId, Pageable pageable) {
         findBoard(boardId);
-        Board board = findBoard(boardId);
-        Page<Post> posts = postRepository.findPostsByBoardId(boardId, pageable);
-        return posts.map(PostSimpleResponse::new);
+        findBoard(boardId);
+        return postRepository.findPostsByBoardId(boardId, pageable).map(PostSimpleResponse::new);
     }
 
     @Transactional
