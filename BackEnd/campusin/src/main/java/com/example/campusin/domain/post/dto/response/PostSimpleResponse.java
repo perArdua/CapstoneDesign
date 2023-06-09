@@ -1,6 +1,8 @@
 package com.example.campusin.domain.post.dto.response;
 
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
+import com.example.campusin.domain.photo.Photo;
+import com.example.campusin.domain.photo.response.PhotoResponse;
 import com.example.campusin.domain.post.Post;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,6 +12,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by kok8454@gmail.com on 2023-05-07
@@ -44,30 +48,35 @@ public class PostSimpleResponse {
 
     @Schema(name = "스터디 그룹 id", example = "1")
     private Long studyGroupId;
+
+    @Schema(name = "게시글 대표 사진", example = "photo")
+    private String photo;
+
     @Builder
-    public PostSimpleResponse(Long postId, BoardSimpleResponse boardSimpleResponse, String nickname, String title, String content, LocalDateTime createdAt, Long studyGroupId, Long price) {
+    public PostSimpleResponse(Long postId, BoardSimpleResponse boardSimpleResponse, String nickname, String title, String content, LocalDateTime createdAt, Long price, Long studyGroupId, String photo) {
         this.postId = postId;
         this.boardSimpleResponse = boardSimpleResponse;
         this.nickname = nickname;
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
-        this.studyGroupId = studyGroupId;
         this.price = price;
+        this.studyGroupId = studyGroupId;
+        this.photo = photo;
     }
 
     @Builder
     public PostSimpleResponse(Post entity) {
-        this(
+        this (
                 entity.getId(),
                 new BoardSimpleResponse(entity.getBoard()),
                 entity.getUser().getNickname(),
                 entity.getTitle(),
                 entity.getContent(),
                 entity.getCreatedAt(),
+                entity.getPrice(),
                 entity.getStudyGroupId(),
-                entity.getPrice()
+                entity.getPhoto() != null ? entity.getPhoto().getContent() : null
         );
-
     }
 }

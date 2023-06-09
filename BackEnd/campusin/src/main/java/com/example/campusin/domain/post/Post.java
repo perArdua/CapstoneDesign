@@ -115,4 +115,11 @@ public class Post extends BaseTimeEntity {
     public void increaseLikeCount() {
         likeCount++;
     }
+
+    public Photo getPhoto() {
+        if (this.photos.isEmpty()) {
+            return null;
+        }
+        return this.photos.get(0);
+    }
 }
