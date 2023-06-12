@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		311E085B2A0D37D20048F5FB /* StudyNavigationController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311E085A2A0D37D20048F5FB /* StudyNavigationController.storyboard */; };
 		313F7DB82A07DE7500182CDA /* GeneralPostingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313F7DB72A07DE7500182CDA /* GeneralPostingSearchViewController.swift */; };
+		315067332A37015C0045E028 /* QuestionPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 315067322A37015C0045E028 /* QuestionPostingViewController.storyboard */; };
+		315067362A3701C90045E028 /* QuestionPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315067352A3701C90045E028 /* QuestionPostingViewController.swift */; };
+		315067382A3701D50045E028 /* QuestionPostingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315067372A3701D50045E028 /* QuestionPostingDetailViewController.swift */; };
+		3150673A2A3701DE0045E028 /* QuestionPostingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315067392A3701DE0045E028 /* QuestionPostingAddViewController.swift */; };
+		3150673C2A3701E70045E028 /* QuestionPostingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3150673B2A3701E70045E028 /* QuestionPostingSearchViewController.swift */; };
+		315067402A3702F80045E028 /* QuestionPostingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3150673F2A3702F80045E028 /* QuestionPostingTableViewCell.swift */; };
+		315067422A3703010045E028 /* QuestionPostingCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315067412A3703010045E028 /* QuestionPostingCommentTableViewCell.swift */; };
+		315067442A37030C0045E028 /* QuestionPostingSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315067432A37030C0045E028 /* QuestionPostingSearchTableViewCell.swift */; };
+		315067462A3703170045E028 /* QuestionPostingContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315067452A3703170045E028 /* QuestionPostingContentTableViewCell.swift */; };
 		315E599B2A30848E00E85A61 /* StudyPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */; };
 		315E599E2A3084BC00E85A61 /* StudyPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E599D2A3084BC00E85A61 /* StudyPostingViewController.swift */; };
 		3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */; };
@@ -135,6 +144,15 @@
 /* Begin PBXFileReference section */
 		311E085A2A0D37D20048F5FB /* StudyNavigationController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyNavigationController.storyboard; sourceTree = "<group>"; };
 		313F7DB72A07DE7500182CDA /* GeneralPostingSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingSearchViewController.swift; sourceTree = "<group>"; };
+		315067322A37015C0045E028 /* QuestionPostingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuestionPostingViewController.storyboard; sourceTree = "<group>"; };
+		315067352A3701C90045E028 /* QuestionPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingViewController.swift; sourceTree = "<group>"; };
+		315067372A3701D50045E028 /* QuestionPostingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingDetailViewController.swift; sourceTree = "<group>"; };
+		315067392A3701DE0045E028 /* QuestionPostingAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingAddViewController.swift; sourceTree = "<group>"; };
+		3150673B2A3701E70045E028 /* QuestionPostingSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingSearchViewController.swift; sourceTree = "<group>"; };
+		3150673F2A3702F80045E028 /* QuestionPostingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingTableViewCell.swift; sourceTree = "<group>"; };
+		315067412A3703010045E028 /* QuestionPostingCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingCommentTableViewCell.swift; sourceTree = "<group>"; };
+		315067432A37030C0045E028 /* QuestionPostingSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingSearchTableViewCell.swift; sourceTree = "<group>"; };
+		315067452A3703170045E028 /* QuestionPostingContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingContentTableViewCell.swift; sourceTree = "<group>"; };
 		315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyPostingViewController.storyboard; sourceTree = "<group>"; };
 		315E599D2A3084BC00E85A61 /* StudyPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPostingViewController.swift; sourceTree = "<group>"; };
 		3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralPostingViewController.storyboard; sourceTree = "<group>"; };
@@ -283,6 +301,55 @@
 			path = StudyRecord;
 			sourceTree = "<group>";
 		};
+		315067342A3701990045E028 /* QuestionPosting */ = {
+			isa = PBXGroup;
+			children = (
+				315067352A3701C90045E028 /* QuestionPostingViewController.swift */,
+				315067372A3701D50045E028 /* QuestionPostingDetailViewController.swift */,
+				315067392A3701DE0045E028 /* QuestionPostingAddViewController.swift */,
+				3150673B2A3701E70045E028 /* QuestionPostingSearchViewController.swift */,
+			);
+			path = QuestionPosting;
+			sourceTree = "<group>";
+		};
+		3150673D2A3702190045E028 /* StroryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				3165EDF62A02A86700D91856 /* Main.storyboard */,
+				5D4ADF9B2A0555BA00195CA9 /* NickNameViewController.storyboard */,
+				5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */,
+				311E085A2A0D37D20048F5FB /* StudyNavigationController.storyboard */,
+				5DC885172A2CE59000631BC1 /* RankingViewController.storyboard */,
+				3197C68A2A2CCC3000674199 /* StatisticsViewController.storyboard */,
+				5D3F614E2A2F5951000E3B7C /* BookStoreNavigationController.storyboard */,
+				3165CBE92A03FE5B005E34AC /* Posting */,
+			);
+			path = StroryBoards;
+			sourceTree = "<group>";
+		};
+		3150673E2A3702550045E028 /* QuestionPosting */ = {
+			isa = PBXGroup;
+			children = (
+				3150673F2A3702F80045E028 /* QuestionPostingTableViewCell.swift */,
+				315067412A3703010045E028 /* QuestionPostingCommentTableViewCell.swift */,
+				315067432A37030C0045E028 /* QuestionPostingSearchTableViewCell.swift */,
+				315067452A3703170045E028 /* QuestionPostingContentTableViewCell.swift */,
+			);
+			path = QuestionPosting;
+			sourceTree = "<group>";
+		};
+		315067472A3703B50045E028 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				319815132A2B205400B8B010 /* StudyRecordDelegate.swift */,
+				31EAED4D2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift */,
+				31AC40172A2F49CB001D2D22 /* CommetCellDelegate.swift */,
+				3165EDC32A02A3C100D91856 /* AppDelegate.swift */,
+				3165EDC52A02A3C100D91856 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		315E599C2A3084A500E85A61 /* StudyPosting */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +366,7 @@
 			children = (
 				3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */,
 				315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */,
+				315067322A37015C0045E028 /* QuestionPostingViewController.storyboard */,
 			);
 			path = Posting;
 			sourceTree = "<group>";
@@ -332,8 +400,6 @@
 				3165EDF52A02A82E00D91856 /* Controllers */,
 				3165EDF42A02A82900D91856 /* Views */,
 				3165EDF32A02A82400D91856 /* Models */,
-				3165EDC32A02A3C100D91856 /* AppDelegate.swift */,
-				3165EDC52A02A3C100D91856 /* SceneDelegate.swift */,
 				3165EDCC2A02A3C100D91856 /* Assets.xcassets */,
 				3165EDCE2A02A3C100D91856 /* LaunchScreen.storyboard */,
 				3165EDD12A02A3C100D91856 /* Info.plist */,
@@ -361,10 +427,10 @@
 		3165EDF32A02A82400D91856 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				31EAED4C2A3231F000F04DEC /* Posting */,
+				5D4ADF9F2A0555E600195CA9 /* KeyChain.swift */,
+				315067472A3703B50045E028 /* Delegates */,
 				31B2B1692A190C25005A3D4E /* Study */,
 				3183ABDC2A150A1D009CA636 /* Network */,
-				5D4ADF9F2A0555E600195CA9 /* KeyChain.swift */,
 				31FCD9202A054E180068689B /* Datas */,
 				31EAED4A2A32158700F04DEC /* ClassExtension.swift */,
 			);
@@ -374,15 +440,8 @@
 		3165EDF42A02A82900D91856 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3150673D2A3702190045E028 /* StroryBoards */,
 				31FCD9182A054DEB0068689B /* TableViewCells */,
-				3165CBE92A03FE5B005E34AC /* Posting */,
-				3165EDF62A02A86700D91856 /* Main.storyboard */,
-				5D4ADF9B2A0555BA00195CA9 /* NickNameViewController.storyboard */,
-				5DC33E352A0D45C200C061BC /* MessageBoxViewController.storyboard */,
-				311E085A2A0D37D20048F5FB /* StudyNavigationController.storyboard */,
-				5DC885172A2CE59000631BC1 /* RankingViewController.storyboard */,
-				3197C68A2A2CCC3000674199 /* StatisticsViewController.storyboard */,
-				5D3F614E2A2F5951000E3B7C /* BookStoreNavigationController.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -482,7 +541,6 @@
 		31B2B16F2A191693005A3D4E /* Study */ = {
 			isa = PBXGroup;
 			children = (
-				319815132A2B205400B8B010 /* StudyRecordDelegate.swift */,
 				317913802A23917900BC86FE /* TimerDeleteResponse.swift */,
 				3179137E2A23911D00BC86FE /* TimerAddResponse.swift */,
 				317913822A23927E00BC86FE /* TimerUpdateResponse.swift */,
@@ -518,18 +576,11 @@
 			path = StudyPosting;
 			sourceTree = "<group>";
 		};
-		31EAED4C2A3231F000F04DEC /* Posting */ = {
-			isa = PBXGroup;
-			children = (
-				31EAED4D2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift */,
-			);
-			path = Posting;
-			sourceTree = "<group>";
-		};
 		31FCD9142A054DCF0068689B /* Posting */ = {
 			isa = PBXGroup;
 			children = (
 				31EAED3B2A320A3100F04DEC /* PostingReplyViewController.swift */,
+				315067342A3701990045E028 /* QuestionPosting */,
 				315E599C2A3084A500E85A61 /* StudyPosting */,
 				31FCD9152A054DD70068689B /* GeneralPosting */,
 			);
@@ -551,13 +602,14 @@
 			isa = PBXGroup;
 			children = (
 				31AC40152A2F2362001D2D22 /* ReplyCommentTableViewCell.swift */,
-				31EAED412A320B9700F04DEC /* StudyPosting */,
-				31B2B1662A190717005A3D4E /* Study */,
-				31FCD9192A054DF90068689B /* GeneralPosting */,
 				5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */,
 				5D2570512A10EABE00E03713 /* ChatTableViewCell.swift */,
 				5DC8851F2A2CF3E100631BC1 /* RankingTableViewCell.swift */,
 				5D3F61542A2F63EE000E3B7C /* BookStoreTableViewCell.swift */,
+				31B2B1662A190717005A3D4E /* Study */,
+				3150673E2A3702550045E028 /* QuestionPosting */,
+				31EAED412A320B9700F04DEC /* StudyPosting */,
+				31FCD9192A054DF90068689B /* GeneralPosting */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -600,7 +652,6 @@
 				31AF26BE2A1F9B4300B1CEC7 /* CommentAddResponse.swift */,
 				31AF26C02A1F9BE000B1CEC7 /* CommentDeleteResponse.swift */,
 				31D96F612A1A9BC00086FD7D /* CommetData.swift */,
-				31AC40172A2F49CB001D2D22 /* CommetCellDelegate.swift */,
 			);
 			path = GeneralPosting;
 			sourceTree = "<group>";
@@ -804,6 +855,7 @@
 				3197C68B2A2CCC3000674199 /* StatisticsViewController.storyboard in Resources */,
 				3165EDF72A02A86700D91856 /* Main.storyboard in Resources */,
 				31C7184A2A080EE800C7731A /* loading_check.json in Resources */,
+				315067332A37015C0045E028 /* QuestionPostingViewController.storyboard in Resources */,
 				5DC33E362A0D45C200C061BC /* MessageBoxViewController.storyboard in Resources */,
 				5DC885182A2CE59000631BC1 /* RankingViewController.storyboard in Resources */,
 				5D3F614F2A2F5951000E3B7C /* BookStoreNavigationController.storyboard in Resources */,
@@ -886,8 +938,10 @@
 				3165EDC82A02A3C100D91856 /* ViewController.swift in Sources */,
 				31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */,
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
+				315067362A3701C90045E028 /* QuestionPostingViewController.swift in Sources */,
 				3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */,
 				3179137F2A23911D00BC86FE /* TimerAddResponse.swift in Sources */,
+				315067382A3701D50045E028 /* QuestionPostingDetailViewController.swift in Sources */,
 				31CBDA892A2CC3E300E55924 /* StatisticsViewController.swift in Sources */,
 				317913832A23927E00BC86FE /* TimerUpdateResponse.swift in Sources */,
 				5DFF9BB22A2C98C0004C2DE5 /* StudyGroupTableViewCell.swift in Sources */,
@@ -899,9 +953,11 @@
 				5D69A3E42A1A9D1400E9BBB4 /* MessageRooms.swift in Sources */,
 				3185DF312A2A3FAA001E5265 /* StudyRecordViewController.swift in Sources */,
 				319815142A2B205400B8B010 /* StudyRecordDelegate.swift in Sources */,
+				315067422A3703010045E028 /* QuestionPostingCommentTableViewCell.swift in Sources */,
 				5D87A0922A2F8A0300A0B98E /* SellBookViewController.swift in Sources */,
 				31FCD91F2A054E050068689B /* GeneralPostingTableViewCell.swift in Sources */,
 				317913852A2393AB00BC86FE /* TimerManager.swift in Sources */,
+				315067462A3703170045E028 /* QuestionPostingContentTableViewCell.swift in Sources */,
 				31EAED3C2A320A3100F04DEC /* PostingReplyViewController.swift in Sources */,
 				5D14AB342A15158A00807A2B /* SideMenuViewController.swift in Sources */,
 				31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */,
@@ -957,9 +1013,13 @@
 				31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */,
 				5D3F61572A2F6893000E3B7C /* BookDetailViewController.swift in Sources */,
 				31EAED4E2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift in Sources */,
+				3150673A2A3701DE0045E028 /* QuestionPostingAddViewController.swift in Sources */,
 				31EAED452A320BD300F04DEC /* StudyPostingContentTableViewCell.swift in Sources */,
 				31D96F642A1A9E610086FD7D /* BoardData.swift in Sources */,
+				3150673C2A3701E70045E028 /* QuestionPostingSearchViewController.swift in Sources */,
+				315067442A37030C0045E028 /* QuestionPostingSearchTableViewCell.swift in Sources */,
 				5D6013672A14D5D400159F63 /* APIConstants.swift in Sources */,
+				315067402A3702F80045E028 /* QuestionPostingTableViewCell.swift in Sources */,
 				5D69A3E02A1A9C9600E9BBB4 /* MessageManager.swift in Sources */,
 				5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */,
 				31D57E4F2A13B7830049E57A /* BoardInitResponse.swift in Sources */,
