@@ -15,4 +15,7 @@ protocol StudyReplyBtnDelegate: AnyObject {
     func replyBtnTapped(in cell: StudyPostingCommentTableViewCell)
 }
 
+protocol QuestionReplyBtnDelegate: AnyObject {
+    func replyBtnTapped(in cell: QuestionPostingCommentTableViewCell)
+}
 

@@ -1,5 +1,4 @@
 //
-//  StudyPostingAddViewController.swift
 //  CampusIn
 //
 //  Created by 이동현 on 2023/06/08.
@@ -10,7 +9,7 @@ import BSImagePicker
 import Photos
 import Alamofire
 
-class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
+class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
     var postDetail: PostDetailContent?
     
     @IBOutlet weak var img0: UIImageView!
@@ -30,33 +29,23 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var tagLabel0: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
-    @IBOutlet weak var studyGroupLabel: UILabel!
     
     let tagData = ["선택하세요", "IT", "수학", "인문", "태그1", "태그2", "태그3", "태그4", "태그5"]
-    let studyGroupData = ["선택하세요", "그룹1", "그룹2", "그룹3", "그룹4", "그룹5", "그룹6", "그룹7", "그룹8"]
+
     //tag 버튼 누르면 나오는 피커뷰
     let tagPickerView = UIPickerView()
     let tagDoneView = UIView()
     let tagDoneBtn = UIButton(type: .system)
     
-    //tag 버튼 누르면 나오는 피커뷰
-    let studyPickerView = UIPickerView()
-    let studyDoneView = UIView()
-    let studyDoneBtn = UIButton(type: .system)
-    
-    
     var imgs : [UIImageView] = []
     var img_cnt = 0
     //태그 라벨에 들어갈 텍스트
     var tag: String?
-    //스터디 그룹 라벨에 들어갈 텍스트
-    var studyGroup: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpTagPickerView()
-        setUpStudyPickerView()
     
         stView0.isHidden = true
         stView1.isHidden = true
@@ -156,48 +145,6 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
         ])
     }
     
-    // MARK: - study group의 pickerView UI 세팅
-    func setUpStudyPickerView(){
-        studyPickerView.delegate = self
-        studyPickerView.dataSource = self
-        view.addSubview(studyPickerView)
-        studyPickerView.translatesAutoresizingMaskIntoConstraints = false
-        studyPickerView.backgroundColor = .white
-        studyPickerView.layer.borderColor = UIColor.gray.cgColor
-        studyPickerView.isHidden = true
-        NSLayoutConstraint.activate([
-        
-            // Picker View 제약 조건
-            studyPickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-            studyPickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
-            studyPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            studyPickerView.heightAnchor.constraint(equalToConstant: 200)
-        ])
-        
-        studyDoneView.backgroundColor = .systemGray5
-        view.addSubview(studyDoneView)
-        studyDoneView.translatesAutoresizingMaskIntoConstraints = false
-        studyDoneView.isHidden = true
-        NSLayoutConstraint.activate([
-            studyDoneView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-            studyDoneView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
-            studyDoneView.bottomAnchor.constraint(equalTo: studyPickerView.topAnchor, constant: 0),
-            studyDoneView.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        studyDoneView.addSubview(studyDoneBtn)
-        
-        studyDoneBtn.tintColor = .systemBlue
-        studyDoneBtn.setTitle("완료", for: .normal)
-        
-        studyDoneBtn.translatesAutoresizingMaskIntoConstraints = false
-        studyDoneBtn.addTarget(self, action: #selector(studyDoneBtnTapped), for: .touchUpInside)
-        NSLayoutConstraint.activate([
-            studyDoneBtn.trailingAnchor.constraint(equalTo: studyDoneView.trailingAnchor, constant: 0),
-            studyDoneBtn.topAnchor.constraint(equalTo: studyDoneView.topAnchor, constant: 0),
-            studyDoneBtn.bottomAnchor.constraint(equalTo: studyDoneView.bottomAnchor, constant: 0),
-            studyDoneBtn.widthAnchor.constraint(equalToConstant: 80)
-        ])
-    }
                                       
     @IBAction func cancelBtnTapped(_ sender: UIButton) {
         
@@ -294,7 +241,7 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
             alert.addAction(okAction)
             present(alert, animated: true)
         }
-        if let contentData = contentTV.text, let tag = tagLabel.text, let studyGroup = studyGroupLabel.text{
+        if let contentData = contentTV.text, let tag = tagLabel.text{
             params["content"] = contentData
             //api 받으면 prameter에 태그, 스터디 그룹 넣어주기
         }else{
@@ -321,7 +268,7 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
             present(alert, animated: true)
         }
         else{
-            postData(boardID: BoardManager.getBoardID(boardName: "Study"), params: params)
+            postData(boardID: BoardManager.getBoardID(boardName: "Question"), params: params)
             let alert = UIAlertController(title: "알림", message: "글쓰기가 완료되었습니다.", preferredStyle: .alert)
             let ok = UIAlertAction(title: "확인", style: .default){_ in self.dismiss(animated: true) }
             alert.addAction(ok)
@@ -346,18 +293,6 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
         UIView.animate(withDuration: 0.3) {
             self.tagPickerView.alpha = 1.0
             self.tagDoneView.alpha = 1.0
-        }
-    }
-    
-    @IBAction func studyBtnTapped(_ sender: Any) {
-        studyPickerView.isHidden = false
-        studyDoneView.isHidden = false
-        
-        studyPickerView.alpha = 0.0
-        studyDoneView.alpha = 0.0
-        UIView.animate(withDuration: 0.3) {
-            self.studyPickerView.alpha = 1.0
-            self.studyDoneView.alpha = 1.0
         }
     }
     
@@ -386,30 +321,6 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    @objc func studyDoneBtnTapped(){
-        studyPickerView.isHidden = true
-        studyDoneView.isHidden = true
-        
-        if let studyGroupText = studyGroup{
-            if studyGroupText == "선택하세요"{
-                studyGroupLabel.text = nil
-            }
-            else{
-                studyGroupLabel.text = studyGroupText
-            }
-        }
-        else{
-            studyGroupLabel.text = nil
-        }
-                
-        UIView.animate(withDuration: 0.3) {
-            self.studyPickerView.alpha = 0.0
-            self.studyDoneView.alpha = 0.0
-        }
-    }
-    
-    
-    
     //MARK: - title textView의 place holder 기능
     func textViewDidBeginEditing(_ textView: UITextView) {
         if titleTV.textColor == UIColor.lightGray {
@@ -435,36 +346,21 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
 
 }
 
-extension StudyPostingAddViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+extension QuestionPostingAddViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == tagPickerView{
-            return tagData.count
-        }
-        else{
-            return studyGroupData.count
-        }
+        return tagData.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == tagPickerView{
-            return tagData[row]
-        }
-        else{
-            return studyGroupData[row]
-        }
+        return tagData[row]
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == tagPickerView{
-            self.tag = tagData[row]
-        }
-        else{
-            self.studyGroup = studyGroupData[row]
-        }
+        self.tag = tagData[row]
     }
     
 }
