@@ -32,7 +32,6 @@ public class StatisticsService {
         User user = findUser(userId);
 
         Statistics oldStatistics = statisticsRepository.findByUserAndDate(user, statisticsCreateRequest.getLocalDate());
-
         if (oldStatistics != null) {
             return new StatisticsIdResponse(oldStatistics.getId());
         }
