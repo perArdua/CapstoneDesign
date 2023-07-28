@@ -31,6 +31,6 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
     @Query(value = "SELECT COUNT(c) FROM Comment c WHERE c.user = :user AND FORMATDATETIME(c.createdAt, 'yyyy-MM-dd') >= :startDate AND FORMATDATETIME(c.createdAt, 'yyyy-MM-dd') < :endDate AND c.isAdopted = true")
     long countAnswersByUserAndModifiedAtBetweenAndIsAdoptedTrue(@Param("user") User user, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    @Query(value = "SELECT s FROM Statistics s WHERE FORMATDATETIME(s.date, 'yyyy-MM-dd') = FORMATDATETIME(:date, 'yyyy-MM-dd') AND s.user = :user")
+    @Query(value = "SELECT s FROM Statistics s WHERE s.date = :date AND s.user = :user")
     Statistics findByUserAndDate(@Param("user") User user, @Param("date") LocalDate date);
 }
