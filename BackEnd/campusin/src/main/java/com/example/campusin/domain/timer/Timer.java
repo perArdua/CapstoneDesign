@@ -3,10 +3,7 @@ package com.example.campusin.domain.timer;
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.timer.request.TimerUpdateRequest;
 import com.example.campusin.domain.user.User;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -22,8 +19,9 @@ import java.util.Objects;
 
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "UPDATE TIMER SET deleted_at = CURRENT_TIMESTAMP where timer_id = ?")
+@NoArgsConstructor
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
 @Entity
 public class Timer extends BaseTimeEntity {
 

@@ -2,10 +2,7 @@ package com.example.campusin.domain.statistics;
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.user.User;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -19,7 +16,8 @@ import java.time.LocalDate;
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "UPDATE Statistics SET deleted_at = CURRENT_TIMESTAMP where statistics_id = ?")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
+@NoArgsConstructor()
 @Entity
 public class Statistics extends BaseTimeEntity {
 

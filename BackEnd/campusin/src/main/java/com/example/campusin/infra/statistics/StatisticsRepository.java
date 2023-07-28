@@ -5,7 +5,6 @@ import com.example.campusin.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.parameters.P;
 
 import java.time.LocalDate;
 
@@ -32,6 +31,6 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
     @Query(value = "SELECT COUNT(c) FROM Comment c WHERE c.user = :user AND FORMATDATETIME(c.createdAt, 'yyyy-MM-dd') >= :startDate AND FORMATDATETIME(c.createdAt, 'yyyy-MM-dd') < :endDate AND c.isAdopted = true")
     long countAnswersByUserAndModifiedAtBetweenAndIsAdoptedTrue(@Param("user") User user, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    @Query(value = "SELECT s FROM Statistics s WHERE s.date = :date")
-    Statistics findByDate(@Param("date") LocalDate date);
+    @Query(value = "SELECT s FROM Statistics s WHERE s.date = :date AND s.user = :user")
+    Statistics findByUserAndDate(@Param("user") User user, @Param("date") LocalDate date);
 }
