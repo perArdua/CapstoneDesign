@@ -59,10 +59,10 @@ public class TimerService {
 
     @Transactional
     public Page<TimerResponse> initTimer(Long userId, Pageable pageable) {
-        findUser(userId);
+        User user = findUser(userId);
         List<Timer> oldTimers = timerRepository.findAllByUserId(userId);
 
-        Statistics statistics = statisticsRepository.findByDate(oldTimers.get(0).getModifiedAt().toLocalDate());
+        Statistics statistics = statisticsRepository.findByUserAndDate(user, oldTimers.get(0).getModifiedAt().toLocalDate());
 
         if (statistics == null) {
             statistics = Statistics.builder()
@@ -93,7 +93,7 @@ public class TimerService {
         if (!timer.getUser().equals(user)) {
             throw new IllegalArgumentException("USER NOT MATCH");
         }
-        Statistics statistics = statisticsRepository.findByDate(timer.getModifiedAt().toLocalDate());
+        Statistics statistics = statisticsRepository.findByUserAndDate(user, timer.getModifiedAt().toLocalDate());
         statistics.addElapsedTime(timer.getElapsedTime());
         statisticsRepository.save(statistics);
         timerRepository.deleteById(timerId);
