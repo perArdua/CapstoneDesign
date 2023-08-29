@@ -173,7 +173,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.2243322666" green="0.87414215689999997" blue="0.38678473920000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="ql0-Ks-boM" secondAttribute="trailing" constant="15" id="KWf-XW-4j0"/>
                                             <constraint firstAttribute="trailing" secondItem="fte-sw-o5w" secondAttribute="trailing" constant="20" id="RcL-MB-C5J"/>
@@ -201,7 +201,7 @@
                                                                     <constraint firstAttribute="width" constant="120" id="RUe-8Q-KiL"/>
                                                                     <constraint firstAttribute="height" constant="30" id="yvw-hz-Bcr"/>
                                                                 </constraints>
-                                                                <color key="tintColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="자유 게시판 &gt;"/>
                                                                 <connections>
@@ -274,7 +274,7 @@
                                                                     <constraint firstAttribute="width" constant="155" id="3Xx-er-YBv"/>
                                                                     <constraint firstAttribute="height" constant="30" id="YjT-rM-rrm"/>
                                                                 </constraints>
-                                                                <color key="tintColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="질의 응답 게시판 &gt;"/>
                                                                 <connections>
@@ -301,7 +301,7 @@
                                                                     <constraint firstAttribute="height" constant="30" id="fB7-VC-8GT"/>
                                                                     <constraint firstAttribute="width" constant="200" id="nHt-v2-iZr"/>
                                                                 </constraints>
-                                                                <color key="tintColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="스터디 그룹 모집 게시판 &gt;"/>
                                                                 <connections>
@@ -699,6 +699,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
