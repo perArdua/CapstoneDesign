@@ -27,11 +27,15 @@ public abstract class CommentResponse {
     @ApiModelProperty(value = "댓글 내용", example = "댓글 내용")
     private String content;
 
-    public CommentResponse(Long userId, Long parentId, Long commentId, String name, String content) {
+    @ApiModelProperty(value = "좋아요 수", example = "0")
+    private Integer like;
+
+    public CommentResponse(Long userId, Long parentId, Long commentId, String name, String content, Integer like) {
         this.userId = userId;
         this.parentId = parentId;
         this.commentId = commentId;
         this.name = name;
         this.content = content;
+        this.like = like;
     }
 }
