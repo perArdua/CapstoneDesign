@@ -22,7 +22,7 @@ struct MyStudyGroupResponseBody: Codable {
     
 
     private enum CodingKeys: String, CodingKey {
-        case studyGroupDetails = "StudyGroup 상세정보 조회가 완료되었습니다."
+        case studyGroupDetails = "내가 속한 StudyGroup 목록 조회가 완료되었습니다."
     }
 }
 
@@ -43,9 +43,10 @@ struct MyStudyGroupContent: Codable{
 struct MyStudyGroupDetails: Codable {
     let id: Int
     let studygroupName: String
-    let userId: Int
+    let userName: String
     let createdAt: [Int]
     let limitedMemberSize: Int
+    let currentMemberSize: Int
 }
 
 struct MyStudyGroupPageable: Codable {

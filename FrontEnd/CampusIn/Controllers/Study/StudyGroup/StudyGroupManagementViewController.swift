@@ -82,10 +82,10 @@ extension StudyGroupManagementViewController: UITableViewDataSource, UITableView
        
         let group = groupItems[indexPath.row]
         print("cell usere id")
-        print(group.userId)
+        //print(group.userId)
         cell.groupName.text = String(group.studygroupName)
         print(group.studygroupName)
-        cell.groupSize.text = String(group.limitedMemberSize) + " / 4"
+        cell.groupSize.text = String(group.currentMemberSize) + " / 4"
         //cell.selectionStyle = .none
        
         return cell
