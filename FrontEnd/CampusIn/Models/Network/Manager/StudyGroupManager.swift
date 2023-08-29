@@ -102,7 +102,7 @@ class StudyGroupManager{
         }
     }
     
-    //MARK: - create study group
+    //MARK: - join study group
     static func joinStudyGroup(groupID: Int, completion: @escaping (Result<Void, Error>) -> Void){
         let endPoint = APIConstants.StudyGroup.joinStudyGroupDetail
         
@@ -124,6 +124,21 @@ class StudyGroupManager{
             }
         }
     }
-    
-    
+
+    static func deleteStudyGroup(groupID: Int, completion: @escaping (Result<Void, Error>) -> Void){
+        let endPoint = String(format: APIConstants.StudyGroup.deleteStudyGroup, groupID)
+        
+        
+        AF.request(endPoint, method: .delete, encoding: JSONEncoding.default, headers: APIConstants.headers)
+            .validate()
+            .response { response in
+                switch response.result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+            }
+        }
+    }
+
 }

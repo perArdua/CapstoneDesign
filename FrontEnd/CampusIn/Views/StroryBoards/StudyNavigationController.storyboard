@@ -509,13 +509,13 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="Pvd-81-c6o">
                                                                             <rect key="frame" x="90" y="13.333333333333332" width="256" height="53.666666666666671"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2023 - 06 - 01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nca-ph-bhx">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2023 - 06 - 01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nca-ph-bhx">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="111.33333333333333" height="20.333333333333332"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="아 진짜 왜 안되는거야 진따" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGN-7E-OZR">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아 진짜 왜 안되는거야 진따" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGN-7E-OZR">
                                                                                     <rect key="frame" x="0.0" y="33.333333333333329" width="179.33333333333334" height="20.333333333333329"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <nil key="textColor"/>
@@ -892,7 +892,8 @@
                     </view>
                     <connections>
                         <outlet property="creationDate" destination="g7w-Tn-26S" id="J3d-qN-67c"/>
-                        <outlet property="g1" destination="KVB-Ml-5gm" id="ss1-aE-Bb3"/>
+                        <outlet property="deleteBtn" destination="Pf5-NG-lte" id="OgI-tx-8YI"/>
+                        <outlet property="g1" destination="KCY-gA-sda" id="DOf-PU-pHI"/>
                         <outlet property="g2" destination="mNF-Li-axL" id="sl8-eG-XIe"/>
                         <outlet property="g3" destination="JVh-0A-WkQ" id="q9t-KF-tPe"/>
                         <outlet property="g4" destination="1Uo-na-2wk" id="jEn-nJ-76m"/>
