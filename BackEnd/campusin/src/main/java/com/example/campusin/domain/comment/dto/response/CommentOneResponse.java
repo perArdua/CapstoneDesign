@@ -8,9 +8,10 @@ public class CommentOneResponse extends CommentResponse{
             Long userId,
             Long parentId,
             Long commentId,
+            Integer like,
             String name,
             String content
     ) {
-        super(userId, parentId, commentId, name, content);
+        super(userId, parentId, commentId, name, content, like);
     }
 }

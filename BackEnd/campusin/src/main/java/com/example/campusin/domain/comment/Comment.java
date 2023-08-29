@@ -26,7 +26,6 @@ import static javax.persistence.GenerationType.AUTO;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "UPDATE COMMENT SET deleted_at = CURRENT_TIMESTAMP where comment_id = ?")
-
 public class Comment extends BaseTimeEntity {
 
     @Id
@@ -41,8 +40,11 @@ public class Comment extends BaseTimeEntity {
     @JoinColumn(name = "parent_id")
     private Comment parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "parent", orphanRemoval = false)
     private List<Comment> children = new ArrayList<>();
+
+    @OneToMany(mappedBy = "comment")
+    private List<CommentLike> Likes = new ArrayList<>();
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id")
@@ -62,6 +64,8 @@ public class Comment extends BaseTimeEntity {
     @ColumnDefault("false")
     @Column(name = "is_adopted")
     private Boolean isAdopted;
+
+
 
     @Builder
     public Comment(Comment parent,User user, Post post, String content, Boolean isAnswer, Boolean isAdopted) {
@@ -119,5 +123,9 @@ public class Comment extends BaseTimeEntity {
 
     public List<Comment> getChildren() {
         return children;
+    }
+
+    public void addLike(CommentLike commentLike){
+        commentLike.setComment(this);
     }
 }
