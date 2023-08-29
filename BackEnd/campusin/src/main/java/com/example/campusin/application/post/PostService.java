@@ -3,8 +3,11 @@ package com.example.campusin.application.post;
 import com.example.campusin.domain.board.Board;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
+import com.example.campusin.domain.comment.CommentLikeId;
 import com.example.campusin.domain.photo.Photo;
 import com.example.campusin.domain.post.Post;
+import com.example.campusin.domain.post.PostLike;
+import com.example.campusin.domain.post.PostLikeId;
 import com.example.campusin.domain.post.dto.request.PostCreateRequest;
 import com.example.campusin.domain.post.dto.request.PostUpdateRequest;
 import com.example.campusin.domain.post.dto.response.PostIdResponse;
@@ -13,6 +16,7 @@ import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.board.BoardRepository;
 import com.example.campusin.infra.photo.PhotoRepository;
+import com.example.campusin.infra.post.PostLikeRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Created by kok8454@gmail.com on 2023-03-19
@@ -36,6 +41,7 @@ public class PostService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
     private final PhotoRepository photoRepository;
+    private final PostLikeRepository postLikeRepository;
 
     @Transactional(readOnly = true)
     public Page<PostSimpleResponse> getPostsByBoard(Long boardId, Pageable pageable) {
@@ -129,6 +135,34 @@ public class PostService {
     public Page<BoardSimpleResponse> getBoardIds(Pageable pageable) {
         return boardRepository.findAll(pageable).map(BoardSimpleResponse::new);
     }
+
+    @Transactional
+    public void likePost(Long userId, Long postId) {
+        PostLikeId postLikeId = new PostLikeId(userId, postId);
+        if(isPresentLike(postLikeId)){
+            throw new IllegalArgumentException("ALREADY LIKED EXISTS");
+        }
+        Post post = findPost(postId);
+        User user = findUser(userId);
+        postLikeRepository.save(new PostLike(post, user));
+    }
+
+    @Transactional
+    public void unlikePost(Long userId, Long postId) {
+        PostLikeId postLikeId = new PostLikeId(userId, postId);
+        if(!isPresentLike(postLikeId)){
+            throw new IllegalArgumentException("LIKE NOT FOUND");
+        }
+        Post post = findPost(postId);
+        User user = findUser(userId);
+        postLikeRepository.deleteById(postLikeId);
+        post.decreaseLikeCount();
+    }
+
+    private boolean isPresentLike(PostLikeId postLikeId){
+        return postLikeRepository.existsById(postLikeId);
+    }
+
     private Board findBoard(Long boardId) {
         return boardRepository.findById(boardId).orElseThrow(
                 () -> new IllegalArgumentException("BOARD NOT FOUND")
