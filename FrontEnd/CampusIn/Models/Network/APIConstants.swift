@@ -96,6 +96,7 @@ struct APIConstants {
         static let showStudyGroup = baseURL + "/studygroup/%d"
         static let deleteStudyGroup = baseURL + "/studygroup/%d"
         static let showMyStudyGroup = baseURL + "/studygroup/mystudygroup"
+        static let showStudyGroupDetail = baseURL + "/studygroup/%d"
     }
     
     struct Statistics{

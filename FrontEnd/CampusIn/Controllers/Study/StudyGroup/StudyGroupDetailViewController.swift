@@ -18,6 +18,7 @@ class StudyGroupDetailViewController: UIViewController {
     @IBOutlet weak var creationDate: UILabel!
     @IBOutlet weak var groupName: UILabel!
     var groupInfo: MyStudyGroupDetails?
+    var groupDetail: StudyGroupDetailContent?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +31,24 @@ class StudyGroupDetailViewController: UIViewController {
         var cDate: String = "\(String((groupInfo?.createdAt[0])!))/\(String((groupInfo?.createdAt[1])!))/\(String((groupInfo?.createdAt[2])!))"
         creationDate.text = cDate
         //groupHead.text = groupInfo.head //그룹장
+        setup()
         
-        
+    }
+    
+    func setup(){
+        StudyGroupManager.showStudyGroupDetail(groupID: groupInfo!.id) { result in
+            switch result{
+            case.success(let contents):
+                self.groupDetail = contents;
+                print("leader")
+                print(contents.leaderName)
+                DispatchQueue.main.async {
+                    self.groupHead.text = contents.leaderName
+                }
+            case.failure(let error):
+                print(error)
+            }
+        }
     }
     
 //MARK: - 그룹 탈퇴 버튼 액션 구현

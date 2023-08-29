@@ -85,4 +85,21 @@ class StudyGroupManager{
         }
     }
     
+    //MARK: - show study group detail
+    static func showStudyGroupDetail(groupID: Int, completion: @escaping(Result<StudyGroupDetailContent, Error>) -> Void){
+        let endPoint = String(format: APIConstants.StudyGroup.showStudyGroupDetail, groupID)
+        
+        AF.request(endPoint, method: .get, headers: APIConstants.headers)
+            .validate()
+            .responseDecodable(of: StudyGroupDetailResponse.self) { response in
+                switch response.result {
+                case .success(let studyGRes):
+                    let sgResponse = studyGRes.body.studyGroupDetail
+                    completion(.success(sgResponse))
+                case .failure(let error):
+                    completion(.failure(error))
+            }
+        }
+    }
+    
 }
