@@ -33,7 +33,9 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var studyGroupLabel: UILabel!
     
     let tagData = ["선택하세요", "IT", "수학", "자연과학", "공학", "경제", "인문", "예체능", "기타"]
-    let studyGroupData = ["선택하세요", "그룹1", "그룹2", "그룹3", "그룹4", "그룹5", "그룹6", "그룹7", "그룹8"]
+    var studyGroupData: [MyStudyGroupDetails] = []
+    var studyGroupID : Int?
+    
     //tag 버튼 누르면 나오는 피커뷰
     let tagPickerView = UIPickerView()
     let tagDoneView = UIView()
@@ -109,6 +111,20 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
             imgs.insert(img2, at: 2)
             imgs.insert(img3, at: 3)
             imgs.insert(img4, at: 4)
+        }
+        
+        StudyGroupManager.showMyStudyGroup { res in
+            switch res{
+            case .success(let data):
+                print("나의 스터디 그룹 목록 불러오기 성공")
+                for item in data{
+                    print(item.studygroupName)
+                }
+                self.studyGroupData = data
+            case .failure(let err):
+                print("나의 스터디 그룹 목록 불러오기 성공")
+                print(err)
+            }
         }
         
     }
@@ -297,6 +313,7 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
         if let contentData = contentTV.text, let tag = tagLabel.text, let studyGroup = studyGroupLabel.text{
             params["content"] = contentData
             //api 받으면 prameter에 태그, 스터디 그룹 넣어주기
+            params["studyGroupId"] = studyGroupID
         }else{
             let alert = UIAlertController(title: "경고", message: "내용을 모두 채워주세요", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default) { _ in print("empty contents")}
@@ -338,6 +355,7 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func tagBtnTapped(_ sender: UIButton) {
+        tagPickerView.reloadAllComponents()
         tagPickerView.isHidden = false
         tagDoneView.isHidden = false
         
@@ -350,6 +368,7 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func studyBtnTapped(_ sender: Any) {
+        studyPickerView.reloadAllComponents()
         studyPickerView.isHidden = false
         studyDoneView.isHidden = false
         
@@ -454,7 +473,7 @@ extension StudyPostingAddViewController: UIPickerViewDelegate, UIPickerViewDataS
             return tagData[row]
         }
         else{
-            return studyGroupData[row]
+            return studyGroupData[row].studygroupName
         }
     }
 
@@ -463,7 +482,8 @@ extension StudyPostingAddViewController: UIPickerViewDelegate, UIPickerViewDataS
             self.tag = tagData[row]
         }
         else{
-            self.studyGroup = studyGroupData[row]
+            self.studyGroup = studyGroupData[row].studygroupName
+            self.studyGroupID = studyGroupData[row].id
         }
     }
     
