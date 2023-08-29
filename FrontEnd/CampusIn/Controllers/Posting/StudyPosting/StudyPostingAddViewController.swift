@@ -32,7 +32,7 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var studyGroupLabel: UILabel!
     
-    let tagData = ["선택하세요", "IT", "수학", "인문", "태그1", "태그2", "태그3", "태그4", "태그5"]
+    let tagData = ["선택하세요", "IT", "수학", "자연과학", "공학", "경제", "인문", "예체능", "기타"]
     let studyGroupData = ["선택하세요", "그룹1", "그룹2", "그룹3", "그룹4", "그룹5", "그룹6", "그룹7", "그룹8"]
     //tag 버튼 누르면 나오는 피커뷰
     let tagPickerView = UIPickerView()

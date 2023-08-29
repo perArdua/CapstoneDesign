@@ -9,6 +9,13 @@ class QuestionPostingViewController: UIViewController {
     
     
     var array :[PostListContent] = []
+    let tagData = ["선택하세요", "IT", "수학", "자연과학", "공학", "경제", "인문", "예체능", "기타"]
+    let tagPickerView = UIPickerView()
+    let tagDoneView = UIView()
+    let tagDoneBtn = UIButton(type: .system)
+    var tag: String?
+    @IBOutlet weak var tagLabel: UILabel!
+    
     
     let addBtn: UIButton = {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
@@ -31,6 +38,7 @@ class QuestionPostingViewController: UIViewController {
         // TabBar 숨기기
         self.getData()
         self.tabBarController?.tabBar.isHidden = true
+        setUpTagPickerView()
         
     }
     
@@ -51,7 +59,53 @@ class QuestionPostingViewController: UIViewController {
         
         self.getData()
         tableView.reloadData()
+        
     }
+    
+    // MARK: - pickerView 레이아웃 설정
+    func setUpTagPickerView(){
+        tagPickerView.delegate = self
+        tagPickerView.dataSource = self
+        view.addSubview(tagPickerView)
+        tagPickerView.translatesAutoresizingMaskIntoConstraints = false
+        tagPickerView.backgroundColor = .white
+        tagPickerView.layer.borderColor = UIColor.gray.cgColor
+        tagPickerView.isHidden = true
+        NSLayoutConstraint.activate([
+        
+            // Picker View 제약 조건
+            tagPickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            tagPickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            tagPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            tagPickerView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        tagDoneView.backgroundColor = .systemGray5
+        view.addSubview(tagDoneView)
+        tagDoneView.translatesAutoresizingMaskIntoConstraints = false
+        tagDoneView.isHidden = true
+        NSLayoutConstraint.activate([
+            tagDoneView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            tagDoneView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            tagDoneView.bottomAnchor.constraint(equalTo: tagPickerView.topAnchor, constant: 0),
+            tagDoneView.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        tagDoneView.addSubview(tagDoneBtn)
+        
+        tagDoneBtn.tintColor = .systemBlue
+        tagDoneBtn.setTitle("완료", for: .normal)
+        
+        tagDoneBtn.translatesAutoresizingMaskIntoConstraints = false
+        tagDoneBtn.addTarget(self, action: #selector(tagDoneBtnTapped), for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            tagDoneBtn.trailingAnchor.constraint(equalTo: tagDoneView.trailingAnchor, constant: 0),
+            tagDoneBtn.topAnchor.constraint(equalTo: tagDoneView.topAnchor, constant: 0),
+            tagDoneBtn.bottomAnchor.constraint(equalTo: tagDoneView.bottomAnchor, constant: 0),
+            tagDoneBtn.widthAnchor.constraint(equalToConstant: 80)
+        ])
+    }
+    
+    
     
     // MARK: - 검색 API 요청하는 함수
     func getData(){
@@ -78,6 +132,43 @@ class QuestionPostingViewController: UIViewController {
         present(nextVC, animated: true, completion: nil)
         print("addBtn tapped")
     }
+    
+    @IBAction func tagBtnTapped(_ sender: UIButton) {
+        tagPickerView.isHidden = false
+        tagDoneView.isHidden = false
+        
+        tagPickerView.alpha = 0.0
+        tagDoneView.alpha = 0.0
+        UIView.animate(withDuration: 0.3) {
+            self.tagPickerView.alpha = 1.0
+            self.tagDoneView.alpha = 1.0
+        }
+    }
+    
+    @objc func tagDoneBtnTapped(){
+        tagPickerView.isHidden = true
+        tagDoneView.isHidden = true
+        
+        if let tagText = tag{
+            tagLabel.text = tagText
+            if tagText == "선택하세요"{
+                tagLabel.textColor = .systemGray2
+            }
+            else{
+                tagLabel.textColor = .black
+            }
+        }
+        else{
+            tagLabel.text = nil
+        }
+                
+        UIView.animate(withDuration: 0.3) {
+            self.tagPickerView.alpha = 0.0
+            self.tagDoneView.alpha = 0.0
+        }
+    }
+    
+    
     
     // MARK: - 테이블 뷰에서 게시글을 탭했을때 게시글의 정보를 가져오는 함수
     func getPostDetail(postID : Int, completion: @escaping (PostDetailContent) -> Void){
@@ -150,5 +241,24 @@ extension QuestionPostingViewController : UITableViewDelegate, UITableViewDataSo
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }
+    }
+}
+
+extension QuestionPostingViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return tagData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return tagData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        self.tag = tagData[row]
     }
 }
