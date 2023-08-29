@@ -31,12 +31,14 @@ struct PostDetailContent: Codable {
     let title, content: String
     let photoList: [PostDetailPhotoList]
     let createdAt: [Int]
+    let studyGroupID: Int?
     let price: Int?
     
     enum CodingKeys: String, CodingKey {
         case postID = "postId"
         case boardType
         case userID = "userId"
+        case studyGroupID = "studyGroupId"
         case nickname, title, content, photoList, createdAt, price
     }
 }

@@ -304,6 +304,23 @@ extension StudyPostingDetailViewController: UISheetPresentationControllerDelegat
 extension StudyPostingDetailViewController: StudyGroupPostingContentTVCellDelegate{
     func registerBtnTapped(in cell: StudyPostingContentTableViewCell) {
         print("그룹 가입 시도함")
-        //그룹 가입 API콜 하기
+        StudyGroupManager.joinStudyGroup(groupID: postDetail!.studyGroupID!) { res in
+            switch res{
+            case .success:
+                print("가입 성공")
+                let alert = UIAlertController(title: "알림", message: "스터디 그룹에 가입되었습니다.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(okAction)
+                self.present(alert, animated: true)
+                
+            case .failure(_):
+                print("가입 실패")
+                let alert = UIAlertController(title: "알림", message: "스터디 그룹에 가입에 살패했습니다.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(okAction)
+                self.present(alert, animated: true)
+            }
+            //그룹 가입 API콜 하기
+        }
     }
 }
