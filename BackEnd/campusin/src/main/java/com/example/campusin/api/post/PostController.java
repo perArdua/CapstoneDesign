@@ -112,4 +112,18 @@ public class PostController {
                                       ) Pageable pageable) {
         return ApiResponse.success("내가 작성한 댓글의 게시글 목록", postService.getPostsThatUserCommentedAt(principal.getUserId(), pageable));
     }
+
+    @PostMapping("/{postId}/like")
+    public ApiResponse likePost(@AuthenticationPrincipal UserPrincipal principal,
+                                @PathVariable(name = "postId") Long postId) {
+        postService.likePost(principal.getUserId(), postId);
+        return ApiResponse.success("게시글 좋아요", "Post liked successfully");
+    }
+
+    @DeleteMapping("/{postId}/like")
+    public ApiResponse unlikePost(@AuthenticationPrincipal UserPrincipal principal,
+                                  @PathVariable(name = "postId") Long postId) {
+        postService.unlikePost(principal.getUserId(), postId);
+        return ApiResponse.success("게시글 좋아요 취소", "Post unliked successfully");
+    }
 }
