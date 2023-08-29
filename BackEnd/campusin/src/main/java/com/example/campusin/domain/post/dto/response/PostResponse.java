@@ -54,8 +54,11 @@ public class PostResponse {
     @Schema(name = "스터디 그룹 id", example = "1")
     private Long studyGroupId;
 
+    @Schema(name = "좋아요 수", example = "1")
+    private Integer likeCount;
+
     @Builder
-    public PostResponse(Long postId, Long userId, BoardType boardType, String nickname, String title, String content, List<PhotoResponse> photoList, LocalDateTime createdAt, Long price, Long studyGroupId) {
+    public PostResponse(Long postId, Long userId, BoardType boardType, String nickname, String title, String content, List<PhotoResponse> photoList, LocalDateTime createdAt, Long price, Long studyGroupId, Integer likeCount) {
         this.postId = postId;
         this.userId = userId;
         this.boardType = boardType;
@@ -66,6 +69,7 @@ public class PostResponse {
         this.createdAt = createdAt;
         this.price = price;
         this.studyGroupId = studyGroupId;
+        this.likeCount = likeCount;
     }
 
     @Builder
@@ -80,7 +84,8 @@ public class PostResponse {
                 entity.getPhotos().stream().map(PhotoResponse::new).collect(Collectors.toList()),
                 entity.getCreatedAt(),
                 entity.getPrice(),
-                entity.getStudyGroupId()
+                entity.getStudyGroupId(),
+                entity.getLikeCount()
         );
     }
 }
