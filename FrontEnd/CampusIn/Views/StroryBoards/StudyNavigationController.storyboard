@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -509,13 +510,13 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="Pvd-81-c6o">
                                                                             <rect key="frame" x="90" y="13.333333333333332" width="256" height="53.666666666666671"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2023 - 06 - 01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nca-ph-bhx">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2023 - 06 - 01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nca-ph-bhx">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="111.33333333333333" height="20.333333333333332"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아 진짜 왜 안되는거야 진따" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGN-7E-OZR">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="아 진짜 왜 안되는거야 진따" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGN-7E-OZR">
                                                                                     <rect key="frame" x="0.0" y="33.333333333333329" width="179.33333333333334" height="20.333333333333329"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <nil key="textColor"/>
@@ -589,59 +590,61 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="그룹 이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lik-aP-KgK">
-                                <rect key="frame" x="20" y="109" width="353" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <rect key="frame" x="20" y="163" width="75" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="그룹 이름을 입력하세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bQy-HH-DuF">
-                                <rect key="frame" x="20" y="181" width="353" height="34"/>
+                                <rect key="frame" x="105" y="159" width="278" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인원 선택" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7K-mk-gve">
-                                <rect key="frame" x="20" y="255" width="353" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <rect key="frame" x="20" y="255" width="74.333333333333329" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y35-te-tGH">
-                                <rect key="frame" x="96.666666666666686" y="317" width="200" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="WTE-fa-hHg"/>
-                                    <constraint firstAttribute="height" constant="100" id="dYf-Xl-igL"/>
-                                </constraints>
-                            </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1O-tC-mdg">
                                 <rect key="frame" x="50" y="733" width="293" height="35"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="추가하기"/>
+                                <buttonConfiguration key="configuration" style="filled" title="추가하기">
+                                    <color key="baseBackgroundColor" name="outgoingMessageBackground"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="addBtnTapped:" destination="nhP-oa-PCC" eventType="touchUpInside" id="zuA-Wv-yt4"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="y35-te-tGH">
+                                <rect key="frame" x="104.33333333333334" y="217" width="268.66666666666663" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="dYf-Xl-igL"/>
+                                </constraints>
+                            </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vj8-fL-55d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="f1O-tC-mdg" firstAttribute="leading" secondItem="vj8-fL-55d" secondAttribute="leading" constant="50" id="0Lj-Ec-yLV"/>
+                            <constraint firstItem="vj8-fL-55d" firstAttribute="trailing" secondItem="bQy-HH-DuF" secondAttribute="trailing" constant="10" id="0dS-F2-TcI"/>
+                            <constraint firstItem="y35-te-tGH" firstAttribute="leading" secondItem="S7K-mk-gve" secondAttribute="trailing" constant="10" id="0nk-Nw-Q90"/>
                             <constraint firstItem="S7K-mk-gve" firstAttribute="leading" secondItem="vj8-fL-55d" secondAttribute="leading" constant="20" id="1UI-6B-nUA"/>
-                            <constraint firstItem="vj8-fL-55d" firstAttribute="trailing" secondItem="lik-aP-KgK" secondAttribute="trailing" constant="20" id="72t-q3-AJa"/>
-                            <constraint firstItem="lik-aP-KgK" firstAttribute="top" secondItem="vj8-fL-55d" secondAttribute="top" constant="50" id="7DP-4p-sfN"/>
-                            <constraint firstItem="vj8-fL-55d" firstAttribute="trailing" secondItem="bQy-HH-DuF" secondAttribute="trailing" constant="20" id="7eo-or-LrR"/>
-                            <constraint firstItem="lik-aP-KgK" firstAttribute="leading" secondItem="vj8-fL-55d" secondAttribute="leading" constant="20" id="IKq-0R-QsN"/>
+                            <constraint firstItem="y35-te-tGH" firstAttribute="top" secondItem="bQy-HH-DuF" secondAttribute="bottom" constant="24" id="DHB-bs-6AH"/>
+                            <constraint firstItem="lik-aP-KgK" firstAttribute="leading" secondItem="vj8-fL-55d" secondAttribute="leading" constant="20" id="Js6-2W-qZA"/>
                             <constraint firstItem="vj8-fL-55d" firstAttribute="trailing" secondItem="f1O-tC-mdg" secondAttribute="trailing" constant="50" id="QzG-cu-kjN"/>
-                            <constraint firstItem="bQy-HH-DuF" firstAttribute="top" secondItem="lik-aP-KgK" secondAttribute="bottom" constant="30" id="Z2M-lI-oMC"/>
-                            <constraint firstItem="bQy-HH-DuF" firstAttribute="leading" secondItem="vj8-fL-55d" secondAttribute="leading" constant="20" id="bEw-fH-PeH"/>
-                            <constraint firstItem="y35-te-tGH" firstAttribute="centerX" secondItem="Bri-wi-kbJ" secondAttribute="centerX" id="bw2-kN-KSS"/>
+                            <constraint firstItem="bQy-HH-DuF" firstAttribute="top" secondItem="vj8-fL-55d" secondAttribute="top" constant="100" id="Wpv-kc-DB7"/>
+                            <constraint firstItem="vj8-fL-55d" firstAttribute="trailing" secondItem="y35-te-tGH" secondAttribute="trailing" constant="20" id="ciQ-of-Pno"/>
                             <constraint firstItem="vj8-fL-55d" firstAttribute="bottom" secondItem="f1O-tC-mdg" secondAttribute="bottom" constant="50" id="cs3-yq-7qv"/>
-                            <constraint firstItem="vj8-fL-55d" firstAttribute="trailing" secondItem="S7K-mk-gve" secondAttribute="trailing" constant="20" id="dmg-8d-S3u"/>
-                            <constraint firstItem="S7K-mk-gve" firstAttribute="top" secondItem="bQy-HH-DuF" secondAttribute="bottom" constant="40" id="l8l-HY-TP0"/>
-                            <constraint firstItem="y35-te-tGH" firstAttribute="top" secondItem="S7K-mk-gve" secondAttribute="bottom" constant="20" id="rF6-bL-dZo"/>
+                            <constraint firstItem="lik-aP-KgK" firstAttribute="top" secondItem="vj8-fL-55d" secondAttribute="top" constant="104" id="jbu-sg-Kjg"/>
+                            <constraint firstItem="bQy-HH-DuF" firstAttribute="leading" secondItem="lik-aP-KgK" secondAttribute="trailing" constant="10" id="jki-9h-iAl"/>
+                            <constraint firstItem="S7K-mk-gve" firstAttribute="top" secondItem="lik-aP-KgK" secondAttribute="bottom" constant="68" id="yL0-yh-W7e"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4Pi-Tw-v6u"/>
                     <connections>
+                        <outlet property="addBtn" destination="f1O-tC-mdg" id="MH4-sj-zma"/>
                         <outlet property="nameTextField" destination="bQy-HH-DuF" id="YFs-3B-K7Q"/>
                         <outlet property="pickerView" destination="y35-te-tGH" id="Lii-zJ-YuL"/>
                     </connections>
@@ -1403,6 +1406,9 @@
         <image name="square.grid.3x3.fill" catalog="system" width="128" height="113"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
+        <namedColor name="outgoingMessageBackground">
+            <color red="0.20399998128414154" green="0.77999997138977051" blue="0.34899997711181641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

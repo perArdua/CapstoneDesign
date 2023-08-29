@@ -14,13 +14,12 @@ class StudyGroupManager{
     static func createStudyGroup(title: String, size: Int, completion: @escaping (Result<Void, Error>) -> Void){
         let endPoint = APIConstants.StudyGroup.createStudyGroup
         
-        let userId = UserDefaults.standard.value(forKey: "userId")!
-        let userIdString = String(describing: userId)
+//        let userId = UserDefaults.standard.value(forKey: "userId")!
+//        let userIdString = String(describing: userId)
         
         let parameters: [String: Any] = [
             "limitedMemberSize": size,
             "studygroupName": title,
-            "userId": Int(userIdString)!
         ]
         
         AF.request(endPoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: APIConstants.headers)

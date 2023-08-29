@@ -9,6 +9,7 @@ import UIKit
 
 class StudyGroupAddViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
     let numbers = ["1", "2", "3", "4"]
@@ -18,6 +19,8 @@ class StudyGroupAddViewController: UIViewController, UIPickerViewDataSource, UIP
         
         pickerView.dataSource = self
         pickerView.delegate = self
+        nameTextField.delegate = self
+        setDisable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +46,19 @@ class StudyGroupAddViewController: UIViewController, UIPickerViewDataSource, UIP
        cnt = Int(selectedNumber)
        print(cnt)
    }
+    
+    func setDisable(){
+        addBtn.isEnabled = false
+        addBtn.backgroundColor = UIColor.lightGray
+        addBtn.tintColor = UIColor.white
+    }
+    
+    func setAble(){
+        addBtn.isEnabled = true
+        addBtn.backgroundColor = UIColor.systemGreen
+        addBtn.tintColor = UIColor.white
+    }
+    
     //MARK: - 그룹 추가 액션 구현
     @IBAction func addBtnTapped(_ sender: UIButton) {
         guard let groupName = nameTextField.text, !groupName.isEmpty else {
@@ -66,5 +82,20 @@ class StudyGroupAddViewController: UIViewController, UIPickerViewDataSource, UIP
         let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
+    }
+}
+
+extension StudyGroupAddViewController: UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        print("textfied edit")
+        if newText.isEmpty{
+            setDisable()
+        }
+        else{
+            setAble()
+        }
+        
+        return true
     }
 }
