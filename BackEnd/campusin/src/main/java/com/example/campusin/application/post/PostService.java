@@ -13,11 +13,14 @@ import com.example.campusin.domain.post.dto.request.PostUpdateRequest;
 import com.example.campusin.domain.post.dto.response.PostIdResponse;
 import com.example.campusin.domain.post.dto.response.PostResponse;
 import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
+import com.example.campusin.domain.post.dto.response.PostStudyResponse;
+import com.example.campusin.domain.studygroup.StudyGroup;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.board.BoardRepository;
 import com.example.campusin.infra.photo.PhotoRepository;
 import com.example.campusin.infra.post.PostLikeRepository;
 import com.example.campusin.infra.post.PostRepository;
+import com.example.campusin.infra.studygroup.StudyGroupRepository;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
@@ -42,6 +45,8 @@ public class PostService {
     private final UserRepository userRepository;
     private final PhotoRepository photoRepository;
     private final PostLikeRepository postLikeRepository;
+
+    private final StudyGroupRepository studyGroupRepository;
 
     @Transactional(readOnly = true)
     public Page<PostSimpleResponse> getPostsByBoard(Long boardId, Pageable pageable) {
@@ -158,6 +163,20 @@ public class PostService {
         postLikeRepository.deleteById(postLikeId);
         post.decreaseLikeCount();
     }
+
+    @Transactional(readOnly = true)
+    public Page<PostStudyResponse> getPostsByStudyGroup(Long studyGroupId, Pageable pageable) {
+        StudyGroup studyGroup = findStudyGroup(studyGroupId);
+        Page<Post> posts = postRepository.findPostsByStudyGroupId(studyGroupId, pageable);
+        return posts.map(PostStudyResponse::new);
+    }
+
+    private StudyGroup findStudyGroup(Long studyGroupId) {
+        return studyGroupRepository.findById(studyGroupId).orElseThrow(
+                () -> new IllegalArgumentException("STUDYGROUP NOT FOUND")
+        );
+    }
+
 
     private boolean isPresentLike(PostLikeId postLikeId){
         return postLikeRepository.existsById(postLikeId);
