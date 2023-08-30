@@ -3,7 +3,6 @@ package com.example.campusin.application.post;
 import com.example.campusin.domain.board.Board;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
-import com.example.campusin.domain.comment.CommentLikeId;
 import com.example.campusin.domain.photo.Photo;
 import com.example.campusin.domain.post.Post;
 import com.example.campusin.domain.post.PostLike;
@@ -15,12 +14,16 @@ import com.example.campusin.domain.post.dto.response.PostResponse;
 import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
 import com.example.campusin.domain.post.dto.response.PostStudyResponse;
 import com.example.campusin.domain.studygroup.StudyGroup;
+import com.example.campusin.domain.tag.Tag;
+import com.example.campusin.domain.tag.TagType;
+import com.example.campusin.domain.tag.dto.response.TagResponse;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.board.BoardRepository;
 import com.example.campusin.infra.photo.PhotoRepository;
 import com.example.campusin.infra.post.PostLikeRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.studygroup.StudyGroupRepository;
+import com.example.campusin.infra.tag.TagRepository;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
@@ -29,8 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Created by kok8454@gmail.com on 2023-03-19
@@ -45,8 +46,8 @@ public class PostService {
     private final UserRepository userRepository;
     private final PhotoRepository photoRepository;
     private final PostLikeRepository postLikeRepository;
-
     private final StudyGroupRepository studyGroupRepository;
+    private final TagRepository tagRepository;
 
     @Transactional(readOnly = true)
     public Page<PostSimpleResponse> getPostsByBoard(Long boardId, Pageable pageable) {
@@ -55,10 +56,17 @@ public class PostService {
         return postRepository.findPostsByBoardId(boardId, pageable).map(PostSimpleResponse::new);
     }
 
+    @Transactional(readOnly = true)
+    public Page<PostSimpleResponse> getPostsByTag(Long tagId, Pageable pageable) {
+        findTag(tagId);
+        return postRepository.findPostsByTagId(tagId, pageable).map(PostSimpleResponse::new);
+    }
+
     @Transactional
-    public PostIdResponse createPost(Long boardId, Long userId, PostCreateRequest request) {
+    public PostIdResponse createPost(Long boardId, Long tagId, Long userId, PostCreateRequest request) {
         Board board = findBoard(boardId);
         User user = findUser(userId);
+        Tag tag = findTag(tagId);
         Post post = postRepository.save(Post.builder()
                 .board(board)
                 .user(user)
@@ -66,6 +74,7 @@ public class PostService {
                 .content(request.getContent())
                 .price(request.getPrice())
                 .studyGroupId(request.getStudyGroupId())
+                .tag(tag)
                 .build());
         for (String content : request.getPhotos()) {
             Photo savePhoto = new Photo(content);
@@ -113,9 +122,22 @@ public class PostService {
                         .boardType(boardType)
                         .build());
             }
+
+            if(tagRepository.count() == 0) {
+                for(TagType tagType : TagType.values()){
+                    tagRepository.save(Tag.builder()
+                            .tagType(tagType)
+                            .build());
+                }
+            }
             return true;
         }
         return false;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<TagResponse> getTags(Pageable pageable){
+        return tagRepository.findAll(pageable).map(TagResponse::new);
     }
 
     @Transactional(readOnly = true)
@@ -197,6 +219,11 @@ public class PostService {
     private User findUser(Long userId) {
         return userRepository.findById(userId).orElseThrow(
                 () -> new IllegalArgumentException("USER NOT FOUND")
+        );
+    }
+    private Tag findTag(Long tagId) {
+        return tagRepository.findById(tagId).orElseThrow(
+                () -> new IllegalArgumentException("TAG NOT FOUND")
         );
     }
 }
