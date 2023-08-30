@@ -1,6 +1,7 @@
 package com.example.campusin.domain.user.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ public class NickResponse {
     @Schema(name = "닉네임", example = "닉네임")
     private String nickname;
 
+    @Builder
     public NickResponse(String nickname) {
         this.nickname = nickname;
     }
