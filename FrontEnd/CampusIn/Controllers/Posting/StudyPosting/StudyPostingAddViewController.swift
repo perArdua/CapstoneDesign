@@ -126,7 +126,6 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
                 print(err)
             }
         }
-        
     }
     
     // MARK: - tag의 pickerView UI 세팅
