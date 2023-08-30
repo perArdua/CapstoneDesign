@@ -81,7 +81,7 @@ class BoardManager{
     // MARK: - 게시글 검색 요청 함수
     static func searchPost(boardID: Int, keyword: String, completion: @escaping (Result<[PostSearchContent], Error>) -> Void){
         let endpoint = String(format: APIConstants.Board.searchPosts, boardID, keyword.encodeUrl()!)
-        
+        print(endpoint)
         AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostSearch.self) { response in
             switch response.result{
             case .success(let searchList):
