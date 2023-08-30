@@ -43,8 +43,7 @@ public class UserController {
     @Operation(summary = "기존 회원인지 판단", description = "기존 회원이면 true, 아니면 false")
     @GetMapping("/nickname")
     public ApiResponse nicknameCheck(@AuthenticationPrincipal UserPrincipal principal) {
-        boolean isExist = userService.nicknameCheck(principal.getLoginId());
-        return ApiResponse.success("isExist", isExist);
+        return ApiResponse.success("기존 회원 닉네임 반환 성공",  userService.nicknameCheck(principal.getLoginId()));
     }
 
     @ApiResponses(value = {
