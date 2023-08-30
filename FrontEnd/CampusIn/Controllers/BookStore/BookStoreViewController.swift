@@ -21,6 +21,8 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
     let sellerNames: [String] = ["ooo", "ooo", "ooo"]
     var searchBar: UISearchBar?
     var array: [PostListContent] = []
+    var searchArr: [PostSearchContent] = []
+    var srch: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,7 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
         plusButton.tintColor = .white
         navigationItem.rightBarButtonItem = plusButton
         
+        srch = false
         bookTitle.textColor = .white
         getData()
         //self.navigationController?.navigationBar.tintColor = .white
@@ -48,6 +51,7 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
+        srch = false
         getData()
         tableView.delegate = self
         tableView.dataSource = self
@@ -112,13 +116,16 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
         }
     
     func getSearchData(keyword: String){
+        srch = true
         BoardManager.searchPost(boardID: BoardManager.getBoardID(boardName: "Book"), keyword: keyword){result in
             switch result {
             case .success(let posts):
                 // 데이터를 받아와서 배열에 저장
-                //self.array = posts
-                self.tableView.reloadData()
-                
+                DispatchQueue.main.async {
+                    self.searchArr = []
+                    self.searchArr = posts
+                    self.tableView.reloadData()
+                }
             case .failure(let error):
                 print("Error: \(error)")
             }
@@ -153,6 +160,9 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(srch){
+            return searchArr.count
+        }
         return array.count
     }
     
@@ -160,35 +170,65 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
         let cellIdentifier = "BookStoreTableViewCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! BookStoreTableViewCell
         print(indexPath.row)
-        let bookInfo = array[indexPath.row]
-        print("price")
-        print(bookInfo.price)
-//        cell.bookImgView.image = UIImage(base64: (bookInfo.photo)!, withPrefix: false)
-        cell.bookName.text = bookInfo.title
-        cell.bookPrice.text = String(describing: bookInfo.price)
-        cell.sellerName.text = bookInfo.nickname
-        cell.bookPrice.text = String(bookInfo.price!) + " 원"
-        cell.selectionStyle = .none
-        print("weoifjwe;ofjao;ewfj;oaiwejf")
+        
+        if(srch){
+            let searchInfo = searchArr[indexPath.row]
+            cell.bookName.text = searchInfo.title
+            cell.bookPrice.text = String(describing: searchInfo.price)
+            cell.sellerName.text = searchInfo.nickname
+            cell.bookPrice.text = String(searchInfo.price!) + " 원"
+            cell.selectionStyle = .none
+        }else{
+            let bookInfo = array[indexPath.row]
+            print("price")
+            print(bookInfo.price)
+    //        cell.bookImgView.image = UIImage(base64: (bookInfo.photo)!, withPrefix: false)
+            cell.bookName.text = bookInfo.title
+            cell.bookPrice.text = String(describing: bookInfo.price)
+            cell.sellerName.text = bookInfo.nickname
+            cell.bookPrice.text = String(bookInfo.price!) + " 원"
+            cell.selectionStyle = .none
+            print("weoifjwe;ofjao;ewfj;oaiwejf")
+        }
+        
+        
         //print(cell)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = storyboard!.instantiateViewController(withIdentifier: "BookDetailViewController") as! BookDetailViewController
-        let bookInfo = array[indexPath.row]
         
-        getPostDetail(postID: bookInfo.postID){ [self]
-            postDetail in
-            print("res")
-            //print(postDetail)
-            detailVC.bookDetail = postDetail
-            detailVC.bookName = bookInfo.title
-            detailVC.sellerName = bookInfo.nickname
-            //detailVC.bookImg = UIImage(base64: (bookInfo.postImage)!, withPrefix: false)
-            detailVC.bookPrice = String(bookInfo.price!)
-            self.navigationController?.pushViewController(detailVC, animated: true)
-            
+        if(srch){
+            let bookInfo = searchArr[indexPath.row]
+            getPostDetail(postID: bookInfo.postID){ [self]
+                postDetail in
+                print("res")
+                
+                //print(postDetail)
+                detailVC.bookDetail = postDetail
+                detailVC.bookName = bookInfo.title
+                detailVC.sellerName = bookInfo.nickname
+                //detailVC.bookImg = UIImage(base64: (bookInfo.postImage)!, withPrefix: false)
+                detailVC.bookPrice = String(bookInfo.price!)
+                self.navigationController?.pushViewController(detailVC, animated: true)
+                
+            }
+        }else{
+            let bookInfo = array[indexPath.row]
+            getPostDetail(postID: bookInfo.postID){ [self]
+                postDetail in
+                print("res")
+                
+                //print(postDetail)
+                detailVC.bookDetail = postDetail
+                detailVC.bookName = bookInfo.title
+                detailVC.sellerName = bookInfo.nickname
+                //detailVC.bookImg = UIImage(base64: (bookInfo.postImage)!, withPrefix: false)
+                detailVC.bookPrice = String(bookInfo.price!)
+                self.navigationController?.pushViewController(detailVC, animated: true)
+                
+            }
         }
         
        
