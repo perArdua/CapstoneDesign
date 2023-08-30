@@ -18,6 +18,7 @@ class StudyManageViewController: UIViewController{
     
     @IBOutlet weak var totalTimeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var groupTimers: [UIView]!
     
     // MARK: - 타이머 추가 버튼
     let addBtn: UIButton = {
@@ -40,6 +41,9 @@ class StudyManageViewController: UIViewController{
         tableView.delegate = self
         tableView.allowsSelection = false
         totalTime = 0
+        
+        groupTimers[2].isHidden = true
+        groupTimers[3].isHidden = true
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -95,6 +99,14 @@ class StudyManageViewController: UIViewController{
         view.addSubview(addBtn)
         addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
         addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 250, width: 60, height: 60)
+        
+        
+        //초기 그룹원들의 시간들을 가지고 오는 함수 필요
+    }
+    
+    func setGroupTimer(){
+        //1. api Call로 그룹원들의 시간을 불러옴
+        //2. 타이머 화면에 배치
     }
     
     // MARK: - 타이머 추가 버튼을 눌렀을때 작동하는 함수
