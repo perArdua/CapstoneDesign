@@ -77,14 +77,14 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알고리즘 청정수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcI-Zc-UE3">
-                                        <rect key="frame" x="143" y="168" width="107.33333333333331" height="20.333333333333343"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcI-Zc-UE3">
+                                        <rect key="frame" x="196.66666666666666" y="168" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Foi-Yz-WDn">
-                                        <rect key="frame" x="131.66666666666666" y="198.33333333333331" width="129.99999999999997" height="20"/>
+                                        <rect key="frame" x="131.66666666666666" y="178" width="129.99999999999997" height="20"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W5D-px-m2n">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="20"/>
@@ -98,6 +98,9 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="변경" cornerStyle="capsule">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="0.0"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="groupChangeBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="2dt-6q-DjC"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jY-qb-aCn">
                                                 <rect key="frame" x="70" y="0.0" width="60" height="20"/>
@@ -457,6 +460,7 @@
                     <navigationItem key="navigationItem" id="w72-H8-PPv"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="groupLabel" destination="PcI-Zc-UE3" id="iuQ-IX-nNK"/>
                         <outlet property="tableView" destination="gjb-Yy-S1a" id="OxK-Jp-ejH"/>
                         <outlet property="totalTimeLabel" destination="BGf-5g-EfU" id="umb-rP-Nlx"/>
                         <outletCollection property="groupTimers" destination="TGV-Pb-WOE" collectionClass="NSMutableArray" id="d3z-pK-9O0"/>

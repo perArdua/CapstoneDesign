@@ -18,7 +18,17 @@ class StudyManageViewController: UIViewController{
     
     @IBOutlet weak var totalTimeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet var groupTimers: [UIView]!
+    
+    var studyGroupData: [MyStudyGroupDetails] = []
+    var studyGroupID : Int?
+    
+    let studyPickerView = UIPickerView()
+    let studyDoneView = UIView()
+    let studyDoneBtn = UIButton(type: .system)
+    //스터디 그룹 라벨에 들어갈 텍스트
+    var studyGroup: String?
     
     // MARK: - 타이머 추가 버튼
     let addBtn: UIButton = {
@@ -62,7 +72,7 @@ class StudyManageViewController: UIViewController{
         
         
         timerFlag = false
-        
+        setUpStudyPickerView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +84,21 @@ class StudyManageViewController: UIViewController{
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
+        StudyGroupManager.showMyStudyGroup { res in
+            switch res{
+            case .success(let data):
+                print("나의 스터디 그룹 목록 불러오기 성공")
+                for item in data{
+                    print(item.studygroupName)
+                }
+                self.studyGroupData = data
+            case .failure(let err):
+                print("나의 스터디 그룹 목록 불러오기 성공")
+                print(err)
+            }
+        }
+        
+        
         if haveToInit!{
             //타이머 초기화 후 타이머 가져오기
             TimerManager.initTimer { result in
@@ -82,7 +107,6 @@ class StudyManageViewController: UIViewController{
                     print("타이머 초기화 성공")
                     //타이머 초기화 성공했다면 타이머 가져오기
                     self.getTimerData()
-                    
                     
                 case .failure(let error):
                     print("타이머 초기화 실패")
@@ -107,6 +131,49 @@ class StudyManageViewController: UIViewController{
     func setGroupTimer(){
         //1. api Call로 그룹원들의 시간을 불러옴
         //2. 타이머 화면에 배치
+    }
+    
+    // MARK: - study group의 pickerView UI 세팅
+    func setUpStudyPickerView(){
+        studyPickerView.delegate = self
+        studyPickerView.dataSource = self
+        view.addSubview(studyPickerView)
+        studyPickerView.translatesAutoresizingMaskIntoConstraints = false
+        studyPickerView.backgroundColor = .white
+        studyPickerView.layer.borderColor = UIColor.gray.cgColor
+        studyPickerView.isHidden = true
+        NSLayoutConstraint.activate([
+        
+            // Picker View 제약 조건
+            studyPickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            studyPickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            studyPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            studyPickerView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        studyDoneView.backgroundColor = .systemGray5
+        view.addSubview(studyDoneView)
+        studyDoneView.translatesAutoresizingMaskIntoConstraints = false
+        studyDoneView.isHidden = true
+        NSLayoutConstraint.activate([
+            studyDoneView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            studyDoneView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            studyDoneView.bottomAnchor.constraint(equalTo: studyPickerView.topAnchor, constant: 0),
+            studyDoneView.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        studyDoneView.addSubview(studyDoneBtn)
+        
+        studyDoneBtn.tintColor = .systemBlue
+        studyDoneBtn.setTitle("완료", for: .normal)
+        
+        studyDoneBtn.translatesAutoresizingMaskIntoConstraints = false
+        studyDoneBtn.addTarget(self, action: #selector(studyDoneBtnTapped), for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            studyDoneBtn.trailingAnchor.constraint(equalTo: studyDoneView.trailingAnchor, constant: 0),
+            studyDoneBtn.topAnchor.constraint(equalTo: studyDoneView.topAnchor, constant: 0),
+            studyDoneBtn.bottomAnchor.constraint(equalTo: studyDoneView.bottomAnchor, constant: 0),
+            studyDoneBtn.widthAnchor.constraint(equalToConstant: 80)
+        ])
     }
     
     // MARK: - 타이머 추가 버튼을 눌렀을때 작동하는 함수
@@ -160,6 +227,47 @@ class StudyManageViewController: UIViewController{
     @IBAction func recordBtnTapped(_ sender: UIButton) {
         let recordVC = storyboard?.instantiateViewController(identifier: "StudyRecordViewController") as! StudyRecordViewController
         self.navigationController?.pushViewController(recordVC, animated: true)
+    }
+    
+    
+    @IBAction func groupChangeBtnTapped(_ sender: Any) {
+        studyPickerView.reloadAllComponents()
+        studyPickerView.isHidden = false
+        studyDoneView.isHidden = false
+        
+        studyPickerView.alpha = 0.0
+        studyDoneView.alpha = 0.0
+        UIView.animate(withDuration: 0.3) {
+            self.studyPickerView.alpha = 1.0
+            self.studyDoneView.alpha = 1.0
+        }
+        
+        addBtn.isHidden = true
+    }
+    
+    @objc func studyDoneBtnTapped(){
+        studyPickerView.isHidden = true
+        studyDoneView.isHidden = true
+        
+        if let studyGroupText = studyGroup{
+            if studyGroupText == "개인"{
+                groupLabel.text = ""
+            }
+            else{
+                groupLabel.text = studyGroupText
+            }
+        }
+        else{
+            groupLabel.text = nil
+        }
+                
+        UIView.animate(withDuration: 0.3) {
+            self.studyPickerView.alpha = 0.0
+            self.studyDoneView.alpha = 0.0
+        }
+        
+        addBtn.isHidden = false
+        //api 호출로 스터디 그룹원들 타이머 설정해주기
     }
     
     func getTimerData(){
@@ -287,6 +395,36 @@ extension StudyManageViewController: TimerTableViewCellDelegate{
             cell.timer?.invalidate()
             
             //API콜로 타이머 종료를 알림
+        }
+    }
+}
+
+extension StudyManageViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return studyGroupData.count + 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if row == 0{
+            return "그룹을 선택하세요"
+        }
+        else {
+            return studyGroupData[row - 1].studygroupName
+        }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row == 0{
+            self.studyGroup = "개인"
+            self.studyGroupID = -1
+        }
+        else{
+            self.studyGroup = studyGroupData[row - 1].studygroupName
+            self.studyGroupID = studyGroupData[row - 1].id
         }
     }
 }
