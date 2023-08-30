@@ -5,6 +5,7 @@ import com.example.campusin.domain.board.Board;
 import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.photo.Photo;
 import com.example.campusin.domain.post.dto.request.PostUpdateRequest;
+import com.example.campusin.domain.tag.Tag;
 import com.example.campusin.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -65,15 +66,21 @@ public class Post extends BaseTimeEntity {
     private Integer commentCount = 0;
     private Integer likeCount = 0;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tag_id", referencedColumnName = "tag_id")
+    private Tag tag;
+
+
 
     @Builder
-    public Post(String title, String content, User user, Board board, Long price, Long studyGroupId) {
+    public Post(String title, String content, User user, Board board, Long price, Long studyGroupId, Tag tag){
         this.title = title;
         this.content = content;
         this.user = user;
         this.board = board;
         this.price = price;
         this.studyGroupId = studyGroupId;
+        this.tag = tag;
     }
 
     public void updatePost(PostUpdateRequest request) {

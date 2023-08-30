@@ -74,23 +74,24 @@ public class BoardController {
             @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 생성 성공, 생성된 게시글의 id 반환", response = PostIdResponse.class),
     })
     @Operation(summary = "게시글 생성")
-    @PostMapping("/{boardId}/posts")
+    @PostMapping("/{boardId}/posts/{tagId}")
     public ApiResponse createPost(
             @PathVariable(name = "boardId") Long boardId,
+            @PathVariable(name = "tagId") Long tagId,
             @AuthenticationPrincipal UserPrincipal principal,
             @Parameter(description = "파라미터 설명") @RequestBody @Validated PostCreateRequest request
     ) {
-        return ApiResponse.success("게시글 생성", postService.createPost(boardId, principal.getUserId(), request));
+        return ApiResponse.success("게시글 생성", postService.createPost(boardId, tagId, principal.getUserId(), request));
     }
 
     @ApiResponses({
             @io.swagger.annotations.ApiResponse(code = 200, message = "게시판 초기화 성공"),
             @io.swagger.annotations.ApiResponse(code = 500, message = "서버 에러")
     })
-    @Operation(summary = "게시판 초기화")
+    @Operation(summary = "게시판 초기화 및 태그 초기화")
     @GetMapping("/init")
     public ApiResponse initBoard() {
-        return ApiResponse.success("게시판 초기화", postService.initBoard());
+        return ApiResponse.success("게시판, 태그 초기화", postService.initBoard());
     }
 
     @ApiResponses(
@@ -105,5 +106,31 @@ public class BoardController {
             direction = Sort.Direction.DESC
     ) Pageable pageable) {
         return ApiResponse.success("게시판 고유 id값 얻기", postService.getBoardIds(pageable));
+    }
+
+    @Operation(summary = "태그별 고유 id값 얻기")
+    @GetMapping("/tags/ids")
+    public ApiResponse getTagIds(@PageableDefault(
+            sort = {"createdAt"},
+            direction = Sort.Direction.DESC
+    ) Pageable pageable) {
+        return ApiResponse.success("태그별 고유 id값 얻기", postService.getTags(pageable));
+    }
+
+    @ApiResponses(
+            value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "태그별 게시글 목록 조회 성공", response = PostSimpleResponse.class, responseContainer = "Page")
+            }
+    )
+    @Operation(summary = "태그별 게시글 목록 조회")
+    @GetMapping("tag/{tagId}/posts")
+    public ApiResponse showPostsByTag(
+            @PathVariable(name = "tagId") Long tagId,
+            @PageableDefault(
+                    sort = {"createdAt"},
+                    direction = Sort.Direction.DESC
+            ) Pageable pageable
+    ) {
+        return ApiResponse.success("게시글 목록", postService.getPostsByTag(tagId, pageable));
     }
 }

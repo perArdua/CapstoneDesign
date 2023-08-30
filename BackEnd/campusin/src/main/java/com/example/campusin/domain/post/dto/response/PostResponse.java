@@ -3,8 +3,7 @@ package com.example.campusin.domain.post.dto.response;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.photo.response.PhotoResponse;
 import com.example.campusin.domain.post.Post;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.example.campusin.domain.tag.TagType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
@@ -57,8 +56,15 @@ public class PostResponse {
     @Schema(name = "좋아요 수", example = "1")
     private Integer likeCount;
 
+    @Schema(name = "태그 타입", example = "IT")
+    private TagType tagType;
+
+
     @Builder
-    public PostResponse(Long postId, Long userId, BoardType boardType, String nickname, String title, String content, List<PhotoResponse> photoList, LocalDateTime createdAt, Long price, Long studyGroupId, Integer likeCount) {
+    public PostResponse(Long postId, Long userId, BoardType boardType, String nickname, String title,
+                        String content, List<PhotoResponse> photoList,
+                        LocalDateTime createdAt, Long price, Long studyGroupId,
+                        Integer likeCount, TagType tagType) {
         this.postId = postId;
         this.userId = userId;
         this.boardType = boardType;
@@ -70,6 +76,7 @@ public class PostResponse {
         this.price = price;
         this.studyGroupId = studyGroupId;
         this.likeCount = likeCount;
+        this.tagType = tagType;
     }
 
     @Builder
@@ -85,7 +92,8 @@ public class PostResponse {
                 entity.getCreatedAt(),
                 entity.getPrice(),
                 entity.getStudyGroupId(),
-                entity.getLikeCount()
+                entity.getLikeCount(),
+                entity.getTag().getTagType()
         );
     }
 }

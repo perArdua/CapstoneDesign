@@ -1,19 +1,13 @@
 package com.example.campusin.domain.post.dto.response;
 
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
-import com.example.campusin.domain.photo.Photo;
-import com.example.campusin.domain.photo.response.PhotoResponse;
 import com.example.campusin.domain.post.Post;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiResponse;
+import com.example.campusin.domain.tag.dto.response.TagResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by kok8454@gmail.com on 2023-05-07
@@ -55,8 +49,13 @@ public class PostSimpleResponse {
     @Schema(name = "좋아요 수", example = "1")
     private Integer likeCount;
 
+    @Schema(name = "태그 정보")
+    private TagResponse tagResponse;
+
     @Builder
-    public PostSimpleResponse(Long postId, BoardSimpleResponse boardSimpleResponse, String nickname, String title, String content, LocalDateTime createdAt, Long price, Long studyGroupId, String photo, Integer likeCount) {
+    public PostSimpleResponse(Long postId, BoardSimpleResponse boardSimpleResponse, String nickname, String title,
+                              String content, LocalDateTime createdAt, Long price, Long studyGroupId, String photo,
+                              Integer likeCount, TagResponse tagResponse) {
         this.postId = postId;
         this.boardSimpleResponse = boardSimpleResponse;
         this.nickname = nickname;
@@ -67,6 +66,7 @@ public class PostSimpleResponse {
         this.studyGroupId = studyGroupId;
         this.photo = photo;
         this.likeCount = likeCount;
+        this.tagResponse = tagResponse;
     }
 
     @Builder
@@ -81,7 +81,8 @@ public class PostSimpleResponse {
                 entity.getPrice(),
                 entity.getStudyGroupId(),
                 entity.getPhoto() != null ? entity.getPhoto().getContent() : null,
-                entity.getLikeCount()
+                entity.getLikeCount(),
+                new TagResponse(entity.getTag())
         );
     }
 }
