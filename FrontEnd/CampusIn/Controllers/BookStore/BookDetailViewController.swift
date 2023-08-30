@@ -51,7 +51,7 @@ class BookDetailViewController: UIViewController {
 
         msgBtn.tintColor = UIColor(named: "btnColor")
         detailImg.image = bookImg
-        detailPrice.text = bookPrice
+        detailPrice.text = bookPrice! + " 원"
         detailName.text = bookName
         detailSellerName.text = sellerName
     }

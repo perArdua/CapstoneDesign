@@ -161,11 +161,13 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! BookStoreTableViewCell
         print(indexPath.row)
         let bookInfo = array[indexPath.row]
-        
-        //cell.bookImgView.image = UIImage(base64: (bookInfo.postImage)!, withPrefix: false)
+        print("price")
+        print(bookInfo.price)
+//        cell.bookImgView.image = UIImage(base64: (bookInfo.photo)!, withPrefix: false)
         cell.bookName.text = bookInfo.title
         cell.bookPrice.text = String(describing: bookInfo.price)
         cell.sellerName.text = bookInfo.nickname
+        cell.bookPrice.text = String(bookInfo.price!) + " 원"
         cell.selectionStyle = .none
         print("weoifjwe;ofjao;ewfj;oaiwejf")
         //print(cell)
@@ -184,7 +186,7 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
             detailVC.bookName = bookInfo.title
             detailVC.sellerName = bookInfo.nickname
             //detailVC.bookImg = UIImage(base64: (bookInfo.postImage)!, withPrefix: false)
-            detailVC.bookPrice = String(describing: bookInfo.price)
+            detailVC.bookPrice = String(bookInfo.price!)
             self.navigationController?.pushViewController(detailVC, animated: true)
             
         }
