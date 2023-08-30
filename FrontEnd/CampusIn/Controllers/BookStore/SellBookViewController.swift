@@ -119,8 +119,6 @@ class SellBookViewController: UIViewController, UIImagePickerControllerDelegate,
         
         params["photos"] = img_temp
         
-        
-        
         if(!isEditable){
             
             let boardID: Int = UserDefaults.standard.value(forKey: "Book") as! Int

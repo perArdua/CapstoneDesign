@@ -182,7 +182,7 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
             let bookInfo = array[indexPath.row]
             print("price")
             print(bookInfo.price)
-    //        cell.bookImgView.image = UIImage(base64: (bookInfo.photo)!, withPrefix: false)
+            cell.bookImgView.image = UIImage(base64: (bookInfo.photo ?? "BookImage"), withPrefix: false)
             cell.bookName.text = bookInfo.title
             cell.bookPrice.text = String(describing: bookInfo.price)
             cell.sellerName.text = bookInfo.nickname
@@ -209,7 +209,7 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
                 detailVC.bookDetail = postDetail
                 detailVC.bookName = bookInfo.title
                 detailVC.sellerName = bookInfo.nickname
-                //detailVC.bookImg = UIImage(base64: (bookInfo.postImage)!, withPrefix: false)
+                detailVC.bookImg = UIImage(base64: (bookInfo.photo ?? "BookImage"), withPrefix: false)
                 detailVC.bookPrice = String(bookInfo.price!)
                 self.navigationController?.pushViewController(detailVC, animated: true)
                 
@@ -224,7 +224,7 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
                 detailVC.bookDetail = postDetail
                 detailVC.bookName = bookInfo.title
                 detailVC.sellerName = bookInfo.nickname
-                //detailVC.bookImg = UIImage(base64: (bookInfo.postImage)!, withPrefix: false)
+                detailVC.bookImg = UIImage(base64: (bookInfo.photo ?? "BookImage"), withPrefix: false)
                 detailVC.bookPrice = String(bookInfo.price!)
                 self.navigationController?.pushViewController(detailVC, animated: true)
                 
