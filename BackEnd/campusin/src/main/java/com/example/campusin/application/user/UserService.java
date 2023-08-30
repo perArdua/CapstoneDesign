@@ -6,6 +6,7 @@ package com.example.campusin.application.user;
  */
 
 import com.example.campusin.domain.user.User;
+import com.example.campusin.domain.user.dto.response.NickResponse;
 import com.example.campusin.domain.user.dto.response.UserIdResponse;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +22,13 @@ public class UserService {
     public User getUser(String loginId) {
         return userRepository.findByLoginId(loginId);
     }
-    public boolean nicknameCheck(String loginId) {
+    public NickResponse nicknameCheck(String loginId) {
         User user = userRepository.findByLoginId(loginId);
         if (Objects.isNull(user.getNickname())) {
-            return false;
+            return new NickResponse("해당 닉네임을 설정하지 않았습니다.");
         }
         else {
-            return true;
+            return new NickResponse(user.getNickname());
         }
     }
     public User createNickname(String loginId, String nickname) {
