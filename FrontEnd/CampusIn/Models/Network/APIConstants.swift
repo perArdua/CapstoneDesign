@@ -28,7 +28,7 @@ struct APIConstants {
         static let getBoardIds = baseURL + "/boards/boards/ids" // 게시판 id 얻기
         static let initBoards = baseURL + "/boards/init" // 게시판 초기화
         
-        static let tagFiltering = baseURL + "/boards/tag/%d/posts" // 태그별 게시글 목록 조회
+        static let tagFiltering = baseURL + "​/boards​/tag​/%d/%d​/posts" // 태그별 게시글 목록 조회
         static let getTags = baseURL + "/boards/tags/ids" // 태그별 고유 id값 얻기
     }
     
@@ -106,6 +106,12 @@ struct APIConstants {
     struct Statistics{
         static let getStatistics = baseURL + "/statistics/%d"
         static let createStatistics = baseURL + "/statistics/create"
+    }
+    
+    struct Ranking{
+        static let createRanking = baseURL + "/rank" //현재 주차 랭킹 생성
+        static let getPersonalStudyRanking = baseURL + "/rank/study"
+        static let getPrevPersonalStudyRanking = baseURL + "/statistics/create"
     }
 }
 

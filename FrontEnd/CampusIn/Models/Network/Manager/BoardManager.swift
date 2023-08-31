@@ -173,5 +173,22 @@ class BoardManager{
             }
         }
     }
+    
+    // MARK: - tag별 필터링
+    static func tagFiltering(boardID: Int, tagID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
+        let endpoint = String(format: APIConstants.Board.tagFiltering, boardID, tagID)
+        
+        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostList.self) { response in
+            switch response.result{
+            case .success(let postList):
+                print("태그 필터링 요청 성공")
+                completion(.success(postList.body.postListArray.content))
+            case .failure(let error):
+                print("태그 필터링 요청 실패")
+                print(KeyChain.read(key: "token"))
+                completion(.failure(error))
+            }
+        }
+    }
 
 }

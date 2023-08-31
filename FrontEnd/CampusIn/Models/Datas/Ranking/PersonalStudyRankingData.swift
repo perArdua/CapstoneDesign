@@ -8,14 +8,14 @@
 import Foundation
 
 // MARK: - RankingData
-struct RankingData: Codable {
-    let header: RankingHeader
-    let body: RankingBody
+struct PersonalStudyRankingData: Codable {
+    let header: PersonalStudyRankingHeader
+    let body: PersonalStudyRankingBody
 }
 
 // MARK: - Body
-struct RankingBody: Codable {
-    let rankingList: RankingList
+struct PersonalStudyRankingBody: Codable {
+    let rankingList: PersonalStudyRankingList
 
     enum CodingKeys: String, CodingKey {
         case rankingList = "공부시간 랭킹 리스트 조회"
@@ -23,37 +23,37 @@ struct RankingBody: Codable {
 }
 
 // MARK: - 공부시간랭킹리스트조회
-struct RankingList: Codable {
-    let content: [RankingContent]
-    let pageable: RankingPageable
+struct PersonalStudyRankingList: Codable {
+    let content: [PersonalStudyRankingContent]
+    let pageable: PersonalStudyRankingPageable
     let totalElements, totalPages: Int
     let last: Bool
     let numberOfElements, size, number: Int
-    let sort: RankingSort
+    let sort: PersonalStudyRankingSort
     let first, empty: Bool
 }
 
 // MARK: - Content
-struct RankingContent: Codable {
+struct PersonalStudyRankingContent: Codable {
     let rank: Int
     let name: String
     let week: Int
 }
 
 // MARK: - Pageable
-struct RankingPageable: Codable {
-    let sort: RankingSort
+struct PersonalStudyRankingPageable: Codable {
+    let sort: PersonalStudyRankingSort
     let pageNumber, pageSize, offset: Int
     let paged, unpaged: Bool
 }
 
 // MARK: - Sort
-struct RankingSort: Codable {
+struct PersonalStudyRankingSort: Codable {
     let sorted, unsorted, empty: Bool
 }
 
 // MARK: - Header
-struct RankingHeader: Codable {
+struct PersonalStudyRankingHeader: Codable {
     let code: Int
     let message: String
 }
