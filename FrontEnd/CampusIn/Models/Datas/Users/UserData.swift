@@ -18,5 +18,13 @@ struct UserHeader: Codable {
 }
 
 struct UserBody: Codable {
-    let isExist: Bool
+    let 기존회원닉네임반환성공: userNick
+
+    enum CodingKeys: String, CodingKey {
+        case 기존회원닉네임반환성공 = "기존 회원 닉네임 반환 성공"
+    }
+}
+
+struct userNick: Codable {
+    let nickname: String
 }

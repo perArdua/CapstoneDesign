@@ -11,14 +11,14 @@ import Alamofire
 class UserManager{
     
     //MARK: - 기존 회원인지 판단
-    static func isExistingMember(completion: @escaping (Result<Bool, Error>) -> Void) {
+    static func isExistingMember(completion: @escaping (Result<String, Error>) -> Void) {
         let endPoint = APIConstants.User.isExistingMember
 
         AF.request(endPoint, method: .get, headers: APIConstants.headers)
             .responseDecodable(of: UserResponse.self) { response in
                 switch response.result {
                 case .success(let userExistenceResponse):
-                    let isExisting = userExistenceResponse.body.isExist
+                    let isExisting = userExistenceResponse.body.기존회원닉네임반환성공.nickname
                     completion(.success(isExisting))
                 case .failure(let error):
                     completion(.failure(error))

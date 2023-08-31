@@ -107,7 +107,7 @@ class SocialViewController: UIViewController, WKNavigationDelegate{
                             UserManager.isExistingMember(){ result in
                                 switch result{
                                 case .success(let isExisting):
-                                    if isExisting {
+                                    if (isExisting != "해당 닉네임을 설정하지 않았습니다.") {
                                         self.dismiss(animated: false, completion: nil)
                                     } else{
                                         let nickVC = self.storyboard!.instantiateViewController(withIdentifier: "NickNameViewController") as! NickNameViewController
