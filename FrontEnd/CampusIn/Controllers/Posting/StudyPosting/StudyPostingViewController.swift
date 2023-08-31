@@ -139,11 +139,10 @@ class StudyPostingViewController: UIViewController {
         print(array)
     }
     
-    // MARK: - 게시판 별로 태그 분리 필요 즉 수정해야됨
-    func getTagPostingData(){
-        BoardManager.showPostbyBoard(boardID: BoardManager.getBoardID(boardName: "Question")){[weak self] result in
-            // 데이터를 받아온 후 실행되는 완료 핸들러
-            switch result {
+    // MARK: - 태그 필터링 요청
+    func getTagFilteringData(tagID: Int){
+        BoardManager.tagFiltering(boardID: BoardManager.getBoardID(boardName: "Study"), tagID: tagID) { [weak self] res in
+            switch res{
             case .success(let posts):
                 // 데이터를 받아와서 배열에 저장
                 self?.array = posts
@@ -154,7 +153,6 @@ class StudyPostingViewController: UIViewController {
                 print("Error: \(error)")
             }
         }
-        print(array)
     }
     
     
@@ -185,9 +183,11 @@ class StudyPostingViewController: UIViewController {
         if let tagText = tag{
             tagLabel.text = tagText
             if tagText == "선택하세요"{
+                getData()
                 tagLabel.textColor = .systemGray2
             }
             else{
+                getTagFilteringData(tagID: tagId)
                 tagLabel.textColor = .black
             }
         }
@@ -300,15 +300,6 @@ extension StudyPostingViewController: UIPickerViewDelegate, UIPickerViewDataSour
         self.tagEng = ConvertTag.convert(tag: tag!)
         self.tagId = getTagId(tag: tagEng!)
         print(tagEng!, tagId)
-        if(self.tag == "선택하세요"){
-            self.getData()
-            tableView.reloadData()
-        }
-        else{
-            //api call로 태그가지고 있는 게시글만 보이게 갱신
-            self.getTagPostingData()
-            tableView.reloadData()
-        }
 
     }
 }
