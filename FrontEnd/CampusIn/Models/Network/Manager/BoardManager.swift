@@ -159,6 +159,7 @@ class BoardManager{
     // MARK: - 태그별 고유 Id값 얻기
     static func getTags(completion: @escaping (Result<[TagContent], Error>) -> Void){
         let endpoint = String(format: APIConstants.Board.getTags)
+        
         AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: TagData.self) { response in
             
             print(response)
@@ -176,9 +177,11 @@ class BoardManager{
     
     // MARK: - tag별 필터링
     static func tagFiltering(boardID: Int, tagID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
-        let endpoint = String(format: APIConstants.Board.tagFiltering, boardID, tagID)
-        
+        let endpoint = "http://localhost:8080/api/v1/boards/tag/\(boardID)/\(tagID)/posts"
+        print(endpoint)
+            
         AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostList.self) { response in
+            print(response)
             switch response.result{
             case .success(let postList):
                 print("태그 필터링 요청 성공")
@@ -186,9 +189,9 @@ class BoardManager{
             case .failure(let error):
                 print("태그 필터링 요청 실패")
                 print(KeyChain.read(key: "token"))
+                print(error.responseCode)
                 completion(.failure(error))
             }
         }
     }
-
 }

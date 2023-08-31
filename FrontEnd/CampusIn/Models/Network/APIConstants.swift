@@ -27,8 +27,8 @@ struct APIConstants {
 
         static let getBoardIds = baseURL + "/boards/boards/ids" // 게시판 id 얻기
         static let initBoards = baseURL + "/boards/init" // 게시판 초기화
-        
-        static let tagFiltering = baseURL + "​/boards​/tag​/%d/%d​/posts" // 태그별 게시글 목록 조회
+    
+        static let tagFiltering = baseURL + "​/boards/tag/%d/%d/posts" // 태그별 게시글 목록 조회
         static let getTags = baseURL + "/boards/tags/ids" // 태그별 고유 id값 얻기
     }
     
