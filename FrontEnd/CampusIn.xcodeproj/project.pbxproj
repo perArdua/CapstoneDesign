@@ -85,6 +85,7 @@
 		31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD9262A054F380068689B /* GeneralPostingDetailViewController.swift */; };
 		31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD9282A0551E00068689B /* GeneralPostingAddViewController.swift */; };
 		5B49257F2A9E2D0C0094A203 /* StudyGroupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49257E2A9E2D0C0094A203 /* StudyGroupDetail.swift */; };
+		5B4925822AA0F8420094A203 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4925812AA0F8420094A203 /* MyPageViewController.swift */; };
 		5D14AB342A15158A00807A2B /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D14AB332A15158A00807A2B /* SideMenuViewController.swift */; };
 		5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D25704B2A10CE8B00E03713 /* ChatViewController.swift */; };
 		5D25704E2A10D1F700E03713 /* MessageBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */; };
@@ -230,6 +231,7 @@
 		31FCD9282A0551E00068689B /* GeneralPostingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingAddViewController.swift; sourceTree = "<group>"; };
 		565A28D9AB05323A781AEE9C /* Pods-CampusIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusIn.debug.xcconfig"; path = "Target Support Files/Pods-CampusIn/Pods-CampusIn.debug.xcconfig"; sourceTree = "<group>"; };
 		5B49257E2A9E2D0C0094A203 /* StudyGroupDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupDetail.swift; sourceTree = "<group>"; };
+		5B4925812AA0F8420094A203 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		5D14AB332A15158A00807A2B /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		5D25704B2A10CE8B00E03713 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBoxTableViewCell.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 		3165EDF52A02A82E00D91856 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5B4925802AA0F8300094A203 /* MyPage */,
 				5D3F614D2A2F5806000E3B7C /* BookStore */,
 				5DC885192A2CE5CC00631BC1 /* Ranking */,
 				31CBDA872A2CC3B800E55924 /* Statistics */,
@@ -674,6 +677,14 @@
 				B35DA945251EA1CA3A88F354 /* Pods_CampusIn.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B4925802AA0F8300094A203 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				5B4925812AA0F8420094A203 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		5D3F614D2A2F5806000E3B7C /* BookStore */ = {
@@ -953,6 +964,7 @@
 				31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */,
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
 				315067362A3701C90045E028 /* QuestionPostingViewController.swift in Sources */,
+				5B4925822AA0F8420094A203 /* MyPageViewController.swift in Sources */,
 				3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */,
 				3179137F2A23911D00BC86FE /* TimerAddResponse.swift in Sources */,
 				315067382A3701D50045E028 /* QuestionPostingDetailViewController.swift in Sources */,
