@@ -109,6 +109,7 @@ class SocialViewController: UIViewController, WKNavigationDelegate{
                                 case .success(let isExisting):
                                     if (isExisting != "해당 닉네임을 설정하지 않았습니다.") {
                                         self.dismiss(animated: false, completion: nil)
+                                        UserDefaults.standard.set(isExisting, forKey: "nickname")
                                     } else{
                                         let nickVC = self.storyboard!.instantiateViewController(withIdentifier: "NickNameViewController") as! NickNameViewController
                                         nickVC.modalTransitionStyle = .coverVertical
