@@ -15,6 +15,7 @@ class BookDetailViewController: UIViewController {
     var bookPrice: String?
     var bookImg: UIImage?
     var bookDetail: PostDetailContent?
+
     
     @IBOutlet weak var sendMsgBtn: UIButton!
     @IBOutlet weak var detailPrice: UILabel!
@@ -25,6 +26,7 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var bookInfoTV: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         bookTitle.textColor = .white
         bookInfoTV.text = bookDetail?.content
         print("content")
@@ -35,6 +37,7 @@ class BookDetailViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("apper")
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
         //본인 게시글이면 메세지 전송 버튼 안보이게
@@ -54,6 +57,7 @@ class BookDetailViewController: UIViewController {
         detailPrice.text = bookPrice! + " 원"
         detailName.text = bookName
         detailSellerName.text = sellerName
+        
     }
     
     @objc func editButtonTapped() {
@@ -62,6 +66,7 @@ class BookDetailViewController: UIViewController {
         nextVC.titleString = "책 정보 수정하기"
         nextVC.isEditable = true
         nextVC.detail = bookDetail
+        nextVC.tempImg = detailImg.image
         navigationController?.pushViewController(nextVC, animated: true)
     }
 
