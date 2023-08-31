@@ -17,7 +17,7 @@ struct DataBody: Codable {
     let boardInit: Bool
 
     enum CodingKeys: String, CodingKey {
-        case boardInit = "게시판 초기화"
+        case boardInit = "게시판, 태그 초기화"
     }
 }
 

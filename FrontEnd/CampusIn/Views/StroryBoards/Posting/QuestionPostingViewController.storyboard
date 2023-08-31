@@ -528,6 +528,7 @@
                         <outlet property="stView4" destination="ekq-2m-Ai7" id="iLo-bu-8hr"/>
                         <outlet property="tagLabel" destination="VV8-0e-HCY" id="cAd-tV-Faz"/>
                         <outlet property="tagLabel0" destination="znE-iK-0R4" id="cZc-bP-gam"/>
+                        <outlet property="tagSelectBtn" destination="44q-vc-0lz" id="OBH-ou-KwJ"/>
                         <outlet property="titleTV" destination="wII-hj-f9T" id="9df-ho-99W"/>
                     </connections>
                 </viewController>

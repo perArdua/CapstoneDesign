@@ -43,7 +43,7 @@ struct MyStudyGroupContent: Codable{
 struct MyStudyGroupDetails: Codable {
     let id: Int
     let studygroupName: String
-    let userName: String
+    let userName: String?
     let createdAt: [Int]
     let limitedMemberSize: Int
     let currentMemberSize: Int

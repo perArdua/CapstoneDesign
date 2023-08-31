@@ -17,7 +17,7 @@ struct APIConstants {
     
     struct Board{
         static let showPostByBoard = baseURL + "/boards/%d/posts" // 모든 게시글 불러오기
-        static let createPost = baseURL + "/boards/%d/posts" // 게시글 생성(아래 사용 예시 참고)
+        static let createPost = baseURL + "/boards/%d/posts/%d" // 게시글 생성(아래 사용 예시 참고)
         //사용 예시
         //let endpoint = String(format: APIConstants.Board.createPost, boardId)
 
@@ -27,6 +27,9 @@ struct APIConstants {
 
         static let getBoardIds = baseURL + "/boards/boards/ids" // 게시판 id 얻기
         static let initBoards = baseURL + "/boards/init" // 게시판 초기화
+        
+        static let tagFiltering = baseURL + "/boards/tag/%d/posts" // 태그별 게시글 목록 조회
+        static let getTags = baseURL + "/boards/tags/ids" // 태그별 고유 id값 얻기
     }
     
     struct Auth{

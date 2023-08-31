@@ -14,8 +14,8 @@ class BoardManager{
     static let headers: HTTPHeaders = ["Authorization": "Bearer \(String(KeyChain.read(key: "token")!))"]
     
     // MARK: - 게시글 생성 요청 함수
-    static func createPost(boardID: Int, params: Parameters){
-        let endpoint = String(format: APIConstants.Board.createPost, boardID)
+    static func createPost(boardID: Int, tagID: Int,  params: Parameters){
+        let endpoint = String(format: APIConstants.Board.createPost, boardID, tagID)
         
         AF.request(endpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: DataResponse.self, completionHandler: { response in
             print("게시글 생성요청")
@@ -156,4 +156,22 @@ class BoardManager{
         return -1
     }
     
+    // MARK: - 태그별 고유 Id값 얻기
+    static func getTags(completion: @escaping (Result<[TagContent], Error>) -> Void){
+        let endpoint = String(format: APIConstants.Board.getTags)
+        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: TagData.self) { response in
+            
+            print(response)
+            switch response.result{
+            case .success(let tagData):
+                print("태그 목록 요청 성공")
+                completion(.success(tagData.body.tagList.content))
+            case .failure(let error):
+                print("태그 목록 요청 실패")
+                print(error)
+                completion(.failure(error))
+            }
+        }
+    }
+
 }

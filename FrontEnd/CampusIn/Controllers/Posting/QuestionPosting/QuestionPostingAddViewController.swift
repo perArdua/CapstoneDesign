@@ -31,7 +31,11 @@ class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tagLabel: UILabel!
     
     let tagData = ["선택하세요", "IT", "수학", "인문", "태그1", "태그2", "태그3", "태그4", "태그5"]
-
+    var tagIdList: [TagContent] = []
+    var tagId: Int = -1;
+    var tagEng: String?
+    
+    @IBOutlet weak var tagSelectBtn: UIButton!
     //tag 버튼 누르면 나오는 피커뷰
     let tagPickerView = UIPickerView()
     let tagDoneView = UIView()
@@ -46,7 +50,7 @@ class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         setUpTagPickerView()
-    
+        
         stView0.isHidden = true
         stView1.isHidden = true
         stView2.isHidden = true
@@ -100,6 +104,16 @@ class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
             imgs.insert(img4, at: 4)
         }
         
+        BoardManager.getTags { res in
+            switch res{
+            case .success(let tagData):
+                self.tagIdList = tagData
+            case .failure(let err):
+                print(err)
+            }
+        }
+        
+        if postDetail != nil{tagSelectBtn.isEnabled = false}
     }
     
     // MARK: - tag의 pickerView UI 세팅
@@ -241,11 +255,19 @@ class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
             alert.addAction(okAction)
             present(alert, animated: true)
         }
-        if let contentData = contentTV.text, let tag = tagLabel.text{
+        
+        if let contentData = contentTV.text{
             params["content"] = contentData
             //api 받으면 prameter에 태그, 스터디 그룹 넣어주기
         }else{
             let alert = UIAlertController(title: "경고", message: "내용을 모두 채워주세요", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default) { _ in print("empty contents")}
+            alert.addAction(okAction)
+            present(alert, animated: true)
+        }
+        
+        if tagId == -1{
+            let alert = UIAlertController(title: "경고", message: "태그를 선택해주세요", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default) { _ in print("empty contents")}
             alert.addAction(okAction)
             present(alert, animated: true)
@@ -277,7 +299,7 @@ class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
     }
    
     func postData(boardID: Int, params: Parameters){
-        BoardManager.createPost(boardID: boardID, params: params)
+        BoardManager.createPost(boardID: boardID, tagID: tagId, params: params)
     }
     
     func patchData(postID: Int, params:Parameters){
@@ -344,6 +366,15 @@ class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
         }
     }
 
+    func getTagId(tag : String) -> Int{
+        for item in tagIdList{
+            if item.tagType == tag{
+                return item.tagID
+            }
+        }
+        return -1
+    }
+
 }
 
 extension QuestionPostingAddViewController: UIPickerViewDelegate, UIPickerViewDataSource{
@@ -361,6 +392,10 @@ extension QuestionPostingAddViewController: UIPickerViewDelegate, UIPickerViewDa
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.tag = tagData[row]
+        
+        self.tagEng = ConvertTag.convert(tag: tag!)
+        self.tagId = getTagId(tag: tagEng!)
+        print(tagEng!, tagId)
     }
     
 }

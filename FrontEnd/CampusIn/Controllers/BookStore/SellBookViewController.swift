@@ -148,7 +148,7 @@ class SellBookViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func postData(boardID: Int, params: Parameters){
-        BoardManager.createPost(boardID: boardID, params: params)
+//        BoardManager.createPost(boardID: boardID, params: params)
     }
     
     func patchData(postID: Int, params:Parameters){
