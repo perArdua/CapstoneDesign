@@ -59,11 +59,11 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Page<Comment> findCommentsByPost(@Param("postId") Long postId, Pageable pageable);
 
 
-    @Query(value = "select p from Post p where p.studyGroupId = :studyGroupId and p.board.id = 5",
+    @Query(value = "select p from Post p where p.studyGroupId = :studyGroupId",
             countQuery = "select count(p) from Post p where p.studyGroupId = :studyGroupId")
     Page<Post> findPostsByStudyGroupId(Long studyGroupId, Pageable pageable);
 
-    @Query(value = "select p from Post p join fetch p.tag t where p.tag.id = :tagId",
-            countQuery = "select count(p) from Post p where p.tag.id = :tagId")
-    Page<Post> findPostsByTagId(@Param("tagId") Long tagId, Pageable pageable);
+    @Query(value = "select p from Post p join fetch p.tag t join fetch p.board b where p.tag.id = :tagId and p.board.id = :boardId",
+            countQuery = "select count(p) from Post p where p.tag.id = :tagId and p.board.id = :boardId")
+    Page<Post> findPostsByTagId(@Param("boardId") Long boardId, @Param("tagId") Long tagId, Pageable pageable);
 }
