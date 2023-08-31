@@ -9,5 +9,6 @@ public enum BoardType {
     Question,
     Book,
     Study,
-    AdminBadgeAccept
+    AdminBadgeAccept,
+    StudyRecord
 }

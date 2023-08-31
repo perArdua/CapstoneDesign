@@ -122,15 +122,16 @@ public class BoardController {
                     @io.swagger.annotations.ApiResponse(code = 200, message = "태그별 게시글 목록 조회 성공", response = PostSimpleResponse.class, responseContainer = "Page")
             }
     )
-    @Operation(summary = "태그별 게시글 목록 조회")
-    @GetMapping("tag/{tagId}/posts")
+    @Operation(summary = "게시판 내 태그별 게시글 목록 조회")
+    @GetMapping("tag/{boardId}/{tagId}/posts")
     public ApiResponse showPostsByTag(
+            @PathVariable(name = "boardId") Long boardId,
             @PathVariable(name = "tagId") Long tagId,
             @PageableDefault(
                     sort = {"createdAt"},
                     direction = Sort.Direction.DESC
             ) Pageable pageable
     ) {
-        return ApiResponse.success("게시글 목록", postService.getPostsByTag(tagId, pageable));
+        return ApiResponse.success("게시글 목록", postService.getPostsByTag(boardId, tagId, pageable));
     }
 }
