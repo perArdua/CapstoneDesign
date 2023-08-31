@@ -57,9 +57,10 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public Page<PostSimpleResponse> getPostsByTag(Long tagId, Pageable pageable) {
+    public Page<PostSimpleResponse> getPostsByTag(Long boardId, Long tagId, Pageable pageable) {
+        findBoard(boardId);
         findTag(tagId);
-        return postRepository.findPostsByTagId(tagId, pageable).map(PostSimpleResponse::new);
+        return postRepository.findPostsByTagId(boardId, tagId, pageable).map(PostSimpleResponse::new);
     }
 
     @Transactional
