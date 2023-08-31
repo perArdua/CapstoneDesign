@@ -31,6 +31,9 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tagLabel0: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var studyGroupLabel: UILabel!
+    var tagIdList: [TagContent] = []
+    var tagId: Int = -1;
+    var tagEng: String?
     
     let tagData = ["선택하세요", "IT", "수학", "자연과학", "공학", "경제", "인문", "예체능", "기타"]
     var studyGroupData: [MyStudyGroupDetails] = []
@@ -126,6 +129,16 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
                 print(err)
             }
         }
+        
+        BoardManager.getTags { res in
+            switch res{
+            case .success(let tagData):
+                self.tagIdList = tagData
+            case .failure(let err):
+                print(err)
+            }
+        }
+        
     }
     
     // MARK: - tag의 pickerView UI 세팅
@@ -309,16 +322,33 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
             alert.addAction(okAction)
             present(alert, animated: true)
         }
-        if let contentData = contentTV.text, let tag = tagLabel.text, let studyGroup = studyGroupLabel.text{
+        if let contentData = contentTV.text{
             params["content"] = contentData
             //api 받으면 prameter에 태그, 스터디 그룹 넣어주기
-            params["studyGroupId"] = studyGroupID
         }else{
             let alert = UIAlertController(title: "경고", message: "내용을 모두 채워주세요", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default) { _ in print("empty contents")}
             alert.addAction(okAction)
             present(alert, animated: true)
         }
+        
+        
+        if tagId == -1{
+            let alert = UIAlertController(title: "경고", message: "태그를 선택해주세요", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default) { _ in print("empty contents")}
+            alert.addAction(okAction)
+            present(alert, animated: true)
+        }
+        
+        if let studyGroupId = studyGroupID{
+            params["studyGroupId"] = studyGroupId
+        }else{
+            let alert = UIAlertController(title: "경고", message: "스터디 그룹을 선택해주세요", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default) { _ in print("empty contents")}
+            alert.addAction(okAction)
+            present(alert, animated: true)
+        }
+    
     
         var img_temp : [String] = []
         print("img_cnt : \(img_cnt)")
@@ -346,7 +376,7 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
     }
    
     func postData(boardID: Int, params: Parameters){
-        BoardManager.createPost(boardID: boardID, params: params)
+        BoardManager.createPost(boardID: boardID, tagID: tagId ,params: params)
     }
     
     func patchData(postID: Int, params:Parameters){
@@ -451,6 +481,16 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
         }
     }
 
+    func getTagId(tag : String) -> Int{
+        for item in tagIdList{
+            if item.tagType == tag{
+                return item.tagID
+            }
+        }
+        return -1
+    }
+    
+    
 }
 
 extension StudyPostingAddViewController: UIPickerViewDelegate, UIPickerViewDataSource{
@@ -479,10 +519,18 @@ extension StudyPostingAddViewController: UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == tagPickerView{
             self.tag = tagData[row]
+            
+            self.tagEng = ConvertTag.convert(tag: tag!)
+            self.tagId = getTagId(tag: tagEng!)
+            print(tagEng!, tagId)
         }
         else{
-            self.studyGroup = studyGroupData[row].studygroupName
-            self.studyGroupID = studyGroupData[row].id
+            if(studyGroupData.count > 1){
+                
+                self.studyGroup = studyGroupData[row].studygroupName
+                self.studyGroupID = studyGroupData[row].id
+                print(studyGroup)
+            }
         }
     }
     

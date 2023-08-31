@@ -18,6 +18,7 @@
 		315067422A3703010045E028 /* QuestionPostingCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315067412A3703010045E028 /* QuestionPostingCommentTableViewCell.swift */; };
 		315067442A37030C0045E028 /* QuestionPostingSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315067432A37030C0045E028 /* QuestionPostingSearchTableViewCell.swift */; };
 		315067462A3703170045E028 /* QuestionPostingContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315067452A3703170045E028 /* QuestionPostingContentTableViewCell.swift */; };
+		315309022AA097CC001F4BC2 /* TagData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315309012AA097CC001F4BC2 /* TagData.swift */; };
 		315E599B2A30848E00E85A61 /* StudyPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */; };
 		315E599E2A3084BC00E85A61 /* StudyPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E599D2A3084BC00E85A61 /* StudyPostingViewController.swift */; };
 		3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */; };
@@ -154,6 +155,7 @@
 		315067412A3703010045E028 /* QuestionPostingCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingCommentTableViewCell.swift; sourceTree = "<group>"; };
 		315067432A37030C0045E028 /* QuestionPostingSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingSearchTableViewCell.swift; sourceTree = "<group>"; };
 		315067452A3703170045E028 /* QuestionPostingContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingContentTableViewCell.swift; sourceTree = "<group>"; };
+		315309012AA097CC001F4BC2 /* TagData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagData.swift; sourceTree = "<group>"; };
 		315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyPostingViewController.storyboard; sourceTree = "<group>"; };
 		315E599D2A3084BC00E85A61 /* StudyPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPostingViewController.swift; sourceTree = "<group>"; };
 		3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralPostingViewController.storyboard; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				31FCD9212A054E1E0068689B /* GeneralPosting */,
+				315309012AA097CC001F4BC2 /* TagData.swift */,
 			);
 			path = Posting;
 			sourceTree = "<group>";
@@ -1000,6 +1003,7 @@
 				5D77035D2A21188B00AF0903 /* TodoCreationResponse.swift in Sources */,
 				5D69A3E22A1A9CDB00E9BBB4 /* MessageRoomManager.swift in Sources */,
 				5D547FF32A1F5ACF00376E09 /* UserManager.swift in Sources */,
+				315309022AA097CC001F4BC2 /* TagData.swift in Sources */,
 				5D4ADF9E2A0555D900195CA9 /* NickNameViewController.swift in Sources */,
 				31A77AFA2A2B806000AEC557 /* StudyRecordTableViewCell.swift in Sources */,
 				31D57E512A13CE160049E57A /* PostList.swift in Sources */,

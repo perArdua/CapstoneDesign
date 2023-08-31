@@ -28,6 +28,10 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
     
     @IBOutlet weak var titleTV: UITextView!
     @IBOutlet weak var contentTV: UITextView!
+    
+    var tagIdList: [TagContent] = []
+    var tagId: Int = -1;
+    
     var imgs : [UIImageView] = []
     var img_cnt = 0
 //    var post : GeneralPostingContent!
@@ -88,6 +92,16 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
             imgs.insert(img4, at: 4)
         }
         
+        BoardManager.getTags { res in
+            switch res{
+            case .success(let tagData):
+                self.tagIdList = tagData
+                self.tagId = self.getTagId(tag: "Etc")
+            case .failure(let err):
+                print(err)
+            }
+        }
+    
     }
     
     @IBAction func cancelBtnTapped(_ sender: UIButton) {
@@ -211,6 +225,7 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
             present(alert, animated: true)
         }
         else{
+            print(tagId)
             postData(boardID: BoardManager.getBoardID(boardName: "Free"), params: params)
             let alert = UIAlertController(title: "알림", message: "글쓰기가 완료되었습니다.", preferredStyle: .alert)
             let ok = UIAlertAction(title: "확인", style: .default){_ in self.dismiss(animated: true) }
@@ -220,11 +235,20 @@ class GeneralPostingAddViewController: UIViewController, UITextViewDelegate{
     }
    
     func postData(boardID: Int, params: Parameters){
-        BoardManager.createPost(boardID: boardID, params: params)
+        BoardManager.createPost(boardID: boardID, tagID: tagId ,params: params)
     }
     
     func patchData(postID: Int, params:Parameters){
         BoardManager.updatePost(postID: postID, params: params)
+    }
+    
+    func getTagId(tag : String) -> Int{
+        for item in tagIdList{
+            if item.tagType == tag{
+                return item.tagID
+            }
+        }
+        return -1
     }
     
     //MARK: - title textView의 place holder 기능

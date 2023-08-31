@@ -10,6 +10,9 @@ class QuestionPostingViewController: UIViewController {
     
     var array :[PostListContent] = []
     let tagData = ["선택하세요", "IT", "수학", "자연과학", "공학", "경제", "인문", "예체능", "기타"]
+    var tagIdList: [TagContent] = []
+    var tagId: Int = -1;
+    var tagEng: String?
     let tagPickerView = UIPickerView()
     let tagDoneView = UIView()
     let tagDoneBtn = UIButton(type: .system)
@@ -59,6 +62,15 @@ class QuestionPostingViewController: UIViewController {
         
         self.getData()
         tableView.reloadData()
+        
+        BoardManager.getTags { res in
+            switch res{
+            case .success(let tagData):
+                self.tagIdList = tagData
+            case .failure(let err):
+                print(err)
+            }
+        }
         
     }
     
@@ -124,6 +136,25 @@ class QuestionPostingViewController: UIViewController {
         }
         print(array)
     }
+    
+    // MARK: - 게시판 별로 태그 분리 필요 즉 수정해야됨
+    func getTagPostingData(){
+        BoardManager.showPostbyBoard(boardID: BoardManager.getBoardID(boardName: "Question")){[weak self] result in
+            // 데이터를 받아온 후 실행되는 완료 핸들러
+            switch result {
+            case .success(let posts):
+                // 데이터를 받아와서 배열에 저장
+                self?.array = posts
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+        print(array)
+    }
+    
     
     //MARK: 글쓰기 버튼을 누를 경우 실행
     @objc func addBtnTapped(){
@@ -197,9 +228,14 @@ class QuestionPostingViewController: UIViewController {
         }
     }
     
-
-    
-    
+    func getTagId(tag : String) -> Int{
+        for item in tagIdList{
+            if item.tagType == tag{
+                return item.tagID
+            }
+        }
+        return -1
+    }
 }
  
 //MARK: 테이블 뷰 delegate, datasource
@@ -260,5 +296,17 @@ extension QuestionPostingViewController: UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         self.tag = tagData[row]
+        self.tagEng = ConvertTag.convert(tag: tag!)
+        self.tagId = getTagId(tag: tagEng!)
+        print(tagEng!, tagId)
+        if(self.tag == "선택하세요"){
+            self.getData()
+            tableView.reloadData()
+        }
+        else{
+            //api call로 태그가지고 있는 게시글만 보이게 갱신
+            self.getTagPostingData()
+            tableView.reloadData()
+        }
     }
 }
