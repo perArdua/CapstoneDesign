@@ -35,6 +35,7 @@ class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
     var tagId: Int = -1;
     var tagEng: String?
     
+    @IBOutlet weak var tagSelectBtn: UIButton!
     //tag 버튼 누르면 나오는 피커뷰
     let tagPickerView = UIPickerView()
     let tagDoneView = UIView()
@@ -49,7 +50,7 @@ class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         setUpTagPickerView()
-    
+        
         stView0.isHidden = true
         stView1.isHidden = true
         stView2.isHidden = true
@@ -112,6 +113,7 @@ class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
             }
         }
         
+        if postDetail != nil{tagSelectBtn.isEnabled = false}
     }
     
     // MARK: - tag의 pickerView UI 세팅

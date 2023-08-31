@@ -574,6 +574,7 @@
                     </view>
                     <connections>
                         <outlet property="contentTV" destination="cib-RW-Uge" id="pMX-h8-haN"/>
+                        <outlet property="groupSelectBtn" destination="twS-b6-VIR" id="dqW-4z-GUT"/>
                         <outlet property="img0" destination="A8g-qJ-0VB" id="AjQ-Kf-kNr"/>
                         <outlet property="img1" destination="rgK-Bp-Bq2" id="JUr-N6-dv5"/>
                         <outlet property="img2" destination="bWf-vt-AFK" id="g8R-gv-R7f"/>
@@ -587,6 +588,7 @@
                         <outlet property="studyGroupLabel" destination="xf1-DB-FXT" id="mHI-nR-qFq"/>
                         <outlet property="tagLabel" destination="VV8-0e-HCY" id="cAd-tV-Faz"/>
                         <outlet property="tagLabel0" destination="znE-iK-0R4" id="cZc-bP-gam"/>
+                        <outlet property="tagSelectBtn" destination="44q-vc-0lz" id="ZKn-Qr-av8"/>
                         <outlet property="titleTV" destination="wII-hj-f9T" id="9df-ho-99W"/>
                     </connections>
                 </viewController>
@@ -1127,7 +1129,7 @@
         <image name="hand.thumbsup" catalog="system" width="123" height="128"/>
         <image name="magnifyingglass.circle" catalog="system" width="128" height="123"/>
         <image name="paperplane.circle" catalog="system" width="128" height="123"/>
-        <image name="person.fill" catalog="system" width="32" height="32"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>

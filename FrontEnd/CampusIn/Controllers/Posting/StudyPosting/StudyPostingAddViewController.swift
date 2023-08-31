@@ -35,6 +35,8 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
     var tagId: Int = -1;
     var tagEng: String?
     
+    @IBOutlet weak var tagSelectBtn: UIButton!
+    @IBOutlet weak var groupSelectBtn: UIButton!
     let tagData = ["선택하세요", "IT", "수학", "자연과학", "공학", "경제", "인문", "예체능", "기타"]
     var studyGroupData: [MyStudyGroupDetails] = []
     var studyGroupID : Int?
@@ -137,6 +139,11 @@ class StudyPostingAddViewController: UIViewController, UITextViewDelegate {
             case .failure(let err):
                 print(err)
             }
+        }
+        
+        if postDetail != nil{
+            tagSelectBtn.isEnabled = false
+            groupSelectBtn.isEnabled = false
         }
         
     }
