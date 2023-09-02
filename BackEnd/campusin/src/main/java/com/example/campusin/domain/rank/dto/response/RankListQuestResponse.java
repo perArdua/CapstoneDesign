@@ -11,19 +11,22 @@ public class RankListQuestResponse {
     private Long rank;
     private String name;
     private int week;
+    private int month;
 
     @Builder
-    public RankListQuestResponse(Long rank, String name, int week) {
+    public RankListQuestResponse(Long rank, String name, int week, int month) {
         this.rank = rank;
         this.name = name;
         this.week = week;
+        this.month = month;
     }
     @Builder
     public RankListQuestResponse(Rank rank) {
         this(
                 rank.getQuestionRanking(),
                 rank.getUser().getNickname(),
-                rank.getWeek()
+                rank.getStartDate(rank.getStatistics().getDate()).getDayOfMonth() / 7 + 1,
+                rank.getStartDate(rank.getStatistics().getDate()).getMonthValue()
         );
     }
 }
