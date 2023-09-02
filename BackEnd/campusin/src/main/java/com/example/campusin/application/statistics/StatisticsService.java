@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -70,6 +71,14 @@ public class StatisticsService {
         statistics.updateNumberOfAdoptedAnswers(numberOfAdoptedAnswers);
         statisticsRepository.save(statistics);
         return new StatisticsResponse(statistics.getElapsedTime(), statistics.getNumberOfQuestions(), statistics.getNumberOfAnswers(), statistics.getNumberOfAdoptedAnswers());
+    }
+
+    // localDate가 속한 주의 시작 요일을 localDate로 반환
+    public LocalDate getStartDate(LocalDate localDate) {
+        while (localDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
+            localDate = localDate.minusDays(1);
+        }
+        return localDate;
     }
 
     private User findUser(Long userId) {
