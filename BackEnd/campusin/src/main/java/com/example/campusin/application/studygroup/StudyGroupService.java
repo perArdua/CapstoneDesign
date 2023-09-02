@@ -2,22 +2,25 @@ package com.example.campusin.application.studygroup;
 
 import com.example.campusin.domain.studygroup.StudyGroup;
 import com.example.campusin.domain.studygroup.StudyGroupMember;
+import com.example.campusin.domain.studygroup.dto.StudyGroupTimeRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupCreateRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupJoinRequest;
-import com.example.campusin.domain.studygroup.dto.response.StudyGroupDetailResponse;
-import com.example.campusin.domain.studygroup.dto.response.StudyGroupIdResponse;
-import com.example.campusin.domain.studygroup.dto.response.StudyGroupMemberResponse;
-import com.example.campusin.domain.studygroup.dto.response.StudyGroupResponse;
+import com.example.campusin.domain.studygroup.dto.response.*;
 import com.example.campusin.domain.user.User;
+import com.example.campusin.infra.statistics.StatisticsRepository;
 import com.example.campusin.infra.studygroup.StudyGroupMemberRepository;
 import com.example.campusin.infra.studygroup.StudyGroupRepository;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +36,7 @@ public class StudyGroupService {
     private final StudyGroupRepository studyGroupRepository;
     private final StudyGroupMemberRepository studyGroupMemberRepository;
     private final UserRepository userRepository;
-
+    private final StatisticsRepository statisticsRepository;
     private static final int INITNUMBER = 1;
 
 
@@ -123,6 +126,32 @@ public class StudyGroupService {
         StudyGroup studyGroup = findStudyGroup(studygroupId);
         return new StudyGroupDetailResponse(studyGroup);
 
+    }
+
+    @Transactional(readOnly = true)
+    public Page<StudyGroupTimeResponse> getStudyGroupMemberStudyTime(Long studyGroupId, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        StudyGroup studyGroup = findStudyGroup(studyGroupId);
+        List<StudyGroupMember> studyGroupMembers = studyGroup.getMembers();
+        List<StudyGroupTimeResponse> studyGroupMemberResponses = new ArrayList<>();
+
+        for (StudyGroupMember member: studyGroupMembers) {
+            User user = member.getUser();
+            Long elapsedTime = 0L;
+            for (LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1)) {
+                elapsedTime += statisticsRepository.findByUserAndDate(user, date).getElapsedTime();
+            }
+            studyGroupMemberResponses.add(new StudyGroupTimeResponse(member, elapsedTime));
+        }
+
+        return studyGroupMemberResponses.stream()
+                .sorted((o1, o2) -> o2.getElapsedTime().compareTo(o1.getElapsedTime()))
+                .collect(Collectors.toList())
+                .stream()
+                .skip(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .collect(Collectors.toCollection(ArrayList::new))
+                .stream()
+                .collect(Collectors.collectingAndThen(Collectors.toList(), PageImpl::new));
     }
 
     private StudyGroup findStudyGroup(Long studyGroupId) {
