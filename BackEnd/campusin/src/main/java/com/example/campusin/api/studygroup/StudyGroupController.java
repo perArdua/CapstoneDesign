@@ -4,7 +4,7 @@ import com.example.campusin.application.statistics.StatisticsService;
 import com.example.campusin.application.studygroup.StudyGroupService;
 import com.example.campusin.common.response.ApiResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
-import com.example.campusin.domain.studygroup.dto.StudyGroupTimeRequest;
+import com.example.campusin.domain.studygroup.dto.request.StudyGroupTimeRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupCreateRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupJoinRequest;
 import io.swagger.annotations.Api;
