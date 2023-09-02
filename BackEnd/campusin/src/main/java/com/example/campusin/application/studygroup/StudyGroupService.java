@@ -2,7 +2,7 @@ package com.example.campusin.application.studygroup;
 
 import com.example.campusin.domain.studygroup.StudyGroup;
 import com.example.campusin.domain.studygroup.StudyGroupMember;
-import com.example.campusin.domain.studygroup.dto.StudyGroupTimeRequest;
+import com.example.campusin.domain.studygroup.dto.request.StudyGroupTimeRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupCreateRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupJoinRequest;
 import com.example.campusin.domain.studygroup.dto.response.*;
