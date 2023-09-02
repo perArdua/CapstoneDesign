@@ -1,8 +1,10 @@
 package com.example.campusin.api.studygroup;
 
+import com.example.campusin.application.statistics.StatisticsService;
 import com.example.campusin.application.studygroup.StudyGroupService;
 import com.example.campusin.common.response.ApiResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
+import com.example.campusin.domain.studygroup.dto.StudyGroupTimeRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupCreateRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupJoinRequest;
 import io.swagger.annotations.Api;
@@ -16,6 +18,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @Api(tags = {"스터디그룹 API"})
 @RestController
 @RequestMapping("/api/v1/studygroup")
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 public class StudyGroupController {
 
     private final StudyGroupService studyGroupService;
+    private final StatisticsService statisticsService;
 
     @ApiResponses(
             value = {
@@ -91,5 +96,21 @@ public class StudyGroupController {
         return ApiResponse.success("내가 속한 StudyGroup 목록 조회가 완료되었습니다.", studyGroupService.getMyAllStudyGroupList(principal.getUserId(), pageable));
     }
 
+    // 스터디그룹 멤버들의 주간 공부시간 조회
+    @ApiResponses(
+            value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "StudyGroup 멤버들의 주간 공부시간 조회 성공")
+            }
+    )
+    @Operation(summary = "StudyGroup 멤버들의 주간 공부시간 조회")
+    @GetMapping("/studytime")
+    public ApiResponse showStudyGroupMemberStudyTime(@RequestBody @Validated StudyGroupTimeRequest request, @PageableDefault(
+                                                             sort = {"createdAt"},
+                                                             direction = Sort.Direction.DESC
+                                                     ) Pageable pageable){
+        LocalDate endDate = request.getEndDate();
+        LocalDate startDate = statisticsService.getStartDate(endDate);
+        return ApiResponse.success("StudyGroup 멤버들의 주간 공부시간 조회가 완료되었습니다.", studyGroupService.getStudyGroupMemberStudyTime(request.getStudyGroupId(), startDate, endDate, pageable));
+    }
 
 }
