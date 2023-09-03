@@ -42,7 +42,12 @@ class StudyPostingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // TabBar 숨기기
-        self.getData()
+        if(!isPrevVCMyPage()){
+            self.getData()
+        }else{
+            print("from my page")
+        }
+        
         self.tabBarController?.tabBar.isHidden = true
         setUpTagPickerView()
         
@@ -76,6 +81,26 @@ class StudyPostingViewController: UIViewController {
         }
         
     }
+    
+    // MARK: - 이전 뷰 컨트롤러가 마이페이지인지 판단하는 함수
+    func isPrevVCMyPage() -> Bool{
+        if let navigationController = self.navigationController {
+            let viewControllers = navigationController.viewControllers
+            if viewControllers.count >= 2 {
+                let previousViewController = viewControllers[viewControllers.count - 2]
+                let prevSB = UIStoryboard(name: "Main", bundle: nil)
+                if let viewController = prevSB.instantiateViewController(withIdentifier: "MyPostingViewController") as? MyPostingViewController {
+                    if type(of: previousViewController) == type(of: viewController) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            }
+        }
+        return false
+    }
+    
     
     // MARK: - pickerView 레이아웃 설정
     func setUpTagPickerView(){

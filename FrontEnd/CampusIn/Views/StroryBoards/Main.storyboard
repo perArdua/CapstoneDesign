@@ -432,6 +432,66 @@
             </objects>
             <point key="canvasLocation" x="8487" y="730"/>
         </scene>
+        <!--My Posting View Controller-->
+        <scene sceneID="MNz-Mf-IVE">
+            <objects>
+                <viewController storyboardIdentifier="MyPostingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iqj-eB-y3d" customClass="MyPostingViewController" customModule="CampusIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rSk-j8-8A5">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kUz-tG-NJ6">
+                                <rect key="frame" x="30" y="171" width="180" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="자유게시판 작성 게시글"/>
+                                <connections>
+                                    <action selector="freeBtnTapped:" destination="iqj-eB-y3d" eventType="touchUpInside" id="9fz-SG-mmh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZA8-O0-EqD">
+                                <rect key="frame" x="30" y="246" width="184.33333333333334" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="질문 게시판 작성 게시글"/>
+                                <connections>
+                                    <action selector="qnaBtnTapped:" destination="iqj-eB-y3d" eventType="touchUpInside" id="bbI-8D-hp7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VB-Ww-JL1">
+                                <rect key="frame" x="30" y="321" width="135.66666666666666" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="책방 작성 게시글"/>
+                                <connections>
+                                    <action selector="bookBtnTapped:" destination="iqj-eB-y3d" eventType="touchUpInside" id="ktt-u9-a2G"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IoM-lk-Rr0">
+                                <rect key="frame" x="30" y="396" width="184.33333333333334" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="스터디 그룹 작성 게시글"/>
+                                <connections>
+                                    <action selector="studyBtnTapped:" destination="iqj-eB-y3d" eventType="touchUpInside" id="v46-7M-uYL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0LJ-OV-IHJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kUz-tG-NJ6" firstAttribute="top" secondItem="0LJ-OV-IHJ" secondAttribute="top" constant="80" id="2O3-ki-6dB"/>
+                            <constraint firstItem="kUz-tG-NJ6" firstAttribute="leading" secondItem="0LJ-OV-IHJ" secondAttribute="leading" constant="30" id="5H3-1T-hF5"/>
+                            <constraint firstItem="2VB-Ww-JL1" firstAttribute="leading" secondItem="0LJ-OV-IHJ" secondAttribute="leading" constant="30" id="6LY-e7-lXi"/>
+                            <constraint firstItem="ZA8-O0-EqD" firstAttribute="top" secondItem="kUz-tG-NJ6" secondAttribute="bottom" constant="40" id="EKx-2q-5Ks"/>
+                            <constraint firstItem="ZA8-O0-EqD" firstAttribute="leading" secondItem="0LJ-OV-IHJ" secondAttribute="leading" constant="30" id="EjN-rY-h46"/>
+                            <constraint firstItem="IoM-lk-Rr0" firstAttribute="top" secondItem="2VB-Ww-JL1" secondAttribute="bottom" constant="40" id="GLe-v8-GMf"/>
+                            <constraint firstItem="IoM-lk-Rr0" firstAttribute="leading" secondItem="0LJ-OV-IHJ" secondAttribute="leading" constant="30" id="Ns5-Pb-5Ws"/>
+                            <constraint firstItem="2VB-Ww-JL1" firstAttribute="top" secondItem="ZA8-O0-EqD" secondAttribute="bottom" constant="40" id="TKg-ri-Xrp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="10k-ru-v6V"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tqQ-SQ-0J4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9057" y="1346"/>
+        </scene>
         <!--My Page View Controller-->
         <scene sceneID="sus-cN-2Ea">
             <objects>
@@ -646,6 +706,9 @@
                                     </attributedString>
                                     <color key="baseForegroundColor" systemColor="labelColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="iqj-eB-y3d" kind="show" id="yXH-Ao-Z2e"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Knw-ae-H3z"/>

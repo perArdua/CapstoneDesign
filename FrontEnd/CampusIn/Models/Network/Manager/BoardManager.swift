@@ -78,6 +78,24 @@ class BoardManager{
         }
     }
     
+    // MARK: - 내가 쓴 게시글 요청 함수
+    
+    static func showMyPosting(completion: @escaping (Result<[PostListContent], Error>) -> Void){
+        let endpoint = APIConstants.Board.getMyPosting
+        
+        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostList.self) { response in
+            switch response.result{
+            case .success(let postListArray):
+                print("내가 쓴 게시글 요청 성공")
+                completion(.success(postListArray.body.postListArray.content))
+            case .failure(let error):
+                print("내가 쓴 게시글 요청 실패")
+                print(KeyChain.read(key: "token"))
+                completion(.failure(error))
+            }
+        }
+    }
+    
     // MARK: - 게시글 검색 요청 함수
     static func searchPost(boardID: Int, keyword: String, completion: @escaping (Result<[PostSearchContent], Error>) -> Void){
         let endpoint = String(format: APIConstants.Board.searchPosts, boardID, keyword.encodeUrl()!)

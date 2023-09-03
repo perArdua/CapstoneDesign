@@ -15,7 +15,6 @@ class GeneralPostingViewController: UIViewController {
     
     
     var array :[PostListContent] = []
-    
     let addBtn: UIButton = {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
         btn.layer.masksToBounds = true
@@ -35,7 +34,13 @@ class GeneralPostingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // TabBar 숨기기
-        self.getData()
+        
+        if(!isPrevVCMyPage()){
+            self.getData()
+        }else{
+            print("from my page")
+        }
+        
         self.tabBarController?.tabBar.isHidden = true
         
     }
@@ -57,6 +62,25 @@ class GeneralPostingViewController: UIViewController {
         
         self.getData()
         tableView.reloadData()
+    }
+    
+    // MARK: - 이전 뷰 컨트롤러가 마이페이지인지 판단하는 함수
+    func isPrevVCMyPage() -> Bool{
+        if let navigationController = self.navigationController {
+            let viewControllers = navigationController.viewControllers
+            if viewControllers.count >= 2 {
+                let previousViewController = viewControllers[viewControllers.count - 2]
+                let prevSB = UIStoryboard(name: "Main", bundle: nil)
+                if let viewController = prevSB.instantiateViewController(withIdentifier: "MyPostingViewController") as? MyPostingViewController {
+                    if type(of: previousViewController) == type(of: viewController) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            }
+        }
+        return false
     }
     
     // MARK: - 검색 API 요청하는 함수
