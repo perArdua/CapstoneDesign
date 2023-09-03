@@ -85,7 +85,7 @@ public class PostController {
 
     @ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "내가 작성한 게시글 목록", response = PostSimpleResponse.class, responseContainer = "Page")
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 목록", response = PostSimpleResponse.class, responseContainer = "Page")
             }
     )
     @Operation(summary = "내가 작성한 게시글 목록")
@@ -96,7 +96,7 @@ public class PostController {
                                            direction = Sort.Direction.DESC
                                    ) Pageable pageable) {
 
-        return ApiResponse.success("내가 작성한 게시글 목록", postService.getPostsByUser(principal.getUserId(), pageable));
+        return ApiResponse.success("게시글 목록", postService.getPostsByUser(principal.getUserId(), pageable));
     }
 
     @ApiResponses(

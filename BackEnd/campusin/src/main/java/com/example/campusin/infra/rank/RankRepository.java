@@ -12,26 +12,32 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 
 @Repository
 public interface RankRepository extends JpaRepository<Rank, Long> {
-    @Query(value = "SELECT r FROM Rank r WHERE r.studyGroup.id = :studyGroup order by r.totalElapsedTime desc")
-    Page<Rank> countInStudyGroup(Long studyGroup, Pageable pageable);
+    @Query(value = "SELECT r FROM Rank r " +
+            "WHERE r.studyGroup.id = :studyGroup " +
+            "AND r.statistics.date = :localDate " +
+            "ORDER BY r.totalElapsedTime DESC")
+    Page<Rank> countInStudyGroup(Long studyGroup, LocalDate localDate, Pageable pageable);
 
     @Query(value = "select r from Rank r where r.user = :user and r.statistics = :statistics")
     Rank findByUserAndStatistics(User user, Statistics statistics);
 
-    @Query("SELECT r FROM Rank r WHERE r.week = :week")
-    Page<Rank> findAllByWeek(int week, Pageable pageable);
-
     @Query(value = "select r from Rank r where r.user = :user and r.statistics = :statistics and r.studyGroup.id = :studyGroupId")
     Rank findByUserAndStatisticsAndStudyGroup(User user, Statistics statistics, Long studyGroupId);
+    @Query(value = "SELECT r FROM Rank r " +
+            "WHERE r.studyGroup.id = null " +
+            "AND r.statistics.date = :localDate " +
+            "ORDER BY r.totalElapsedTime DESC")
+    Page<Rank> findAllByOrderByTotalStudyTimeAsc(LocalDate localDate,Pageable pageable);
 
-    @Query(value = "select r from Rank r  where r.studyGroup.id = null order by r.totalElapsedTime desc")
-    Page<Rank> findAllByOrderByTotalStudyTimeAsc(Pageable pageable);
-
-    @Query(value = "select r from Rank r order by r.totalNumberOfQuestions desc")
-    Page<Rank> findAllByOrderByTotalNumberOfQuestionsAsc(Pageable pageable);
+    @Query(value = "SELECT r FROM Rank r " +
+            "WHERE r.studyGroup.id = null " +
+            "AND r.statistics.date = :localDate " +
+            "ORDER BY r.totalNumberOfQuestions DESC")
+    Page<Rank> findAllByOrderByTotalNumberOfQuestionsAsc(LocalDate localDate,Pageable pageable);
 }

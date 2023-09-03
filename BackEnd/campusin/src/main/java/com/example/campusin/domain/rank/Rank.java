@@ -11,6 +11,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "UPDATE rank SET deleted_at = CURRENT_TIMESTAMP where rank_id = ?")
@@ -72,12 +74,10 @@ public class Rank extends BaseTimeEntity{
     public void updateQuestionRanking(Long ranking) {
         this.QuestionRanking = ranking;
     }
-
-    public void updateTotalElapsedTime(Long elapsedTime) {
-        this.totalElapsedTime = elapsedTime;
-    }
-
-    public void updateTotalNumberOfQuestions(Long numberOfQuestions) {
-        this.totalNumberOfQuestions = numberOfQuestions;
+    public LocalDate getStartDate(LocalDate localDate) {
+        while (localDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
+            localDate = localDate.minusDays(1);
+        }
+        return localDate;
     }
 }

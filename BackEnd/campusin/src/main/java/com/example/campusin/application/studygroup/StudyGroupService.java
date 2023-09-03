@@ -1,5 +1,6 @@
 package com.example.campusin.application.studygroup;
 
+import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.studygroup.StudyGroup;
 import com.example.campusin.domain.studygroup.StudyGroupMember;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupTimeRequest;
@@ -138,9 +139,16 @@ public class StudyGroupService {
             User user = member.getUser();
             Long elapsedTime = 0L;
             for (LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1)) {
-                elapsedTime += statisticsRepository.findByUserAndDate(user, date).getElapsedTime();
+                Statistics statistics = statisticsRepository.findByUserAndDate(user, date);
+                if(statistics != null)
+                {
+                    elapsedTime += statistics.getElapsedTime();
+                }
+                else{
+                    elapsedTime += 0L;
+                }
             }
-            studyGroupMemberResponses.add(new StudyGroupTimeResponse(member, elapsedTime));
+            studyGroupMemberResponses.add(new StudyGroupTimeResponse(member.getUser().getNickname(), elapsedTime));
         }
 
         return studyGroupMemberResponses.stream()

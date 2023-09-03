@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -103,14 +104,16 @@ public class StudyGroupController {
             }
     )
     @Operation(summary = "StudyGroup 멤버들의 주간 공부시간 조회")
-    @GetMapping("/studytime")
-    public ApiResponse showStudyGroupMemberStudyTime(@RequestBody @Validated StudyGroupTimeRequest request, @PageableDefault(
+    @GetMapping("/{studyGroupId}/studytime")
+    public ApiResponse showStudyGroupMemberStudyTime(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate,
+                                                     @PathVariable Long studyGroupId,
+                                                     @PageableDefault(
                                                              sort = {"createdAt"},
                                                              direction = Sort.Direction.DESC
                                                      ) Pageable pageable){
-        LocalDate endDate = request.getEndDate();
+
         LocalDate startDate = statisticsService.getStartDate(endDate);
-        return ApiResponse.success("StudyGroup 멤버들의 주간 공부시간 조회가 완료되었습니다.", studyGroupService.getStudyGroupMemberStudyTime(request.getStudyGroupId(), startDate, endDate, pageable));
+        return ApiResponse.success("StudyGroup 멤버들의 주간 공부시간 조회가 완료되었습니다.", studyGroupService.getStudyGroupMemberStudyTime(studyGroupId, startDate, endDate, pageable));
     }
 
 }
