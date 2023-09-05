@@ -19,10 +19,10 @@ import java.util.Optional;
 @Repository
 public interface RankRepository extends JpaRepository<Rank, Long> {
     @Query(value = "SELECT r FROM Rank r " +
-            "WHERE r.studyGroup.id = :studyGroup " +
+            "WHERE r.studyGroup.id != null " +
             "AND r.statistics.date = :localDate " +
             "ORDER BY r.totalElapsedTime DESC")
-    Page<Rank> countInStudyGroup(Long studyGroup, LocalDate localDate, Pageable pageable);
+    Page<Rank> countInStudyGroup(LocalDate localDate, Pageable pageable);
 
     @Query(value = "select r from Rank r where r.user = :user and r.statistics = :statistics")
     Rank findByUserAndStatistics(User user, Statistics statistics);

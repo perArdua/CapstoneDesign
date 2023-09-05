@@ -53,7 +53,7 @@ public class RankController {
     public ApiResponse createStudyGroupRank(@AuthenticationPrincipal UserPrincipal userPrincipal,
                                             @PathVariable Long StudyGroupId,
                                             @RequestBody RankCreateRequest request ){
-        return ApiResponse.success("스터디 그룹 랭킹 생성", rankService.createStudyRank(userPrincipal.getUserId(), StudyGroupId, request));
+        return ApiResponse.success("스터디 그룹 랭킹 생성", rankService.createStudyRank(StudyGroupId, request));
     }
     @ApiResponses(
             value = {
@@ -63,13 +63,12 @@ public class RankController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "localDate", value = "날짜 (예: '2023-09-01')", required = true, dataType = "string", paramType = "query", dataTypeClass = LocalDate.class)
     })
-    @Operation(summary = "스터디그룹 내 공부시간 랭킹 리스트 조회")
-    @GetMapping("/studyGroupRank/{studyGroupId}")
+    @Operation(summary = "스터디그룹 공부시간 랭킹 리스트 조회")
+    @GetMapping("/studyGroupRank/")
     public ApiResponse getStudyGroupRank(
-                                         @PathVariable Long studyGroupId,
                                          @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate,
                                          @PageableDefault(size = 10) Pageable pageable){
-        return ApiResponse.success("랭킹 리스트 조회", rankService.getStudyGroupPersonalStudyTimeRank(studyGroupId, localDate, pageable));
+        return ApiResponse.success("랭킹 리스트 조회", rankService.getStudyGroupPersonalStudyTimeRank(localDate, pageable));
     }
 
     @ApiResponses(

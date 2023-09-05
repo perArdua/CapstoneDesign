@@ -5,8 +5,10 @@ import com.example.campusin.domain.rank.dto.request.RankCreateRequest;
 import com.example.campusin.domain.rank.dto.response.RankIdResponse;
 import com.example.campusin.domain.rank.dto.response.RankListQuestResponse;
 import com.example.campusin.domain.rank.dto.response.RankListResponse;
+import com.example.campusin.domain.rank.dto.response.RankListStudyGroupResponse;
 import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.studygroup.StudyGroup;
+import com.example.campusin.domain.studygroup.StudyGroupMember;
 import com.example.campusin.domain.timer.Timer;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.rank.RankRepository;
@@ -67,17 +69,16 @@ public class RankService {
 
     // 스터디그룹내에서의 랭킹 생성
     @Transactional
-    public RankIdResponse createStudyRank(Long userId, Long StudyGroupId, RankCreateRequest request){
-        User user = findUser(userId);
+    public RankIdResponse createStudyRank(Long StudyGroupId, RankCreateRequest request){
         StudyGroup studyGroup = findStudyGroup(StudyGroupId);
-        Statistics statistics = statisticsRepository.findByUserAndDate(user, request.getLocalDate());
+        Statistics statistics = statisticsRepository.findByUserAndDate(studyGroup.getUser(), request.getLocalDate());
         if(statistics == null){
             throw new IllegalArgumentException("해당 날짜에 대한 Statistics가 존재하지 않습니다.");
         }
 
         // 이미 해당 날짜에 대한 Rank가 존재하면서 스터디그룹도 존재하면 해당 Rank의 Id를 반환
-        if(rankRepository.findByUserAndStatisticsAndStudyGroup(user, statistics, studyGroup.getId()) != null){
-            return new RankIdResponse(rankRepository.findByUserAndStatisticsAndStudyGroup(user, statistics, studyGroup.getId()).getId());
+        if(rankRepository.findByUserAndStatisticsAndStudyGroup(studyGroup.getUser(), statistics, studyGroup.getId()) != null){
+            return new RankIdResponse(rankRepository.findByUserAndStatisticsAndStudyGroup(studyGroup.getUser(), statistics, studyGroup.getId()).getId());
         }
 
         // 해당 날짜 기준 전주의 statistics totalElapsedTime, totalNumberOfQuestions를 구한다.
@@ -85,35 +86,45 @@ public class RankService {
         LocalDate startDate = localDate.minusDays(localDate.getDayOfWeek().getValue() - 1);
         LocalDate endDate = startDate.plusDays(6);
 
-        List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user, startDate, endDate);
-        Long totalStudyTime = timerList.stream().mapToLong(Timer::getElapsedTime).sum();
-        Long totalQuestion = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(user, startDate, endDate);
+        Long totalStudyTime = 0L;
+        Long totalQuestion = 0L;
 
+        for(StudyGroupMember studyGroupMember : studyGroup.getMembers()){
+            User studyGroupMemberUser = studyGroupMember.getUser();
+
+            List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(studyGroupMemberUser, startDate, endDate);
+            Long StudyTime = timerList.stream().mapToLong(Timer::getElapsedTime).sum();
+            Long Question = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(studyGroupMemberUser, startDate, endDate);
+
+            totalStudyTime += StudyTime;
+            totalQuestion += Question;
+
+        }
         Rank rank = Rank.builder()
-                .user(user)
+                .user(studyGroup.getUser()) // 스터디 그룹장
                 .statistics(statistics)
                 .totalNumberOfQuestions(totalQuestion)
                 .totalElapsedTime(totalStudyTime)
-                .userName(user.getNickname())
+                .userName(studyGroup.getStudygroupName())
                 .studyGroup(studyGroup)
                 .build();
 
         Long rankId = rankRepository.save(rank).getId();
+
         return new RankIdResponse(rankId);
     }
 
-    // 주차별 스터디 그룹 내 개인 공부시간 rank 조회
+    // 주차별 스터디 그룹 간 개인 공부시간 rank 조회
     @Transactional
-    public Page<RankListResponse> getStudyGroupPersonalStudyTimeRank(Long studyGroupId, LocalDate localDate, Pageable pageable){
+    public Page<RankListStudyGroupResponse> getStudyGroupPersonalStudyTimeRank(LocalDate localDate, Pageable pageable){
 
-        StudyGroup studyGroup = findStudyGroup(studyGroupId);
-        Page<Rank> ranks = rankRepository.countInStudyGroup(studyGroup.getId(), localDate, pageable);
+        Page<Rank> ranks = rankRepository.countInStudyGroup(localDate, pageable);
 
         for(Long i = 0L; i < ranks.getContent().size(); i++){
             ranks.getContent().get(i.intValue()).updateStudyRanking(i+1);
             rankRepository.save(ranks.getContent().get(i.intValue()));
         }
-        return ranks.map(RankListResponse::new);
+        return ranks.map(RankListStudyGroupResponse::new);
     }
 
     // 주차별 user들 rank 순위 목록 조회
