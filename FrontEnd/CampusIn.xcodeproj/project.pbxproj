@@ -20,7 +20,6 @@
 		315067462A3703170045E028 /* QuestionPostingContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315067452A3703170045E028 /* QuestionPostingContentTableViewCell.swift */; };
 		315309022AA097CC001F4BC2 /* TagData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315309012AA097CC001F4BC2 /* TagData.swift */; };
 		315309042AA0D30E001F4BC2 /* RankingCreateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315309032AA0D30E001F4BC2 /* RankingCreateData.swift */; };
-		3153090A2AA0DBEC001F4BC2 /* PersonalStudyRankingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315309092AA0DBEC001F4BC2 /* PersonalStudyRankingData.swift */; };
 		3153090C2AA0DE0A001F4BC2 /* RankingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3153090B2AA0DE0A001F4BC2 /* RankingManager.swift */; };
 		3153090E2AA0E2FD001F4BC2 /* RankingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3153090D2AA0E2FD001F4BC2 /* RankingData.swift */; };
 		315E599B2A30848E00E85A61 /* StudyPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */; };
@@ -162,7 +161,6 @@
 		315067452A3703170045E028 /* QuestionPostingContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostingContentTableViewCell.swift; sourceTree = "<group>"; };
 		315309012AA097CC001F4BC2 /* TagData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagData.swift; sourceTree = "<group>"; };
 		315309032AA0D30E001F4BC2 /* RankingCreateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCreateData.swift; sourceTree = "<group>"; };
-		315309092AA0DBEC001F4BC2 /* PersonalStudyRankingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalStudyRankingData.swift; sourceTree = "<group>"; };
 		3153090B2AA0DE0A001F4BC2 /* RankingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingManager.swift; sourceTree = "<group>"; };
 		3153090D2AA0E2FD001F4BC2 /* RankingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingData.swift; sourceTree = "<group>"; };
 		315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyPostingViewController.storyboard; sourceTree = "<group>"; };
@@ -740,7 +738,6 @@
 			isa = PBXGroup;
 			children = (
 				315309032AA0D30E001F4BC2 /* RankingCreateData.swift */,
-				315309092AA0DBEC001F4BC2 /* PersonalStudyRankingData.swift */,
 				3153090D2AA0E2FD001F4BC2 /* RankingData.swift */,
 			);
 			path = Ranking;
@@ -983,7 +980,6 @@
 				3185DF312A2A3FAA001E5265 /* StudyRecordViewController.swift in Sources */,
 				319815142A2B205400B8B010 /* StudyRecordDelegate.swift in Sources */,
 				315067422A3703010045E028 /* QuestionPostingCommentTableViewCell.swift in Sources */,
-				3153090A2AA0DBEC001F4BC2 /* PersonalStudyRankingData.swift in Sources */,
 				5D87A0922A2F8A0300A0B98E /* SellBookViewController.swift in Sources */,
 				31FCD91F2A054E050068689B /* GeneralPostingTableViewCell.swift in Sources */,
 				317913852A2393AB00BC86FE /* TimerManager.swift in Sources */,

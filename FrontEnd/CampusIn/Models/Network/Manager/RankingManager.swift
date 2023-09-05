@@ -11,35 +11,151 @@ import Alamofire
 class RankingManager{
     static let headers: HTTPHeaders = ["Authorization": "Bearer \(String(KeyChain.read(key: "token")!))"]
     
-    // MARK: - 랭킹 데이터 생성, id를 반환함
-    static func createRanking(completion: @escaping (Result<Int, Error>) -> Void){
-        let endpoint = APIConstants.Ranking.createRanking
+    // MARK: - 개인 랭킹 생성
+    static private func createPersonalRanking(param: Parameters ,completion: @escaping(Result<String, Error>) -> Void){
+        let endpoint = APIConstants.Ranking.createPersonalRanking
         
-        AF.request(endpoint, method: .post, headers: headers).responseDecodable(of: RankingCreateData.self) { response in
-            switch response.result{
-            case.success(let data):
-                completion(.success(data.body.rankingContent.id))
-                
-            case.failure(let error):
-                print(error)
-                completion(.failure(error))
+        AF.request(endpoint, method: .post, parameters: param, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: RankingCreateData.self) { res in
+            switch res.result{
+            case .success(_):
+                print("개인 랭킹 생성 성공")
+                completion(.success("success"))
+            case.failure(let err):
+                print(err)
+                print("개인 랭킹 생성 실패")
+                completion(.failure(err))
             }
         }
     }
     
-    // MARK: - 현재 주차 개인 공부 시간 랭킹을 가져온다
     static func getPersonalStudyRanking(completion: @escaping (Result<[RankingContent], Error>) -> Void){
-        let endpoint = APIConstants.Ranking.getPersonalStudyRanking
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        var param: Parameters = ["localDate" : dateFormatter.string(from: Date())]
+        let endpoint = APIConstants.Ranking.getPersonalStudyRanking + "/?localDate=\(dateFormatter.string(from: Date()))"
         
-        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: RankingData.self) { response in
-            switch response.result{
-            case .success(let data):
-                completion(.success(data.body.rankingList.content))
-            case .failure(let error):
-                print(error)
-                completion(.failure(error))
+        StatisticsManager.createStatistics(param: param) { res in
+            switch res{
+            case .success(_):
+                createPersonalRanking(param: param){r in
+                    switch r{
+                    case .success(_):
+                        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: RankingData.self) { res in
+                            switch res.result{
+                            case .success(let data):
+                                print(data)
+                                completion(.success(data.body.rankingList.content))
+                            case .failure(let err):
+                                print(err)
+                                print("개인 공부 시간 랭킹 불러오기 실패")
+                                completion(.failure(err))
+                            }
+                        }
+                    case .failure(let err):
+                        print(err)
+                    }
+                }
+            case .failure(let err):
+                print(err)
             }
         }
     }
-
+    
+    static func getPersonalQuesRanking(completion: @escaping (Result<[RankingContent], Error>) -> Void){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        var param: Parameters = ["localDate" : dateFormatter.string(from: Date())]
+        
+        let endpoint = APIConstants.Ranking.getPrevPersonalQuesRanking + "/?localDate=\(dateFormatter.string(from: Date()))"
+        
+        StatisticsManager.createStatistics(param: param) { res in
+            switch res{
+            case .success(_):
+                createPersonalRanking(param: param){r in
+                    switch r{
+                    case .success(_):
+                        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: RankingData.self) { res in
+                            switch res.result{
+                            case .success(let data):
+                                completion(.success(data.body.rankingList.content))
+                            case .failure(let err):
+                                print(err)
+                                print("개인 질의 응답 랭킹 불러오기 실패")
+                                completion(.failure(err))
+                            }
+                        }
+                    case .failure(let err):
+                        print(err)
+                    }
+                }
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
+    
+    
+    static func prevPersonalStudyRanking(paramString: String , completion: @escaping(Result<[RankingContent], Error>) -> Void){
+        let param: Parameters = ["localDate" : paramString]
+        
+        let endpoint = APIConstants.Ranking.getPrevPersonalStudyRanking + "/?localDate=\(paramString)"
+        
+        StatisticsManager.createStatistics(param: param) { res in
+            switch res{
+            case .success(_):
+                createPersonalRanking(param: param){r in
+                    switch r{
+                    case .success(_):
+                        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: RankingData.self) { res in
+                            switch res.result{
+                            case .success(let data):
+                                completion(.success(data.body.rankingList.content))
+                            case .failure(let err):
+                                print(err)
+                                print("특정 주차 스터디 랭킹 불러오기 실패")
+                                completion(.failure(err))
+                            }
+                        }
+                    case .failure(let err):
+                        print(err)
+                    }
+                }
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
+    static func prevPersonalQuesRanking(paramString: String, completion: @escaping(Result<[RankingContent], Error>) -> Void){
+        let param: Parameters = ["localDate" : paramString]
+        
+        let endpoint = APIConstants.Ranking.getPrevPersonalQuesRanking + "/?localDate=\(paramString)"
+        
+        StatisticsManager.createStatistics(param: param) { res in
+            switch res{
+            case .success(_):
+                createPersonalRanking(param: param){r in
+                    switch r{
+                    case .success(_):
+                        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: RankingData.self) { res in
+                            switch res.result{
+                            case .success(let data):
+                                print(data)
+                                completion(.success(data.body.rankingList.content))
+                            case .failure(let err):
+                                print(err)
+                                print("특정 주차 스터디 랭킹 불러오기 실패")
+                                completion(.failure(err))
+                            }
+                        }
+                    case .failure(let err):
+                        print(err)
+                    }
+                }
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
 }

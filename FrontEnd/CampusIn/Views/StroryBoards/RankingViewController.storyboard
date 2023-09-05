@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -27,6 +27,9 @@
                                         <buttonConfiguration key="configuration" style="plain" image="arrow.backward" catalog="system">
                                             <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="prevBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="VIa-0B-WWv"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rl8-Bs-hW0">
                                         <rect key="frame" x="340" y="55" width="50" height="35"/>
@@ -34,9 +37,12 @@
                                         <buttonConfiguration key="configuration" style="plain" image="arrow.forward" catalog="system">
                                             <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="nextBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4fk-h7-LWO"/>
+                                        </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2023년 6월 1주차" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5t-GG-FhI">
-                                        <rect key="frame" x="113.00000000000001" y="55" width="164.33333333333337" height="35"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="랭킹" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5t-GG-FhI">
+                                        <rect key="frame" x="176" y="55" width="38.333333333333343" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="cvS-Td-DsK"/>
                                         </constraints>
@@ -44,16 +50,8 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="medal.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="CrV-FG-8qz">
-                                        <rect key="frame" x="113" y="104.66666666666667" width="35" height="35.666666666666671"/>
-                                        <color key="tintColor" systemColor="systemYellowColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="RMk-OZ-soT"/>
-                                            <constraint firstAttribute="height" constant="35" id="sVT-QJ-4Xk"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="랭킹" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkw-Db-miz">
-                                        <rect key="frame" x="177.66666666666666" y="105" width="34.666666666666657" height="35"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[ 06.03 ~ 06.10 ]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkw-Db-miz">
+                                        <rect key="frame" x="118.66666666666669" y="105" width="153" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="fTQ-lf-VGu"/>
                                         </constraints>
@@ -70,13 +68,15 @@
                                             <fontDescription key="titleFontDescription" type="boldSystem" pointSize="13"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="rankingTypeBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="GLO-Lk-s5D"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemCyanColor"/>
                                 <constraints>
                                     <constraint firstItem="0cM-vu-X2a" firstAttribute="leading" secondItem="tIF-t4-ErO" secondAttribute="leading" id="0lG-Vj-fsl"/>
                                     <constraint firstAttribute="height" constant="170" id="1HE-EF-BzP"/>
-                                    <constraint firstItem="CrV-FG-8qz" firstAttribute="top" secondItem="s5t-GG-FhI" secondAttribute="bottom" constant="15" id="2hc-65-NYR"/>
                                     <constraint firstItem="0cM-vu-X2a" firstAttribute="top" secondItem="tIF-t4-ErO" secondAttribute="top" constant="55" id="4ES-F7-cAZ"/>
                                     <constraint firstItem="qkw-Db-miz" firstAttribute="top" secondItem="s5t-GG-FhI" secondAttribute="bottom" constant="15" id="7bU-Bw-F2V"/>
                                     <constraint firstAttribute="trailing" secondItem="Hdf-0p-wYb" secondAttribute="trailing" id="LCm-fP-m0k"/>
@@ -86,7 +86,6 @@
                                     <constraint firstItem="s5t-GG-FhI" firstAttribute="top" secondItem="tIF-t4-ErO" secondAttribute="top" constant="55" id="Vha-NM-TUg"/>
                                     <constraint firstItem="s5t-GG-FhI" firstAttribute="centerX" secondItem="tIF-t4-ErO" secondAttribute="centerX" id="hC4-84-Jcy"/>
                                     <constraint firstAttribute="trailing" secondItem="Rl8-Bs-hW0" secondAttribute="trailing" id="lwN-iz-cis"/>
-                                    <constraint firstItem="CrV-FG-8qz" firstAttribute="leading" secondItem="s5t-GG-FhI" secondAttribute="leading" id="mjZ-dB-Uz6"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="170" id="opk-XA-cdv"/>
                                 </constraints>
                             </view>
@@ -96,6 +95,9 @@
                                     <segment title="개인"/>
                                     <segment title="그룹"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentControlChanged:" destination="Y6W-OH-hqX" eventType="valueChanged" id="uOT-8K-t6j"/>
+                                </connections>
                             </segmentedControl>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crown.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mxb-wP-Dow">
                                 <rect key="frame" x="155" y="236.66666666666663" width="80" height="78"/>
@@ -133,7 +135,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="acs-Y3-Awc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="acs-Y3-Awc">
                                 <rect key="frame" x="0.0" y="427" width="390" height="304"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -218,9 +220,12 @@
                         <outlet property="goldPersonLabel" destination="SK4-iB-8T2" id="r0a-zG-em7"/>
                         <outlet property="nextBtn" destination="Rl8-Bs-hW0" id="47n-gk-L8o"/>
                         <outlet property="prevBtn" destination="0cM-vu-X2a" id="jWS-t4-RUc"/>
+                        <outlet property="rankingTypeBtn" destination="Hdf-0p-wYb" id="CDZ-Qy-i6h"/>
+                        <outlet property="segmentControl" destination="Lqr-0s-GF4" id="Gye-9o-VuO"/>
                         <outlet property="silverPersonLabel" destination="X7e-iE-j1D" id="1fa-Ng-OrL"/>
                         <outlet property="tableView" destination="acs-Y3-Awc" id="qNc-Q8-aBO"/>
                         <outlet property="toggleBtn" destination="Hdf-0p-wYb" id="UCV-zZ-J07"/>
+                        <outlet property="weekLabel" destination="qkw-Db-miz" id="e0O-c3-IQD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -234,9 +239,8 @@
         <image name="arrow.forward" catalog="system" width="128" height="95"/>
         <image name="crown" catalog="system" width="128" height="92"/>
         <image name="crown.fill" catalog="system" width="128" height="92"/>
-        <image name="medal.fill" catalog="system" width="121" height="128"/>
         <namedColor name="bronze">
-            <color red="0.69019607843137254" green="0.44313725490196076" blue="0.21568627450980393" alpha="0.90000008583068847" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.69019607843137254" green="0.44313725490196076" blue="0.21568627450980393" alpha="0.89999997615814209" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="typingIndicatorDot">
             <color red="0.68199998140335083" green="0.68199998140335083" blue="0.69800001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
