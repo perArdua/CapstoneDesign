@@ -48,7 +48,7 @@ public class RankService {
         }
 
         LocalDate localDate = statistics.getDate();
-        LocalDate startDate = localDate.minusDays(localDate.getDayOfWeek().getValue() - 1);
+        LocalDate startDate = localDate.minusDays(localDate.getDayOfWeek().getValue());
         LocalDate endDate = startDate.plusDays(6);
 
         List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user, startDate, endDate);
@@ -83,7 +83,7 @@ public class RankService {
 
         // 해당 날짜 기준 전주의 statistics totalElapsedTime, totalNumberOfQuestions를 구한다.
         LocalDate localDate = statistics.getDate();
-        LocalDate startDate = localDate.minusDays(localDate.getDayOfWeek().getValue() - 1);
+        LocalDate startDate = localDate.minusDays(localDate.getDayOfWeek().getValue());
         LocalDate endDate = startDate.plusDays(6);
 
         Long totalStudyTime = 0L;
@@ -100,6 +100,10 @@ public class RankService {
             totalQuestion += Question;
 
         }
+
+        totalStudyTime = totalStudyTime / studyGroup.getMembers().size();
+        totalQuestion = totalQuestion / studyGroup.getMembers().size();
+
         Rank rank = Rank.builder()
                 .user(studyGroup.getUser()) // 스터디 그룹장
                 .statistics(statistics)
