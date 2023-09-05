@@ -69,7 +69,7 @@ public class RankController {
                                          @PathVariable Long studyGroupId,
                                          @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate,
                                          @PageableDefault(size = 10) Pageable pageable){
-        return ApiResponse.success("스터디 그룹 랭킹 조회", rankService.getStudyGroupPersonalStudyTimeRank(studyGroupId, localDate, pageable));
+        return ApiResponse.success("랭킹 리스트 조회", rankService.getStudyGroupPersonalStudyTimeRank(studyGroupId, localDate, pageable));
     }
 
     @ApiResponses(
@@ -85,7 +85,7 @@ public class RankController {
     public ApiResponse getAllStudyTimeRankList(@RequestParam(name = "localDate")
                                                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate,
                                                Pageable pageable){
-        return ApiResponse.success("공부시간 랭킹 리스트 조회", rankService.getAllStudyTimeRankList(localDate, pageable));
+        return ApiResponse.success("랭킹 리스트 조회", rankService.getAllStudyTimeRankList(localDate, pageable));
     }
 
     @ApiResponses(
@@ -100,7 +100,7 @@ public class RankController {
     @GetMapping("/LastWeek/studyTimeRank")
     public ApiResponse getPreviousWeekRankList(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate,
                                                @PageableDefault(size = 10) Pageable pageable){
-        return ApiResponse.success("이전 주 랭킹 리스트 조회", rankService.getAllStudyTimeRankList(localDate, pageable));
+        return ApiResponse.success("랭킹 리스트 조회", rankService.getAllStudyTimeRankList(localDate, pageable));
     }
 
     @ApiResponses(
@@ -115,7 +115,7 @@ public class RankController {
     @GetMapping("/LastWeek/questionRank")
     public ApiResponse getPreviousWeekRankQuestList(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate,
                                                @PageableDefault(size = 10) Pageable pageable){
-        return ApiResponse.success("이전 주 랭킹 리스트 조회", rankService.getAllQuestionRankList(localDate, pageable));
+        return ApiResponse.success("랭킹 리스트 조회", rankService.getAllQuestionRankList(localDate, pageable));
     }
 
     @ApiResponses(
@@ -129,7 +129,7 @@ public class RankController {
     @Operation(summary = "개인 질의응답 랭킹 리스트 조회")
     @GetMapping("/questionRank")
     public ApiResponse getAllQuestionRankList(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate, Pageable pageable){
-        return ApiResponse.success("개인 질의응답 랭킹 리스트 조회", rankService.getAllQuestionRankList(localDate, pageable));
+        return ApiResponse.success("랭킹 리스트 조회", rankService.getAllQuestionRankList(localDate, pageable));
     }
 
 }
