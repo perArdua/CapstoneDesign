@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 // MARK: - RankingData
 struct RankingData: Codable {
     let header: RankingHeader
@@ -18,11 +19,11 @@ struct RankingBody: Codable {
     let rankingList: RankingList
 
     enum CodingKeys: String, CodingKey {
-        case rankingList = "공부시간 랭킹 리스트 조회"
+        case rankingList = "랭킹 리스트 조회"
     }
 }
 
-// MARK: - 공부시간랭킹리스트조회
+// MARK: - 랭킹리스트조회
 struct RankingList: Codable {
     let content: [RankingContent]
     let pageable: RankingPageable
@@ -37,7 +38,7 @@ struct RankingList: Codable {
 struct RankingContent: Codable {
     let rank: Int
     let name: String
-    let week: Int
+    let week, month: Int
 }
 
 // MARK: - Pageable
@@ -49,7 +50,7 @@ struct RankingPageable: Codable {
 
 // MARK: - Sort
 struct RankingSort: Codable {
-    let sorted, unsorted, empty: Bool
+    let unsorted, sorted, empty: Bool
 }
 
 // MARK: - Header
