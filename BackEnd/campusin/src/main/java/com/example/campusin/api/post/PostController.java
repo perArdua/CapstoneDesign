@@ -152,6 +152,6 @@ public class PostController {
                                                       sort = {"createdAt"},
                                                       direction = Sort.Direction.DESC
                                               ) Pageable pageable) {
-        return ApiResponse.success("스터디 그룹 게시글 목록", postService.getPostsByStudyGroup(studyGroupId, pageable));
+        return ApiResponse.success("게시글 목록", postService.getPostsByStudyGroup(studyGroupId, pageable));
     }
 }
