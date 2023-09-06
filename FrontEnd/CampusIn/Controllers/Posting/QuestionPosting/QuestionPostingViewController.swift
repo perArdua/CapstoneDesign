@@ -279,8 +279,9 @@ extension QuestionPostingViewController : UITableViewDelegate, UITableViewDataSo
         cell.titleLabel.text = temp.title
         cell.contentLabel.text = temp.content
         cell.dateLabel.text = String(temp.createdAt[1])+"/"+String(temp.createdAt[2])
-        cell.userLabel.text = temp.nickname
+        cell.userLabel.text = "작성자: \(temp.nickname ?? "(null)")"
         cell.commentLabel.text = "5"
+        cell.tagLabel.text = "#\(temp.tagResponse.tagType)"
 
         return cell
     }
