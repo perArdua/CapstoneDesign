@@ -85,7 +85,7 @@ extension StudyGroupManagementViewController: UITableViewDataSource, UITableView
         //print(group.userId)
         cell.groupName.text = String(group.studygroupName)
         print(group.studygroupName)
-        cell.groupSize.text = String(group.currentMemberSize) + " / 4"
+        cell.groupSize.text = String(group.currentMemberSize) + " / \(group.limitedMemberSize)"
         //cell.selectionStyle = .none
        
         return cell
