@@ -49,6 +49,7 @@
 		3185DF312A2A3FAA001E5265 /* StudyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF302A2A3FA9001E5265 /* StudyRecordViewController.swift */; };
 		3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */; };
 		3185DF352A2A3FC5001E5265 /* StudyRecordAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */; };
+		318B6E882AA89CBD00D981A8 /* GroupTimerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318B6E872AA89CBD00D981A8 /* GroupTimerResponse.swift */; };
 		3197C68B2A2CCC3000674199 /* StatisticsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3197C68A2A2CCC3000674199 /* StatisticsViewController.storyboard */; };
 		319815142A2B205400B8B010 /* StudyRecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319815132A2B205400B8B010 /* StudyRecordDelegate.swift */; };
 		31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */; };
@@ -194,6 +195,7 @@
 		3185DF302A2A3FA9001E5265 /* StudyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordViewController.swift; sourceTree = "<group>"; };
 		3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDetailViewController.swift; sourceTree = "<group>"; };
 		3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordAddViewController.swift; sourceTree = "<group>"; };
+		318B6E872AA89CBD00D981A8 /* GroupTimerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTimerResponse.swift; sourceTree = "<group>"; };
 		3197C68A2A2CCC3000674199 /* StatisticsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StatisticsViewController.storyboard; sourceTree = "<group>"; };
 		319815132A2B205400B8B010 /* StudyRecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDelegate.swift; sourceTree = "<group>"; };
 		31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 				3179137E2A23911D00BC86FE /* TimerAddResponse.swift */,
 				317913822A23927E00BC86FE /* TimerUpdateResponse.swift */,
 				3179137C2A23906E00BC86FE /* TimerReadResponse.swift */,
+				318B6E872AA89CBD00D981A8 /* GroupTimerResponse.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -1018,6 +1021,7 @@
 				3183ABE22A150A51009CA636 /* BoardManager.swift in Sources */,
 				31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */,
 				5D3F61532A2F59C2000E3B7C /* BookStoreViewController.swift in Sources */,
+				318B6E882AA89CBD00D981A8 /* GroupTimerResponse.swift in Sources */,
 				5DFF9BB02A2C90B5004C2DE5 /* StudyGroupManager.swift in Sources */,
 				31EAED492A320BF400F04DEC /* StudyPostingTableViewCell.swift in Sources */,
 				5D547FF02A1F593F00376E09 /* UserNickname.swift in Sources */,
