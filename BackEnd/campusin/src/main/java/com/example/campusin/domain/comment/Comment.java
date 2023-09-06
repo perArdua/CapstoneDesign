@@ -124,8 +124,4 @@ public class Comment extends BaseTimeEntity {
     public List<Comment> getChildren() {
         return children;
     }
-
-    public void addLike(CommentLike commentLike){
-        commentLike.setComment(this);
-    }
 }

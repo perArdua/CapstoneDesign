@@ -37,7 +37,15 @@ public class CommentLikeService {
             throw new IllegalArgumentException("NOT FOUND LIKED");
         }
 
+        Comment comment = getComment(commentId);
+        comment.getLikes().removeIf(commentLike -> commentLike.getId().equals(commentLikeId));
+
+        CommentLike commentLike = commentLikeRepository.findById(commentLikeId).orElseThrow(() -> new IllegalArgumentException("COMMENT LIKE NOT FOUND"));
+        commentLike.setComment(null);
+        commentLike.setUser(null);
+
         commentLikeRepository.deleteById(commentLikeId);
+        System.out.println("삭제되었습니다");
     }
 
     private Comment getComment(Long commentId){

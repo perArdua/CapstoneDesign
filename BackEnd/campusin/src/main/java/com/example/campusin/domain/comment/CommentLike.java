@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JoinColumnOrFormula;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -17,7 +18,8 @@ import static javax.persistence.FetchType.LAZY;
 @Table(name = "COMMENT_LIKE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@SQLDelete(sql = "UPDATE COMMENT_LIKE SET deleted_at = CURRENT_TIMESTAMP where comment_id = ? and user_id = ?")
+// @SQLDelete(sql = "UPDATE COMMENT_LIKE SET deleted_at = CURRENT_TIMESTAMP where comment_id = ? and user_id = ?")
+// @Where(clause = "deleted_at IS NULL")
 public class
 CommentLike extends BaseTimeEntity {
 
@@ -44,9 +46,9 @@ CommentLike extends BaseTimeEntity {
 
     public void setComment(Comment comment){
         this.comment = comment;
-        comment.getLikes().add(this);
     }
 
-
-
+    public void setUser(User user){
+        this.user = user;
+    }
 }
