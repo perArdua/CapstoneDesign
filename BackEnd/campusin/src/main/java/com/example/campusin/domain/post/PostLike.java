@@ -15,7 +15,7 @@ import java.util.Objects;
 @Table(name = "POST_LIKE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@SQLDelete(sql = "UPDATE POST_LIKE SET deleted_at = CURRENT_TIMESTAMP where post_id = ? and user_id = ?")
+//@SQLDelete(sql = "UPDATE POST_LIKE SET deleted_at = CURRENT_TIMESTAMP where post_id = ? and user_id = ?")
 public class PostLike extends BaseTimeEntity {
 
     @EmbeddedId
