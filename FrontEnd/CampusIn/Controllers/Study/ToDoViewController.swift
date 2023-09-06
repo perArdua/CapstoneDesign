@@ -51,7 +51,6 @@ class ToDoViewController: UIViewController {
     @IBAction func addBtnTapped(_ sender: UIButton) {
         let defaults = UserDefaults.standard
         
-        let userId: Int? = defaults.value(forKey: "userId") as! Int
         let alertController = UIAlertController(title: "Add Todo", message: nil, preferredStyle: .alert)
             alertController.addTextField { textField in
                 textField.placeholder = "Enter Todo"
@@ -61,13 +60,8 @@ class ToDoViewController: UIViewController {
             if let todoText = alertController.textFields?.first?.text {
                 TodoManager.addTodoItem(title: todoText) { [weak self] result in
                     switch result {
-                    case .success(let todoId):
-                        let todo = Todo(userId: userId!, todoId: todoId, title: todoText, completed: false)
-                        self?.todoItems.append(todo)
-                        DispatchQueue.main.async {
-                            self?.tableView.reloadData()
-                            self?.scrollToBottom()
-                        }
+                    case .success(_):
+                        self?.prepareTableView()
                     case .failure(let error):
                         print("Error: \(error)")
                     }

@@ -17,9 +17,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var studyView: UIView!
     
     
-    @IBOutlet weak var todoLabel: UILabel!
-    @IBOutlet weak var todoLabel2: UILabel!
-    @IBOutlet weak var todoLabel3: UILabel!
+    @IBOutlet var todoLabel: [UILabel]!
+    
+    @IBOutlet var generalTitle: [UILabel]!
+    @IBOutlet var studyTitle: [UILabel]!
+    @IBOutlet var questionTitle: [UILabel]!
+    
+    var generalPostingList: [PostListContent] = []
+    var studyPostingList: [PostListContent] = []
+    var questionPostingList: [PostListContent] = []
+    var todoList: [Todo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,19 +61,127 @@ class ViewController: UIViewController {
         
         //할일 목록 라벨 UI 설정
         
-        todoLabel.layer.cornerRadius = 10.0
-        todoLabel.layer.masksToBounds = true
-        todoLabel2.layer.cornerRadius = 10.0
-        todoLabel2.layer.masksToBounds = true
-        todoLabel3.layer.cornerRadius = 10.0
-        todoLabel3.layer.masksToBounds = true
+        todoLabel[0].layer.cornerRadius = 10.0
+        todoLabel[0].layer.masksToBounds = true
+        todoLabel[1].layer.cornerRadius = 10.0
+        todoLabel[1].layer.masksToBounds = true
+        todoLabel[2].layer.cornerRadius = 10.0
+        todoLabel[2].layer.masksToBounds = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // TabBar 보이기
         self.tabBarController?.tabBar.isHidden = false
+        initPostingTitle()
         
+        let defaults = UserDefaults.standard
+        let check = defaults.value(forKey: "isLoggedIn")
+        if check as! Bool{
+           setPostingTitle()
+        }
     }
+    
+    func setPostingTitle(){
+        TodoManager.getAllTodoList { res in
+            switch res{
+            case .success(let data):
+                self.todoList = data
+                self.setTodoLabel()
+            case .failure(let err):
+                print(err)
+            }
+        }
+        
+        
+        BoardManager.showPostbyBoard(boardID: BoardManager.getBoardID(boardName: "Free")){[weak self] result in
+            switch result {
+            case .success(let posts):
+                // 데이터를 받아와서 배열에 저장
+                self?.generalPostingList = posts
+                self?.setGeneralPostingTitle()
+            case .failure(let error):
+                print("자유 게시판 미리보기 Error: \(error)")
+            }
+        }
+        
+        BoardManager.showPostbyBoard(boardID: BoardManager.getBoardID(boardName: "Study")){[weak self] result in
+            switch result {
+            case .success(let posts):
+                // 데이터를 받아와서 배열에 저장
+                self?.studyPostingList = posts
+                self?.setStudyPostingTitle()
+            case .failure(let error):
+                print("스터디 모집 게시판 미리보기 Error: \(error)")
+            }
+        }
+        
+        BoardManager.showPostbyBoard(boardID: BoardManager.getBoardID(boardName: "Question")){[weak self] result in
+            switch result {
+            case .success(let posts):
+                // 데이터를 받아와서 배열에 저장
+                self?.questionPostingList = posts
+                self?.setQuestionPostingTitle()
+            case .failure(let error):
+                print("질의 응답 게시판 미리보기 Error: \(error)")
+            }
+        }
+    }
+    
+    func initPostingTitle(){
+        for i in 0..<3{
+            generalTitle[i].textColor = .lightGray
+            studyTitle[i].textColor = .lightGray
+            questionTitle[i].textColor = .lightGray
+            todoLabel[i].textColor = .lightGray
+            
+            
+            generalTitle[i].text = "• 게시글이 없습니다."
+            studyTitle[i].text = "• 게시글이 없습니다."
+            questionTitle[i].text = "• 게시글이 없습니다."
+            todoLabel[i].text = "- 할 일이 없습니다."
+        }
+    }
+    
+    func setTodoLabel(){
+        let maxPostingCnt = 3
+        
+        var cnt = 0
+        for i in 0..<todoList.count{
+            if cnt == 3{break}
+            if todoList[i].completed {continue}
+            todoLabel[i].textColor = .black
+            todoLabel[i].text = "- \(todoList[i].title)"
+            cnt += 1
+        }
+    }
+    
+    func setGeneralPostingTitle(){
+        let maxPostingCnt = 3
+        
+        for i in 0..<(min(maxPostingCnt, generalPostingList.count)){
+            generalTitle[i].textColor = .black
+            generalTitle[i].text = "• \(generalPostingList[i].title)"
+        }
+    }
+    
+    func setStudyPostingTitle(){
+        let maxPostingCnt = 3
+        
+        for i in 0..<(min(maxPostingCnt, studyPostingList.count)){
+            studyTitle[i].textColor = .black
+            studyTitle[i].text = "• \(studyPostingList[i].title)"
+        }
+    }
+    
+    func setQuestionPostingTitle(){
+        let maxPostingCnt = 3
+        
+        for i in 0..<(min(maxPostingCnt, questionPostingList.count)){
+            questionTitle[i].textColor = .black
+            questionTitle[i].text = "• \(questionPostingList[i].title)"
+        }
+    }
+
 
     override func loadView() {
         super.loadView()
@@ -98,8 +213,6 @@ class ViewController: UIViewController {
         //self.navigationController?.pushViewController(nextVC!, animated: true)
         self.present(nextVC!, animated: true)
     }
-    
-
 }
 
 
