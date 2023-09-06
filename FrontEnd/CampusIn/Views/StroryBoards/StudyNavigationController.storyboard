@@ -499,27 +499,12 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbs-aU-F8D">
-                                        <rect key="frame" x="161.66666666666666" y="88" width="70" height="20"/>
-                                        <color key="backgroundColor" red="0.12475224059999999" green="0.48611461179999998" blue="0.21509283339999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="Zro-Gg-CK6"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="mrd-0g-For"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="그룹 변경" cornerStyle="capsule">
-                                            <fontDescription key="titleFontDescription" type="system" pointSize="0.0"/>
-                                        </buttonConfiguration>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
-                                    <constraint firstItem="Rbs-aU-F8D" firstAttribute="top" secondItem="WcJ-Pd-Ajx" secondAttribute="bottom" constant="20" id="X20-z8-OOF"/>
                                     <constraint firstAttribute="height" constant="130" id="aRR-Pb-OE4"/>
                                     <constraint firstItem="WcJ-Pd-Ajx" firstAttribute="centerX" secondItem="jbY-z9-Qgg" secondAttribute="centerX" id="bO5-ZQ-FjL"/>
                                     <constraint firstItem="WcJ-Pd-Ajx" firstAttribute="top" secondItem="jbY-z9-Qgg" secondAttribute="top" constant="20" id="oxP-cv-uFN"/>
-                                    <constraint firstItem="Rbs-aU-F8D" firstAttribute="centerX" secondItem="jbY-z9-Qgg" secondAttribute="centerX" id="qfP-jh-wnm"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SBU-EU-i9S">
