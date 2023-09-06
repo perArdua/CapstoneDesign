@@ -14,6 +14,7 @@ class QuestionPostingTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var tagLabel: UILabel!
     
     //cell에서 viewDidLoad와 비슷한 역할을 하는 코드
     //만약 스토리보드로 만들때 밑 함수에 원하는 코드 작성. 모두 코드로 할거면 사용 x

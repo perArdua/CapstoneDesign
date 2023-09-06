@@ -468,6 +468,14 @@
                         <outletCollection property="groupTimers" destination="IcH-QR-fTp" collectionClass="NSMutableArray" id="5eV-3e-62L"/>
                         <outletCollection property="groupTimers" destination="I0d-qv-5PQ" collectionClass="NSMutableArray" id="oWV-fp-r6n"/>
                         <outletCollection property="groupTimers" destination="SFc-7q-X0h" collectionClass="NSMutableArray" id="Vd8-qL-WlL"/>
+                        <outletCollection property="memberNames" destination="Y0J-Of-qD8" collectionClass="NSMutableArray" id="1J0-XA-14h"/>
+                        <outletCollection property="memberNames" destination="01Z-7Q-jtV" collectionClass="NSMutableArray" id="7r8-Rc-vuY"/>
+                        <outletCollection property="memberNames" destination="Lvg-im-egD" collectionClass="NSMutableArray" id="R6h-sI-NwZ"/>
+                        <outletCollection property="memberNames" destination="1rj-XM-zIJ" collectionClass="NSMutableArray" id="5BC-SC-T48"/>
+                        <outletCollection property="memberTimers" destination="Wqq-EP-DUV" collectionClass="NSMutableArray" id="TbO-Oc-VBi"/>
+                        <outletCollection property="memberTimers" destination="D8g-uM-wr5" collectionClass="NSMutableArray" id="tRo-sJ-iPE"/>
+                        <outletCollection property="memberTimers" destination="pJ5-30-xPS" collectionClass="NSMutableArray" id="4Y7-fn-7I4"/>
+                        <outletCollection property="memberTimers" destination="Xns-oI-HGd" collectionClass="NSMutableArray" id="w94-5s-Ah2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

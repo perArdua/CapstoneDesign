@@ -195,8 +195,7 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
             cell.titleLabel.text = postDetail?.title
             cell.contentLabel.text = postDetail?.content
             
-            //API 받기 전 임시
-            cell.tagLabel.text = "IT"
+            cell.tagLabel.text = ConvertTag.convert2(tag: postDetail!.tagType)
             
             cell.img0.isHidden = true
             cell.img1.isHidden = true

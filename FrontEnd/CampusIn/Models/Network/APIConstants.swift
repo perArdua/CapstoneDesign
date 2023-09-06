@@ -93,7 +93,7 @@ struct APIConstants {
         static let addTimer = baseURL + "/timer" //timer 추가
         static let deleteTimer = baseURL + "/timer/%d" //timer 삭제
         static let updateTimer = baseURL + "/timer/%d" //timer 시간 갱신
-        static let initTimer = baseURL + "/timer/init" //timer 시간 갱신 
+        static let initTimer = baseURL + "/timer/init" //timer 시간 갱신
     }
     
     struct StudyGroup{
@@ -103,6 +103,7 @@ struct APIConstants {
         static let showMyStudyGroup = baseURL + "/studygroup/mystudygroup"
         static let showStudyGroupDetail = baseURL + "/studygroup/%d"
         static let joinStudyGroupDetail = baseURL + "/studygroup/join"
+        static let getGroupTimer = baseURL + "/studygroup/%d/studytime?endDate=" // 그룹원들 타이머 시간 가져오기
     }
     
     struct StudyRecord{
@@ -115,9 +116,14 @@ struct APIConstants {
     }
     
     struct Ranking{
-        static let createRanking = baseURL + "/rank" //현재 주차 랭킹 생성
-        static let getPersonalStudyRanking = baseURL + "/rank/study"
-        static let getPrevPersonalStudyRanking = baseURL + "/statistics/create"
+        static let createPersonalRanking = baseURL + "/rank" //개인 user rank 생성
+        static let createGroupRanking = baseURL + "/rank/studyGroupRank" //스터디 그룹 rank 생성
+        static let getPersonalStudyRanking = baseURL + "/rank/studyTimeRank" //개인 공부 시간 랭킹 생성
+        static let getPersonalQuesRanking = baseURL + "/rank/questionRank" //개인 공부 시간 랭킹 생성
+        
+        static let getPrevPersonalStudyRanking = baseURL + "/rank/LastWeek/studyTimeRank" //개인 공부 시간 랭킹 가져오기
+        static let getPrevPersonalQuesRanking = baseURL + "/rank/LastWeek/questionRank" //개인 공부 시간 랭킹 가져오기
+        
     }
 }
 

@@ -64,11 +64,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="184" translatesAutoresizingMaskIntoConstraints="NO" id="R2M-P1-KRf">
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="R2M-P1-KRf">
                                                     <rect key="frame" x="10" y="5" width="370" height="76"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="gix-vL-q6I">
-                                                            <rect key="frame" x="0.0" y="13.666666666666668" width="119" height="62.333333333333329"/>
+                                                            <rect key="frame" x="0.0" y="11.333333333333336" width="183" height="64.666666666666657"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSy-zz-nYd">
                                                                     <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="20.333333333333332"/>
@@ -83,17 +83,23 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="cQX-Qa-dhk">
-                                                                    <rect key="frame" x="0.0" y="44.333333333333329" width="95" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="44.333333333333329" width="154.33333333333334" height="20.333333333333329"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBQ-rz-KQq">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="26" height="18"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="26" height="20.333333333333332"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="작성자" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZhV-xa-ihb">
-                                                                            <rect key="frame" x="56" y="0.0" width="39" height="18"/>
+                                                                            <rect key="frame" x="56" y="0.0" width="39" height="20.333333333333332"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# IT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wA9-Cr-l9b">
+                                                                            <rect key="frame" x="124.99999999999999" y="0.0" width="29.333333333333329" height="20.333333333333332"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -148,6 +154,7 @@
                                             <outlet property="commentLabel" destination="IMY-sn-qu1" id="5hJ-eP-6q7"/>
                                             <outlet property="contentLabel" destination="fAv-x0-9lV" id="YJY-2M-ias"/>
                                             <outlet property="dateLabel" destination="xBQ-rz-KQq" id="6UJ-Z2-W4V"/>
+                                            <outlet property="tagLabel" destination="wA9-Cr-l9b" id="le9-G8-B9W"/>
                                             <outlet property="titleLabel" destination="hSy-zz-nYd" id="tGt-BI-IMy"/>
                                             <outlet property="userLabel" destination="ZhV-xa-ihb" id="nNr-qP-tIU"/>
                                         </connections>

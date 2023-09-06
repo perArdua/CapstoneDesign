@@ -29,7 +29,7 @@ class StatisticsManager{
     
     
     // MARK: - 특정 날짜의 통계 데이터 생성 요청. Response로 해당 통계 data의 Id를 가져온다.
-    static private func createStatistics(param: Parameters, completion: @escaping (Result<CreateStatisticsID, Error>) -> Void){
+    static func createStatistics(param: Parameters, completion: @escaping (Result<CreateStatisticsID, Error>) -> Void){
         let endpoint = APIConstants.Statistics.createStatistics
         
         AF.request(endpoint, method: .post, parameters: param, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: CreateStatisticsResponse.self) { response in

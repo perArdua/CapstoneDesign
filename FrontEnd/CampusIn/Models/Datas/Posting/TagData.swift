@@ -75,4 +75,15 @@ struct ConvertTag{
         else if tag == "수학" {return "Math"}
         else {return "IT"}
     }
+    
+    static func convert2(tag: String) -> String{
+        if tag == "Etc" {return "기타"}
+        else if tag == "Art" {return "예체능"}
+        else if tag == "Humanity" {return "인문"}
+        else if tag == "Economy" {return "경제"}
+        else if tag == "Engineering" {return "공학"}
+        else if tag == "Science" {return "자연과학"}
+        else if tag == "Math" {return "수학"}
+        else {return "IT"}
+    }
 }

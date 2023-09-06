@@ -15,13 +15,16 @@ class StudyManageViewController: UIViewController{
     var haveToInit: Bool?
     var runningTime: Int?
     var totalTime: Int?
+    var studyCnt = 0
     
     @IBOutlet weak var totalTimeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet var groupTimers: [UIView]!
+    @IBOutlet var memberNames: [UILabel]!
+    @IBOutlet var memberTimers: [UILabel]!
     
-    var studyGroupData: [MyStudyGroupDetails] = []
+    var studyGroupData: [MyStudyGroupDetails] = [MyStudyGroupDetails(id: -1, studygroupName: "선택하세요", userName: ".", createdAt: [], limitedMemberSize: -1, currentMemberSize: 0)]
     var studyGroupID : Int?
     
     let studyPickerView = UIPickerView()
@@ -29,6 +32,7 @@ class StudyManageViewController: UIViewController{
     let studyDoneBtn = UIButton(type: .system)
     //스터디 그룹 라벨에 들어갈 텍스트
     var studyGroup: String?
+    var groupTimerList: [GroupTimerContent] = []
     
     // MARK: - 타이머 추가 버튼
     let addBtn: UIButton = {
@@ -52,9 +56,6 @@ class StudyManageViewController: UIViewController{
         tableView.allowsSelection = false
         totalTime = 0
         
-        groupTimers[2].isHidden = true
-        groupTimers[3].isHidden = true
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         haveToInit = false
@@ -73,6 +74,7 @@ class StudyManageViewController: UIViewController{
         
         timerFlag = false
         setUpStudyPickerView()
+        setGroupTimer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,7 +93,8 @@ class StudyManageViewController: UIViewController{
                 for item in data{
                     print(item.studygroupName)
                 }
-                self.studyGroupData = data
+                self.studyGroupData = [MyStudyGroupDetails(id: -1, studygroupName: "선택하세요", userName: ".", createdAt: [], limitedMemberSize: -1, currentMemberSize: 0)]
+                self.studyGroupData.append(contentsOf: data)
             case .failure(let err):
                 print("나의 스터디 그룹 목록 불러오기 성공")
                 print(err)
@@ -123,14 +126,49 @@ class StudyManageViewController: UIViewController{
         view.addSubview(addBtn)
         addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
         addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 250, width: 60, height: 60)
-        
-        
-        //초기 그룹원들의 시간들을 가지고 오는 함수 필요
     }
     
     func setGroupTimer(){
-        //1. api Call로 그룹원들의 시간을 불러옴
-        //2. 타이머 화면에 배치
+        print("그룹원 수: \(groupTimerList.count)")
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        formatter.timeZone = TimeZone(identifier: "GMT")
+        
+        for i in 0...3{
+            groupTimers[i].isHidden = true
+        }
+        
+        
+        if groupTimerList.count > 0{
+            groupTimers[0].isHidden = false
+            memberNames[0].text = groupTimerList[0].studyGroupMemberName
+            let date = Date(timeIntervalSinceReferenceDate: TimeInterval(groupTimerList[0].elapsedTime))
+            let formattedCnt = formatter.string(from: date)
+            memberTimers[0].text = formattedCnt
+        
+        }
+        if groupTimerList.count > 1{
+            groupTimers[1].isHidden = false
+            memberNames[1].text = groupTimerList[1].studyGroupMemberName
+            let date = Date(timeIntervalSinceReferenceDate: TimeInterval(groupTimerList[1].elapsedTime))
+            let formattedCnt = formatter.string(from: date)
+            memberTimers[1].text = formattedCnt
+        }
+        if groupTimerList.count > 2{
+            groupTimers[2].isHidden = false
+            memberNames[2].text = groupTimerList[2].studyGroupMemberName
+            let date = Date(timeIntervalSinceReferenceDate: TimeInterval(groupTimerList[2].elapsedTime))
+            let formattedCnt = formatter.string(from: date)
+            memberTimers[2].text = formattedCnt
+        }
+        if groupTimerList.count > 3{
+            groupTimers[3].isHidden = false
+            memberNames[3].text = groupTimerList[3].studyGroupMemberName
+            let date = Date(timeIntervalSinceReferenceDate: TimeInterval(groupTimerList[3].elapsedTime))
+            let formattedCnt = formatter.string(from: date)
+            memberTimers[3].text = formattedCnt
+        }
     }
     
     // MARK: - study group의 pickerView UI 세팅
@@ -261,19 +299,32 @@ class StudyManageViewController: UIViewController{
     @objc func studyDoneBtnTapped(){
         studyPickerView.isHidden = true
         studyDoneView.isHidden = true
-        
+        print(self.studyGroupID)
         if let studyGroupText = studyGroup{
-            if studyGroupText == "개인"{
+            if studyGroupText == ""{
                 groupLabel.text = ""
+                groupTimerList = []
+                self.setGroupTimer()
             }
             else{
                 groupLabel.text = studyGroupText
+                StudyGroupManager.getGroupTimer(groupID: studyGroupID!) { res in
+                    switch res{
+                    case .success(let timers):
+                        self.groupTimerList = timers
+                        self.setGroupTimer()
+                    case .failure(_):
+                        print("그룹 타이머 불러오기 실패...")
+                    }
+                }
             }
         }
         else{
             groupLabel.text = nil
+            groupTimerList = []
+            self.setGroupTimer()
         }
-                
+        
         UIView.animate(withDuration: 0.3) {
             self.studyPickerView.alpha = 0.0
             self.studyDoneView.alpha = 0.0
@@ -418,26 +469,22 @@ extension StudyManageViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return studyGroupData.count + 1
+        return studyGroupData.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if row == 0{
-            return "그룹을 선택하세요"
-        }
-        else {
-            return studyGroupData[row - 1].studygroupName
-        }
+        return studyGroupData[row].studygroupName
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row == 0{
-            self.studyGroup = "개인"
+            self.studyGroup = ""
             self.studyGroupID = -1
         }
         else{
-            self.studyGroup = studyGroupData[row - 1].studygroupName
-            self.studyGroupID = studyGroupData[row - 1].id
+            self.studyGroup = studyGroupData[row].studygroupName
+            self.studyGroupID = studyGroupData[row].id
+            print(self.studyGroupID)
         }
     }
 }
