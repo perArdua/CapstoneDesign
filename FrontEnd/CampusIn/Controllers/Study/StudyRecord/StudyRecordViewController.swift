@@ -9,11 +9,16 @@ import UIKit
 
 class StudyRecordViewController: UIViewController {
 
-    var array:[PostListContent]?
+    var array:[RecordPostListContent] = []
+    var recordID: Int?
+    
+    var groupID: Int?
     
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var groupName: String = ""
     
     // MARK: - 스터디 기록 추가 버튼
     let addBtn: UIButton = {
@@ -35,38 +40,85 @@ class StudyRecordViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.isHidden = false
+        getData()
+        print("count")
+        print(array.count)
+        print(groupID)
+        print(groupName)
+        print("record id")
+        print(UserDefaults.standard.value(forKey: "StudyRecord"))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         view.addSubview(addBtn)
+        
+        getData()
+        tableView.reloadData()
         addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
         addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 150, width: 60, height: 60)
     }
     
     @objc func addBtnTapped(){
         print("스터디 기록 추가 버튼 tapped")
+        let nextVC = storyboard?.instantiateViewController(withIdentifier: "StudyAddRecordViewController") as! StudyAddRecordViewController
+        nextVC.gId = groupID
+        navigationController?.pushViewController(nextVC, animated: true)
     }
-
+    
+    func getData() {
+        StudyRecordManager.showPostbyGroupID(groupID: groupID!){[weak self] result in
+            print("________________")
+            print(self!.groupID)
+            print(result)
+            switch result{
+            case .success(let posts):
+                print("성공")
+                self?.array = posts
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 
 }
 
+
+
+
 extension StudyRecordViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudyRecordTableViewCell", for: indexPath) as! StudyRecordTableViewCell
-        
+        cell.selectionStyle = .none
         cell.menuBtnTappedClosure = { [weak self] in
             self?.showMenu(for: indexPath)
             
         }
-        
-        cell.titleLabel.text = "\(indexPath.row)"
-        cell.dateLabel.text = "\(indexPath.row)"
+        print("title")
+        print(array[indexPath.row].title)
+        cell.titleLabel.text = array[indexPath.row].title
+        let dateArr = array[indexPath.row].createdAt
+        let dateStr: String = "\(dateArr[0]) / \(dateArr[1]) / \(dateArr[2])"
+        cell.dateLabel.text = dateStr
+        print(dateStr)
+
+
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = storyboard!.instantiateViewController(withIdentifier: "StudyDetailRecordViewController") as! StudyDetailRecordViewController
+        nextVC.recordDetail = array[indexPath.row]
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     func showMenu(for indexPath: IndexPath) {

@@ -106,6 +106,10 @@ struct APIConstants {
         static let getGroupTimer = baseURL + "/studygroup/%d/studytime?endDate=" // 그룹원들 타이머 시간 가져오기
     }
     
+    struct StudyRecord{
+        static let showStudyRecord = baseURL + "/posts/%d/posts"
+    }
+    
     struct Statistics{
         static let getStatistics = baseURL + "/statistics/%d"
         static let createStatistics = baseURL + "/statistics/create"

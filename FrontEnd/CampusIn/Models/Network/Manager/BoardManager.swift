@@ -16,7 +16,7 @@ class BoardManager{
     // MARK: - 게시글 생성 요청 함수
     static func createPost(boardID: Int, tagID: Int,  params: Parameters){
         let endpoint = String(format: APIConstants.Board.createPost, boardID, tagID)
-        
+        print(endpoint)
         AF.request(endpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: DataResponse.self, completionHandler: { response in
             print("게시글 생성요청")
             print(response)
