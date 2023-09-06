@@ -93,7 +93,7 @@ struct APIConstants {
         static let addTimer = baseURL + "/timer" //timer 추가
         static let deleteTimer = baseURL + "/timer/%d" //timer 삭제
         static let updateTimer = baseURL + "/timer/%d" //timer 시간 갱신
-        static let initTimer = baseURL + "/timer/init" //timer 시간 갱신 
+        static let initTimer = baseURL + "/timer/init" //timer 시간 갱신
     }
     
     struct StudyGroup{
@@ -103,6 +103,7 @@ struct APIConstants {
         static let showMyStudyGroup = baseURL + "/studygroup/mystudygroup"
         static let showStudyGroupDetail = baseURL + "/studygroup/%d"
         static let joinStudyGroupDetail = baseURL + "/studygroup/join"
+        static let getGroupTimer = baseURL + "/studygroup/%d/studytime?endDate=" // 그룹원들 타이머 시간 가져오기
     }
     
     struct Statistics{

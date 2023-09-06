@@ -140,4 +140,25 @@ class StudyGroupManager{
         }
     }
 
+    
+    //MARK: - show study group detail
+    static func getGroupTimer(groupID: Int, completion: @escaping(Result<[GroupTimerContent], Error>) -> Void){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        
+        let endPoint = String(format: APIConstants.StudyGroup.getGroupTimer, groupID) + dateFormatter.string(from: Date())
+        print(endPoint)
+        AF.request(endPoint, method: .get, headers: APIConstants.headers)
+            .validate()
+            .responseDecodable(of: GroupTimerData.self) { response in
+                switch response.result {
+                case .success(let timers):
+                    print("그룹 타이머 가져오기 성공")
+                    completion(.success(timers.body.groupTimerList.content))
+                case .failure(let error):
+                    print(error)
+                    completion(.failure(error))
+            }
+        }
+    }
 }
