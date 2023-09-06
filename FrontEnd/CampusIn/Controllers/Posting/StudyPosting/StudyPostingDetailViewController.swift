@@ -197,7 +197,7 @@ extension StudyPostingDetailViewController: UITableViewDelegate, UITableViewData
             cell.titleLabel.text = postDetail?.title
             cell.contentLabel.text = postDetail?.content
             
-            cell.tagLabel.text = postDetail?.tagType
+            cell.tagLabel.text =  ConvertTag.convert2(tag: postDetail!.tagType)
             
             cell.img0.isHidden = true
             cell.img1.isHidden = true

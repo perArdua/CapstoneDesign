@@ -519,6 +519,7 @@ extension StudyPostingAddViewController: UIPickerViewDelegate, UIPickerViewDataS
             return tagData[row]
         }
         else{
+            print(studyGroupData[row].studygroupName)
             return studyGroupData[row].studygroupName
         }
     }
@@ -532,8 +533,7 @@ extension StudyPostingAddViewController: UIPickerViewDelegate, UIPickerViewDataS
             print(tagEng!, tagId)
         }
         else{
-            if(studyGroupData.count > 1){
-                
+            if(studyGroupData.count > 0){
                 self.studyGroup = studyGroupData[row].studygroupName
                 self.studyGroupID = studyGroupData[row].id
                 print(studyGroup)
