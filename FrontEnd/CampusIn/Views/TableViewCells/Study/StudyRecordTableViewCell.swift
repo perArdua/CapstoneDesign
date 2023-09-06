@@ -20,7 +20,7 @@ class StudyRecordTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        menuBtn2.addTarget(self, action: #selector(menuBtnTapped), for: .touchUpInside)
+        
         
     }
 

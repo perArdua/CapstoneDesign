@@ -226,7 +226,20 @@ class StudyManageViewController: UIViewController{
     
     @IBAction func recordBtnTapped(_ sender: UIButton) {
         let recordVC = storyboard?.instantiateViewController(identifier: "StudyRecordViewController") as! StudyRecordViewController
-        self.navigationController?.pushViewController(recordVC, animated: true)
+        if(groupLabel.text == ""){
+            let alertController = UIAlertController(title: "그룹 선택", message: "그룹을 선택해주세요", preferredStyle: .alert)
+                    
+                    // 확인 액션 추가
+                    alertController.addAction(UIAlertAction(title: "확인", style: .default) { _ in
+                        // 확인을 눌렀을 때 실행할 코드를 여기에 작성
+                        print("확인이 눌렸습니다.")
+                    })
+            present(alertController, animated: true, completion: nil)
+        }else{
+            recordVC.groupName = groupLabel.text!
+            recordVC.groupID = studyGroupID
+            self.navigationController?.pushViewController(recordVC, animated: true)
+        }
     }
     
     

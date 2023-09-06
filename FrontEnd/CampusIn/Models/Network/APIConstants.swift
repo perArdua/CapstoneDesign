@@ -105,6 +105,10 @@ struct APIConstants {
         static let joinStudyGroupDetail = baseURL + "/studygroup/join"
     }
     
+    struct StudyRecord{
+        static let showStudyRecord = baseURL + "/posts/%d/posts"
+    }
+    
     struct Statistics{
         static let getStatistics = baseURL + "/statistics/%d"
         static let createStatistics = baseURL + "/statistics/create"
