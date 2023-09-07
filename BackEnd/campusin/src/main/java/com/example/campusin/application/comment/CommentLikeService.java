@@ -20,21 +20,22 @@ public class CommentLikeService {
     private final CommentLikeRepository commentLikeRepository;
     private final CommentRepository commentRepository;
 
-    public void createLike(Long userId, Long commentId){
+    public boolean createLike(Long userId, Long commentId){
         CommentLikeId commentLikeId = new CommentLikeId(userId, commentId);
         if(isPresentLike(commentLikeId)){
-            throw new IllegalArgumentException("ALREADY LIKED EXISTS");
+            return false;
         }
         User currentUser = getCurrentUser(userId);
         Comment comment = getComment(commentId);
         commentLikeRepository.save(new CommentLike(currentUser, comment));
 
+        return true;
     }
 
-    public void deleteLike(Long userId, Long commentId){
+    public boolean deleteLike(Long userId, Long commentId){
         CommentLikeId commentLikeId = new CommentLikeId(userId, commentId);
         if(!isPresentLike(commentLikeId)){
-            throw new IllegalArgumentException("NOT FOUND LIKED");
+            return false;
         }
 
         Comment comment = getComment(commentId);
@@ -45,7 +46,7 @@ public class CommentLikeService {
         commentLike.setUser(null);
 
         commentLikeRepository.deleteById(commentLikeId);
-        System.out.println("삭제되었습니다");
+        return true;
     }
 
     private Comment getComment(Long commentId){
