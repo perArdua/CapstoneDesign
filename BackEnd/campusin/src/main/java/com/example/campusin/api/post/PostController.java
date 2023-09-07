@@ -123,8 +123,10 @@ public class PostController {
     @PostMapping("/{postId}/like")
     public ApiResponse likePost(@AuthenticationPrincipal UserPrincipal principal,
                                 @PathVariable(name = "postId") Long postId) {
-        postService.likePost(principal.getUserId(), postId);
-        return ApiResponse.success("게시글 좋아요", "Post liked successfully");
+        if(postService.likePost(principal.getUserId(), postId)) {
+            return ApiResponse.success("게시글 좋아요", "Post liked successfully");
+        }
+        return ApiResponse.success("이미 좋아요한 게시글입니다.", "Already liked post");
     }
 
     @ApiResponses(
@@ -136,8 +138,10 @@ public class PostController {
     @DeleteMapping("/{postId}/like")
     public ApiResponse unlikePost(@AuthenticationPrincipal UserPrincipal principal,
                                   @PathVariable(name = "postId") Long postId) {
-        postService.unlikePost(principal.getUserId(), postId);
-        return ApiResponse.success("게시글 좋아요 취소", "Post unliked successfully");
+        if(postService.unlikePost(principal.getUserId(), postId)){
+            return ApiResponse.success("게시글 좋아요 취소", "Post unliked successfully");
+        }
+        return ApiResponse.success("좋아요를 누르지 않은 게시글입니다.", "Not liked post");
     }
 
     @ApiResponses(

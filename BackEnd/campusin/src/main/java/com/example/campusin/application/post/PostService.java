@@ -165,26 +165,28 @@ public class PostService {
     }
 
     @Transactional
-    public void likePost(Long userId, Long postId) {
+    public boolean likePost(Long userId, Long postId) {
         PostLikeId postLikeId = new PostLikeId(userId, postId);
         if(isPresentLike(postLikeId)){
-            throw new IllegalArgumentException("ALREADY LIKED EXISTS");
+            return false;
         }
         Post post = findPost(postId);
         User user = findUser(userId);
         postLikeRepository.save(new PostLike(post, user));
+        return true;
     }
 
     @Transactional
-    public void unlikePost(Long userId, Long postId) {
+    public boolean unlikePost(Long userId, Long postId) {
         PostLikeId postLikeId = new PostLikeId(userId, postId);
         if(!isPresentLike(postLikeId)){
-            throw new IllegalArgumentException("LIKE NOT FOUND");
+            return false;
         }
         Post post = findPost(postId);
         User user = findUser(userId);
         postLikeRepository.deleteById(postLikeId);
         post.decreaseLikeCount();
+        return true;
     }
 
     @Transactional(readOnly = true)
