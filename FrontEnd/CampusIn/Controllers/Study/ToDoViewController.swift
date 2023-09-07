@@ -17,7 +17,12 @@ class ToDoViewController: UIViewController {
         // 테이블뷰 설정
         tableView.delegate = self
         tableView.dataSource = self
-
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .systemGreen
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
 }
     override func viewWillAppear(_ animated: Bool) {
         prepareTableView()
