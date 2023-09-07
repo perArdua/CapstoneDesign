@@ -12,6 +12,7 @@ class GeneralPostingDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var likeCntLabel: UILabel!
     var postID: Int?
     var postDetail: PostDetailContent?
     var comments: [CommentDataContent] = []
@@ -140,6 +141,7 @@ class GeneralPostingDetailViewController: UIViewController {
         }
     }
     
+
     @IBAction func commentAddBtnTapped(_ sender: UIButton) {
         let alert = UIAlertController(title: "알림", message: "댓글 작성이 완료되었습니다.", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default){_ in
@@ -195,12 +197,14 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
             
             cell.titleLabel.text = postDetail?.title
             cell.contentLabel.text = postDetail?.content
-            
+            cell.likeLabel.text = "\(Int(postDetail!.likeCount))"
             cell.img0.isHidden = true
             cell.img1.isHidden = true
             cell.img2.isHidden = true
             cell.img3.isHidden = true
             cell.img4.isHidden = true
+            cell.likeBtn.setTitle("", for: .normal)
+            cell.postid = postID
             
             imgCnt = (postDetail!.photoList.count)
             if imgCnt >= 1 {

@@ -32,6 +32,7 @@ struct APIConstants {
         static let getTags = baseURL + "/boards/tags/ids" // 태그별 고유 id값 얻기
         
         static let getMyPosting = baseURL + "/posts/mypost"
+        static let likePost = baseURL + "/posts/%d/like"
     }
     
     struct Auth{

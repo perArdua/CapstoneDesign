@@ -212,4 +212,17 @@ class BoardManager{
             }
         }
     }
+    
+    static func likePost(postID: Int, completion: @escaping (Result<postLikeResponse, Error>) -> Void){
+        let endpoint = String(format: APIConstants.Board.likePost, postID)
+        
+        AF.request(endpoint, method: .post, headers: headers).responseDecodable(of: postLikeResponse.self){ response in
+            switch response.result{
+            case.success(let rspns):
+                completion(.success(rspns))
+            case.failure(let error):
+                print(error)
+            }
+        }
+    }
 }
