@@ -194,8 +194,9 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
             
             cell.titleLabel.text = postDetail?.title
             cell.contentLabel.text = postDetail?.content
-            
+            cell.likeCntLabel.text = "\(Int(postDetail!.likeCount))"
             cell.tagLabel.text = ConvertTag.convert2(tag: postDetail!.tagType)
+            cell.postid = postID
             
             cell.img0.isHidden = true
             cell.img1.isHidden = true
