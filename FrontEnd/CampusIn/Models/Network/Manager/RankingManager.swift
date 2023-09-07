@@ -28,6 +28,42 @@ class RankingManager{
         }
     }
     
+    static func createGroupRanking(dateString: String, groupID: Int, completion: @escaping(Result<String, Error>) -> Void){
+        let endpoint = String(format: APIConstants.Ranking.createGroupRanking, groupID)
+        var p: Parameters = ["localDate" : dateString]
+
+        AF.request(endpoint, method: .post, parameters: p, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: RankingCreateData.self){ res in
+            switch res.result{
+            case.success(_):
+                print("그룹 랭킹 불러오기 성공")
+                completion(.success("성공"))
+            case .failure(let err):
+                print("그룹 랭킹 불러오기 실패")
+                print(err)
+                completion(.failure(err))
+            }
+        }
+    }
+    
+    static func getGroupRanking(completion: @escaping(Result<[RankingContent], Error>) -> Void){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        let endpoint = APIConstants.Ranking.getStudyGroupRanking + "/?localDate=\(dateFormatter.string(from: Date()))"
+        
+        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: RankingData.self){ res in
+            switch res.result{
+            case .success(let data):
+                print("그룹 랭킹 불러오기 성공")
+                completion(.success(data.body.rankingList.content))
+            case .failure(let err):
+                print("그룹 랭킹 불러오기 실패")
+                print(err)
+                completion(.failure(err))
+            }
+        }
+    }
+    
+    
     static func getPersonalStudyRanking(completion: @escaping (Result<[RankingContent], Error>) -> Void){
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
