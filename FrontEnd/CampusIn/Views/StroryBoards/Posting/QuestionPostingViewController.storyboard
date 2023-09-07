@@ -927,7 +927,7 @@
                                 <rect key="frame" x="0.0" y="161" width="390" height="649"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudyPostingSearchTableViewCell" rowHeight="86" id="ShZ-na-lkb" customClass="StudyPostingSearchTableViewCell" customModule="CampusIn" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuestionPostingSearchTableViewCell" rowHeight="86" id="ShZ-na-lkb" customClass="QuestionPostingSearchTableViewCell" customModule="CampusIn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="390" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ShZ-na-lkb" id="aMB-PT-0y0">
@@ -1000,11 +1000,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="commentLabel" destination="pXD-5x-TwF" id="Vgl-Qd-r0S"/>
-                                            <outlet property="contentLabel" destination="qKb-IB-qdV" id="r43-vc-q1X"/>
-                                            <outlet property="dateLabel" destination="h4G-K5-1bj" id="EZE-Ef-ymf"/>
-                                            <outlet property="titleLabel" destination="R7d-4F-a3v" id="AWB-Bi-0u3"/>
-                                            <outlet property="userLabel" destination="nly-CP-WGz" id="q3Y-8m-cdZ"/>
+                                            <outlet property="commentLabel" destination="pXD-5x-TwF" id="lSy-Hb-KWT"/>
+                                            <outlet property="contentLabel" destination="qKb-IB-qdV" id="otF-Kq-nbD"/>
+                                            <outlet property="dateLabel" destination="h4G-K5-1bj" id="hAk-8S-O9O"/>
+                                            <outlet property="titleLabel" destination="R7d-4F-a3v" id="mkJ-rB-NOW"/>
+                                            <outlet property="userLabel" destination="nly-CP-WGz" id="YkG-dA-hXt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
