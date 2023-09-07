@@ -24,6 +24,8 @@
 		3153090E2AA0E2FD001F4BC2 /* RankingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3153090D2AA0E2FD001F4BC2 /* RankingData.swift */; };
 		315E599B2A30848E00E85A61 /* StudyPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */; };
 		315E599E2A3084BC00E85A61 /* StudyPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E599D2A3084BC00E85A61 /* StudyPostingViewController.swift */; };
+		315FB3C62AAA13570083C634 /* StudyGroupRankingCreateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3C52AAA13570083C634 /* StudyGroupRankingCreateData.swift */; };
+		315FB3C82AAA17DE0083C634 /* StudyGroupRankingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3C72AAA17DE0083C634 /* StudyGroupRankingData.swift */; };
 		3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */; };
 		3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165EDC32A02A3C100D91856 /* AppDelegate.swift */; };
 		3165EDC62A02A3C100D91856 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165EDC52A02A3C100D91856 /* SceneDelegate.swift */; };
@@ -170,6 +172,8 @@
 		3153090D2AA0E2FD001F4BC2 /* RankingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingData.swift; sourceTree = "<group>"; };
 		315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyPostingViewController.storyboard; sourceTree = "<group>"; };
 		315E599D2A3084BC00E85A61 /* StudyPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPostingViewController.swift; sourceTree = "<group>"; };
+		315FB3C52AAA13570083C634 /* StudyGroupRankingCreateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupRankingCreateData.swift; sourceTree = "<group>"; };
+		315FB3C72AAA17DE0083C634 /* StudyGroupRankingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupRankingData.swift; sourceTree = "<group>"; };
 		3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralPostingViewController.storyboard; sourceTree = "<group>"; };
 		3165EDC02A02A3C100D91856 /* CampusIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3165EDC32A02A3C100D91856 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -754,6 +758,8 @@
 			children = (
 				315309032AA0D30E001F4BC2 /* RankingCreateData.swift */,
 				3153090D2AA0E2FD001F4BC2 /* RankingData.swift */,
+				315FB3C72AAA17DE0083C634 /* StudyGroupRankingData.swift */,
+				315FB3C52AAA13570083C634 /* StudyGroupRankingCreateData.swift */,
 			);
 			path = Ranking;
 			sourceTree = "<group>";
@@ -980,6 +986,7 @@
 				31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */,
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
 				315067362A3701C90045E028 /* QuestionPostingViewController.swift in Sources */,
+				315FB3C62AAA13570083C634 /* StudyGroupRankingCreateData.swift in Sources */,
 				5B4925822AA0F8420094A203 /* MyPageViewController.swift in Sources */,
 				3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */,
 				3179137F2A23911D00BC86FE /* TimerAddResponse.swift in Sources */,
@@ -1016,6 +1023,7 @@
 				3179137D2A23906E00BC86FE /* TimerReadResponse.swift in Sources */,
 				5DFF9BA62A2C8796004C2DE5 /* StudyGroupManagementViewController.swift in Sources */,
 				5B56659D2AA2200200CD6854 /* MyPostingViewController.swift in Sources */,
+				315FB3C82AAA17DE0083C634 /* StudyGroupRankingData.swift in Sources */,
 				5B49257F2A9E2D0C0094A203 /* StudyGroupDetail.swift in Sources */,
 				31EAED402A320B0300F04DEC /* StudyPostingAddViewController.swift in Sources */,
 				315309042AA0D30E001F4BC2 /* RankingCreateData.swift in Sources */,
