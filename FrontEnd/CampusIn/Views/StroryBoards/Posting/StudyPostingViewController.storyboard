@@ -33,7 +33,7 @@
                                                     <rect key="frame" x="10" y="5" width="370" height="76"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="gix-vL-q6I">
-                                                            <rect key="frame" x="0.0" y="11.333333333333336" width="183" height="64.666666666666657"/>
+                                                            <rect key="frame" x="0.0" y="11.333333333333336" width="200" height="64.666666666666657"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSy-zz-nYd">
                                                                     <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="20.333333333333332"/>
@@ -80,26 +80,7 @@
                                                             </constraints>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xf8-KZ-CoW">
-                                                            <rect key="frame" x="303" y="56" width="67" height="20"/>
-                                                            <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="p3S-gu-ocb">
-                                                                    <rect key="frame" x="0.0" y="1.9999999999999982" width="20" height="16.666666666666664"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="20" id="IYD-iZ-bVO"/>
-                                                                        <constraint firstAttribute="height" constant="20" id="kHX-Ot-Vms"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="댓글 수 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMY-sn-qu1">
-                                                                    <rect key="frame" x="20" y="0.0" width="47" height="20"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="IMY-sn-qu1" secondAttribute="trailing" id="2s0-62-zhv"/>
-                                                                <constraint firstAttribute="bottom" secondItem="IMY-sn-qu1" secondAttribute="bottom" id="9py-iI-RLx"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="320" y="26" width="50" height="50"/>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -116,7 +97,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="commentLabel" destination="IMY-sn-qu1" id="5hJ-eP-6q7"/>
                                             <outlet property="contentLabel" destination="fAv-x0-9lV" id="YJY-2M-ias"/>
                                             <outlet property="dateLabel" destination="xBQ-rz-KQq" id="6UJ-Z2-W4V"/>
                                             <outlet property="tagLabel" destination="MqG-T7-EGu" id="H86-wj-lFy"/>

@@ -13,7 +13,6 @@ class StudyPostingTableViewCell: UITableViewCell {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var commentLabel: UILabel!
     
     @IBOutlet weak var tagLabel: UILabel!
     //cell에서 viewDidLoad와 비슷한 역할을 하는 코드
@@ -27,5 +26,7 @@ class StudyPostingTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
+    
+    
 
 }
