@@ -63,6 +63,7 @@ struct APIConstants {
         static let deletePost = baseURL + "/posts/%d" // 게시글 삭제
         static let showPost = baseURL + "/posts/%d" // 게시글 검색
         static let updatePost = baseURL + "/posts/%d"// 게시글 수정
+        static let adoptComment = baseURL + "/posts/%d/comments/%d/accept" // 답변채택
         //사용 예시
         //let endpoint = String(format: APIConstants.Posts.deletePost or showPost or updatePost, postId)
         

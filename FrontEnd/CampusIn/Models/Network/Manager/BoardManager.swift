@@ -225,4 +225,19 @@ class BoardManager{
             }
         }
     }
+    
+    
+    static func adoptCommnet(postID: Int, commentID: Int, completion: @escaping(Result<String, Error>) -> Void){
+        let endpoint = String(format: APIConstants.Posts.adoptComment, postID, commentID)
+        
+        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: CommentAdoptData.self){ response in
+            switch response.result{
+            case.success(let rspns):
+                print(rspns.body.commentAdoptStr)
+                completion(.success(rspns.body.commentAdoptStr))
+            case.failure(let error):
+                print(error)
+            }
+        }
+    }
 }

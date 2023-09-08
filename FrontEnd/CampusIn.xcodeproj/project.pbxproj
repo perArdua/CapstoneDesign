@@ -26,6 +26,8 @@
 		315E599E2A3084BC00E85A61 /* StudyPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E599D2A3084BC00E85A61 /* StudyPostingViewController.swift */; };
 		315FB3C62AAA13570083C634 /* StudyGroupRankingCreateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3C52AAA13570083C634 /* StudyGroupRankingCreateData.swift */; };
 		315FB3C82AAA17DE0083C634 /* StudyGroupRankingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3C72AAA17DE0083C634 /* StudyGroupRankingData.swift */; };
+		315FB3CA2AAB61E00083C634 /* AdoptCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3C92AAB61E00083C634 /* AdoptCommentTableViewCell.swift */; };
+		315FB3CC2AAB72070083C634 /* CommentAdoptData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3CB2AAB72070083C634 /* CommentAdoptData.swift */; };
 		3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */; };
 		3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165EDC32A02A3C100D91856 /* AppDelegate.swift */; };
 		3165EDC62A02A3C100D91856 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165EDC52A02A3C100D91856 /* SceneDelegate.swift */; };
@@ -175,6 +177,8 @@
 		315E599D2A3084BC00E85A61 /* StudyPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPostingViewController.swift; sourceTree = "<group>"; };
 		315FB3C52AAA13570083C634 /* StudyGroupRankingCreateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupRankingCreateData.swift; sourceTree = "<group>"; };
 		315FB3C72AAA17DE0083C634 /* StudyGroupRankingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupRankingData.swift; sourceTree = "<group>"; };
+		315FB3C92AAB61E00083C634 /* AdoptCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdoptCommentTableViewCell.swift; sourceTree = "<group>"; };
+		315FB3CB2AAB72070083C634 /* CommentAdoptData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAdoptData.swift; sourceTree = "<group>"; };
 		3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralPostingViewController.storyboard; sourceTree = "<group>"; };
 		3165EDC02A02A3C100D91856 /* CampusIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3165EDC32A02A3C100D91856 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -362,6 +366,7 @@
 			children = (
 				3150673F2A3702F80045E028 /* QuestionPostingTableViewCell.swift */,
 				315067412A3703010045E028 /* QuestionPostingCommentTableViewCell.swift */,
+				315FB3C92AAB61E00083C634 /* AdoptCommentTableViewCell.swift */,
 				315067432A37030C0045E028 /* QuestionPostingSearchTableViewCell.swift */,
 				315067452A3703170045E028 /* QuestionPostingContentTableViewCell.swift */,
 			);
@@ -687,6 +692,7 @@
 				31D96F5F2A1A9A140086FD7D /* PostDetail.swift */,
 				31AF26BE2A1F9B4300B1CEC7 /* CommentAddResponse.swift */,
 				31AF26C02A1F9BE000B1CEC7 /* CommentDeleteResponse.swift */,
+				315FB3CB2AAB72070083C634 /* CommentAdoptData.swift */,
 				31D96F612A1A9BC00086FD7D /* CommetData.swift */,
 				5B2BB8F62AAA165C00AE74D8 /* PostLikeResponse.swift */,
 			);
@@ -995,6 +1001,7 @@
 				3179137F2A23911D00BC86FE /* TimerAddResponse.swift in Sources */,
 				315067382A3701D50045E028 /* QuestionPostingDetailViewController.swift in Sources */,
 				31CBDA892A2CC3E300E55924 /* StatisticsViewController.swift in Sources */,
+				315FB3CC2AAB72070083C634 /* CommentAdoptData.swift in Sources */,
 				317913832A23927E00BC86FE /* TimerUpdateResponse.swift in Sources */,
 				5DFF9BB22A2C98C0004C2DE5 /* StudyGroupTableViewCell.swift in Sources */,
 				5DFF9BAC2A2C8CF9004C2DE5 /* StudyGroupData.swift in Sources */,
@@ -1053,6 +1060,7 @@
 				31EAED492A320BF400F04DEC /* StudyPostingTableViewCell.swift in Sources */,
 				5D547FF02A1F593F00376E09 /* UserNickname.swift in Sources */,
 				5D7703592A20FC5B00AF0903 /* TodoList.swift in Sources */,
+				315FB3CA2AAB61E00083C634 /* AdoptCommentTableViewCell.swift in Sources */,
 				5D77035D2A21188B00AF0903 /* TodoCreationResponse.swift in Sources */,
 				5D69A3E22A1A9CDB00E9BBB4 /* MessageRoomManager.swift in Sources */,
 				5B05A7B62AA7731300FF5D1D /* StudyRecordManager.swift in Sources */,
