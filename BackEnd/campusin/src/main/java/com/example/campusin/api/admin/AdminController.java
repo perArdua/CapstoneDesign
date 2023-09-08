@@ -78,13 +78,13 @@ public class AdminController {
         for (BoardSimpleResponse boardSimpleResponse : boardSimpleResponses) {
             Page<PostSimpleResponse> postSimpleResponse = postService.getPostsByBoard(boardSimpleResponse.getBoardId(), pageable);
             for (PostSimpleResponse post : postSimpleResponse) {
-                if (post.getReportCount() > 0) {
+                if (post.getReportCount() > 0 && !post.getTitle().equals("신고 완료 처리 된 게시글입니다.")) {
                     postSimpleResponses.add(post);
                 }
             }
         }
 
-        return ApiResponse.success("신고된 게시글 목록", postSimpleResponses);
+        return ApiResponse.success("게시글 목록", postSimpleResponses);
     }
 
     @GetMapping("/comment")
@@ -97,12 +97,12 @@ public class AdminController {
         List<CommentsOnPostResponse> commentsOnPostResponses = new ArrayList<>();
 
         for (Comment comment : comments) {
-            if (comment.getReports().size() > 0) {
+            if (comment.getReports().size() > 0 && !comment.getContent().equals("신고 완료 처리 된 댓글입니다.")) {
                 commentsOnPostResponses.add(CommentsOnPostResponse.of(comment));
             }
         }
 
-        return ApiResponse.success("신고된 댓글 목록", commentsOnPostResponses);
+        return ApiResponse.success("댓글 조회 성공", commentsOnPostResponses);
     }
 
     @GetMapping("/block/post/{postId}")
