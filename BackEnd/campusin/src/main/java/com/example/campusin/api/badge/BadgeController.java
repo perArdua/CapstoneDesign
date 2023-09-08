@@ -37,7 +37,7 @@ public class BadgeController {
             }
     )
     @Operation(summary = "유저가 갖고 있는 모든 뱃지 읽기")
-    @GetMapping("/user-badges")
+    @GetMapping("/user-badges/{userId}")
     public ApiResponse getUserBadges(@PathVariable("userId") Long userId,
                                      @PageableDefault(
                                              sort = {"createdAt"},

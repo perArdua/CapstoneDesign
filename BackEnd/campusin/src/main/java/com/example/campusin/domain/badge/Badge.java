@@ -1,5 +1,6 @@
 package com.example.campusin.domain.badge;
 
+import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +21,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Badge {
+public class Badge extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
