@@ -62,12 +62,14 @@ public class PostResponse {
     @Schema(name = "태그 타입", example = "IT")
     private TagType tagType;
 
+    @Schema(name = "뱃지 신청 수락 현황", example = "true")
+    private Boolean isBadgeAccepted;
 
     @Builder
     public PostResponse(Long postId, Long userId, BoardType boardType, String nickname, String title,
                         String content, List<PhotoResponse> photoList,
                         LocalDateTime createdAt, Long price, Long studyGroupId,
-                        Integer likeCount, Integer reportCount,TagType tagType) {
+                        Integer likeCount, Integer reportCount,TagType tagType, Boolean isBadgeAccepted) {
         this.postId = postId;
         this.userId = userId;
         this.boardType = boardType;
@@ -81,6 +83,7 @@ public class PostResponse {
         this.likeCount = likeCount;
         this.reportCount = reportCount;
         this.tagType = tagType;
+        this.isBadgeAccepted = isBadgeAccepted;
     }
 
     @Builder
@@ -98,7 +101,8 @@ public class PostResponse {
                 entity.getStudyGroupId(),
                 entity.getLikeCount(),
                 entity.getReportCount(),
-                entity.getTag().getTagType()
+                entity.getTag().getTagType(),
+                entity.getIsBadgeAccepted()
         );
     }
 }

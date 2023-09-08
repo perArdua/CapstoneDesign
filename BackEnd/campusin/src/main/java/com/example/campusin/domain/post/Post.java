@@ -71,7 +71,7 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name = "tag_id", referencedColumnName = "tag_id")
     private Tag tag;
 
-
+    private Boolean isBadgeAccepted = null;
 
     @Builder
     public Post(String title, String content, User user, Board board, Long price, Long studyGroupId, Tag tag){
@@ -115,6 +115,10 @@ public class Post extends BaseTimeEntity {
 
     public void setStudyGroupId(Long studyGroupId) {
         this.studyGroupId = studyGroupId;
+    }
+
+    public void setIsBadgeAccepted(Boolean isBadgeAccepted) {
+        this.isBadgeAccepted = isBadgeAccepted;
     }
     public List<Comment> getCommentList() {
         return comments;

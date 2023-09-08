@@ -1,8 +1,10 @@
 package com.example.campusin.api.admin;
 
 import com.example.campusin.application.comment.CommentService;
+import com.example.campusin.application.badge.BadgeService;
 import com.example.campusin.application.post.PostService;
 import com.example.campusin.common.response.ApiResponse;
+import com.example.campusin.domain.badge.request.BadgeCreateRequest;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
 import com.example.campusin.domain.comment.Comment;
@@ -10,7 +12,9 @@ import com.example.campusin.domain.comment.dto.response.CommentOneResponse;
 import com.example.campusin.domain.comment.dto.response.CommentResponse;
 import com.example.campusin.domain.comment.dto.response.CommentsOnPostResponse;
 import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
+import com.example.campusin.domain.oauth.UserPrincipal;
 import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +24,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +44,7 @@ public class AdminController {
 
     private final PostService postService;
     private final CommentService commentService;
+    private final BadgeService badgeService;
 
     @GetMapping("/badge")
     public ApiResponse showRequestBadge(@PageableDefault(
@@ -117,7 +125,21 @@ public class AdminController {
 
     @GetMapping("/unblock/comment/{commentId}")
     public ApiResponse unblockComment(@PathVariable Long commentId) {
-//        commentService.unblockComment(commentId);
+        commentService.unblockComment(commentId);
         return ApiResponse.success("댓글 차단 해제", "댓글 차단 해제 완료");
     }
+  
+    @Operation(summary = "뱃지 요청 게시글 상태 변경")
+    @PutMapping("/badge/{postId}/{isBadgeAccepted}")
+    public ApiResponse decideBadgeStatus(@PathVariable Long postId, @PathVariable Boolean isBadgeAccepted) {
+        postService.updateBadgeStatus(postId, isBadgeAccepted);
+        return ApiResponse.success("뱃지 요청 게시글 상태 변경", "뱃지 요청 게시글 상태 변경 완료");
+    }
+
+    @Operation(summary = "뱃지 만들기")
+    @PostMapping("/make-badge")
+    public ApiResponse makeBadge(@AuthenticationPrincipal UserPrincipal principal, BadgeCreateRequest request) {
+        return ApiResponse.success("makeBadge", badgeService.createBadge(principal.getUserId(), request));
+    }
+
 }

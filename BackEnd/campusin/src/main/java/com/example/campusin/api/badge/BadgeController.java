@@ -16,10 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by kok8454@gmail.com on 2023-06-05
@@ -41,17 +38,12 @@ public class BadgeController {
     )
     @Operation(summary = "유저가 갖고 있는 모든 뱃지 읽기")
     @GetMapping("/user-badges")
-    public ApiResponse getUserBadges(@AuthenticationPrincipal UserPrincipal principal,
+    public ApiResponse getUserBadges(@PathVariable("userId") Long userId,
                                      @PageableDefault(
                                              sort = {"createdAt"},
                                              direction = Sort.Direction.DESC
                                      ) Pageable pageable) {
-        return ApiResponse.success("userBadges", badgeService.getBadges(principal.getUserId(), pageable));
+        return ApiResponse.success("userBadges", badgeService.getBadges(userId, pageable));
     }
 
-    @Operation(summary = "뱃지 만들기")
-    @PostMapping("/make-badge")
-    public ApiResponse makeBadge(@AuthenticationPrincipal UserPrincipal principal, BadgeCreateRequest request) {
-        return ApiResponse.success("makeBadge", badgeService.createBadge(principal.getUserId(), request));
-    }
 }
