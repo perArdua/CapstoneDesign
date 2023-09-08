@@ -46,9 +46,4 @@ public class BadgeController {
         return ApiResponse.success("userBadges", badgeService.getBadges(userId, pageable));
     }
 
-    @Operation(summary = "뱃지 만들기")
-    @PostMapping("/make-badge")
-    public ApiResponse makeBadge(@AuthenticationPrincipal UserPrincipal principal, BadgeCreateRequest request) {
-        return ApiResponse.success("makeBadge", badgeService.createBadge(principal.getUserId(), request));
-    }
 }
