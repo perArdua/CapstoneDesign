@@ -4,9 +4,7 @@ import com.example.campusin.domain.board.Board;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
 import com.example.campusin.domain.photo.Photo;
-import com.example.campusin.domain.post.Post;
-import com.example.campusin.domain.post.PostLike;
-import com.example.campusin.domain.post.PostLikeId;
+import com.example.campusin.domain.post.*;
 import com.example.campusin.domain.post.dto.request.PostCreateRequest;
 import com.example.campusin.domain.post.dto.request.PostUpdateRequest;
 import com.example.campusin.domain.post.dto.response.PostIdResponse;
@@ -21,6 +19,7 @@ import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.board.BoardRepository;
 import com.example.campusin.infra.photo.PhotoRepository;
 import com.example.campusin.infra.post.PostLikeRepository;
+import com.example.campusin.infra.post.PostReportRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.studygroup.StudyGroupRepository;
 import com.example.campusin.infra.tag.TagRepository;
@@ -46,6 +45,7 @@ public class PostService {
     private final UserRepository userRepository;
     private final PhotoRepository photoRepository;
     private final PostLikeRepository postLikeRepository;
+    private final PostReportRepository postReportRepository;
     private final StudyGroupRepository studyGroupRepository;
     private final TagRepository tagRepository;
 
@@ -189,6 +189,31 @@ public class PostService {
         return true;
     }
 
+    @Transactional
+    public boolean reportPost(Long userId, Long postId) {
+        PostReportId postReportId = new PostReportId(userId, postId);
+        if(isPresentReport(postReportId)){
+            return false;
+        }
+        Post post = findPost(postId);
+        User user = findUser(userId);
+        postReportRepository.save(new PostReport(post, user));
+        return true;
+    }
+
+    @Transactional
+    public boolean unreportPost(Long userId, Long postId) {
+        PostReportId postReportId = new PostReportId(userId, postId);
+        if(!isPresentReport(postReportId)){
+            return false;
+        }
+        Post post = findPost(postId);
+        User user = findUser(userId);
+        postReportRepository.deleteById(postReportId);
+        post.decreaseReportCount();
+        return true;
+    }
+
     @Transactional(readOnly = true)
     public Page<PostStudyResponse> getPostsByStudyGroup(Long studyGroupId, Pageable pageable) {
         StudyGroup studyGroup = findStudyGroup(studyGroupId);
@@ -205,6 +230,10 @@ public class PostService {
 
     private boolean isPresentLike(PostLikeId postLikeId){
         return postLikeRepository.existsById(postLikeId);
+    }
+
+    private boolean isPresentReport(PostReportId postReportId){
+        return postReportRepository.existsById(postReportId);
     }
 
     private Board findBoard(Long boardId) {

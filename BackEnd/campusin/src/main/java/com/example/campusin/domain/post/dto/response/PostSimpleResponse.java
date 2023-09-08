@@ -49,13 +49,16 @@ public class PostSimpleResponse {
     @Schema(name = "좋아요 수", example = "1")
     private Integer likeCount;
 
+    @Schema(name = "신고 횟수", example = "1")
+    private Integer reportCount;
+
     @Schema(name = "태그 정보")
     private TagResponse tagResponse;
 
     @Builder
     public PostSimpleResponse(Long postId, BoardSimpleResponse boardSimpleResponse, String nickname, String title,
                               String content, LocalDateTime createdAt, Long price, Long studyGroupId, String photo,
-                              Integer likeCount, TagResponse tagResponse) {
+                              Integer likeCount, Integer reportCount, TagResponse tagResponse) {
         this.postId = postId;
         this.boardSimpleResponse = boardSimpleResponse;
         this.nickname = nickname;
@@ -66,6 +69,7 @@ public class PostSimpleResponse {
         this.studyGroupId = studyGroupId;
         this.photo = photo;
         this.likeCount = likeCount;
+        this.reportCount = reportCount;
         this.tagResponse = tagResponse;
     }
 
@@ -82,6 +86,7 @@ public class PostSimpleResponse {
                 entity.getStudyGroupId(),
                 entity.getPhoto() != null ? entity.getPhoto().getContent() : null,
                 entity.getLikeCount(),
+                entity.getReportCount(),
                 new TagResponse(entity.getTag())
         );
     }
