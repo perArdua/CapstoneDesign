@@ -148,15 +148,25 @@ class StudyPostingDetailViewController: UIViewController {
             params["parentId"] = "null"
             params["postId"] = self.postDetail!.postID
             
-            CommentManager.postComment(postID: self.postDetail!.postID, params: params){
-                self.getComment(postID: self.postDetail!.postID){
-                    comments in
-                    self.comments = comments
-                    print(comments)
-                    self.tableView.reloadData()
+            CommentManager.postComment(postID: self.postDetail!.postID, params: params){res in
+                switch res{
+                case .success(let data):
+                    print(data)
+                    CommentManager.readComment(postID: self.postDetail!.postID) { result in
+                        print("댓글 조회 리퀘 날림")
+                        switch result{
+                        case .success(let comments):
+                            print(comments)
+                            self.comments = comments
+                            self.tableView.reloadData()
+                        case .failure(let error):
+                            print("Error: \(error)")
+                        }
+                    }
+                case .failure(let err):
+                    print(err)
                 }
             }
-            self.tableView.reloadData()
         }
         alert.addAction(okAction)
         
