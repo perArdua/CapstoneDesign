@@ -8,6 +8,8 @@
 import UIKit
 
 class SideMenuViewController: UIViewController {
+    
+    var isManager: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()

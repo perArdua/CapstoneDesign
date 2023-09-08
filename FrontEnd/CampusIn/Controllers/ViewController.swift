@@ -32,7 +32,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
         let sideBtn = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(rightBtnTapped))
         sideBtn.tintColor = .black
         navigationItem.rightBarButtonItem = sideBtn

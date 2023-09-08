@@ -42,6 +42,11 @@ class GeneralPostingDetailViewController: UIViewController {
         let navigationItem = self.navigationItem
         //네비게이션 바의 오른쪽에 pullDownBtn을 추가한다.
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: pullDownBtn)
+        if(isPrevVCManagerPage()){
+            print("yes")
+        }else{
+            print("no")
+        }
         
     }
     
@@ -60,6 +65,24 @@ class GeneralPostingDetailViewController: UIViewController {
                 print(comments)
             }
         }
+    }
+    
+    func isPrevVCManagerPage() -> Bool{
+        if let navigationController = self.navigationController {
+            let viewControllers = navigationController.viewControllers
+            if viewControllers.count >= 2 {
+                let previousViewController = viewControllers[viewControllers.count - 2]
+                let prevSB = UIStoryboard(name: "Main", bundle: nil)
+                if let viewController = prevSB.instantiateViewController(withIdentifier: "ReportedCommentViewController") as? ReportedCommentViewController {
+                    if type(of: previousViewController) == type(of: viewController) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            }
+        }
+        return false
     }
     
     @objc func pullDownBtnTapped(){
