@@ -30,16 +30,28 @@ public abstract class CommentResponse {
     @ApiModelProperty(value = "좋아요 수", example = "0")
     private Integer like;
 
+    @ApiModelProperty(value = "신고 횟수", example = "0")
+    private Integer report;
+
     @ApiModelProperty(value = "채택 여부", example = "false")
     private Boolean isAdopted;
 
-    public CommentResponse(Long userId, Long parentId, Long commentId, String name, String content, Integer like, Boolean isAdopted) {
+    @ApiModelProperty(value = "게시판 id", example = "1")
+    private Long boardId;
+
+    @ApiModelProperty(value = "게시글 id", example = "1")
+    private Long postId;
+
+    public CommentResponse(Long userId, Long parentId, Long commentId, String name, String content, Integer like, Integer report, Boolean isAdopted, Long boardId, Long postId) {
         this.userId = userId;
         this.parentId = parentId;
         this.commentId = commentId;
         this.name = name;
         this.content = content;
         this.like = like;
+        this.report = report;
         this.isAdopted = isAdopted;
+        this.boardId = boardId;
+        this.postId = postId;
     }
 }
