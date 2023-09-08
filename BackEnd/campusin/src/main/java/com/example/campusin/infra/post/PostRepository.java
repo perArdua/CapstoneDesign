@@ -66,4 +66,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query(value = "select p from Post p join fetch p.tag t join fetch p.board b where p.tag.id = :tagId and p.board.id = :boardId",
             countQuery = "select count(p) from Post p where p.tag.id = :tagId and p.board.id = :boardId")
     Page<Post> findPostsByTagId(@Param("boardId") Long boardId, @Param("tagId") Long tagId, Pageable pageable);
+
 }

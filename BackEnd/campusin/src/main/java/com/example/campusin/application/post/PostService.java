@@ -221,6 +221,22 @@ public class PostService {
         return posts.map(PostStudyResponse::new);
     }
 
+    @Transactional
+    public void blockPost(Long postId) {
+        Post post = findPost(postId);
+        post.setTitle("신고 완료 처리 된 게시글입니다.");
+        post.setContent("신고 완료 처리 된 게시글입니다.");
+        postRepository.save(post);
+    }
+
+    @Transactional
+    public void unblockPost(Long postId) {
+        Post post = findPost(postId);
+        post.setReportCount(0);
+        postReportRepository.deleteByPostId(postId);
+        postRepository.save(post);
+    }
+
     private StudyGroup findStudyGroup(Long studyGroupId) {
         return studyGroupRepository.findById(studyGroupId).orElseThrow(
                 () -> new IllegalArgumentException("STUDYGROUP NOT FOUND")
