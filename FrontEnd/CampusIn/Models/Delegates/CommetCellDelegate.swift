@@ -19,3 +19,11 @@ protocol QuestionReplyBtnDelegate: AnyObject {
     func replyBtnTapped(in cell: QuestionPostingCommentTableViewCell)
 }
 
+protocol AdoptReplyBtnDelegate: AnyObject {
+    func replyBtnTapped(in cell: AdoptCommentTableViewCell)
+}
+
+protocol AdoptBtnDelegate: AnyObject {
+    func adoptBtnTapped(in cell: QuestionPostingCommentTableViewCell)
+}
+

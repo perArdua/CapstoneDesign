@@ -42,6 +42,7 @@ struct CommentDataContent: Codable {
     let commentID: Int
     let name: String
     let content: String
+    let isAdopted: Bool?
     let children: [CommentDataContent]
     let childrenSize: Int
 
@@ -49,7 +50,7 @@ struct CommentDataContent: Codable {
         case userID = "userId"
         case parentID = "parentId"
         case commentID = "commentId"
-        case name, content, children, childrenSize
+        case name, content, children, childrenSize, isAdopted
     }
 }
 

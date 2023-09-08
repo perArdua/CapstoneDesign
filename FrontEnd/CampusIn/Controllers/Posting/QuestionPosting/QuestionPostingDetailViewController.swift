@@ -176,14 +176,17 @@ class QuestionPostingDetailViewController: UIViewController {
 // MARK: - 테이블 뷰 설정
 extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewDataSource{
     
-    //테이블 뷰 영역을 "게시글, 댓글" 총 2개로 분리
+    //테이블 뷰 영역을 "게시글, 채택 답변 ,댓글" 총 3개로 분리
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     //두번째 section 일때 section 이름을 "댓글"이라고 출력
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 1{
-            return "comment"
+            return "채택된 답변"
+        }
+        else if section == 2{
+            return "댓글"
         }
         else{
             return ""
@@ -192,8 +195,8 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
     
     //댓글을 한번에 몇개나 표시할 것인지 설정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {return 1}
-        else {return  comments.count}
+        if section == 2 {return  comments.count}
+        else {return 1}
     }
     
     //table view에 표시할 내용을 정의한다.
@@ -241,10 +244,62 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
             
             return cell
         }
+        else if indexPath.section == 1{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AdoptCommentTableViewCell", for: indexPath) as! AdoptCommentTableViewCell
+            cell.contentLabel.isHidden = true
+            cell.nameLabel.isHidden = true
+            cell.dateLabel.isHidden = true
+            cell.resLabel.isHidden = false
+            
+            cell.userImg.isHidden = true
+            cell.checkMark.isHidden = true
+            cell.likeCnt.isHidden = true
+            cell.likeBtn.isHidden = true
+            cell.replyBtn.isHidden = true
+            
+            for comment in comments{
+                if comment.isAdopted != nil{
+                    cell.resLabel.isHidden = true
+                    cell.replyBtn.isHidden = false
+                    cell.contentLabel.isHidden = false
+                    cell.nameLabel.isHidden = false
+                    cell.replyBtn.isHidden = false
+                    cell.userImg.isHidden = false
+                    cell.checkMark.isHidden = false
+                    cell.nameLabel.isHidden = false
+                    cell.dateLabel.isHidden = false
+                    
+                    cell.contentLabel.text = comment.content
+                    cell.nameLabel.text = comment.name
+                    cell.commentID = comment.commentID
+                    cell.childComments = comment.children
+                    cell.dateLabel.text = "00/00"
+                    cell.resLabel.isHidden = true
+                    break
+                }
+            }
+            
+            return cell
+        }
         else{
             //section 1일 경우 댓글을 표시
             let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionPostingCommentTableViewCell", for: indexPath) as! QuestionPostingCommentTableViewCell
             cell.delegate = self
+            cell.adoptDelegate = self
+
+            var flag = false
+            for comment in comments{
+                if comment.isAdopted != nil{
+                    flag = true;
+                    break
+                }
+            }
+            
+            let nickname = UserDefaults.standard.string(forKey: "nickname")!
+            if nickname != postDetail?.nickname{
+                flag = true
+            }
+            
             print(indexPath.section)
             print("show section2")
             cell.contentLabel.text = comments[indexPath.row].content
@@ -252,6 +307,12 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
             cell.commentID = comments[indexPath.row].commentID
             cell.childComments = comments[indexPath.row].children
             cell.dateLabel.text = "00/00"
+            if(flag){ //채택된 답변이 있을 경우, 또는 게시글을 작성한 사람이 아닐 경우
+                cell.adoptBtn.isHidden = true
+            }
+            else{ //채택된 답변이 없을 경우
+                cell.adoptBtn.isHidden = false
+            }
 //            cell.dateLabel = String(comments_p[indexPath.row].c)
 //            cell.likeCnt
             return cell
@@ -261,7 +322,50 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
 
 
 // MARK: - half modal로 뷰 컨트롤러 show
-extension QuestionPostingDetailViewController: QuestionReplyBtnDelegate{
+extension QuestionPostingDetailViewController: QuestionReplyBtnDelegate, AdoptBtnDelegate, AdoptReplyBtnDelegate{
+    func adoptBtnTapped(in cell: QuestionPostingCommentTableViewCell) {
+        print("답글 채택 버튼 눌림")
+        BoardManager.adoptCommnet(postID: postID!, commentID: cell.commentID!) { [self] res in
+            switch res{
+            case.success(_):
+                print("답글 채택 성공")
+                getComment(postID: postID!) {comments in
+                    self.comments = comments
+                    self.tableView.reloadData()
+                    print(comments)
+                }
+            case .failure(let err):
+                print("답글 채택 실패")
+            }
+        }
+        
+    }
+    
+    func replyBtnTapped(in cell: AdoptCommentTableViewCell) {
+        print("딥글 버튼 눌림")
+        let replyVC = PostingReplyViewController()
+        replyVC.modalPresentationStyle = .pageSheet
+        replyVC.view.backgroundColor = .white
+        replyVC.array = cell.childComments ?? []
+        for i in comments{
+            if i.commentID == cell.commentID{
+                replyVC.parent_commentId = i.commentID
+                replyVC.comment = i
+                replyVC.postId = postDetail!.postID
+                break
+            }
+        }
+        
+        if let sheet = replyVC.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.delegate = self
+            sheet.prefersGrabberVisible = true
+            sheet.largestUndimmedDetentIdentifier = .none
+        }
+        present(replyVC, animated: true, completion: nil)
+        
+    }
+    
     
     func replyBtnTapped(in cell: QuestionPostingCommentTableViewCell){
         print("딥글 버튼 눌림")
@@ -279,24 +383,12 @@ extension QuestionPostingDetailViewController: QuestionReplyBtnDelegate{
         }
         
         if let sheet = replyVC.sheetPresentationController {
-            
-            //지원할 크기 지정
             sheet.detents = [.medium(), .large()]
-            //크기 변하는거 감지
             sheet.delegate = self
-            
-            //시트 상단에 그래버 표시 (기본 값은 false)
             sheet.prefersGrabberVisible = true
-            
-            //처음 크기 지정 (기본 값은 가장 작은 크기)
-//            sheet.selectedDetentIdentifier = .large
-            
-            //뒤 배경 흐리게 제거 (기본 값은 모든 크기에서 배경 흐리게 됨)
             sheet.largestUndimmedDetentIdentifier = .none
         }
-        
         present(replyVC, animated: true, completion: nil)
-    
     }
 }
 

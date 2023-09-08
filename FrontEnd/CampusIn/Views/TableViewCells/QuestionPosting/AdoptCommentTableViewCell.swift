@@ -1,13 +1,13 @@
 //
-//  QuestionPostingCommentTableViewCell.swift
+//  AdoptCommentTableViewCell.swift
 //  CampusIn
 //
-//  Created by 이동현 on 2023/06/12.
+//  Created by 이동현 on 2023/09/08.
 //
 
 import UIKit
 
-class QuestionPostingCommentTableViewCell: UITableViewCell {
+class AdoptCommentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userImg: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -15,15 +15,17 @@ class QuestionPostingCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var likeCnt: UILabel!
     
-    @IBOutlet weak var adoptBtn: UIButton!
+    @IBOutlet weak var likeBtn: UIButton!
+    @IBOutlet weak var checkMark: UIImageView!
     
+    @IBOutlet weak var replyBtn: UIButton!
+    @IBOutlet weak var resLabel: UILabel!
     var commentID: Int?
     //인증마크 여부
     var is_check: Bool?
     var childComments: [CommentDataContent]?
     
-    weak var delegate: QuestionReplyBtnDelegate?
-    weak var adoptDelegate: AdoptBtnDelegate?
+    weak var delegate: AdoptReplyBtnDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,11 +42,5 @@ class QuestionPostingCommentTableViewCell: UITableViewCell {
         print("답글")
         delegate?.replyBtnTapped(in: self)
     }
-    
-    @IBAction func adoptBtnTapped(_ sender: UIButton) {
-        print("채택 버튼눌림")
-        adoptDelegate?.adoptBtnTapped(in: self)
-    }
-
     
 }
