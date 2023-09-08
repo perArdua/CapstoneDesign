@@ -1,5 +1,6 @@
 package com.example.campusin.domain.comment.dto.response;
 
+import com.example.campusin.domain.comment.Comment;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;

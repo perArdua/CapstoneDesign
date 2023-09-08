@@ -109,6 +109,10 @@ public class Post extends BaseTimeEntity {
         this.photos.forEach(photo -> photo.setPost(this));
     }
 
+    public void setReportCount(Integer reportCount) {
+        this.reportCount = reportCount;
+    }
+
     public void setStudyGroupId(Long studyGroupId) {
         this.studyGroupId = studyGroupId;
     }

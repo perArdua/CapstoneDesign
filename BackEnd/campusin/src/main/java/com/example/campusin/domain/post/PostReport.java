@@ -17,7 +17,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "POST_LIKE")
+@Table(name = "POST_REPORT")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 

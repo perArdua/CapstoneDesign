@@ -108,6 +108,14 @@ public class Comment extends BaseTimeEntity {
         parent.getChildren().add(this);
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setReports(List<CommentReport> reports) {
+        Reports = reports;
+    }
+
     public void addChildren(Comment child){
         child.setParent(this);
     }

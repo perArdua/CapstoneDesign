@@ -8,6 +8,7 @@ import com.example.campusin.domain.comment.dto.response.CommentsOnPostResponse;
 import com.example.campusin.domain.post.Post;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.board.BoardRepository;
+import com.example.campusin.infra.comment.CommentReportRepository;
 import com.example.campusin.infra.comment.CommentRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.user.UserRepository;
@@ -26,6 +27,7 @@ public class CommentService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
     private final BoardRepository boardRepository;
+    private final CommentReportRepository commentReportRepository;
     @Transactional
     public CommentCreateResponse createComment(Long userId, CommentCreateRequest commentCreateRequest, Long postId) {
 
@@ -55,6 +57,11 @@ public class CommentService {
         return commentRepository.findByPost(postId, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<Comment> getAllComments(Pageable pageable) {
+        return commentRepository.findAll(pageable);
+    }
+
     @Transactional
     public void deleteComment(Long userId, Long commentId){
         getCurrentUser(userId);
@@ -72,6 +79,22 @@ public class CommentService {
             throw new IllegalArgumentException("해당 유저는 답변 채택 권한이 없습니다.");
         }
     }
+
+    @Transactional
+    public void blockComment(Long commentId) {
+        Comment comment = getComment(commentId);
+        comment.setContent("신고 완료 처리 된 댓글입니다.");
+        commentRepository.save(comment);
+    }
+
+    @Transactional
+    public void unblockComment(Long commentId) {
+        Comment comment = getComment(commentId);
+        comment.setReports(null);
+        commentReportRepository.deleteByCommentId(commentId);
+        commentRepository.save(comment);
+    }
+
     private Post getPost(Long postId){
         return postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + postId));
     }
