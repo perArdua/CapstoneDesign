@@ -28,14 +28,18 @@ class CommentManager{
         }
     }
     
-    // MARK: - <##>댓글 작성 요청하는 함수
-    static func postComment(postID: Int, params: Parameters, completion: @escaping () -> Void){
+    // MARK: - 댓글 작성 요청하는 함수
+    static func postComment(postID: Int, params: Parameters, completion: @escaping (Result<String, Error>) -> Void){
         let endpoint = String(format: APIConstants.Comment.readComment, postID)
         
         AF.request(endpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: CommentAddResponse.self, completionHandler: { response in
-            print("***************")
-            print(response)
-            print("***************")
+            
+            switch response.result{
+            case .success(let data):
+                completion(.success(data.body.commentSuccess.content))
+            case .failure(let err):
+                completion(.failure(err))
+            }
         })
     }
     

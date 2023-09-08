@@ -106,19 +106,26 @@ class PostingReplyViewController: UIViewController {
             params["parentId"] = String(self.parent_commentId!)
             params["postId"] = self.postId!
             
-            CommentManager.postComment(postID: self.postId!, params: params){
-                self.getComment(postID: self.postId!){
-                    comments in
-                    for comment in comments{
-                        if comment.parentID == self.parent_commentId{
-                            self.array = comment.children
-                            break
+            CommentManager.postComment(postID: self.postId!, params: params){res in
+                print("댓글 생성 리퀘 날림")
+                switch res{
+                case .success(let data):
+                    print(data)
+                    CommentManager.readComment(postID: self.postId!) { result in
+                        print("댓글 조회 리퀘 날림")
+                        switch result{
+                        case .success(let comments):
+                            print(comments[0].children)
+                            self.array = comments[0].children
+                            self.tableView.reloadData()
+                        case .failure(let error):
+                            print("Error: \(error)")
                         }
                     }
-                    self.tableView.reloadData()
+                case .failure(let err):
+                    print(err)
                 }
             }
-            self.tableView.reloadData()
         }
         alert.addAction(okAction)
         
