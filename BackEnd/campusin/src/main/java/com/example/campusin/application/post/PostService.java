@@ -214,6 +214,13 @@ public class PostService {
         return true;
     }
 
+    @Transactional
+    public boolean updateBadgeStatus(Long postId, Boolean isBadgeAccepted) {
+        Post post = findPost(postId);
+        post.setIsBadgeAccepted(isBadgeAccepted);
+        return true;
+    }
+
     @Transactional(readOnly = true)
     public Page<PostStudyResponse> getPostsByStudyGroup(Long studyGroupId, Pageable pageable) {
         StudyGroup studyGroup = findStudyGroup(studyGroupId);

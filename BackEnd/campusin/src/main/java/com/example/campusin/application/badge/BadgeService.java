@@ -56,5 +56,5 @@ public class BadgeService {
     public Post findPost(Long postId) {
         return postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
     }
-    
+
 }

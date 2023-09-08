@@ -10,9 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by kok8454@gmail.com on 2023-06-05
@@ -42,5 +40,11 @@ public class AdminController {
                 BoardSimpleResponse::getBoardId).findFirst().orElseThrow(IllegalArgumentException::new);
 
         return ApiResponse.success("뱃지 요청 게시글 목록", postService.getPostsByBoard(BadgeBoard, pageable));
+    }
+
+    @DeleteMapping("/badge")
+    public ApiResponse decideBadgeStatus(Long postId, @PathVariable Boolean isBadgeAccepted) {
+        postService.updateBadgeStatus(postId, isBadgeAccepted);
+        return ApiResponse.success("뱃지 요청 게시글 상태 변경", "뱃지 요청 게시글 상태 변경 완료");
     }
 }

@@ -55,10 +55,13 @@ public class PostSimpleResponse {
     @Schema(name = "태그 정보")
     private TagResponse tagResponse;
 
+    @Schema(name = "뱃지 신청 수락 현황", example = "true")
+    private Boolean isBadgeAccepted;
+    
     @Builder
     public PostSimpleResponse(Long postId, BoardSimpleResponse boardSimpleResponse, String nickname, String title,
                               String content, LocalDateTime createdAt, Long price, Long studyGroupId, String photo,
-                              Integer likeCount, Integer reportCount, TagResponse tagResponse) {
+                              Integer likeCount, Integer reportCount, TagResponse tagResponse, Boolean isBadgeAccepted) {
         this.postId = postId;
         this.boardSimpleResponse = boardSimpleResponse;
         this.nickname = nickname;
@@ -71,6 +74,7 @@ public class PostSimpleResponse {
         this.likeCount = likeCount;
         this.reportCount = reportCount;
         this.tagResponse = tagResponse;
+        this.isBadgeAccepted = isBadgeAccepted;
     }
 
     @Builder
@@ -87,7 +91,8 @@ public class PostSimpleResponse {
                 entity.getPhoto() != null ? entity.getPhoto().getContent() : null,
                 entity.getLikeCount(),
                 entity.getReportCount(),
-                new TagResponse(entity.getTag())
+                new TagResponse(entity.getTag()),
+                entity.getIsBadgeAccepted()
         );
     }
 }
