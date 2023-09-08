@@ -56,6 +56,9 @@ public class PostResponse {
     @Schema(name = "좋아요 수", example = "1")
     private Integer likeCount;
 
+    @Schema(name = "신고 횟수", example = "1")
+    private Integer reportCount;
+
     @Schema(name = "태그 타입", example = "IT")
     private TagType tagType;
 
@@ -64,7 +67,7 @@ public class PostResponse {
     public PostResponse(Long postId, Long userId, BoardType boardType, String nickname, String title,
                         String content, List<PhotoResponse> photoList,
                         LocalDateTime createdAt, Long price, Long studyGroupId,
-                        Integer likeCount, TagType tagType) {
+                        Integer likeCount, Integer reportCount,TagType tagType) {
         this.postId = postId;
         this.userId = userId;
         this.boardType = boardType;
@@ -76,6 +79,7 @@ public class PostResponse {
         this.price = price;
         this.studyGroupId = studyGroupId;
         this.likeCount = likeCount;
+        this.reportCount = reportCount;
         this.tagType = tagType;
     }
 
@@ -93,6 +97,7 @@ public class PostResponse {
                 entity.getPrice(),
                 entity.getStudyGroupId(),
                 entity.getLikeCount(),
+                entity.getReportCount(),
                 entity.getTag().getTagType()
         );
     }

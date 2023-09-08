@@ -65,6 +65,7 @@ public class Post extends BaseTimeEntity {
 
     private Integer commentCount = 0;
     private Integer likeCount = 0;
+    private Integer reportCount = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id", referencedColumnName = "tag_id")
@@ -122,9 +123,16 @@ public class Post extends BaseTimeEntity {
     public void increaseLikeCount() {
         likeCount++;
     }
-
     public void decreaseLikeCount() {
         likeCount--;
+    }
+
+    public void increaseReportCount() {
+        reportCount++;
+    }
+
+    public void decreaseReportCount() {
+        reportCount--;
     }
 
     public Photo getPhoto() {

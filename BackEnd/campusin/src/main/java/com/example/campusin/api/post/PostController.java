@@ -146,6 +146,36 @@ public class PostController {
 
     @ApiResponses(
             value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 신고")
+            }
+    )
+    @Operation(summary = "게시글 신고")
+    @PostMapping("/{postId}/report")
+    public ApiResponse reportPost(@AuthenticationPrincipal UserPrincipal principal,
+                                  @PathVariable(name = "postId") Long postId) {
+        if (postService.reportPost(principal.getUserId(), postId)) {
+            return ApiResponse.success("게시글 신고", "Post reported successfully");
+        }
+        return ApiResponse.success("이미 신고한 게시글입니다.", "Already reported post");
+    }
+
+    @ApiResponses(
+            value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 신고 취소")
+            }
+    )
+    @Operation(summary = "게시글 신고 취소")
+    @DeleteMapping("/{postId}/report")
+    public ApiResponse unreportPost(@AuthenticationPrincipal UserPrincipal principal,
+                                    @PathVariable(name = "postId") Long postId) {
+        if (postService.unreportPost(principal.getUserId(), postId)) {
+            return ApiResponse.success("게시글 신고 취소", "Post unreported successfully");
+        }
+        return ApiResponse.success("신고하지 않은 게시글입니다.", "Not reported post");
+    }
+    
+    @ApiResponses(
+            value = {
                     @io.swagger.annotations.ApiResponse(code = 200, message = "스터디 그룹 게시글 목록", response = PostStudyResponse.class, responseContainer = "Page")
             }
     )
