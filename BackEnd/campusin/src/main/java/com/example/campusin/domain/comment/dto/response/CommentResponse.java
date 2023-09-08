@@ -30,12 +30,16 @@ public abstract class CommentResponse {
     @ApiModelProperty(value = "좋아요 수", example = "0")
     private Integer like;
 
-    public CommentResponse(Long userId, Long parentId, Long commentId, String name, String content, Integer like) {
+    @ApiModelProperty(value = "채택 여부", example = "false")
+    private Boolean isAdopted;
+
+    public CommentResponse(Long userId, Long parentId, Long commentId, String name, String content, Integer like, Boolean isAdopted) {
         this.userId = userId;
         this.parentId = parentId;
         this.commentId = commentId;
         this.name = name;
         this.content = content;
         this.like = like;
+        this.isAdopted = isAdopted;
     }
 }

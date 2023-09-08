@@ -20,8 +20,8 @@ public class CommentsOnPostResponse extends CommentResponse{
     private List<CommentsOnPostResponse> children = new ArrayList<>();
 
     @QueryProjection
-    public CommentsOnPostResponse(Long userId, Long parentId, Long commentId, Integer like,String name, String content) {
-        super(userId, parentId, commentId, name, content, like);
+    public CommentsOnPostResponse(Long userId, Long parentId, Long commentId, Integer like, String name, String content, Boolean isAdopted) {
+        super(userId, parentId, commentId, name, content, like, isAdopted);
     }
 
     public void setChildren(List<CommentsOnPostResponse> children){
@@ -36,11 +36,12 @@ public class CommentsOnPostResponse extends CommentResponse{
 
         return new CommentsOnPostResponse(
                 user.getId(),
-                parent == null ? null : parent.getId(),
+                parent != null ? parent.getId() : null,
                 comment.getId(),
                 comment.getLikes().size(),
                 name,
-                content
+                content,
+                comment.getIsAdopted()
         );
     }
 

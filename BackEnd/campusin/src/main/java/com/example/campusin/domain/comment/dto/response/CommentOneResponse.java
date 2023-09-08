@@ -10,8 +10,9 @@ public class CommentOneResponse extends CommentResponse{
             Long commentId,
             Integer like,
             String name,
-            String content
+            String content,
+            Boolean isAdopted
     ) {
-        super(userId, parentId, commentId, name, content, like);
+        super(userId, parentId, commentId, name, content, like, isAdopted);
     }
 }
