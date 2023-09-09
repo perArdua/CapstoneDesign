@@ -15,8 +15,12 @@ class GeneralPostingCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var likeCnt: UILabel!
+
     var myLabel: UILabel!
     var blockResult: BlockCommentBody?
+
+    @IBOutlet weak var badgeImg: UIImageView!
+
     
     var commentID: Int?
     //인증마크 여부

@@ -35,11 +35,16 @@ class StatisticsManager{
         AF.request(endpoint, method: .post, parameters: param, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: CreateStatisticsResponse.self) { response in
             switch response.result{
             case.success(let data):
+                print(param)
                 completion(.success(data.body.createStatisticsID))
                 
             
             case.failure(let error):
+                print(endpoint)
+                print(param)
+                print("통계 오류 시작#######")
                 print(error)
+                print("통계 오류 끝#######")
                 completion(.failure(error))
             }
         }

@@ -218,6 +218,28 @@ extension StudyPostingDetailViewController: UITableViewDelegate, UITableViewData
             cell.img3.isHidden = true
             cell.img4.isHidden = true
             
+            Task {
+                do {
+                    let data = try await BadgeManager.getBadge(userid:(postDetail?.userID)!){ res in
+                        switch res{
+                        case.success(let suc):
+                            
+                            if let d = suc{
+                                if d.count > 0{
+                                    cell.badgeImg.isHidden = false
+                                }
+                            }
+                            else{
+                                cell.badgeImg.isHidden = true
+                            }
+                        case .failure(let err):
+                            print(err)
+                            cell.badgeImg.isHidden = true
+                        }
+                    }
+                }
+            }
+            
             imgCnt = (postDetail!.photoList.count)
             if imgCnt >= 1 {
                 cell.img0.image = UIImage(base64: (postDetail?.photoList[0].content)!, withPrefix: false)
@@ -256,6 +278,7 @@ extension StudyPostingDetailViewController: UITableViewDelegate, UITableViewData
             cell.commentID = comments[indexPath.row].commentID
             cell.childComments = comments[indexPath.row].children
             cell.dateLabel.text = "00/00"
+
             if(!isManager){
                 cell.deleteBtn.isHidden = true
             }
@@ -264,6 +287,31 @@ extension StudyPostingDetailViewController: UITableViewDelegate, UITableViewData
             }
 //            cell.dateLabel = String(comments_p[indexPath.row].c)
 //            cell.likeCnt
+
+
+            Task {
+                do {
+                    let data = try await BadgeManager.getBadge(userid: comments[indexPath.row].userID){ res in
+                        switch res{
+                        case.success(let suc):
+                            
+                            if let d = suc{
+                                if d.count > 0{
+                                    cell.badgeImg.isHidden = false
+                                }
+                            }
+                            else{
+                                cell.badgeImg.isHidden = true
+                            }
+                        case .failure(let err):
+                            print(err)
+                            cell.badgeImg.isHidden = true
+                        }
+                    }
+                }
+            }
+            
+
             return cell
         }
     }

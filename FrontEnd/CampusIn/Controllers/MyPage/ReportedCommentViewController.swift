@@ -9,8 +9,10 @@ import UIKit
 
 class ReportedCommentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
+
 //    var commentList: [CommentDataContent] = [CommentDataContent(userID: 1, parentID: nil, commentID: 17, name: "ekrud99", content: "qerqwer", isAdopted: nil, boardId: 2, postId: 16, children: [], childrenSize: 0)]
     var commentList: [ReportedCommentDataContent] = []
+
     
     var postDetail: PostDetailContent?
     var blockResult: BlockCommentBody?

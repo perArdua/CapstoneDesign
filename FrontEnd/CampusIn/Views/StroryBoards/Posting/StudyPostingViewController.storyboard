@@ -669,17 +669,24 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UC9-0M-Kmf">
+                                                                    <rect key="frame" x="48.333333333333329" y="0.99999999999999822" width="0.0" height="28.666666666666664"/>
+                                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                                </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이동현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="keL-oL-y6s">
-                                                                    <rect key="frame" x="50.666666666666671" y="0.0" width="44.333333333333329" height="30"/>
+                                                                    <rect key="frame" x="50.666666666666671" y="0.0" width="100.00000000000001" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="100" id="XFw-Aj-dfJ"/>
+                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Xg-E8-pVx">
-                                                                    <rect key="frame" x="100" y="0.0" width="250" height="30"/>
+                                                                    <rect key="frame" x="155.66666666666663" y="0.0" width="194.33333333333337" height="30"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilQ-0P-RYe">
-                                                                            <rect key="frame" x="170" y="0.0" width="80" height="30"/>
+                                                                            <rect key="frame" x="114.33333333333334" y="0.0" width="80" height="30"/>
                                                                             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="80" id="3JC-B6-w4l"/>
@@ -695,7 +702,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TsK-ZR-BPL">
-                                                                            <rect key="frame" x="135" y="0.0" width="25" height="30"/>
+                                                                            <rect key="frame" x="79.333333333333343" y="0.0" width="25" height="30"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3D6-39-4TG">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="10.333333333333334" height="30"/>
@@ -747,6 +754,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="badgeImg" destination="UC9-0M-Kmf" id="WVo-rr-S6h"/>
                                             <outlet property="contentLabel" destination="azr-O0-W3V" id="cJe-cr-cHV"/>
                                             <outlet property="dateLabel" destination="jMJ-Hw-7Re" id="ySj-Ij-sRT"/>
                                             <outlet property="img0" destination="ZxE-Ul-0vL" id="TfU-NF-I40"/>
@@ -785,8 +793,15 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tUp-fz-Ylh">
                                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
                                                                             <subviews>
+                                                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LSK-BW-osB">
+                                                                                    <rect key="frame" x="0.0" y="0.99999999999999822" width="20" height="18.666666666666664"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="20" id="8D2-wh-Fm3"/>
+                                                                                        <constraint firstAttribute="height" constant="20" id="HnZ-TT-nzA"/>
+                                                                                    </constraints>
+                                                                                </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWk-9P-pwM">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="20"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="20" id="NsV-Uz-lwp"/>
                                                                                     </constraints>
@@ -794,13 +809,6 @@
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LSK-BW-osB">
-                                                                                    <rect key="frame" x="80" y="0.99999999999999822" width="20" height="18.666666666666664"/>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="width" constant="20" id="8D2-wh-Fm3"/>
-                                                                                        <constraint firstAttribute="height" constant="20" id="HnZ-TT-nzA"/>
-                                                                                    </constraints>
-                                                                                </imageView>
                                                                             </subviews>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="100" id="eUf-cV-XHQ"/>
@@ -877,6 +885,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="badgeImg" destination="LSK-BW-osB" id="Q2f-qX-BZF"/>
                                             <outlet property="contentLabel" destination="Z30-QY-DRj" id="g53-EB-zMT"/>
                                             <outlet property="dateLabel" destination="vcK-tp-tEF" id="K5P-jF-yhA"/>
                                             <outlet property="deleteBtn" destination="SVF-cb-fw1" id="nx8-lk-nDA"/>

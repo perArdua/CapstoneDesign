@@ -84,6 +84,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("랭킹 ")
+        initDate()
         RankingManager.getPersonalStudyRanking {res in
             switch res{
             case .success(let data):
@@ -93,6 +94,10 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
             case .failure(let err):
                 print(err)
             }
+        }
+        
+        getGroup {
+            print(self.studyGroup)
         }
         print("appear 종료")
     }
@@ -124,12 +129,11 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
             rankingTypeBtn.setTitle("공부시간", for: .normal)
             print("######")
             //그룹별 랭킹 api
-            getGroupRanking {
-                print(self.rankingList)
-
-            }
+            setCurGroupRanking()
             print("###")
         }
+        
+        
     }
     
     @IBAction func rankingTypeBtnTapped(_ sender: UIButton) {
@@ -177,56 +181,100 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     //그룹 랭킹 생성
-    func getGroupRanking(completion: @escaping () -> Void){
-        let dispatchGroup = DispatchGroup()
-        
-        dispatchGroup.enter()
+    func getGroup(completion: @escaping () -> Void){
         StudyGroupManager.showMyStudyGroup { res in
             switch res{
             case .success(let data):
+                print("불러온 스터디 그룹")
+                print(data)
+                completion()
                 self.studyGroup = data
             case .failure(_):
                 print("스터디 그룹 목록 불러오기 실패")
+                completion()
             }
-            dispatchGroup.leave()
         }
-        
-        //각 그룹 랭킹 생성
-        
-        for i in 0..<studyGroup.count{
-            dispatchGroup.enter()
-            RankingManager.createGroupRanking(dateString: dateFormatter.string(from: Date()), groupID: studyGroup[i].id){res in
+    }
+            
+    func createEachGroupRanking(dateString: String, completion: @escaping () -> Void){
+        for i in 0..<self.studyGroup.count{
+            RankingManager.createGroupRanking(dateString: dateString, groupID: studyGroup[i].id){res in
                 switch res{
                 case .success(_):
                     print("그룹 랭킹 생성 성공")
+                    completion()
                 case .failure(_):
                     print("그룹 랭킹 생성 실패")
+                    completion()
                 }
-                dispatchGroup.leave()
             }
         }
-        
-        //그룹 랭킹 불러오기
-        dispatchGroup.enter()
+    }
+
+    func getCurGroupRanking(completion: @escaping () -> Void){
         RankingManager.getGroupRanking { res in
             switch res{
             case .success(let data):
                 self.rankingList = data
                 print(data)
-                self.setRanking()
-                self.tableView.reloadData()
                 print("그룹 랭킹 불러오기 성공")
+                completion()
             case .failure(let err):
                 print(err)
                 print("그룹 랭킹 불러오기 실패")
+                completion()
             }
-            dispatchGroup.leave()
         }
     }
     
-    @IBAction func prevBtnTapped(_ sender: Any) {
-        //저번주
-        if canToogle{
+    func setCurGroupRanking(){
+        let dateString = dateFormatter.string(from: Date())
+        self.createEachGroupRanking(dateString: dateString){
+            self.getCurGroupRanking { [self] in
+                tableView.reloadData()
+                setRanking()
+            }
+        }
+    }
+    
+    func getPrevGroupRanking(dateString:String, completion: @escaping () -> Void){
+        RankingManager.prevGroupStudyRanking(paramString: dateString) { res in
+            switch res{
+            case .success(let data):
+                self.rankingList = data
+                print(data)
+                print("특정 주차 그룹 랭킹 불러오기 성공")
+                completion()
+            case .failure(let err):
+                print(err)
+                print("특정 주차 그룹 랭킹 불러오기 실패")
+                completion()
+            }
+        }
+    }
+    
+    func setPrevGroupRanking(dateString: String){
+        
+        StatisticsManager.createStatistics(param: ["localDate" : dateString]) { res in
+            switch res{
+            case .success(_):
+                print("통계 생성 성공")
+                self.createEachGroupRanking(dateString: dateString){
+                    self.getPrevGroupRanking(dateString: dateString) {
+                        self.tableView.reloadData()
+                        self.setRanking()
+                    }
+                }
+            case .failure(let err):
+                print("통계 생성 실패")
+                print(err)
+            }
+        }
+        
+    }
+    
+    @IBAction func prevBtnTapped(_ sender: Any) {//저번주
+        if canToogle{ //개인
             if dateFormatter.string(from: endOfWeek!) == dateFormatter.string(from: lastWeekEnd!){
                 if rankingTypeBtn.titleLabel?.text == "공부시간"{
                     RankingManager.getPersonalStudyRanking {res in
@@ -288,36 +336,11 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         else{
-            let dispatchGroup = DispatchGroup()
             let paramString = dateFormatter.string(from: lastWeekEnd!)
-            let param: Parameters = ["localDate" : paramString]
-            
-            dispatchGroup.enter()
-            StatisticsManager.createStatistics(param: param) { res in
-                switch res{
-                case .success(let suc):
-                    print("\(paramString)통계 생성 성공")
-                case .failure(let err):
-                    print("\(paramString)통계 생성 실패")
-                }
-                dispatchGroup.leave()
+            print(paramString)
+            createEachGroupRanking(dateString: paramString) {
+                self.setPrevGroupRanking(dateString: paramString)
             }
-            
-            for i in 0..<studyGroup.count{
-                dispatchGroup.enter()
-                RankingManager.createGroupRanking(dateString: paramString, groupID: studyGroup[i].id) { res in
-                    switch res{
-                    case .success(_):
-                        print("그룹 랭킹 생성 성공")
-                    case .failure(_):
-                        print("그룹 랭킹 생성 실패")
-                    }
-                    dispatchGroup.leave()
-                }
-            }
-            
-            //특정 주차 그룹 랭킹 불러오기
-            
         }
         
         curWeekEnd = lastWeekEnd
@@ -399,43 +422,17 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         else{
-            let dispatchGroup = DispatchGroup()
             let paramString = dateFormatter.string(from: nextWeekEnd!)
-            let param: Parameters = ["localDate" : paramString]
-            
-            dispatchGroup.enter()
-            StatisticsManager.createStatistics(param: param) { res in
-                switch res{
-                case .success(_):
-                    print("\(paramString)통계 생성 성공")
-                case .failure(_):
-                    print("\(paramString)통계 생성 실패")
-                }
-                dispatchGroup.leave()
+            createEachGroupRanking(dateString: paramString) {
+                self.setPrevGroupRanking(dateString: paramString)
             }
-            
-            for i in 0..<studyGroup.count{
-                dispatchGroup.enter()
-                RankingManager.createGroupRanking(dateString: paramString, groupID: studyGroup[i].id) { res in
-                    switch res{
-                    case .success(_):
-                        print("그룹 랭킹 생성 성공")
-                    case .failure(_):
-                        print("그룹 랭킹 생성 실패")
-                    }
-                    dispatchGroup.leave()
-                }
-            }
-            
-            //특정 주차 그룹 랭킹 불러오기
-            
         }
         curWeekEnd = nextWeekEnd
         curWeekStart = calendar.date(byAdding: .day, value: -6, to: curWeekEnd!)
         lastWeekEnd = calendar.date(byAdding: .day, value: -7, to: curWeekEnd!)
         nextWeekEnd = calendar.date(byAdding: .day, value: 7, to: curWeekEnd!)
         
-        weekLabel.text = "[ \(dateFormatter2.string(from: curWeekStart!)) ~ \(dateFormatter2.string(from: curWeekEnd!)) ]"
+        weekLabel.text = "[ \(dateFormatter2.string(from: curWeekStart!)) ~ \(dateFormatter2.string(from: curWeekEnd!))]"
         
         
         if dateFormatter.string(from: endOfWeek!) <= dateFormatter.string(from: nextWeekEnd!){
@@ -452,6 +449,10 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func setRanking(){
+        goldPersonLabel.text = "1. -"
+        silverPersonLabel.text = "2. -"
+        bronzePersonLabel.text = "3. -"
+        
         if rankingList.count > 0{
             goldPersonLabel.text = "1. \(rankingList[0].name)"
         }

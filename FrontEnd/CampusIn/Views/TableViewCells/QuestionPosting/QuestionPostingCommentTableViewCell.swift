@@ -17,7 +17,12 @@ class QuestionPostingCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var likeCnt: UILabel!
     
     @IBOutlet weak var adoptBtn: UIButton!
+
     var blockResult: BlockCommentBody?
+
+    
+    @IBOutlet weak var badgeImg: UIImageView!
+
     var commentID: Int?
     //인증마크 여부
     var is_check: Bool?

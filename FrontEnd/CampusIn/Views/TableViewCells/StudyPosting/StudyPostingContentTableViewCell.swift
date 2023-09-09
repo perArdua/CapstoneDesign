@@ -15,6 +15,9 @@ class StudyPostingContentTableViewCell: UITableViewCell {
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
     
+    @IBOutlet weak var badgeImg: UIImageView!
+    
+    
     @IBOutlet weak var img0: UIImageView!
     @IBOutlet weak var img1: UIImageView!
     @IBOutlet weak var img2: UIImageView!

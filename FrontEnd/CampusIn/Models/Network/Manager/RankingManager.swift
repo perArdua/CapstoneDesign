@@ -31,7 +31,7 @@ class RankingManager{
     static func createGroupRanking(dateString: String, groupID: Int, completion: @escaping(Result<String, Error>) -> Void){
         let endpoint = String(format: APIConstants.Ranking.createGroupRanking, groupID)
         var p: Parameters = ["localDate" : dateString]
-
+        
         AF.request(endpoint, method: .post, parameters: p, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: RankingCreateData.self){ res in
             switch res.result{
             case.success(_):
@@ -191,6 +191,21 @@ class RankingManager{
                 }
             case .failure(let err):
                 print(err)
+            }
+        }
+    }
+    
+    static func prevGroupStudyRanking(paramString: String , completion: @escaping(Result<[RankingContent], Error>) -> Void){
+        let endpoint = APIConstants.Ranking.getPrevGroupStudyRanking + paramString
+        
+        AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: RankingData.self) { res in
+            switch res.result{
+            case .success(let data):
+                completion(.success(data.body.rankingList.content))
+            case .failure(let err):
+                print(err)
+                print("특정 주차 스터디 랭킹 불러오기 실패")
+                completion(.failure(err))
             }
         }
     }
