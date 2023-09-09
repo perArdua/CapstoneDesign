@@ -16,7 +16,8 @@ class AdoptCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var likeCnt: UILabel!
     
     @IBOutlet weak var likeBtn: UIButton!
-    @IBOutlet weak var checkMark: UIImageView!
+    @IBOutlet weak var badgeImg: UIImageView!
+    
     
     @IBOutlet weak var replyBtn: UIButton!
     @IBOutlet weak var resLabel: UILabel!

@@ -773,7 +773,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwL-5t-LmG">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="20"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="20" id="QNZ-Mr-33r"/>
                                                                                     </constraints>
@@ -781,8 +781,8 @@
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rPA-ju-Lmb">
-                                                                                    <rect key="frame" x="80" y="0.99999999999999822" width="20" height="18.666666666666664"/>
+                                                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rPA-ju-Lmb">
+                                                                                    <rect key="frame" x="0.0" y="0.99999999999999822" width="20" height="18.666666666666664"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="20" id="1ZP-ly-ErA"/>
                                                                                         <constraint firstAttribute="width" constant="20" id="xHc-HD-UQV"/>
@@ -863,7 +863,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="checkMark" destination="rPA-ju-Lmb" id="X6U-Df-PEa"/>
+                                            <outlet property="badgeImg" destination="rPA-ju-Lmb" id="Ept-0D-IAL"/>
                                             <outlet property="contentLabel" destination="KSs-6G-FoM" id="VQ7-o4-JyK"/>
                                             <outlet property="dateLabel" destination="b6d-O2-aG9" id="Wut-Yn-Gk8"/>
                                             <outlet property="likeBtn" destination="eeF-UV-PYg" id="7Ip-PD-ja2"/>
@@ -929,7 +929,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWk-9P-pwM">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="20"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="20" id="NsV-Uz-lwp"/>
                                                                                     </constraints>
@@ -937,8 +937,8 @@
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LSK-BW-osB">
-                                                                                    <rect key="frame" x="80" y="0.99999999999999822" width="20" height="18.666666666666664"/>
+                                                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LSK-BW-osB">
+                                                                                    <rect key="frame" x="0.0" y="0.99999999999999822" width="20" height="18.666666666666664"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="20" id="8D2-wh-Fm3"/>
                                                                                         <constraint firstAttribute="height" constant="20" id="HnZ-TT-nzA"/>
@@ -1018,6 +1018,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="adoptBtn" destination="3UG-Wg-mP8" id="Gh4-Eh-6Ul"/>
+                                            <outlet property="badgeImg" destination="LSK-BW-osB" id="S3p-VL-c3x"/>
                                             <outlet property="contentLabel" destination="Z30-QY-DRj" id="g53-EB-zMT"/>
                                             <outlet property="dateLabel" destination="vcK-tp-tEF" id="K5P-jF-yhA"/>
                                             <outlet property="likeCnt" destination="flL-xa-ZqO" id="oiC-Ye-sdx"/>
