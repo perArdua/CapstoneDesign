@@ -252,7 +252,7 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
             cell.resLabel.isHidden = false
             
             cell.userImg.isHidden = true
-            cell.checkMark.isHidden = true
+            cell.badgeImg.isHidden = true
             cell.likeCnt.isHidden = true
             cell.likeBtn.isHidden = true
             cell.replyBtn.isHidden = true
@@ -265,7 +265,7 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
                     cell.nameLabel.isHidden = false
                     cell.replyBtn.isHidden = false
                     cell.userImg.isHidden = false
-                    cell.checkMark.isHidden = false
+                    cell.badgeImg.isHidden = false
                     cell.nameLabel.isHidden = false
                     cell.dateLabel.isHidden = false
                     
@@ -275,10 +275,32 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
                     cell.childComments = comment.children
                     cell.dateLabel.text = "00/00"
                     cell.resLabel.isHidden = true
+                    
+                    Task {
+                        do {
+                            let data = try await BadgeManager.getBadge(userid: comment.userID){ res in
+                                switch res{
+                                case.success(let suc):
+                                    
+                                    if let d = suc{
+                                        if d.count > 0{
+                                            cell.badgeImg.isHidden = false
+                                        }
+                                    }
+                                    else{
+                                        cell.badgeImg.isHidden = true
+                                    }
+                                case .failure(let err):
+                                    print(err)
+                                    cell.badgeImg.isHidden = true
+                                }
+                            }
+                        }
+                    }
+                    
                     break
                 }
             }
-            
             return cell
         }
         else{
@@ -313,8 +335,29 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
             else{ //채택된 답변이 없을 경우
                 cell.adoptBtn.isHidden = false
             }
-//            cell.dateLabel = String(comments_p[indexPath.row].c)
-//            cell.likeCnt
+            
+            Task {
+                do {
+                    let data = try await BadgeManager.getBadge(userid: comments[indexPath.row].userID){ res in
+                        switch res{
+                        case.success(let suc):
+                            
+                            if let d = suc{
+                                if d.count > 0{
+                                    cell.badgeImg.isHidden = false
+                                }
+                            }
+                            else{
+                                cell.badgeImg.isHidden = true
+                            }
+                        case .failure(let err):
+                            print(err)
+                            cell.badgeImg.isHidden = true
+                        }
+                    }
+                }
+            }
+            
             return cell
         }
     }

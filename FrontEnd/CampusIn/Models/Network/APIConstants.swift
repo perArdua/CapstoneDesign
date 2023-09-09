@@ -127,6 +127,10 @@ struct APIConstants {
         static let getPrevPersonalQuesRanking = baseURL + "/rank/LastWeek/questionRank" //개인 공부 시간 랭킹 가져오기
         
     }
+    
+    struct Badge{
+        static let getBadge = baseURL + "/badges/user-badges/%d" //해당 user의 뱃지를 읽어옴
+    }
 }
 
 

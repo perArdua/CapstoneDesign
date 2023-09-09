@@ -28,6 +28,8 @@
 		315FB3C82AAA17DE0083C634 /* StudyGroupRankingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3C72AAA17DE0083C634 /* StudyGroupRankingData.swift */; };
 		315FB3CA2AAB61E00083C634 /* AdoptCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3C92AAB61E00083C634 /* AdoptCommentTableViewCell.swift */; };
 		315FB3CC2AAB72070083C634 /* CommentAdoptData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3CB2AAB72070083C634 /* CommentAdoptData.swift */; };
+		315FB3CE2AAC578D0083C634 /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3CD2AAC578D0083C634 /* BadgeManager.swift */; };
+		315FB3D12AAC580F0083C634 /* BadgeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3D02AAC580F0083C634 /* BadgeData.swift */; };
 		3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */; };
 		3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165EDC32A02A3C100D91856 /* AppDelegate.swift */; };
 		3165EDC62A02A3C100D91856 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3165EDC52A02A3C100D91856 /* SceneDelegate.swift */; };
@@ -185,6 +187,8 @@
 		315FB3C72AAA17DE0083C634 /* StudyGroupRankingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupRankingData.swift; sourceTree = "<group>"; };
 		315FB3C92AAB61E00083C634 /* AdoptCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdoptCommentTableViewCell.swift; sourceTree = "<group>"; };
 		315FB3CB2AAB72070083C634 /* CommentAdoptData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAdoptData.swift; sourceTree = "<group>"; };
+		315FB3CD2AAC578D0083C634 /* BadgeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeManager.swift; sourceTree = "<group>"; };
+		315FB3D02AAC580F0083C634 /* BadgeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeData.swift; sourceTree = "<group>"; };
 		3165CBEA2A03FE69005E34AC /* GeneralPostingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralPostingViewController.storyboard; sourceTree = "<group>"; };
 		3165EDC02A02A3C100D91856 /* CampusIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3165EDC32A02A3C100D91856 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -408,6 +412,14 @@
 			path = StudyPosting;
 			sourceTree = "<group>";
 		};
+		315FB3CF2AAC58040083C634 /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				315FB3D02AAC580F0083C634 /* BadgeData.swift */,
+			);
+			path = Badge;
+			sourceTree = "<group>";
+		};
 		3165CBE92A03FE5B005E34AC /* Posting */ = {
 			isa = PBXGroup;
 			children = (
@@ -550,6 +562,7 @@
 				5D547FF22A1F5ACF00376E09 /* UserManager.swift */,
 				5D77035A2A20FCA300AF0903 /* TodoManager.swift */,
 				317913842A2393AB00BC86FE /* TimerManager.swift */,
+				315FB3CD2AAC578D0083C634 /* BadgeManager.swift */,
 				5DFF9BAF2A2C90B5004C2DE5 /* StudyGroupManager.swift */,
 				317BEC612A2CE6430029DA29 /* StatisticsManager.swift */,
 				3153090B2AA0DE0A001F4BC2 /* RankingManager.swift */,
@@ -682,6 +695,7 @@
 		31FCD9202A054E180068689B /* Datas */ = {
 			isa = PBXGroup;
 			children = (
+				315FB3CF2AAC58040083C634 /* Badge */,
 				317BEC632A2CF47E0029DA29 /* Statistics */,
 				5DC8851C2A2CE61100631BC1 /* Ranking */,
 				5DFF9BAA2A2C8CCE004C2DE5 /* StudyGroup */,
@@ -1045,6 +1059,7 @@
 				31FCD91F2A054E050068689B /* GeneralPostingTableViewCell.swift in Sources */,
 				317913852A2393AB00BC86FE /* TimerManager.swift in Sources */,
 				315067462A3703170045E028 /* QuestionPostingContentTableViewCell.swift in Sources */,
+				315FB3CE2AAC578D0083C634 /* BadgeManager.swift in Sources */,
 				31EAED3C2A320A3100F04DEC /* PostingReplyViewController.swift in Sources */,
 				5D14AB342A15158A00807A2B /* SideMenuViewController.swift in Sources */,
 				31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */,
@@ -1123,6 +1138,7 @@
 				5D6013672A14D5D400159F63 /* APIConstants.swift in Sources */,
 				315067402A3702F80045E028 /* QuestionPostingTableViewCell.swift in Sources */,
 				5D69A3E02A1A9C9600E9BBB4 /* MessageManager.swift in Sources */,
+				315FB3D12AAC580F0083C634 /* BadgeData.swift in Sources */,
 				5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */,
 				31D57E4F2A13B7830049E57A /* BoardInitResponse.swift in Sources */,
 				31AC40182A2F49CB001D2D22 /* CommetCellDelegate.swift in Sources */,
