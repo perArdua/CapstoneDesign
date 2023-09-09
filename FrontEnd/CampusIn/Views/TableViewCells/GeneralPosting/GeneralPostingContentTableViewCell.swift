@@ -21,6 +21,7 @@ class GeneralPostingContentTableViewCell: UITableViewCell {
     @IBOutlet weak var img2: UIImageView!
     @IBOutlet weak var img3: UIImageView!
     @IBOutlet weak var img4: UIImageView!
+    @IBOutlet weak var badgeImg: UIImageView!
     
     var postid: Int?
     
