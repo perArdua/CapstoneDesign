@@ -84,6 +84,7 @@
 		31EAED492A320BF400F04DEC /* StudyPostingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EAED482A320BF400F04DEC /* StudyPostingTableViewCell.swift */; };
 		31EAED4B2A32158700F04DEC /* ClassExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EAED4A2A32158700F04DEC /* ClassExtension.swift */; };
 		31EAED4E2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EAED4D2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift */; };
+		31EF222B2AACC26F00EF8A79 /* UpdateReplyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EF222A2AACC26F00EF8A79 /* UpdateReplyDelegate.swift */; };
 		31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD9162A054DE20068689B /* GeneralPostingViewController.swift */; };
 		31FCD91D2A054E050068689B /* GeneralPostingCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD91A2A054E050068689B /* GeneralPostingCommentTableViewCell.swift */; };
 		31FCD91E2A054E050068689B /* GeneralPostingContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD91B2A054E050068689B /* GeneralPostingContentTableViewCell.swift */; };
@@ -251,6 +252,7 @@
 		31EAED482A320BF400F04DEC /* StudyPostingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPostingTableViewCell.swift; sourceTree = "<group>"; };
 		31EAED4A2A32158700F04DEC /* ClassExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtension.swift; sourceTree = "<group>"; };
 		31EAED4D2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupPostingContentTVCellDelegate.swift; sourceTree = "<group>"; };
+		31EF222A2AACC26F00EF8A79 /* UpdateReplyDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateReplyDelegate.swift; sourceTree = "<group>"; };
 		31FCD9162A054DE20068689B /* GeneralPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingViewController.swift; sourceTree = "<group>"; };
 		31FCD91A2A054E050068689B /* GeneralPostingCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingCommentTableViewCell.swift; sourceTree = "<group>"; };
 		31FCD91B2A054E050068689B /* GeneralPostingContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingContentTableViewCell.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			children = (
 				319815132A2B205400B8B010 /* StudyRecordDelegate.swift */,
 				31EAED4D2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift */,
+				31EF222A2AACC26F00EF8A79 /* UpdateReplyDelegate.swift */,
 				31AC40172A2F49CB001D2D22 /* CommetCellDelegate.swift */,
 				3165EDC32A02A3C100D91856 /* AppDelegate.swift */,
 				3165EDC52A02A3C100D91856 /* SceneDelegate.swift */,
@@ -1131,6 +1134,7 @@
 				5D547FF02A1F593F00376E09 /* UserNickname.swift in Sources */,
 				5D7703592A20FC5B00AF0903 /* TodoList.swift in Sources */,
 				315FB3CA2AAB61E00083C634 /* AdoptCommentTableViewCell.swift in Sources */,
+				31EF222B2AACC26F00EF8A79 /* UpdateReplyDelegate.swift in Sources */,
 				5D77035D2A21188B00AF0903 /* TodoCreationResponse.swift in Sources */,
 				5D69A3E22A1A9CDB00E9BBB4 /* MessageRoomManager.swift in Sources */,
 				5B05A7B62AA7731300FF5D1D /* StudyRecordManager.swift in Sources */,

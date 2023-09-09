@@ -254,7 +254,6 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func setPrevGroupRanking(dateString: String){
-        
         StatisticsManager.createStatistics(param: ["localDate" : dateString]) { res in
             switch res{
             case .success(_):
@@ -280,6 +279,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
                     RankingManager.getPersonalStudyRanking {res in
                         switch res{
                         case .success(let data):
+                            print(data)
                             self.rankingList = data
                             self.setRanking()
                             self.tableView.reloadData()
@@ -338,9 +338,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
         else{
             let paramString = dateFormatter.string(from: lastWeekEnd!)
             print(paramString)
-            createEachGroupRanking(dateString: paramString) {
-                self.setPrevGroupRanking(dateString: paramString)
-            }
+            setPrevGroupRanking(dateString: paramString)
         }
         
         curWeekEnd = lastWeekEnd
@@ -423,9 +421,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         else{
             let paramString = dateFormatter.string(from: nextWeekEnd!)
-            createEachGroupRanking(dateString: paramString) {
-                self.setPrevGroupRanking(dateString: paramString)
-            }
+            setPrevGroupRanking(dateString: paramString)
         }
         curWeekEnd = nextWeekEnd
         curWeekStart = calendar.date(byAdding: .day, value: -6, to: curWeekEnd!)

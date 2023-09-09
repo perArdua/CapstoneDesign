@@ -356,6 +356,7 @@ extension GeneralPostingDetailViewController: GeneralReplyBtnDelegate{
         replyVC.isManager = self.isManager
         replyVC.modalPresentationStyle = .pageSheet
         replyVC.view.backgroundColor = .white
+        replyVC.updateReplyDelegate = self
         replyVC.array = cell.childComments ?? []
         for i in comments{
             if i.commentID == cell.commentID{
@@ -394,6 +395,18 @@ extension GeneralPostingDetailViewController: UISheetPresentationControllerDeleg
     func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
         //크기 변경 됐을 경우
         print(sheetPresentationController.selectedDetentIdentifier == .large ? "large" : "medium")
+    }
+}
+
+extension GeneralPostingDetailViewController: UpdateReplyDelegate{
+    func updateReply() {
+        self.getComment(postID: self.postID!){comments in
+            print("이전 뷰의 댓글 목록")
+            print(self.comments)
+            self.comments = comments
+            self.tableView.reloadData()
+            print(comments)
+        }
     }
 }
 
