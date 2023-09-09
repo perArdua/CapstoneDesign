@@ -11,10 +11,21 @@ import Alamofire
 class GeneralPostingDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+
+    
+    @IBOutlet weak var likeCntLabel: UILabel!
+    
+    var reportedCommentID: Int?
+
+
     var postID: Int?
     var postDetail: PostDetailContent?
     var comments: [CommentDataContent] = []
     var comments_c: [CommentDataContent] = []
+
+    var isManager: Bool = false
+    
+
     var imgCnt: Int = 0
     
     @IBOutlet weak var commentAddTf: UITextField!
@@ -28,6 +39,7 @@ class GeneralPostingDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.dataSource = self
         tableView.delegate = self
         //UITableView의 footer 영역을 없애줌.
@@ -298,6 +310,15 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
             cell.commentID = comments[indexPath.row].commentID
             cell.childComments = comments[indexPath.row].children
             cell.dateLabel.text = "00/00"
+
+//            cell.dateLabel = String(comments_p[indexPath.row].c)
+//            cell.likeCnt
+            if(!isManager){
+                cell.deleteBtn.isHidden = true
+            }
+            if(comments[indexPath.row].commentID == reportedCommentID){
+                cell.backgroundColor = .red
+
             //댓글 뱃지 적용
             Task {
                 do {
@@ -319,6 +340,7 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
                         }
                     }
                 }
+
             }
             return cell
         }
@@ -330,12 +352,16 @@ extension GeneralPostingDetailViewController: GeneralReplyBtnDelegate{
     func replyBtnTapped(in cell: GeneralPostingCommentTableViewCell){
         print("딥글 버튼 눌림")
         let replyVC = PostingReplyViewController()
+        replyVC.reportedID = reportedCommentID
+        replyVC.isManager = self.isManager
         replyVC.modalPresentationStyle = .pageSheet
         replyVC.view.backgroundColor = .white
         replyVC.updateReplyDelegate = self
         replyVC.array = cell.childComments ?? []
         for i in comments{
             if i.commentID == cell.commentID{
+                replyVC.isManager = self.isManager
+                replyVC.reportedID = reportedCommentID
                 replyVC.parent_commentId = i.commentID
                 replyVC.comment = i
                 replyVC.postId = postDetail!.postID

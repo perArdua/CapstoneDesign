@@ -15,6 +15,8 @@ class PostingReplyViewController: UIViewController {
     var comment: CommentDataContent?
     var array: [CommentDataContent] = []
     weak var updateReplyDelegate: UpdateReplyDelegate?
+    var reportedID: Int?
+    var isManager: Bool = false
     
     let stackView: UIStackView = {
         let sv = UIStackView()
@@ -52,6 +54,9 @@ class PostingReplyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        print("cid")
+        print(reportedID)
+        print("RRRRR \(isManager)")
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -185,19 +190,63 @@ extension PostingReplyViewController: UITableViewDelegate, UITableViewDataSource
             cell.likeLabel.text = "5"
             cell.nameLabel.text = comment?.name
             cell.contentLabel.text = comment?.content
+            cell.isManager = isManager
             let spacing: CGFloat = 10.0 // 원하는 간격 값으로 수정해주세요.
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: spacing, right: 0)
             return cell
         }
         else{
+            print("답글 셀")
             let cell = ReplyCommentTableViewCell(style: .default, reuseIdentifier: "replyCell")
             cell.badgeImgView.image = UIImage(systemName: "checkmark.circle.fill")
             cell.userImgView.image = UIImage(systemName: "person.fill")
-            cell.dateLabel.text = "06/01"
+            cell.dateLabel.text = "06/05"
             cell.likeLabel.text = "5"
             cell.nameLabel.text = array[indexPath.row].name
             cell.contentLabel.text = array[indexPath.row].content
+            cell.commentID = array[indexPath.row].commentID
+            //cell.isManager = self.isManager
+            print("prVC: \(isManager)")
+            cell.isManager = self.isManager
+            if(array[indexPath.row].commentID == reportedID){
+                cell.backgroundColor = .red
+            }
+            if(!isManager){
+                cell.likeBtn.isHidden = true
+            }else{
+                cell.likeBtn.isHidden = false
+            }
+            cell.delegate = self
             return cell
         }
     }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+}
+
+extension PostingReplyViewController: ReplyLikeBtn{
+    func likeBtnTapped(in cell: ReplyCommentTableViewCell) {
+        print("tapped")
+        AdminManager.blockComment(cID: cell.commentID!){[weak self] result in
+            switch result{
+            case.success(let res):
+                DispatchQueue.main.async {
+                    cell.blockResult = res
+                    if(cell.blockResult!.block != nil){
+                        cell.contentLabel.text = "신고처리가 완료된 댓글 입니다."
+                        //self!.showLabel(msg: "신고 완료")
+                    }else{
+                        //self!.showLabel(msg: "이미 신고된 댓글입니다. ")
+                    }
+                }
+            case.failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
 }

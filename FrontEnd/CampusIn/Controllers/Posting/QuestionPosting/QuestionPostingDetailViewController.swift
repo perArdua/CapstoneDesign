@@ -15,7 +15,8 @@ class QuestionPostingDetailViewController: UIViewController {
     var postDetail: PostDetailContent?
     var comments: [CommentDataContent] = []
     var comments_c: [CommentDataContent] = []
-    
+    var reportedCommentID: Int?
+    var isManager: Bool = false
     var imgCnt: Int = 0
     
     @IBOutlet weak var commentAddTf: UITextField!
@@ -35,7 +36,8 @@ class QuestionPostingDetailViewController: UIViewController {
         tableView.sectionFooterHeight = 0
         tableView.sectionHeaderHeight = 25
         tableView.allowsSelection = false
-        
+        print("isManager: \(isManager)")
+        print("postid: \(postID)")
         pullDownBtn.addTarget(self, action: #selector(pullDownBtnTapped), for: .touchUpInside)
         let navigationItem = self.navigationItem
         //네비게이션 바의 오른쪽에 pullDownBtn을 추가한다.
@@ -357,6 +359,17 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
             else{ //채택된 답변이 없을 경우
                 cell.adoptBtn.isHidden = false
             }
+
+//            cell.dateLabel = String(comments_p[indexPath.row].c)
+//            cell.likeCnt
+            
+            if(!isManager){
+                cell.deleteBtn.isHidden = true
+            }
+            if(comments[indexPath.row].commentID == reportedCommentID){
+                cell.backgroundColor = .red
+            }
+
             
             Task {
                 do {
@@ -380,6 +393,7 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
                 }
             }
             
+
             return cell
         }
     }
@@ -407,13 +421,17 @@ extension QuestionPostingDetailViewController: QuestionReplyBtnDelegate, AdoptBt
     }
     
     func replyBtnTapped(in cell: AdoptCommentTableViewCell) {
-        print("딥글 버튼 눌림")
+        print("딥글 버튼 눌림!!!!!!!!!")
         let replyVC = PostingReplyViewController()
+        replyVC.reportedID = reportedCommentID
+        replyVC.isManager = self.isManager
         replyVC.modalPresentationStyle = .pageSheet
         replyVC.view.backgroundColor = .white
         replyVC.array = cell.childComments ?? []
         for i in comments{
             if i.commentID == cell.commentID{
+                replyVC.reportedID = reportedCommentID
+                replyVC.isManager = self.isManager
                 replyVC.parent_commentId = i.commentID
                 replyVC.comment = i
                 replyVC.postId = postDetail!.postID
@@ -435,12 +453,17 @@ extension QuestionPostingDetailViewController: QuestionReplyBtnDelegate, AdoptBt
     func replyBtnTapped(in cell: QuestionPostingCommentTableViewCell){
         print("딥글 버튼 눌림")
         let replyVC = PostingReplyViewController()
+        replyVC.reportedID = reportedCommentID
+        replyVC.isManager = self.isManager
+        print("qpVC: \(isManager)")
         replyVC.modalPresentationStyle = .pageSheet
         replyVC.view.backgroundColor = .white
         replyVC.updateReplyDelegate = self
         replyVC.array = cell.childComments ?? []
         for i in comments{
             if i.commentID == cell.commentID{
+                replyVC.reportedID = reportedCommentID
+                replyVC.isManager = self.isManager
                 replyVC.parent_commentId = i.commentID
                 replyVC.comment = i
                 replyVC.postId = postDetail!.postID
@@ -477,3 +500,4 @@ extension QuestionPostingDetailViewController: UpdateReplyDelegate{
         }
     }
 }
+
