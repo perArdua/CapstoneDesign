@@ -20,14 +20,14 @@ struct APIConstants {
         static let createPost = baseURL + "/boards/%d/posts/%d" // 게시글 생성(아래 사용 예시 참고)
         //사용 예시
         //let endpoint = String(format: APIConstants.Board.createPost, boardId)
-
+        
         static let searchPosts = baseURL + "/boards/%d/posts/search?keyword=%@" // 게시글 찾기(아래 사용 예시 참고)
         //사용 예시
         //let endpoint = String(format: APIConstants.Board.searchPosts, boardId, keyword)
-
+        
         static let getBoardIds = baseURL + "/boards/boards/ids" // 게시판 id 얻기
         static let initBoards = baseURL + "/boards/init" // 게시판 초기화
-    
+        
         static let tagFiltering = baseURL + "​/boards/tag/%d/%d/posts" // 태그별 게시글 목록 조회
         static let getTags = baseURL + "/boards/tags/ids" // 태그별 고유 id값 얻기
         
@@ -129,7 +129,7 @@ struct APIConstants {
         
     }
     
-
+    
     struct Admin{
         static let makeMeAdmin = baseURL + "/users/make-admin"
         static let getReportedComments = baseURL + "/admin/comment"
@@ -138,12 +138,16 @@ struct APIConstants {
         static let blockPost = baseURL + "/admin/block/post/%d"
         static let unblockComment = baseURL + "/admin/unblock/comment/%d"
         static let unblockPost = baseURL + "/admin/unblock/post/%d"
-
+        
+    }
+    
     struct Badge{
         static let getBadge = baseURL + "/badges/user-badges/%d" //해당 user의 뱃지를 읽어옴
-
     }
+    
+    
 }
+    
 
 
 extension String
