@@ -45,15 +45,14 @@ class RankingManager{
         }
     }
     
-    static func getGroupRanking(completion: @escaping(Result<[RankingContent], Error>) -> Void){
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        let endpoint = APIConstants.Ranking.getStudyGroupRanking + "/?localDate=\(dateFormatter.string(from: Date()))"
+    static func getGroupRanking(dateString: String, completion: @escaping(Result<[RankingContent], Error>) -> Void){
+        let endpoint = APIConstants.Ranking.getStudyGroupRanking + "/?localDate=\(dateString)"
         
         AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: RankingData.self){ res in
             switch res.result{
             case .success(let data):
                 print("그룹 랭킹 불러오기 성공")
+                print(data)
                 completion(.success(data.body.rankingList.content))
             case .failure(let err):
                 print("그룹 랭킹 불러오기 실패")

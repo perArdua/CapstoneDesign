@@ -212,7 +212,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func getCurGroupRanking(completion: @escaping () -> Void){
-        RankingManager.getGroupRanking { res in
+        RankingManager.getGroupRanking(dateString: dateFormatter.string(from: Date())) { res in
             switch res{
             case .success(let data):
                 self.rankingList = data
@@ -238,7 +238,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func getPrevGroupRanking(dateString:String, completion: @escaping () -> Void){
-        RankingManager.prevGroupStudyRanking(paramString: dateString) { res in
+        RankingManager.getGroupRanking(dateString: dateString) { res in
             switch res{
             case .success(let data):
                 self.rankingList = data
