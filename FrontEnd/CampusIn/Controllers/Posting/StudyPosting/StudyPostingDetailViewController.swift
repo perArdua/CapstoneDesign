@@ -312,6 +312,7 @@ extension StudyPostingDetailViewController: StudyReplyBtnDelegate{
         let replyVC = PostingReplyViewController()
         replyVC.modalPresentationStyle = .pageSheet
         replyVC.view.backgroundColor = .white
+        replyVC.updateReplyDelegate = self
         replyVC.array = cell.childComments ?? []
         for i in comments{
             if i.commentID == cell.commentID{
@@ -373,6 +374,18 @@ extension StudyPostingDetailViewController: StudyGroupPostingContentTVCellDelega
                 self.present(alert, animated: true)
             }
             //그룹 가입 API콜 하기
+        }
+    }
+}
+
+extension StudyPostingDetailViewController: UpdateReplyDelegate{
+    func updateReply() {
+        self.getComment(postID: self.postID!){comments in
+            print("이전 뷰의 댓글 목록")
+            print(self.comments)
+            self.comments = comments
+            self.tableView.reloadData()
+            print(comments)
         }
     }
 }

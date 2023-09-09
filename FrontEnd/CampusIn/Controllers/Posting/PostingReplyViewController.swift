@@ -14,7 +14,7 @@ class PostingReplyViewController: UIViewController {
     var parent_commentId: Int?
     var comment: CommentDataContent?
     var array: [CommentDataContent] = []
-    
+    weak var updateReplyDelegate: UpdateReplyDelegate?
     
     let stackView: UIStackView = {
         let sv = UIStackView()
@@ -115,9 +115,13 @@ class PostingReplyViewController: UIViewController {
                         print("댓글 조회 리퀘 날림")
                         switch result{
                         case .success(let comments):
-                            print(comments[0].children)
-                            self.array = comments[0].children
-                            self.tableView.reloadData()
+                            for comment in comments{
+                                if comment.commentID == self.parent_commentId{
+                                    print(comment.children)
+                                    self.array = comment.children
+                                    self.tableView.reloadData()
+                                }
+                            }
                         case .failure(let error):
                             print("Error: \(error)")
                         }
@@ -125,6 +129,8 @@ class PostingReplyViewController: UIViewController {
                 case .failure(let err):
                     print(err)
                 }
+                
+                self.updateReplyDelegate?.updateReply()
             }
         }
         alert.addAction(okAction)
