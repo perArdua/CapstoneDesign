@@ -127,6 +127,16 @@ struct APIConstants {
         static let getPrevPersonalQuesRanking = baseURL + "/rank/LastWeek/questionRank" //개인 공부 시간 랭킹 가져오기
         
     }
+    
+    struct Admin{
+        static let makeMeAdmin = baseURL + "/users/make-admin"
+        static let getReportedComments = baseURL + "/admin/comment"
+        static let getReportedPosts = baseURL + "/admin/post"
+        static let blockComment = baseURL + "/admin/block/comment/%d"
+        static let blockPost = baseURL + "/admin/block/post/%d"
+        static let unblockComment = baseURL + "/admin/unblock/comment/%d"
+        static let unblockPost = baseURL + "/admin/unblock/post/%d"
+    }
 }
 
 

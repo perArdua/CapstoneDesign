@@ -102,6 +102,10 @@
 		5BE29F0E2AAB70AA00C8995B /* ReportedPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE29F0D2AAB70AA00C8995B /* ReportedPostViewController.swift */; };
 		5BE29F112AAB7A6800C8995B /* ReportedCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE29F102AAB7A6800C8995B /* ReportedCommentTableViewCell.swift */; };
 		5BE29F132AAB8E5500C8995B /* ReportedPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE29F122AAB8E5500C8995B /* ReportedPostTableViewCell.swift */; };
+		5BE29F152AAC72A600C8995B /* AdminManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE29F142AAC72A600C8995B /* AdminManager.swift */; };
+		5BE29F182AAC75C700C8995B /* ReportedCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE29F172AAC75C700C8995B /* ReportedCommentData.swift */; };
+		5BE29F1A2AAC83EC00C8995B /* BlockCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE29F192AAC83EC00C8995B /* BlockCommentData.swift */; };
+		5BE29F1C2AAC9BA400C8995B /* ReplyLikeBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE29F1B2AAC9BA400C8995B /* ReplyLikeBtn.swift */; };
 		5D14AB342A15158A00807A2B /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D14AB332A15158A00807A2B /* SideMenuViewController.swift */; };
 		5D25704C2A10CE8B00E03713 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D25704B2A10CE8B00E03713 /* ChatViewController.swift */; };
 		5D25704E2A10D1F700E03713 /* MessageBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */; };
@@ -264,6 +268,10 @@
 		5BE29F0D2AAB70AA00C8995B /* ReportedPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportedPostViewController.swift; sourceTree = "<group>"; };
 		5BE29F102AAB7A6800C8995B /* ReportedCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportedCommentTableViewCell.swift; sourceTree = "<group>"; };
 		5BE29F122AAB8E5500C8995B /* ReportedPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportedPostTableViewCell.swift; sourceTree = "<group>"; };
+		5BE29F142AAC72A600C8995B /* AdminManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminManager.swift; sourceTree = "<group>"; };
+		5BE29F172AAC75C700C8995B /* ReportedCommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportedCommentData.swift; sourceTree = "<group>"; };
+		5BE29F192AAC83EC00C8995B /* BlockCommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCommentData.swift; sourceTree = "<group>"; };
+		5BE29F1B2AAC9BA400C8995B /* ReplyLikeBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyLikeBtn.swift; sourceTree = "<group>"; };
 		5D14AB332A15158A00807A2B /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		5D25704B2A10CE8B00E03713 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBoxTableViewCell.swift; sourceTree = "<group>"; };
@@ -393,6 +401,7 @@
 				31AC40172A2F49CB001D2D22 /* CommetCellDelegate.swift */,
 				3165EDC32A02A3C100D91856 /* AppDelegate.swift */,
 				3165EDC52A02A3C100D91856 /* SceneDelegate.swift */,
+				5BE29F1B2AAC9BA400C8995B /* ReplyLikeBtn.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -554,6 +563,7 @@
 				317BEC612A2CE6430029DA29 /* StatisticsManager.swift */,
 				3153090B2AA0DE0A001F4BC2 /* RankingManager.swift */,
 				5B05A7B52AA7731300FF5D1D /* StudyRecordManager.swift */,
+				5BE29F142AAC72A600C8995B /* AdminManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -682,6 +692,7 @@
 		31FCD9202A054E180068689B /* Datas */ = {
 			isa = PBXGroup;
 			children = (
+				5BE29F162AAC75BB00C8995B /* Admin */,
 				317BEC632A2CF47E0029DA29 /* Statistics */,
 				5DC8851C2A2CE61100631BC1 /* Ranking */,
 				5DFF9BAA2A2C8CCE004C2DE5 /* StudyGroup */,
@@ -740,6 +751,15 @@
 				5BE29F122AAB8E5500C8995B /* ReportedPostTableViewCell.swift */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		5BE29F162AAC75BB00C8995B /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				5BE29F172AAC75C700C8995B /* ReportedCommentData.swift */,
+				5BE29F192AAC83EC00C8995B /* BlockCommentData.swift */,
+			);
+			path = Admin;
 			sourceTree = "<group>";
 		};
 		5D3F614D2A2F5806000E3B7C /* BookStore */ = {
@@ -1013,9 +1033,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BE29F182AAC75C700C8995B /* ReportedCommentData.swift in Sources */,
 				5B25F58A2AA8B14100D2C028 /* StudyAddRecordViewController.swift in Sources */,
 				3183ABDB2A14D3DB009CA636 /* PostSearch.swift in Sources */,
 				313F7DB82A07DE7500182CDA /* GeneralPostingSearchViewController.swift in Sources */,
+				5BE29F1A2AAC83EC00C8995B /* BlockCommentData.swift in Sources */,
 				5DC8851B2A2CE5E400631BC1 /* RankingViewController.swift in Sources */,
 				3165EDC82A02A3C100D91856 /* ViewController.swift in Sources */,
 				31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */,
@@ -1046,6 +1068,7 @@
 				317913852A2393AB00BC86FE /* TimerManager.swift in Sources */,
 				315067462A3703170045E028 /* QuestionPostingContentTableViewCell.swift in Sources */,
 				31EAED3C2A320A3100F04DEC /* PostingReplyViewController.swift in Sources */,
+				5BE29F152AAC72A600C8995B /* AdminManager.swift in Sources */,
 				5D14AB342A15158A00807A2B /* SideMenuViewController.swift in Sources */,
 				31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */,
 				5D77035B2A20FCA300AF0903 /* TodoManager.swift in Sources */,
@@ -1076,6 +1099,7 @@
 				31FCD91E2A054E050068689B /* GeneralPostingContentTableViewCell.swift in Sources */,
 				5D25704E2A10D1F700E03713 /* MessageBoxTableViewCell.swift in Sources */,
 				31EAED3A2A3209F800F04DEC /* StudyPostingDetailViewController.swift in Sources */,
+				5BE29F1C2AAC9BA400C8995B /* ReplyLikeBtn.swift in Sources */,
 				5D547FFD2A1F9D7000376E09 /* ToDoTableViewCell.swift in Sources */,
 				5D4ADF972A054A1B00195CA9 /* LoginViewController.swift in Sources */,
 				3183ABE22A150A51009CA636 /* BoardManager.swift in Sources */,

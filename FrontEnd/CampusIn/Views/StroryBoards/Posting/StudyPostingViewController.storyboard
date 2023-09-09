@@ -844,7 +844,10 @@
                                                                         <constraint firstAttribute="width" constant="30" id="rFu-9v-8bD"/>
                                                                     </constraints>
                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                    <state key="normal" image="hand.thumbsup" catalog="system"/>
+                                                                    <state key="normal" image="minus.circle" catalog="system"/>
+                                                                    <connections>
+                                                                        <action selector="deleteBtnTapped:" destination="AZ7-nB-dkG" eventType="touchUpInside" id="G2D-CU-eV5"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flL-xa-ZqO">
                                                                     <rect key="frame" x="0.0" y="34" width="30" height="20.333333333333329"/>
@@ -876,6 +879,7 @@
                                         <connections>
                                             <outlet property="contentLabel" destination="Z30-QY-DRj" id="g53-EB-zMT"/>
                                             <outlet property="dateLabel" destination="vcK-tp-tEF" id="K5P-jF-yhA"/>
+                                            <outlet property="deleteBtn" destination="SVF-cb-fw1" id="nx8-lk-nDA"/>
                                             <outlet property="likeCnt" destination="flL-xa-ZqO" id="oiC-Ye-sdx"/>
                                             <outlet property="nameLabel" destination="AWk-9P-pwM" id="0xw-hM-Xsu"/>
                                             <outlet property="userImg" destination="53B-9x-YnO" id="wpg-z8-pB0"/>
@@ -1113,8 +1117,8 @@
     </scenes>
     <resources>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="hand.thumbsup" catalog="system" width="123" height="128"/>
         <image name="magnifyingglass.circle" catalog="system" width="128" height="123"/>
+        <image name="minus.circle" catalog="system" width="128" height="123"/>
         <image name="paperplane.circle" catalog="system" width="128" height="123"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo" catalog="system" width="128" height="93"/>
