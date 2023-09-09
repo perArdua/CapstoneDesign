@@ -123,8 +123,9 @@ struct APIConstants {
         static let getPersonalStudyRanking = baseURL + "/rank/studyTimeRank" //개인 공부 시간 랭킹 생성
         static let getPersonalQuesRanking = baseURL + "/rank/questionRank" //개인 공부 시간 랭킹 생성
         static let getStudyGroupRanking = baseURL + "/rank/studyGroupRank" //개인 공부 시간 랭킹 생성
-        static let getPrevPersonalStudyRanking = baseURL + "/rank/LastWeek/studyTimeRank" //개인 공부 시간 랭킹 가져오기
-        static let getPrevPersonalQuesRanking = baseURL + "/rank/LastWeek/questionRank" //개인 공부 시간 랭킹 가져오기
+        static let getPrevPersonalStudyRanking = baseURL + "/rank/LastWeek/studyTimeRank" //특정 주차 개인 공부 시간 랭킹 가져오기
+        static let getPrevPersonalQuesRanking = baseURL + "/rank/LastWeek/questionRank" //특정 주차 개인 공부 시간 랭킹 가져오기
+        static let getPrevGroupStudyRanking = baseURL + "/rank/studyGroupRank/?localDate=" // 특정 주차 그룹 공부 시간 랭킹 가져오기
         
     }
     
