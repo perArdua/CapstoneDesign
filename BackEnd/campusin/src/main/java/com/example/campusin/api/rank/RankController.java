@@ -53,15 +53,15 @@ public class RankController {
     public ApiResponse createStudyGroupRank(@AuthenticationPrincipal UserPrincipal userPrincipal,
                                             @PathVariable Long StudyGroupId,
                                             @RequestBody RankCreateRequest request ){
-        return ApiResponse.success("스터디 그룹 랭킹 생성", rankService.createStudyRank(StudyGroupId, request));
+        return ApiResponse.success("랭킹 생성", rankService.createStudyRank(StudyGroupId, request));
     }
     @ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "스터디그룹내 공부시간 랭킹 리스트 조회", response = RankListResponse.class)
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "스터디그룹간 공부시간 랭킹 리스트 조회", response = RankListResponse.class)
             }
     )
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "localDate", value = "날짜 (예: '2023-09-01')", required = true, dataType = "string", paramType = "query", dataTypeClass = LocalDate.class)
+            @ApiImplicitParam(name = "localDate", value = "날짜 (예: '2023-09-02')", required = true, dataType = "string", paramType = "query", dataTypeClass = LocalDate.class)
     })
     @Operation(summary = "스터디그룹 공부시간 랭킹 리스트 조회")
     @GetMapping("/studyGroupRank/")
@@ -73,11 +73,27 @@ public class RankController {
 
     @ApiResponses(
             value = {
+                    @io.swagger.annotations.ApiResponse(code = 200, message = "스터디그룹간 공부시간 랭킹 리스트 조회", response = RankListResponse.class)
+            }
+    )
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "localDate", value = "주차가 끝나는 날짜 입력 (예: '2023-09-02')", required = true, dataType = "string", paramType = "query", dataTypeClass = LocalDate.class)
+    })
+    @Operation(summary = "이전 주차 스터디그룹 공부시간 랭킹 리스트 조회")
+    @GetMapping("/LastWeek/studyGroupRank/")
+    public ApiResponse getLastWeekStudyGroupRank(
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate,
+            @PageableDefault(size = 10) Pageable pageable){
+        return ApiResponse.success("랭킹 리스트 조회", rankService.getStudyGroupPersonalStudyTimeRank(localDate, pageable));
+    }
+
+    @ApiResponses(
+            value = {
                     @io.swagger.annotations.ApiResponse(code = 200, message = "공부시간 랭킹 리스트 조회", response = RankListResponse.class)
             }
     )
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "localDate", value = "날짜 (예: '2023-09-01')", required = true, dataType = "string", paramType = "query", dataTypeClass = LocalDate.class)
+            @ApiImplicitParam(name = "localDate", value = "날짜 (예: '2023-09-02')", required = true, dataType = "string", paramType = "query", dataTypeClass = LocalDate.class)
     })
     @Operation(summary = "개인 공부시간 랭킹 리스트 조회")
     @GetMapping("/studyTimeRank")
@@ -93,9 +109,9 @@ public class RankController {
             }
     )
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "localDate", value = "주차가 끝나는 날짜 입력 (예: '2023-09-01')", required = true, dataType = "string", paramType = "query", dataTypeClass = LocalDate.class)
+            @ApiImplicitParam(name = "localDate", value = "주차가 끝나는 날짜 입력 (예: '2023-09-02')", required = true, dataType = "string", paramType = "query", dataTypeClass = LocalDate.class)
     })
-    @Operation(summary = "이전 주차 Rank 공부시간 순위 리스트 조회")
+    @Operation(summary = "이전 주차 개인 공부시간 순위 리스트 조회")
     @GetMapping("/LastWeek/studyTimeRank")
     public ApiResponse getPreviousWeekRankList(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate,
                                                @PageableDefault(size = 10) Pageable pageable){
@@ -108,9 +124,9 @@ public class RankController {
             }
     )
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "localDate", value = "주차가 끝나는 날짜 입력 (예: '2023-09-01')", required = true, dataType = "string", paramType = "query", dataTypeClass = LocalDate.class)
+            @ApiImplicitParam(name = "localDate", value = "주차가 끝나는 날짜 입력 (예: '2023-09-02')", required = true, dataType = "string", paramType = "query", dataTypeClass = LocalDate.class)
     })
-    @Operation(summary = "이전 주차 질의응답 공부시간 순위 리스트 조회")
+    @Operation(summary = "이전 주차 개인 질의응답 공부시간 순위 리스트 조회")
     @GetMapping("/LastWeek/questionRank")
     public ApiResponse getPreviousWeekRankQuestList(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate,
                                                @PageableDefault(size = 10) Pageable pageable){
@@ -123,7 +139,7 @@ public class RankController {
             }
     )
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "localDate", value = "날짜 (예: '2023-09-01')", required = true, dataType = "string", paramType = "query")
+            @ApiImplicitParam(name = "localDate", value = "날짜 (예: '2023-09-02')", required = true, dataType = "string", paramType = "query")
     })
     @Operation(summary = "개인 질의응답 랭킹 리스트 조회")
     @GetMapping("/questionRank")
