@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 public class RankListStudyGroupResponse {
 
     private Long rank;
-    private String StudyGroupName;
+    private String name;
     private int week;
     private int month;
 
     @Builder
     public RankListStudyGroupResponse(Long rank, String studyGroupName, int week, int month) {
         this.rank = rank;
-        this.StudyGroupName = studyGroupName;
+        this.name = studyGroupName;
         this.week = week;
         this.month = month;
     }
