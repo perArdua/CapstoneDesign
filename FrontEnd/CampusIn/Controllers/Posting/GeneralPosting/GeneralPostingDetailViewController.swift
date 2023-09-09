@@ -310,40 +310,43 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
             cell.commentID = comments[indexPath.row].commentID
             cell.childComments = comments[indexPath.row].children
             cell.dateLabel.text = "00/00"
-
-//            cell.dateLabel = String(comments_p[indexPath.row].c)
-//            cell.likeCnt
+            
+            //            cell.dateLabel = String(comments_p[indexPath.row].c)
+            //            cell.likeCnt
             if(!isManager){
                 cell.deleteBtn.isHidden = true
             }
             if(comments[indexPath.row].commentID == reportedCommentID){
                 cell.backgroundColor = .red
-
-            //댓글 뱃지 적용
-            Task {
-                do {
-                    let data = try await BadgeManager.getBadge(userid: comments[indexPath.row].userID){ res in
-                        switch res{
-                        case.success(let suc):
-                            
-                            if let d = suc{
-                                if d.count > 0{
-                                    cell.badgeImg.isHidden = false
+                
+                //댓글 뱃지 적용
+                Task {
+                    do {
+                        let data = try await BadgeManager.getBadge(userid: comments[indexPath.row].userID){ res in
+                            switch res{
+                            case.success(let suc):
+                                
+                                if let d = suc{
+                                    if d.count > 0{
+                                        cell.badgeImg.isHidden = false
+                                    }
                                 }
-                            }
-                            else{
+                                else{
+                                    cell.badgeImg.isHidden = true
+                                }
+                            case .failure(let err):
+                                print(err)
                                 cell.badgeImg.isHidden = true
                             }
-                        case .failure(let err):
-                            print(err)
-                            cell.badgeImg.isHidden = true
                         }
                     }
+                    
                 }
-
+                
             }
             return cell
         }
+        
     }
 }
     // MARK: - half modal로 뷰 컨트롤러 show
