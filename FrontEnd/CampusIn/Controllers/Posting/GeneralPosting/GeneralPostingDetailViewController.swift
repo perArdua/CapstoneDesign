@@ -11,13 +11,10 @@ import Alamofire
 class GeneralPostingDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var likeCntLabel: UILabel!
     var postID: Int?
     var postDetail: PostDetailContent?
     var comments: [CommentDataContent] = []
     var comments_c: [CommentDataContent] = []
-    
     var imgCnt: Int = 0
     
     @IBOutlet weak var commentAddTf: UITextField!
@@ -241,6 +238,28 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
             cell.likeBtn.setTitle("", for: .normal)
             cell.postid = postID
             
+            Task {
+                do {
+                    let data = try await BadgeManager.getBadge(userid: (postDetail?.userID!)!){ res in
+                        switch res{
+                        case.success(let suc):
+                            
+                            if let d = suc{
+                                if d.count > 0{
+                                    cell.badgeImg.isHidden = false
+                                }
+                            }
+                            else{
+                                cell.badgeImg.isHidden = true
+                            }
+                        case .failure(let err):
+                            print(err)
+                            cell.badgeImg.isHidden = true
+                        }
+                    }
+                }
+            }
+            
             imgCnt = (postDetail!.photoList.count)
             if imgCnt >= 1 {
                 cell.img0.image = UIImage(base64: (postDetail?.photoList[0].content)!, withPrefix: false)
@@ -279,15 +298,33 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
             cell.commentID = comments[indexPath.row].commentID
             cell.childComments = comments[indexPath.row].children
             cell.dateLabel.text = "00/00"
-//            cell.dateLabel = String(comments_p[indexPath.row].c)
-//            cell.likeCnt
+            //댓글 뱃지 적용
+            Task {
+                do {
+                    let data = try await BadgeManager.getBadge(userid: comments[indexPath.row].userID){ res in
+                        switch res{
+                        case.success(let suc):
+                            
+                            if let d = suc{
+                                if d.count > 0{
+                                    cell.badgeImg.isHidden = false
+                                }
+                            }
+                            else{
+                                cell.badgeImg.isHidden = true
+                            }
+                        case .failure(let err):
+                            print(err)
+                            cell.badgeImg.isHidden = true
+                        }
+                    }
+                }
+            }
             return cell
         }
     }
 }
-
-
-// MARK: - half modal로 뷰 컨트롤러 show
+    // MARK: - half modal로 뷰 컨트롤러 show
 extension GeneralPostingDetailViewController: GeneralReplyBtnDelegate{
     
     func replyBtnTapped(in cell: GeneralPostingCommentTableViewCell){
@@ -316,16 +353,17 @@ extension GeneralPostingDetailViewController: GeneralReplyBtnDelegate{
             sheet.prefersGrabberVisible = true
             
             //처음 크기 지정 (기본 값은 가장 작은 크기)
-//            sheet.selectedDetentIdentifier = .large
+            //            sheet.selectedDetentIdentifier = .large
             
             //뒤 배경 흐리게 제거 (기본 값은 모든 크기에서 배경 흐리게 됨)
             sheet.largestUndimmedDetentIdentifier = .none
         }
         
         present(replyVC, animated: true, completion: nil)
-    
+        
     }
 }
+    
 extension GeneralPostingDetailViewController: UISheetPresentationControllerDelegate {
     func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
         //크기 변경 됐을 경우

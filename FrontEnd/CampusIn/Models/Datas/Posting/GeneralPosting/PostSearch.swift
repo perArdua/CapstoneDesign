@@ -120,12 +120,18 @@ struct PostSearchContent: Codable {
     let title, content: String
     let createdAt: [Int]
     let price: Int?
-    let photo: String?
     let studyGroupId: Int?
+    let photo: String?
+    let likeCount: Int
+    let tagResponse: TagContent
+    let reportCount: Int
+    let isBadgeAccepted: Bool?
+    
 
     enum CodingKeys: String, CodingKey {
         case postID = "postId"
-        case boardSimpleResponse, nickname, title, content, createdAt, price, photo, studyGroupId
+        case boardSimpleResponse
+        case nickname, title, content, createdAt, price, photo, studyGroupId, tagResponse, likeCount, isBadgeAccepted, reportCount
     }
 }
 
