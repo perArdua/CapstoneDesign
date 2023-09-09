@@ -129,8 +129,19 @@ struct APIConstants {
         
     }
     
+
+    struct Admin{
+        static let makeMeAdmin = baseURL + "/users/make-admin"
+        static let getReportedComments = baseURL + "/admin/comment"
+        static let getReportedPosts = baseURL + "/admin/post"
+        static let blockComment = baseURL + "/admin/block/comment/%d"
+        static let blockPost = baseURL + "/admin/block/post/%d"
+        static let unblockComment = baseURL + "/admin/unblock/comment/%d"
+        static let unblockPost = baseURL + "/admin/unblock/post/%d"
+
     struct Badge{
         static let getBadge = baseURL + "/badges/user-badges/%d" //해당 user의 뱃지를 읽어옴
+
     }
 }
 

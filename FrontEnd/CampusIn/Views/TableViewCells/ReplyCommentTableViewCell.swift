@@ -9,6 +9,10 @@ import UIKit
 
 class ReplyCommentTableViewCell: UITableViewCell {
 
+    var blockResult: BlockCommentBody?
+    var commentID: Int?
+    var isManager: Bool = false
+    
     let userImgView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -78,12 +82,14 @@ class ReplyCommentTableViewCell: UITableViewCell {
     
     let likeBtn: UIButton = {
         let btn = UIButton()
-        let thumbsUpImage = UIImage(systemName: "hand.thumbsup.fill")
+        let thumbsUpImage = UIImage(systemName: "minus.circle")
         btn.setImage(thumbsUpImage, for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
         
     }()
+    
+    weak var delegate: ReplyLikeBtn?
     
     let likeLabel: UILabel = {
         let label = UILabel()
@@ -100,6 +106,8 @@ class ReplyCommentTableViewCell: UITableViewCell {
         //super의 init을 호출, style은 원하는거 (보통 디폴트). reuseIdentifier에는 입력받은 파라미터 넣음
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         setup()
+        print(123123)
+        print(34534545)
     }
     
     //지정생성자 재정의 할때는 반드시 필수 생성자도 구현해야함 (자동 상속이 안되므로)
@@ -107,10 +115,25 @@ class ReplyCommentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // likeBtn이 눌렸을 때 호출될 함수
+    @objc func likeBtnTapped() {
+        print("report tap")
+        delegate?.likeBtnTapped(in: self)
+    }
+
     func setup(){
         self.addSubview(userImgView)
         self.addSubview(mainStackView)
-        self.addSubview(buttonSV)
+        //self.addSubview(buttonSV)
+        likeBtn.addTarget(self, action: #selector(likeBtnTapped), for: .touchUpInside)
+        self.contentView.addSubview(buttonSV)
+        print("RCTC \(isManager)")
+//        if(!isManager){
+//            likeBtn.isHidden = true
+//        }else{
+//            likeBtn.isHidden = false
+//        }
+        
         setupStackView()
     }
     
@@ -123,7 +146,7 @@ class ReplyCommentTableViewCell: UITableViewCell {
         mainStackView.addArrangedSubview(contentLabel)
         
         buttonSV.addArrangedSubview(likeBtn)
-        buttonSV.addArrangedSubview(likeLabel)
+        //buttonSV.addArrangedSubview(likeLabel)
     }
     //cell에서 viewDidLoad와 비슷한 역할을 하는 코드
     //만약 스토리보드로 만들때 밑 함수에 원하는 코드 작성. 모두 코드로 할거면 사용 x
@@ -134,7 +157,6 @@ class ReplyCommentTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     

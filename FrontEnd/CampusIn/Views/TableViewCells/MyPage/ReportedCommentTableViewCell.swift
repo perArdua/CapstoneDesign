@@ -9,6 +9,7 @@ import UIKit
 
 class ReportedCommentTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var reportCntLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
     override func awakeFromNib() {

@@ -17,6 +17,9 @@ class StudyPostingDetailViewController: UIViewController {
     var comments: [CommentDataContent] = []
     var comments_c: [CommentDataContent] = []
     
+    var reportedCommentID: Int = -1
+    var isManager: Bool = false
+    
     var imgCnt: Int = 0
     
     @IBOutlet weak var commentAddTf: UITextField!
@@ -276,6 +279,16 @@ extension StudyPostingDetailViewController: UITableViewDelegate, UITableViewData
             cell.childComments = comments[indexPath.row].children
             cell.dateLabel.text = "00/00"
 
+            if(!isManager){
+                cell.deleteBtn.isHidden = true
+            }
+            if(comments[indexPath.row].commentID == reportedCommentID){
+                cell.backgroundColor = .red
+            }
+//            cell.dateLabel = String(comments_p[indexPath.row].c)
+//            cell.likeCnt
+
+
             Task {
                 do {
                     let data = try await BadgeManager.getBadge(userid: comments[indexPath.row].userID){ res in
@@ -298,6 +311,7 @@ extension StudyPostingDetailViewController: UITableViewDelegate, UITableViewData
                 }
             }
             
+
             return cell
         }
     }
@@ -310,11 +324,15 @@ extension StudyPostingDetailViewController: StudyReplyBtnDelegate{
     func replyBtnTapped(in cell: StudyPostingCommentTableViewCell){
         print("딥글 버튼 눌림")
         let replyVC = PostingReplyViewController()
+        replyVC.isManager = true
+        replyVC.reportedID = reportedCommentID
         replyVC.modalPresentationStyle = .pageSheet
         replyVC.view.backgroundColor = .white
         replyVC.array = cell.childComments ?? []
         for i in comments{
             if i.commentID == cell.commentID{
+                replyVC.isManager = true
+                replyVC.reportedID = reportedCommentID
                 replyVC.parent_commentId = i.commentID
                 replyVC.comment = i
                 replyVC.postId = postDetail!.postID

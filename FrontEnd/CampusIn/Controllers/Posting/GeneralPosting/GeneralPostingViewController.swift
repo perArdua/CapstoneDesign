@@ -156,7 +156,7 @@ extension GeneralPostingViewController : UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralPostingTableViewCell", for: indexPath) as! GeneralPostingTableViewCell
         
         let temp = array[indexPath.row]
-        
+
         cell.titleLabel.text = temp.title
         cell.contentLabel.text = temp.content
         cell.dateLabel.text = String(temp.createdAt[1])+"/"+String(temp.createdAt[2])
