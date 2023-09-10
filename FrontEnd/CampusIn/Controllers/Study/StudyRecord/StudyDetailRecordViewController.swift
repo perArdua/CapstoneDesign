@@ -31,7 +31,13 @@ class StudyDetailRecordViewController: UIViewController {
     }
 
     func setup(){
-        recordImage.image = UIImage(base64: (recordDetail?.photo ?? "BookImage"), withPrefix: false)
+        
+        if let photo = recordDetail!.photo{
+            recordImage.image = UIImage(base64: photo, withPrefix: false)
+        }
+        else{
+            UIImage(systemName: "book.circle")
+        }
         titleLabel.text = recordDetail?.title
         contentTV.text = recordDetail?.content
         if let dateArr = recordDetail?.createdAt {
