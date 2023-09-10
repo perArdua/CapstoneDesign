@@ -372,32 +372,32 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
             }
             if(comments[indexPath.row].commentID == reportedCommentID){
                 cell.backgroundColor = .red
-                
-                //댓글 뱃지 적용
-                Task {
-                    do {
-                        let data = try await BadgeManager.getBadge(userid: comments[indexPath.row].userID){ res in
-                            switch res{
-                            case.success(let suc):
-                                
-                                if let d = suc{
-                                    if d.count > 0{
-                                        cell.badgeImg.isHidden = false
-                                    }
+            }
+            
+            //댓글 뱃지 적용
+            Task {
+                do {
+                    let data = try await BadgeManager.getBadge(userid: comments[indexPath.row].userID){ res in
+                        switch res{
+                        case.success(let suc):
+                            
+                            if let d = suc{
+                                if d.count > 0{
+                                    cell.badgeImg.isHidden = false
                                 }
-                                else{
-                                    cell.badgeImg.isHidden = true
-                                }
-                            case .failure(let err):
-                                print(err)
+                            }
+                            else{
                                 cell.badgeImg.isHidden = true
                             }
+                        case .failure(let err):
+                            print(err)
+                            cell.badgeImg.isHidden = true
                         }
                     }
-                    
                 }
                 
             }
+            
             return cell
         }
         

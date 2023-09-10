@@ -127,6 +127,7 @@ class ReplyCommentTableViewCell: UITableViewCell {
         //self.addSubview(buttonSV)
         likeBtn.addTarget(self, action: #selector(likeBtnTapped), for: .touchUpInside)
         self.contentView.addSubview(buttonSV)
+        self.badgeImgView.isHidden = true
         print("RCTC \(isManager)")
 //        if(!isManager){
 //            likeBtn.isHidden = true
