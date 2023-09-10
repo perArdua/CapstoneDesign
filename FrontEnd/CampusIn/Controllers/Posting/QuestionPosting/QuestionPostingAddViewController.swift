@@ -30,7 +30,7 @@ class QuestionPostingAddViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tagLabel0: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
     
-    let tagData = ["선택하세요", "IT", "수학", "인문", "태그1", "태그2", "태그3", "태그4", "태그5"]
+    let tagData = ["선택하세요", "IT", "수학", "자연과학", "공학", "경제", "인문", "예체능", "기타"]
     var tagIdList: [TagContent] = []
     var tagId: Int = -1;
     var tagEng: String?
