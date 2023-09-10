@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         // TabBar 보이기
         self.tabBarController?.tabBar.isHidden = false
         setUp()
+        
     }
     
     func setUp(){

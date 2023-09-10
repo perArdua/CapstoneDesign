@@ -41,5 +41,20 @@ class UserManager{
         }
     }
 
-    
+    // MARK: - user id 반환
+    //MARK: - 기존 회원인지 판단
+    static func getUserID(completion: @escaping (Result<Int, Error>) -> Void) {
+        let endPoint = APIConstants.User.getUserID
+
+        AF.request(endPoint, method: .get, headers: APIConstants.headers)
+            .responseDecodable(of: UserIDData.self) { response in
+                switch response.result {
+                case .success(let data):
+                    let id = data.body.userID.userID
+                    completion(.success(id))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
 }
