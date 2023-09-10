@@ -70,6 +70,11 @@
 		31B2B16B2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */; };
 		31C7184A2A080EE800C7731A /* loading_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 31C718492A080EE800C7731A /* loading_check.json */; };
 		31CBDA892A2CC3E300E55924 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBDA882A2CC3E300E55924 /* StatisticsViewController.swift */; };
+		31D0A6A82AAE053D004114C3 /* BadgeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0A6A72AAE053D004114C3 /* BadgeListViewController.swift */; };
+		31D0A6AA2AAE0547004114C3 /* BadgeDatailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0A6A92AAE0547004114C3 /* BadgeDatailViewController.swift */; };
+		31D0A6AC2AAE09D4004114C3 /* BadgeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0A6AB2AAE09D4004114C3 /* BadgeTableViewCell.swift */; };
+		31D0A6AE2AAE0FE2004114C3 /* HandleBadgeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0A6AD2AAE0FE2004114C3 /* HandleBadgeData.swift */; };
+		31D0A6B02AAE1D42004114C3 /* MakeBadgeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0A6AF2AAE1D42004114C3 /* MakeBadgeData.swift */; };
 		31D57E4F2A13B7830049E57A /* BoardInitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D57E4E2A13B7830049E57A /* BoardInitResponse.swift */; };
 		31D57E512A13CE160049E57A /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D57E502A13CE160049E57A /* PostList.swift */; };
 		31D96F602A1A9A140086FD7D /* PostDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D96F5F2A1A9A140086FD7D /* PostDetail.swift */; };
@@ -244,6 +249,11 @@
 		31B2B16A2A190C3F005A3D4E /* TimerTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		31C718492A080EE800C7731A /* loading_check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_check.json; sourceTree = "<group>"; };
 		31CBDA882A2CC3E300E55924 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		31D0A6A72AAE053D004114C3 /* BadgeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeListViewController.swift; sourceTree = "<group>"; };
+		31D0A6A92AAE0547004114C3 /* BadgeDatailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeDatailViewController.swift; sourceTree = "<group>"; };
+		31D0A6AB2AAE09D4004114C3 /* BadgeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeTableViewCell.swift; sourceTree = "<group>"; };
+		31D0A6AD2AAE0FE2004114C3 /* HandleBadgeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleBadgeData.swift; sourceTree = "<group>"; };
+		31D0A6AF2AAE1D42004114C3 /* MakeBadgeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeBadgeData.swift; sourceTree = "<group>"; };
 		31D57E4E2A13B7830049E57A /* BoardInitResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardInitResponse.swift; sourceTree = "<group>"; };
 		31D57E502A13CE160049E57A /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		31D96F5F2A1A9A140086FD7D /* PostDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetail.swift; sourceTree = "<group>"; };
@@ -532,6 +542,7 @@
 		3165EDF52A02A82E00D91856 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				31D0A6A62AAE0521004114C3 /* Badge */,
 				5B4925802AA0F8300094A203 /* MyPage */,
 				5D3F614D2A2F5806000E3B7C /* BookStore */,
 				5DC885192A2CE5CC00631BC1 /* Ranking */,
@@ -656,6 +667,15 @@
 			path = Statistics;
 			sourceTree = "<group>";
 		};
+		31D0A6A62AAE0521004114C3 /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				31D0A6A72AAE053D004114C3 /* BadgeListViewController.swift */,
+				31D0A6A92AAE0547004114C3 /* BadgeDatailViewController.swift */,
+			);
+			path = Badge;
+			sourceTree = "<group>";
+		};
 		31EAED412A320B9700F04DEC /* StudyPosting */ = {
 			isa = PBXGroup;
 			children = (
@@ -694,6 +714,7 @@
 			children = (
 				5BE29F0F2AAB7A2C00C8995B /* MyPage */,
 				31AC40152A2F2362001D2D22 /* ReplyCommentTableViewCell.swift */,
+				31D0A6AB2AAE09D4004114C3 /* BadgeTableViewCell.swift */,
 				5D25704D2A10D1F700E03713 /* MessageBoxTableViewCell.swift */,
 				5D2570512A10EABE00E03713 /* ChatTableViewCell.swift */,
 				5DC8851F2A2CF3E100631BC1 /* RankingTableViewCell.swift */,
@@ -788,10 +809,12 @@
 		5BE29F162AAC75BB00C8995B /* Admin */ = {
 			isa = PBXGroup;
 			children = (
+				31D0A6AD2AAE0FE2004114C3 /* HandleBadgeData.swift */,
 				5BE29F172AAC75C700C8995B /* ReportedCommentData.swift */,
 				5BE29F192AAC83EC00C8995B /* BlockCommentData.swift */,
 				5B0C609F2AACD8A7001D9B96 /* ReportedPostData.swift */,
 				5B0C60A12AACE1CB001D9B96 /* BlockPostData.swift */,
+				31D0A6AF2AAE1D42004114C3 /* MakeBadgeData.swift */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -1085,6 +1108,7 @@
 				3179137F2A23911D00BC86FE /* TimerAddResponse.swift in Sources */,
 				315067382A3701D50045E028 /* QuestionPostingDetailViewController.swift in Sources */,
 				31CBDA892A2CC3E300E55924 /* StatisticsViewController.swift in Sources */,
+				31D0A6AC2AAE09D4004114C3 /* BadgeTableViewCell.swift in Sources */,
 				315FB3CC2AAB72070083C634 /* CommentAdoptData.swift in Sources */,
 				315B09F12AADF17A0099108B /* UserIDData.swift in Sources */,
 				317913832A23927E00BC86FE /* TimerUpdateResponse.swift in Sources */,
@@ -1125,6 +1149,7 @@
 				315FB3C82AAA17DE0083C634 /* StudyGroupRankingData.swift in Sources */,
 				5B49257F2A9E2D0C0094A203 /* StudyGroupDetail.swift in Sources */,
 				31EAED402A320B0300F04DEC /* StudyPostingAddViewController.swift in Sources */,
+				31D0A6AE2AAE0FE2004114C3 /* HandleBadgeData.swift in Sources */,
 				315309042AA0D30E001F4BC2 /* RankingCreateData.swift in Sources */,
 				315E599E2A3084BC00E85A61 /* StudyPostingViewController.swift in Sources */,
 				5D507AEC2A0DDDA800EB5CA9 /* MessageBoxViewController.swift in Sources */,
@@ -1147,6 +1172,7 @@
 				5B0C60A22AACE1CB001D9B96 /* BlockPostData.swift in Sources */,
 				5D3F61532A2F59C2000E3B7C /* BookStoreViewController.swift in Sources */,
 				318B6E882AA89CBD00D981A8 /* GroupTimerResponse.swift in Sources */,
+				31D0A6B02AAE1D42004114C3 /* MakeBadgeData.swift in Sources */,
 				5DFF9BB02A2C90B5004C2DE5 /* StudyGroupManager.swift in Sources */,
 				31EAED492A320BF400F04DEC /* StudyPostingTableViewCell.swift in Sources */,
 				5D547FF02A1F593F00376E09 /* UserNickname.swift in Sources */,
@@ -1177,6 +1203,7 @@
 				31AF26BF2A1F9B4300B1CEC7 /* CommentAddResponse.swift in Sources */,
 				317913812A23917900BC86FE /* TimerDeleteResponse.swift in Sources */,
 				31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */,
+				31D0A6AA2AAE0547004114C3 /* BadgeDatailViewController.swift in Sources */,
 				31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */,
 				5D3F61572A2F6893000E3B7C /* BookDetailViewController.swift in Sources */,
 				31EAED4E2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift in Sources */,
@@ -1197,6 +1224,7 @@
 				5BE29F0E2AAB70AA00C8995B /* ReportedPostViewController.swift in Sources */,
 				5B0C60A82AAE1EC9001D9B96 /* CommentSingoResponse.swift in Sources */,
 				5DFF9BAE2A2C8E8E004C2DE5 /* MyStudyGroupData.swift in Sources */,
+				31D0A6A82AAE053D004114C3 /* BadgeListViewController.swift in Sources */,
 				31EAED432A320BC600F04DEC /* StudyPostingCommentTableViewCell.swift in Sources */,
 				5DFF9BA92A2C8A06004C2DE5 /* StudyGroupAddViewController.swift in Sources */,
 				5D547FF52A1F8FCE00376E09 /* ToDoViewController.swift in Sources */,

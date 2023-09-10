@@ -16,6 +16,7 @@ class MyPageViewController: UIViewController {
     var tagId: Int = -1;
     var isVerified = false
     
+    @IBOutlet weak var hasBadgeLabel: UILabel!
     @IBOutlet weak var badgeRequestBtn: UIButton!
     
     override func viewDidLoad() {
@@ -31,10 +32,15 @@ class MyPageViewController: UIViewController {
                 BadgeManager.getBadge(userid: id) { res in
                     switch res{
                     case .success(let data):
+                        print(data)
                         if data?.count ?? 0 > 0{
                             self.isVerified = true
+                            self.hasBadgeLabel.text = "뱃지 유무: 있음"
                         }
-                        else{self.isVerified = false}
+                        else{
+                            self.isVerified = false
+                            self.hasBadgeLabel.text = "뱃지 유무: 없음"
+                        }
                     case .failure(let err):
                         print(err)
                     }
@@ -53,7 +59,6 @@ class MyPageViewController: UIViewController {
                 print(err)
             }
         }
-        
     }
     
 //MARK: - 회원 탈퇴 기능
