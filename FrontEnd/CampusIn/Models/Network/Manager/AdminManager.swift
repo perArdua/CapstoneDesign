@@ -91,4 +91,29 @@ class AdminManager{
         }
     }
     
+    static func handleBadge(flag: String, postID:Int, completion: @escaping (Result<String, Error>) -> Void){
+        let endpoint = APIConstants.Admin.handleBadge + "/\(postID)/\(flag)"
+        
+        AF.request(endpoint, method: .put, headers: APIConstants.headers).responseDecodable(of: HandleBadgeData.self){ res in
+            switch res.result{
+            case .success(let suc):
+                completion(.success(suc.body.handleBadgeStatus))
+            case .failure(let err):
+                completion(.failure(err))
+            }
+        }
+    }
+    
+    static func makeBadge(postID: Int, completion: @escaping (Result<MakeBadgeContent, Error>) -> Void){
+        let endpoint = APIConstants.Admin.makeBadge + "?name=professor&postId=\(postID)"
+        
+        AF.request(endpoint, method: .post,  headers: APIConstants.headers).responseDecodable(of: MakeBadgeData.self){ res in
+            switch res.result{
+            case .success(let suc):
+                completion(.success(suc.body.makeBadge))
+            case .failure(let err):
+                completion(.failure(err))
+            }
+        }
+    }
 }

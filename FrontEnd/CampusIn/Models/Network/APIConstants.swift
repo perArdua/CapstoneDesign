@@ -142,6 +142,8 @@ struct APIConstants {
         static let blockPost = baseURL + "/admin/block/post/%d"
         static let unblockComment = baseURL + "/admin/unblock/comment/%d"
         static let unblockPost = baseURL + "/admin/unblock/post/%d"
+        static let handleBadge = baseURL + "/admin/badge"
+        static let makeBadge = baseURL + "/admin/make-badge"
         
     }
     
