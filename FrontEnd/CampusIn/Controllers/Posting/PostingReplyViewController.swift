@@ -196,6 +196,31 @@ extension PostingReplyViewController: UITableViewDelegate, UITableViewDataSource
             if(!isManager){
                 cell.likeBtn.isHidden = true
             }
+            
+            //댓글 뱃지 적용
+            Task {
+                do {
+                    let data = try await BadgeManager.getBadge(userid: comment!.userID){ res in
+                        switch res{
+                        case.success(let suc):
+                            
+                            if let d = suc{
+                                if d.count > 0{
+                                    cell.badgeImgView.isHidden = false
+                                }
+                            }
+                            else{
+                                cell.badgeImgView.isHidden = true
+                            }
+                        case .failure(let err):
+                            print(err)
+                            cell.badgeImgView.isHidden = true
+                        }
+                    }
+                }
+                
+            }
+            
             return cell
         }
         else{
@@ -221,6 +246,31 @@ extension PostingReplyViewController: UITableViewDelegate, UITableViewDataSource
                 cell.likeBtn.isHidden = false
             }
             cell.delegate = self
+            
+            //댓글 뱃지 적용
+            Task {
+                do {
+                    let data = try await BadgeManager.getBadge(userid: array[indexPath.row].userID){ res in
+                        switch res{
+                        case.success(let suc):
+                            
+                            if let d = suc{
+                                if d.count > 0{
+                                    cell.badgeImgView.isHidden = false
+                                }
+                            }
+                            else{
+                                cell.badgeImgView.isHidden = true
+                            }
+                        case .failure(let err):
+                            print(err)
+                            cell.badgeImgView.isHidden = true
+                        }
+                    }
+                }
+                
+            }
+            
             return cell
         }
     }
