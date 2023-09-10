@@ -307,9 +307,11 @@ extension StudyPostingDetailViewController: UITableViewDelegate, UITableViewData
             cell.commentID = comments[indexPath.row].commentID
             cell.childComments = comments[indexPath.row].children
             cell.dateLabel.text = "00/00"
-
+            cell.likeCnt.text = "\(comments[indexPath.row].like)"
+            cell.isManager = isManager
             if(!isManager){
-                cell.deleteBtn.isHidden = true
+//                cell.deleteBtn.isHidden = true
+                cell.deleteBtn.setImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
             }
             if(comments[indexPath.row].commentID == reportedCommentID){
                 cell.backgroundColor = .red

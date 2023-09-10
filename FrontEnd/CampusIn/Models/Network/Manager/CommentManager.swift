@@ -55,4 +55,17 @@ class CommentManager{
             }
         }
     }
+    
+    static func likeComment(cID: Int, completion: @escaping(Result<commentLikebody, Error>) -> Void){
+        let endpoint = String(format: APIConstants.Posts.likeComment, cID)
+        AF.request(endpoint, method: .post, headers: headers).responseDecodable(of: commentLikeResponse.self){ response in
+            switch response.result{
+            case .success(let res):
+                print("좋아요 요청 성공")
+                completion(.success(res.body))
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
