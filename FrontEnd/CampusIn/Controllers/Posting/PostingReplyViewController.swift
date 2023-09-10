@@ -75,7 +75,7 @@ class PostingReplyViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 500
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         tableView.register(ReplyCommentTableViewCell.self, forCellReuseIdentifier: "replyCell")
         
         NSLayoutConstraint.activate([
@@ -223,6 +223,40 @@ extension PostingReplyViewController: UITableViewDelegate, UITableViewDataSource
             cell.delegate = self
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let reportAction = UIAlertAction(title: "신고하기", style: .destructive) { _ in
+            print("enter singo")
+            CommentManager.singoComment(cID: self.array[indexPath.row].commentID){ result in
+                switch result{
+                case.success(let res):
+                    DispatchQueue.main.async {
+                        if(res.already == nil){
+                            print("댓글 신고 완료")
+                            let alert = UIAlertController(title: "신고 완료", message: "신고가 성공적으로 완료되었습니다.", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "확인", style: .default)
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true, completion: nil)
+
+                        }else{
+                            print("이미 신고한 댓글")
+                            let alert = UIAlertController(title: "이미 신고한 댓글", message: "이미 신고한 댓글 입니니다.", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "확인", style: .default)
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                case.failure(let error):
+                    print(error)
+                }
+            }
+        }
+        alert.addAction(reportAction)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
     
     
