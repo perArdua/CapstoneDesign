@@ -338,12 +338,15 @@ extension GeneralPostingDetailViewController: UITableViewDelegate, UITableViewDa
             cell.nameLabel.text = comments[indexPath.row].name
             cell.commentID = comments[indexPath.row].commentID
             cell.childComments = comments[indexPath.row].children
-            cell.dateLabel.text = "00/00"
             
+            cell.dateLabel.text = "00/00"
+            cell.isManager = isManager
+            cell.likeCnt.text = "\(comments[indexPath.row].like)"
             //            cell.dateLabel = String(comments_p[indexPath.row].c)
             //            cell.likeCnt
             if(!isManager){
-                cell.deleteBtn.isHidden = true
+                //cell.deleteBtn.isHidden = true
+                cell.deleteBtn.setImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
             }
             if(comments[indexPath.row].commentID == reportedCommentID){
                 cell.backgroundColor = .red

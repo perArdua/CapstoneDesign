@@ -95,6 +95,7 @@
 		5B05A7B82AA77A9F00FF5D1D /* StudyRecordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B05A7B72AA77A9F00FF5D1D /* StudyRecordResponse.swift */; };
 		5B0C60A02AACD8A7001D9B96 /* ReportedPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C609F2AACD8A7001D9B96 /* ReportedPostData.swift */; };
 		5B0C60A22AACE1CB001D9B96 /* BlockPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C60A12AACE1CB001D9B96 /* BlockPostData.swift */; };
+		5B0C60A42AADF97E001D9B96 /* CommentLikeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C60A32AADF97E001D9B96 /* CommentLikeResponse.swift */; };
 		5B25F5882AA8A2EE00D2C028 /* StudyDetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B25F5872AA8A2EE00D2C028 /* StudyDetailRecordViewController.swift */; };
 		5B25F58A2AA8B14100D2C028 /* StudyAddRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B25F5892AA8B14100D2C028 /* StudyAddRecordViewController.swift */; };
 		5B2BB8F72AAA165C00AE74D8 /* PostLikeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2BB8F62AAA165C00AE74D8 /* PostLikeResponse.swift */; };
@@ -266,6 +267,7 @@
 		5B05A7B72AA77A9F00FF5D1D /* StudyRecordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordResponse.swift; sourceTree = "<group>"; };
 		5B0C609F2AACD8A7001D9B96 /* ReportedPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportedPostData.swift; sourceTree = "<group>"; };
 		5B0C60A12AACE1CB001D9B96 /* BlockPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPostData.swift; sourceTree = "<group>"; };
+		5B0C60A32AADF97E001D9B96 /* CommentLikeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLikeResponse.swift; sourceTree = "<group>"; };
 		5B25F5872AA8A2EE00D2C028 /* StudyDetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailRecordViewController.swift; sourceTree = "<group>"; };
 		5B25F5892AA8B14100D2C028 /* StudyAddRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyAddRecordViewController.swift; sourceTree = "<group>"; };
 		5B2BB8F62AAA165C00AE74D8 /* PostLikeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeResponse.swift; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 				315FB3CB2AAB72070083C634 /* CommentAdoptData.swift */,
 				31D96F612A1A9BC00086FD7D /* CommetData.swift */,
 				5B2BB8F62AAA165C00AE74D8 /* PostLikeResponse.swift */,
+				5B0C60A32AADF97E001D9B96 /* CommentLikeResponse.swift */,
 			);
 			path = GeneralPosting;
 			sourceTree = "<group>";
@@ -1063,6 +1066,7 @@
 				5BE29F1A2AAC83EC00C8995B /* BlockCommentData.swift in Sources */,
 				5DC8851B2A2CE5E400631BC1 /* RankingViewController.swift in Sources */,
 				3165EDC82A02A3C100D91856 /* ViewController.swift in Sources */,
+				5B0C60A42AADF97E001D9B96 /* CommentLikeResponse.swift in Sources */,
 				31AF26BD2A1F972700B1CEC7 /* CommentManager.swift in Sources */,
 				3165EDC42A02A3C100D91856 /* AppDelegate.swift in Sources */,
 				315067362A3701C90045E028 /* QuestionPostingViewController.swift in Sources */,

@@ -383,6 +383,7 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
             cell.commentID = comments[indexPath.row].commentID
             cell.childComments = comments[indexPath.row].children
             cell.dateLabel.text = "00/00"
+            cell.likeCnt.text = "\(comments[indexPath.row].like)"
             if(flag){ //채택된 답변이 있을 경우, 또는 게시글을 작성한 사람이 아닐 경우
                 cell.adoptBtn.isHidden = true
             }
@@ -394,7 +395,8 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
 //            cell.likeCnt
             
             if(!isManager){
-                cell.deleteBtn.isHidden = true
+//                cell.deleteBtn.isHidden = true
+                cell.deleteBtn.setImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
             }
             if(comments[indexPath.row].commentID == reportedCommentID){
                 cell.backgroundColor = .red

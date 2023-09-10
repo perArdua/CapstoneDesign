@@ -187,12 +187,15 @@ extension PostingReplyViewController: UITableViewDelegate, UITableViewDataSource
             cell.badgeImgView.image = UIImage(systemName: "checkmark.circle.fill")
             cell.userImgView.image = UIImage(systemName: "person.fill")
             cell.dateLabel.text = "06/01"
-            cell.likeLabel.text = "5"
+            cell.likeLabel.text = "\(comment!.like)"
             cell.nameLabel.text = comment?.name
             cell.contentLabel.text = comment?.content
             cell.isManager = isManager
             let spacing: CGFloat = 10.0 // 원하는 간격 값으로 수정해주세요.
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: spacing, right: 0)
+            if(!isManager){
+                cell.likeBtn.isHidden = true
+            }
             return cell
         }
         else{
@@ -201,7 +204,7 @@ extension PostingReplyViewController: UITableViewDelegate, UITableViewDataSource
             cell.badgeImgView.image = UIImage(systemName: "checkmark.circle.fill")
             cell.userImgView.image = UIImage(systemName: "person.fill")
             cell.dateLabel.text = "06/05"
-            cell.likeLabel.text = "5"
+            cell.likeLabel.text = "\(array[indexPath.row].like)"
             cell.nameLabel.text = array[indexPath.row].name
             cell.contentLabel.text = array[indexPath.row].content
             cell.commentID = array[indexPath.row].commentID
@@ -212,7 +215,8 @@ extension PostingReplyViewController: UITableViewDelegate, UITableViewDataSource
                 cell.backgroundColor = .red
             }
             if(!isManager){
-                cell.likeBtn.isHidden = true
+//                cell.likeBtn.isHidden = true
+                cell.likeBtn.setImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
             }else{
                 cell.likeBtn.isHidden = false
             }
@@ -230,20 +234,42 @@ extension PostingReplyViewController: UITableViewDelegate, UITableViewDataSource
 extension PostingReplyViewController: ReplyLikeBtn{
     func likeBtnTapped(in cell: ReplyCommentTableViewCell) {
         print("tapped")
-        AdminManager.blockComment(cID: cell.commentID!){[weak self] result in
-            switch result{
-            case.success(let res):
-                DispatchQueue.main.async {
-                    cell.blockResult = res
-                    if(cell.blockResult!.block != nil){
-                        cell.contentLabel.text = "신고처리가 완료된 댓글 입니다."
-                        //self!.showLabel(msg: "신고 완료")
-                    }else{
-                        //self!.showLabel(msg: "이미 신고된 댓글입니다. ")
+        if(isManager){
+            AdminManager.blockComment(cID: cell.commentID!){[weak self] result in
+                switch result{
+                case.success(let res):
+                    DispatchQueue.main.async {
+                        cell.blockResult = res
+                        if(cell.blockResult!.block != nil){
+                            cell.contentLabel.text = "신고처리가 완료된 댓글 입니다."
+                            //self!.showLabel(msg: "신고 완료")
+                        }else{
+                            //self!.showLabel(msg: "이미 신고된 댓글입니다. ")
+                        }
                     }
+                case.failure(let error):
+                    print(error)
                 }
-            case.failure(let error):
-                print(error)
+            }
+
+        }else{
+            CommentManager.likeComment(cID: cell.commentID!){[weak self] result in
+                switch result{
+                case.success(let res):
+                    DispatchQueue.main.async {
+                        cell.likeResult = res
+                        if(cell.likeResult!.already == nil){
+                            cell.likeLabel.text = "\(Int(cell.likeLabel.text!)! + 1)"
+                            print("cnt")
+                            print("\(Int(cell.likeLabel.text!)! + 1)")
+                        }else{
+                            print("이미 좋아요 한 댓글")
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+                
             }
         }
     }

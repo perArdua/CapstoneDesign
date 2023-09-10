@@ -17,6 +17,9 @@ class StudyPostingCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var likeCnt: UILabel!
 
     var blockResult: BlockCommentBody?
+    
+    var isManager: Bool = false
+    var likeResult: commentLikebody?
 
     
     @IBOutlet weak var badgeImg: UIImageView!
@@ -46,21 +49,43 @@ class StudyPostingCommentTableViewCell: UITableViewCell {
     
     @IBAction func deleteBtnTapped(_ sender: Any) {
         print("report tap")
-        AdminManager.blockComment(cID: commentID!){[weak self] result in
-            switch result{
-            case.success(let res):
-                DispatchQueue.main.async {
-                    self!.blockResult = res
-                    if(self!.blockResult!.block != nil){
-                        self!.contentLabel.text = "신고처리가 완료된 댓글 입니다."
-                        //self!.showLabel(msg: "신고 완료")
-                    }else{
-                        //self!.showLabel(msg: "이미 신고된 댓글입니다. ")
+        if(isManager){
+            AdminManager.blockComment(cID: commentID!){[weak self] result in
+                switch result{
+                case.success(let res):
+                    DispatchQueue.main.async {
+                        self!.blockResult = res
+                        if(self!.blockResult!.block != nil){
+                            self!.contentLabel.text = "신고처리가 완료된 댓글 입니다."
+                            //self!.showLabel(msg: "신고 완료")
+                        }else{
+                            //self!.showLabel(msg: "이미 신고된 댓글입니다. ")
+                        }
                     }
+                case.failure(let error):
+                    print(error)
                 }
-            case.failure(let error):
-                print(error)
+            }
+        }else{
+            CommentManager.likeComment(cID: commentID!){[weak self] result in
+                switch result{
+                case.success(let res):
+                    DispatchQueue.main.async {
+                        self!.likeResult = res
+                        if(self!.likeResult!.already == nil){
+                            self!.likeCnt.text = "\(Int(self!.likeCnt.text!)! + 1)"
+                            print("cnt")
+                            print("\(Int(self!.likeCnt.text!)! + 1)")
+                        }else{
+                            print("이미 좋아요 한 댓글")
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+                
             }
         }
+        
     }
 }

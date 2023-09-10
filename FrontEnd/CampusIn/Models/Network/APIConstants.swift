@@ -66,6 +66,7 @@ struct APIConstants {
         static let adoptComment = baseURL + "/posts/%d/comments/%d/accept" // 답변채택
         //사용 예시
         //let endpoint = String(format: APIConstants.Posts.deletePost or showPost or updatePost, postId)
+        static let likeComment = baseURL + "/comments/%d/like"
         
     }
     

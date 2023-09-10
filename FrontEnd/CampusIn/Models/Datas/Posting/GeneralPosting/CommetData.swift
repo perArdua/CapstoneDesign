@@ -47,12 +47,13 @@ struct CommentDataContent: Codable {
     let postId: Int?
     let children: [CommentDataContent]
     let childrenSize: Int
+    let like: Int
 
     enum CodingKeys: String, CodingKey {
         case userID = "userId"
         case parentID = "parentId"
         case commentID = "commentId"
-        case name, content, children, childrenSize, isAdopted, boardId, postId
+        case name, content, children, childrenSize, isAdopted, boardId, postId, like
     }
 }
 

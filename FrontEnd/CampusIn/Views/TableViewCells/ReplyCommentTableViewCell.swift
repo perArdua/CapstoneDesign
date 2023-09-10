@@ -12,6 +12,7 @@ class ReplyCommentTableViewCell: UITableViewCell {
     var blockResult: BlockCommentBody?
     var commentID: Int?
     var isManager: Bool = false
+    var likeResult: commentLikebody?
     
     let userImgView: UIImageView = {
         let imageView = UIImageView()
@@ -94,7 +95,6 @@ class ReplyCommentTableViewCell: UITableViewCell {
     let likeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13)
-        label.text = "5"
         label.numberOfLines = 0
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -146,7 +146,7 @@ class ReplyCommentTableViewCell: UITableViewCell {
         mainStackView.addArrangedSubview(contentLabel)
         
         buttonSV.addArrangedSubview(likeBtn)
-        //buttonSV.addArrangedSubview(likeLabel)
+        buttonSV.addArrangedSubview(likeLabel)
     }
     //cell에서 viewDidLoad와 비슷한 역할을 하는 코드
     //만약 스토리보드로 만들때 밑 함수에 원하는 코드 작성. 모두 코드로 할거면 사용 x
