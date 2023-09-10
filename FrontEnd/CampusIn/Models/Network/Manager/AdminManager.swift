@@ -51,4 +51,44 @@ class AdminManager{
         }
     }
     
+    static func getReportedPosts(completion: @escaping (Result<[ReportedPostListContent], Error>) -> Void){
+        let endpoint = APIConstants.Admin.getReportedPosts
+        AF.request(endpoint, method: .get, headers: APIConstants.headers).responseDecodable(of: ReportedPostList.self){ response in
+            switch response.result{
+            case.success(let posts):
+                print("신고 게시글 요청 성공")
+                completion(.success(posts.body.postListArray))
+            case.failure(let error):
+                print("신고 게시글 요청 실패")
+                print(error)
+            }
+        }
+    }
+    
+    static func blockPost(pID: Int, completion: @escaping (Result<BlockPostBody, Error>) -> Void){
+        let endpoint = String(format: APIConstants.Admin.blockPost, pID)
+        AF.request(endpoint, method: .get, headers: APIConstants.headers).responseDecodable(of: BlockPostData.self){ response in
+            switch response.result{
+            case.success(let res):
+                print("게시글 블락 성공")
+                completion(.success(res.body))
+            case.failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    static func unBlockPost(pID: Int, completion: @escaping (Result<BlockPostBody, Error>) -> Void){
+        let endPoint = String(format: APIConstants.Admin.unblockPost, pID)
+        AF.request(endPoint, method: .get, headers: APIConstants.headers).responseDecodable(of: BlockPostData.self){ response in
+            switch response.result{
+            case.success(let res):
+                print("언블락 성공")
+                completion(.success(res.body))
+            case.failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 }

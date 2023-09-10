@@ -16,7 +16,8 @@ class GeneralPostingDetailViewController: UIViewController {
     @IBOutlet weak var likeCntLabel: UILabel!
     
     var reportedCommentID: Int?
-
+    
+    var postBlockResult: BlockPostBody?
 
     var postID: Int?
     var postDetail: PostDetailContent?
@@ -97,7 +98,7 @@ class GeneralPostingDetailViewController: UIViewController {
     @objc func pullDownBtnTapped(){
         let nickname = UserDefaults.standard.string(forKey: "nickname")!
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        if postDetail?.nickname == nickname{
+        if (postDetail?.nickname == nickname && false){ // 나중에 수정해줘야함
             
             let editAction = UIAlertAction(title: "수정하기", style: .default) { [self] _ in
                 let nextVC = self.storyboard?.instantiateViewController(identifier: "GeneralPostingAddViewController") as! GeneralPostingAddViewController
@@ -121,6 +122,34 @@ class GeneralPostingDetailViewController: UIViewController {
             }
             alert.addAction(editAction)
             alert.addAction(deleteAction)
+        }
+        
+        else if(isManager){
+            let deleteAction = UIAlertAction(title: "블락 하기", style: .default) { _ in
+                AdminManager.blockPost(pID: self.postID!){[weak self] result in
+                    switch result{
+                    case.success(let res):
+                        DispatchQueue.main.async {
+                            self!.postBlockResult = res
+                            if(self!.postBlockResult?.block != nil){
+                                self!.getPostDetail(postID: self!.postID!){
+                                    postDetail in
+                                    self!.postDetail = postDetail
+                                    self!.tableView.reloadData()
+                                }
+
+                                //self!.showLabel(msg: "신고 완료")
+                            }else{
+                                //self!.showLabel(msg: "이미 신고된 댓글입니다. ")
+                            }
+                        }
+                    case.failure(let error):
+                        print(error)
+                    }
+                }
+            }
+            alert.addAction(deleteAction)
+            
         }
         
         else{

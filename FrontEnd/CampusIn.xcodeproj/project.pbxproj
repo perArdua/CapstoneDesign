@@ -93,6 +93,8 @@
 		31FCD9292A0551E00068689B /* GeneralPostingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD9282A0551E00068689B /* GeneralPostingAddViewController.swift */; };
 		5B05A7B62AA7731300FF5D1D /* StudyRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B05A7B52AA7731300FF5D1D /* StudyRecordManager.swift */; };
 		5B05A7B82AA77A9F00FF5D1D /* StudyRecordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B05A7B72AA77A9F00FF5D1D /* StudyRecordResponse.swift */; };
+		5B0C60A02AACD8A7001D9B96 /* ReportedPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C609F2AACD8A7001D9B96 /* ReportedPostData.swift */; };
+		5B0C60A22AACE1CB001D9B96 /* BlockPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C60A12AACE1CB001D9B96 /* BlockPostData.swift */; };
 		5B25F5882AA8A2EE00D2C028 /* StudyDetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B25F5872AA8A2EE00D2C028 /* StudyDetailRecordViewController.swift */; };
 		5B25F58A2AA8B14100D2C028 /* StudyAddRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B25F5892AA8B14100D2C028 /* StudyAddRecordViewController.swift */; };
 		5B2BB8F72AAA165C00AE74D8 /* PostLikeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2BB8F62AAA165C00AE74D8 /* PostLikeResponse.swift */; };
@@ -262,6 +264,8 @@
 		565A28D9AB05323A781AEE9C /* Pods-CampusIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusIn.debug.xcconfig"; path = "Target Support Files/Pods-CampusIn/Pods-CampusIn.debug.xcconfig"; sourceTree = "<group>"; };
 		5B05A7B52AA7731300FF5D1D /* StudyRecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordManager.swift; sourceTree = "<group>"; };
 		5B05A7B72AA77A9F00FF5D1D /* StudyRecordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordResponse.swift; sourceTree = "<group>"; };
+		5B0C609F2AACD8A7001D9B96 /* ReportedPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportedPostData.swift; sourceTree = "<group>"; };
+		5B0C60A12AACE1CB001D9B96 /* BlockPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPostData.swift; sourceTree = "<group>"; };
 		5B25F5872AA8A2EE00D2C028 /* StudyDetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailRecordViewController.swift; sourceTree = "<group>"; };
 		5B25F5892AA8B14100D2C028 /* StudyAddRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyAddRecordViewController.swift; sourceTree = "<group>"; };
 		5B2BB8F62AAA165C00AE74D8 /* PostLikeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeResponse.swift; sourceTree = "<group>"; };
@@ -708,11 +712,8 @@
 		31FCD9202A054E180068689B /* Datas */ = {
 			isa = PBXGroup;
 			children = (
-
 				5BE29F162AAC75BB00C8995B /* Admin */,
-
 				315FB3CF2AAC58040083C634 /* Badge */,
-
 				317BEC632A2CF47E0029DA29 /* Statistics */,
 				5DC8851C2A2CE61100631BC1 /* Ranking */,
 				5DFF9BAA2A2C8CCE004C2DE5 /* StudyGroup */,
@@ -778,6 +779,8 @@
 			children = (
 				5BE29F172AAC75C700C8995B /* ReportedCommentData.swift */,
 				5BE29F192AAC83EC00C8995B /* BlockCommentData.swift */,
+				5B0C609F2AACD8A7001D9B96 /* ReportedPostData.swift */,
+				5B0C60A12AACE1CB001D9B96 /* BlockPostData.swift */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -1127,6 +1130,7 @@
 				5B2BB8F72AAA165C00AE74D8 /* PostLikeResponse.swift in Sources */,
 				31FCD9272A054F380068689B /* GeneralPostingDetailViewController.swift in Sources */,
 				5B25F5882AA8A2EE00D2C028 /* StudyDetailRecordViewController.swift in Sources */,
+				5B0C60A22AACE1CB001D9B96 /* BlockPostData.swift in Sources */,
 				5D3F61532A2F59C2000E3B7C /* BookStoreViewController.swift in Sources */,
 				318B6E882AA89CBD00D981A8 /* GroupTimerResponse.swift in Sources */,
 				5DFF9BB02A2C90B5004C2DE5 /* StudyGroupManager.swift in Sources */,
@@ -1139,6 +1143,7 @@
 				5D69A3E22A1A9CDB00E9BBB4 /* MessageRoomManager.swift in Sources */,
 				5B05A7B62AA7731300FF5D1D /* StudyRecordManager.swift in Sources */,
 				3153090C2AA0DE0A001F4BC2 /* RankingManager.swift in Sources */,
+				5B0C60A02AACD8A7001D9B96 /* ReportedPostData.swift in Sources */,
 				5D547FF32A1F5ACF00376E09 /* UserManager.swift in Sources */,
 				3153090E2AA0E2FD001F4BC2 /* RankingData.swift in Sources */,
 				315309022AA097CC001F4BC2 /* TagData.swift in Sources */,
