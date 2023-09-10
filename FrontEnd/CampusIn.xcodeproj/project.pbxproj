@@ -22,6 +22,7 @@
 		315309042AA0D30E001F4BC2 /* RankingCreateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315309032AA0D30E001F4BC2 /* RankingCreateData.swift */; };
 		3153090C2AA0DE0A001F4BC2 /* RankingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3153090B2AA0DE0A001F4BC2 /* RankingManager.swift */; };
 		3153090E2AA0E2FD001F4BC2 /* RankingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3153090D2AA0E2FD001F4BC2 /* RankingData.swift */; };
+		315B09F12AADF17A0099108B /* UserIDData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315B09F02AADF17A0099108B /* UserIDData.swift */; };
 		315E599B2A30848E00E85A61 /* StudyPostingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */; };
 		315E599E2A3084BC00E85A61 /* StudyPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E599D2A3084BC00E85A61 /* StudyPostingViewController.swift */; };
 		315FB3C62AAA13570083C634 /* StudyGroupRankingCreateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB3C52AAA13570083C634 /* StudyGroupRankingCreateData.swift */; };
@@ -188,6 +189,7 @@
 		315309032AA0D30E001F4BC2 /* RankingCreateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCreateData.swift; sourceTree = "<group>"; };
 		3153090B2AA0DE0A001F4BC2 /* RankingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingManager.swift; sourceTree = "<group>"; };
 		3153090D2AA0E2FD001F4BC2 /* RankingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingData.swift; sourceTree = "<group>"; };
+		315B09F02AADF17A0099108B /* UserIDData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIDData.swift; sourceTree = "<group>"; };
 		315E599A2A30848E00E85A61 /* StudyPostingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyPostingViewController.storyboard; sourceTree = "<group>"; };
 		315E599D2A3084BC00E85A61 /* StudyPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPostingViewController.swift; sourceTree = "<group>"; };
 		315FB3C52AAA13570083C634 /* StudyGroupRankingCreateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupRankingCreateData.swift; sourceTree = "<group>"; };
@@ -810,6 +812,7 @@
 			children = (
 				5D547FED2A1F58E100376E09 /* UserData.swift */,
 				5D547FEF2A1F593F00376E09 /* UserNickname.swift */,
+				315B09F02AADF17A0099108B /* UserIDData.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -1073,6 +1076,7 @@
 				315067382A3701D50045E028 /* QuestionPostingDetailViewController.swift in Sources */,
 				31CBDA892A2CC3E300E55924 /* StatisticsViewController.swift in Sources */,
 				315FB3CC2AAB72070083C634 /* CommentAdoptData.swift in Sources */,
+				315B09F12AADF17A0099108B /* UserIDData.swift in Sources */,
 				317913832A23927E00BC86FE /* TimerUpdateResponse.swift in Sources */,
 				5DFF9BB22A2C98C0004C2DE5 /* StudyGroupTableViewCell.swift in Sources */,
 				5DFF9BAC2A2C8CF9004C2DE5 /* StudyGroupData.swift in Sources */,

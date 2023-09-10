@@ -132,6 +132,7 @@ class BoardManager{
                             print("질의 응답 게시판",getBoardID(boardName: "Question"))
                             print("책방",getBoardID(boardName: "Book"))
                             print("스터디 게시판",getBoardID(boardName: "Study"))
+                            print("관리자 뱃지 게시판",getBoardID(boardName: "AdminBadgeAccept"))
                         }
                     case .failure(_):
                         //print("Error: \(error)")
