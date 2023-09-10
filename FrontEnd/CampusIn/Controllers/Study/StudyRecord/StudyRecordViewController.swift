@@ -57,6 +57,7 @@ class StudyRecordViewController: UIViewController {
         tableView.reloadData()
         addBtn.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
         addBtn.frame = CGRect(x: view.frame.size.width - 75, y: view.frame.size.height - 150, width: 60, height: 60)
+        titleLabel.text = groupName
     }
     
     @objc func addBtnTapped(){
