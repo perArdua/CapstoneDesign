@@ -21,6 +21,8 @@ class QuestionPostingDetailViewController: UIViewController {
     
     @IBOutlet weak var commentAddTf: UITextField!
     
+    var postBlockResult: BlockPostBody?
+    
     let pullDownBtn: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
@@ -62,7 +64,7 @@ class QuestionPostingDetailViewController: UIViewController {
     @objc func pullDownBtnTapped(){
         let nickname = UserDefaults.standard.string(forKey: "nickname")!
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        if postDetail?.nickname == nickname{
+        if (postDetail?.nickname == nickname && false){
             
             let editAction = UIAlertAction(title: "수정하기", style: .default) { [self] _ in
                 let nextVC = self.storyboard?.instantiateViewController(identifier: "QuestionPostingAddViewController") as! QuestionPostingAddViewController
@@ -86,6 +88,34 @@ class QuestionPostingDetailViewController: UIViewController {
             }
             alert.addAction(editAction)
             alert.addAction(deleteAction)
+        }
+        
+        else if(isManager){
+            let deleteAction = UIAlertAction(title: "블락 하기", style: .default) { _ in
+                AdminManager.blockPost(pID: self.postID!){[weak self] result in
+                    switch result{
+                    case.success(let res):
+                        DispatchQueue.main.async {
+                            self!.postBlockResult = res
+                            if(self!.postBlockResult?.block != nil){
+                                self!.getPostDetail(postID: self!.postID!){
+                                    postDetail in
+                                    self!.postDetail = postDetail
+                                    self!.tableView.reloadData()
+                                }
+
+                                //self!.showLabel(msg: "신고 완료")
+                            }else{
+                                //self!.showLabel(msg: "이미 신고된 댓글입니다. ")
+                            }
+                        }
+                    case.failure(let error):
+                        print(error)
+                    }
+                }
+            }
+            alert.addAction(deleteAction)
+            
         }
         
         else{
