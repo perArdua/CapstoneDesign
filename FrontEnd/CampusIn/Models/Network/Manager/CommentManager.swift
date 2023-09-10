@@ -68,4 +68,18 @@ class CommentManager{
             }
         }
     }
+    
+    static func singoComment(cID: Int, completion: @escaping(Result<commentSingobody, Error>) -> Void){
+        let endpoint = String(format: APIConstants.Posts.singoComment, cID)
+        print(endpoint)
+        AF.request(endpoint, method: .post, headers: headers).responseDecodable(of: commentSingoResponse.self){ response in
+            switch response.result{
+            case .success(let res):
+                print("댓글 신고 요청 성공")
+                completion(.success(res.body))
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }

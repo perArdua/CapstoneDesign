@@ -149,6 +149,10 @@ class ReportedCommentViewController: UIViewController, UITableViewDelegate, UITa
                         if(self!.blockResult!.block != nil){
                             self!.commentList.remove(at: indexPath.row)
                             tableView.reloadData()
+                            let alert = UIAlertController(title: "블락 성공", message: "댓글 블락에 성공하셨습니다.", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "확인", style: .default)
+                            alert.addAction(okAction)
+                            self!.present(alert, animated: true, completion: nil)
                             //self!.showLabel(msg: "신고 완료")
                         }else{
                             //self!.showLabel(msg: "이미 신고된 댓글입니다. ")
@@ -171,6 +175,10 @@ class ReportedCommentViewController: UIViewController, UITableViewDelegate, UITa
                         if(self!.blockResult?.unblock != nil){
                             self!.commentList.remove(at: indexPath.row)
                             tableView.reloadData()
+                            let alert = UIAlertController(title: "언블락 성공", message: "댓글 언블락에 성공하셨습니다.", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "확인", style: .default)
+                            alert.addAction(okAction)
+                            self!.present(alert, animated: true, completion: nil)
                         }
                     }
                 case.failure(let error):

@@ -40,7 +40,7 @@ class StudyPostingDetailViewController: UIViewController {
         //UITableView의 footer 영역을 없애줌.
         tableView.sectionFooterHeight = 0
         tableView.sectionHeaderHeight = 25
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         
         pullDownBtn.addTarget(self, action: #selector(pullDownBtnTapped), for: .touchUpInside)
         let navigationItem = self.navigationItem
@@ -103,10 +103,18 @@ class StudyPostingDetailViewController: UIViewController {
                                     postDetail in
                                     self!.postDetail = postDetail
                                     self!.tableView.reloadData()
+                                    let alert = UIAlertController(title: "블락 완료", message: "블락이 성공적으로 완료되었습니다.", preferredStyle: .alert)
+                                    let okAction = UIAlertAction(title: "확인", style: .default)
+                                    alert.addAction(okAction)
+                                    self!.present(alert, animated: true, completion: nil)
                                 }
 
                                 //self!.showLabel(msg: "신고 완료")
                             }else{
+                                let alert = UIAlertController(title: "이미 블락한 게시글", message: "이미 블락한 게시글입니다.", preferredStyle: .alert)
+                                let okAction = UIAlertAction(title: "확인", style: .default)
+                                alert.addAction(okAction)
+                                self!.present(alert, animated: true, completion: nil)
                                 //self!.showLabel(msg: "이미 신고된 댓글입니다. ")
                             }
                         }
@@ -141,8 +149,16 @@ class StudyPostingDetailViewController: UIViewController {
                         DispatchQueue.main.async {
                             if(res.already == nil){
                                 print("게시글 신고 완료")
+                                let alert = UIAlertController(title: "신고 완료", message: "신고가 성공적으로 완료되었습니다.", preferredStyle: .alert)
+                                let okAction = UIAlertAction(title: "확인", style: .default)
+                                alert.addAction(okAction)
+                                self.present(alert, animated: true, completion: nil)
                             }else{
                                 print("이미 신고한 게시글")
+                                let alert = UIAlertController(title: "이미 신고한 게시글", message: "이미 신고한 게시글 입니다.", preferredStyle: .alert)
+                                let okAction = UIAlertAction(title: "확인", style: .default)
+                                alert.addAction(okAction)
+                                self.present(alert, animated: true, completion: nil)
                             }
                         }
                     case.failure(let error):
@@ -360,7 +376,43 @@ extension StudyPostingDetailViewController: UITableViewDelegate, UITableViewData
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let reportAction = UIAlertAction(title: "신고하기", style: .destructive) { _ in
+            print("enter singo")
+            CommentManager.singoComment(cID: self.comments[indexPath.row].commentID){ result in
+                switch result{
+                case.success(let res):
+                    DispatchQueue.main.async {
+                        if(res.already == nil){
+                            print("댓글 신고 완료")
+                            let alert = UIAlertController(title: "신고 완료", message: "신고가 성공적으로 완료되었습니다.", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "확인", style: .default)
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }else{
+                            print("이미 신고한 댓글")
+                            let alert = UIAlertController(title: "이미 신고한 댓글", message: "이미 신고한 댓글입니다.", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "확인", style: .default)
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                case.failure(let error):
+                    print(error)
+                }
+            }
+        }
+        alert.addAction(reportAction)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
+    
+
 
 
 // MARK: - half modal로 뷰 컨트롤러 show
