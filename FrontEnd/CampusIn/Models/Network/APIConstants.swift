@@ -68,6 +68,7 @@ struct APIConstants {
         //사용 예시
         //let endpoint = String(format: APIConstants.Posts.deletePost or showPost or updatePost, postId)
         static let likeComment = baseURL + "/comments/%d/like"
+        static let singoPost = baseURL + "/posts/%d/report"
         
     }
     

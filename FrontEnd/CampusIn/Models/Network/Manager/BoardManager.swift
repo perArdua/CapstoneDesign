@@ -241,4 +241,17 @@ class BoardManager{
             }
         }
     }
+    
+    static func singoPost(pID: Int, completion: @escaping(Result<postSingoBody, Error>) -> Void){
+        let endpoint = String(format: APIConstants.Posts.singoPost, pID)
+        AF.request(endpoint, method: .post, headers: headers).responseDecodable(of: postSingoData.self){ response in
+            switch response.result{
+            case .success(let res):
+                print("신고 요청 성공")
+                completion(.success(res.body))
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
