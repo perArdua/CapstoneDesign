@@ -79,6 +79,8 @@ class ViewController: UIViewController {
         if check as! Bool{
            setPostingTitle()
         }
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.clipsToBounds = true
     }
     
     func setPostingTitle(){

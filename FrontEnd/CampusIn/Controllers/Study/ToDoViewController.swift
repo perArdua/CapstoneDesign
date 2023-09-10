@@ -23,10 +23,22 @@ class ToDoViewController: UIViewController {
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        self.navigationController?.navigationBar.shadowImage = UIImage()
 }
     override func viewWillAppear(_ animated: Bool) {
         prepareTableView()
+        self.navigationController?.navigationBar.clipsToBounds = false
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundColor = .white
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+
+        }
     
     //MARK: - set tableView
     func prepareTableView() {
