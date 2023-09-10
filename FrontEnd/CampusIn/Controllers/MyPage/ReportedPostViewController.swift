@@ -64,8 +64,8 @@ class ReportedPostViewController: UIViewController, UITableViewDataSource, UITab
         cell.titleLabel.text = array[indexPath.row].title
         cell.contentLabel.text = array[indexPath.row].content
         cell.dateLabel.text = "\(array[indexPath.row].createdAt[1]) " + "/ \(array[indexPath.row].createdAt[2])"
-        cell.reportCntLabel.text = "\(array[indexPath.row].reportCount)"
-        
+        cell.reportCntLabel.text = "신고 횟수: \(array[indexPath.row].reportCount)"
+        cell.nicknameLabel.text = array[indexPath.row].nickname
         cell.selectionStyle = .none
         return cell
     }

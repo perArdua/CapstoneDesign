@@ -167,7 +167,21 @@ class GeneralPostingDetailViewController: UIViewController {
                 }
             }
             let reportAction = UIAlertAction(title: "신고하기", style: .destructive) { _ in
-                // 신고하기 버튼이 눌렸을 때의 동작을 처리하는 코드 작성
+                print("enter singo")
+                BoardManager.singoPost(pID: self.postID!){ result in
+                    switch result{
+                    case.success(let res):
+                        DispatchQueue.main.async {
+                            if(res.already == nil){
+                                print("게시글 신고 완료")
+                            }else{
+                                print("이미 신고한 게시글")
+                            }
+                        }
+                    case.failure(let error):
+                        print(error)
+                    }
+                }
             }
             alert.addAction(sendMsgAction)
             alert.addAction(reportAction)
