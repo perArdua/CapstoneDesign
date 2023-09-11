@@ -11,8 +11,23 @@ class SideMenuViewController: UIViewController {
     
     var isManager: Bool = false
 
+    @IBOutlet weak var adminPage: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        AdminManager.getReportedPosts { res in
+            switch res{
+            case .success(let data):
+                print(data)
+                print("관리자입니다.")
+                self.adminPage.isHidden = false
+            case .failure(_):
+                print("관리자가 아닙니다")
+                self.adminPage.isHidden = true
+            }
+        }
+        
 
     }
     

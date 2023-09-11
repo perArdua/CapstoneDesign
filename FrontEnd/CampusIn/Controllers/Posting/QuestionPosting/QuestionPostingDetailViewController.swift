@@ -350,7 +350,6 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
                     cell.nameLabel.isHidden = false
                     cell.replyBtn.isHidden = false
                     cell.userImg.isHidden = false
-                    cell.badgeImg.isHidden = false
                     cell.nameLabel.isHidden = false
                     cell.dateLabel.isHidden = false
                     
@@ -382,9 +381,8 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
                             }
                         }
                     }
-                    
-                    break
                 }
+                break
             }
             return cell
         }
@@ -408,7 +406,7 @@ extension QuestionPostingDetailViewController: UITableViewDelegate, UITableViewD
             }
             
             print(indexPath.section)
-            print("show section2")
+            print("show section 채택")
             cell.contentLabel.text = comments[indexPath.row].content
             cell.nameLabel.text = comments[indexPath.row].name
             cell.commentID = comments[indexPath.row].commentID

@@ -1379,6 +1379,9 @@
                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                     </view>
                     <navigationItem key="navigationItem" id="tSN-zA-iRZ"/>
+                    <connections>
+                        <outlet property="adminPage" destination="4qh-vJ-HxQ" id="gT9-b7-clL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rud-vd-cRh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
