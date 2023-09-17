@@ -96,3 +96,9 @@ configurations {
 compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
 }
+
+task copyPrivate(type: Copy) {
+    from 'lib'
+    include "*.yml"
+    into 'src/main/resources'
+}
