@@ -30,6 +30,7 @@ jobs:
     - name: Build with Gradle
       working-directory: ./BackEnd/campusin
       run: |
+        chmod +x ./gradlew  # Gradle Wrapper에 실행 권한을 부여
         ./gradlew clean bootJar
         
         
