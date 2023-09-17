@@ -19,19 +19,19 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
     //
     //-- H2
     //SELECT FORMATDATETIME('2021-07-24 13:33:42', 'yyyy-MM-dd') FROM DUAL;
-    @Query(value = "SELECT COUNT(p) FROM Post p WHERE p.user = :user AND p.board.boardType = 'Question' AND FORMATDATETIME(p.createdAt, 'yyyy-MM-dd') >= :startDate AND FORMATDATETIME(p.createdAt, 'yyyy-MM-dd') < :endDate")
+    @Query(value = "SELECT COUNT(p) FROM Post p WHERE p.user = :user AND p.board.boardType = 'Question' AND DATE_FORMAT(p.createdAt, '%Y-%m-%d') >= :startDate AND DATE_FORMAT(p.createdAt, '%Y-%m-%d') < :endDate")
     long countQuestionsByUserAndModifiedAtBetween(@Param("user") User user, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
 //    @Query("SELECT COUNT(c) FROM Comment c WHERE c.user = :user AND c.createdAt >= :startDate AND c.createdAt < :endDate")
 //    long countCommentsByUserAndDate(User user, LocalDate startDate, LocalDate endDate);
 
-    @Query(value = "SELECT COUNT(c) FROM Comment c WHERE c.user = :user AND FORMATDATETIME(c.createdAt, 'yyyy-MM-dd') >= :startDate AND FORMATDATETIME(c.createdAt, 'yyyy-MM-dd') < :endDate AND c.isAnswer = true")
+    @Query(value = "SELECT COUNT(c) FROM Comment c WHERE c.user = :user AND DATE_FORMAT(c.createdAt, '%Y-%m-%d') >= :startDate AND DATE_FORMAT(c.createdAt, '%Y-%m-%d') < :endDate AND c.isAnswer = true")
     long countAnswersByUserAndModifiedAtBetweenAndIsAnswerTrue(@Param("user") User user, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    @Query(value = "SELECT COUNT(c) FROM Comment c WHERE c.user = :user AND FORMATDATETIME(c.createdAt, 'yyyy-MM-dd') >= :startDate AND FORMATDATETIME(c.createdAt, 'yyyy-MM-dd') < :endDate AND c.isAdopted = true")
+    @Query(value = "SELECT COUNT(c) FROM Comment c WHERE c.user = :user AND DATE_FORMAT(c.createdAt, '%Y-%m-%d') >= :startDate AND DATE_FORMAT(c.createdAt, '%Y-%m-%d') < :endDate AND c.isAdopted = true")
     long countAnswersByUserAndModifiedAtBetweenAndIsAdoptedTrue(@Param("user") User user, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    @Query(value = "SELECT s FROM Statistics s WHERE FORMATDATETIME(s.date, 'yyyy-MM-dd') = FORMATDATETIME(:date, 'yyyy-MM-dd') AND s.user = :user")
+    @Query(value = "SELECT s FROM Statistics s WHERE DATE_FORMAT(s.date, '%Y-%m-%d') = DATE_FORMAT(:date, '%Y-%m-%d') AND s.user = :user")
     Statistics findByUserAndDate(@Param("user") User user, @Param("date") LocalDate date);
 
 }
