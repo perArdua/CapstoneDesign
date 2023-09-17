@@ -6,8 +6,7 @@ on:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
-  paths:
-    - 'BackEnd/campusin/**'
+
 
 permissions:
   contents: read
