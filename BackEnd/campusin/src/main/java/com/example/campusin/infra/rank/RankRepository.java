@@ -22,22 +22,27 @@ public interface RankRepository extends JpaRepository<Rank, Long> {
             "WHERE r.studyGroup.id != null " +
             "AND r.statistics.date = :localDate " +
             "ORDER BY r.totalElapsedTime DESC")
-    Page<Rank> countInStudyGroup(LocalDate localDate, Pageable pageable);
+    Page<Rank> countInStudyGroup(@Param("localDate") LocalDate localDate, Pageable pageable);
 
+<<<<<<< Updated upstream
     @Query(value = "select r from Rank r where r.user = :user and r.statistics = :statistics and r.studyGroup.id = null")
     Rank findByUserAndStatistics(User user, Statistics statistics);
+=======
+    @Query(value = "select r from Rank r where r.user = :user and r.statistics = :statistics")
+    Rank findByUserAndStatistics(@Param("user") User user, @Param("statistics") Statistics statistics);
+>>>>>>> Stashed changes
 
     @Query(value = "select r from Rank r where r.user = :user and r.statistics = :statistics and r.studyGroup.id = :studyGroupId")
-    Rank findByUserAndStatisticsAndStudyGroup(User user, Statistics statistics, Long studyGroupId);
+    Rank findByUserAndStatisticsAndStudyGroup(@Param("user") User user, @Param("statistics") Statistics statistics, @Param("studyGroupId") Long studyGroupId);
     @Query(value = "SELECT r FROM Rank r " +
             "WHERE r.studyGroup.id = null " +
             "AND r.statistics.date = :localDate " +
             "ORDER BY r.totalElapsedTime DESC")
-    Page<Rank> findAllByOrderByTotalStudyTimeAsc(LocalDate localDate,Pageable pageable);
+    Page<Rank> findAllByOrderByTotalStudyTimeAsc(@Param("localDate") LocalDate localDate, Pageable pageable);
 
     @Query(value = "SELECT r FROM Rank r " +
             "WHERE r.studyGroup.id = null " +
             "AND r.statistics.date = :localDate " +
             "ORDER BY r.totalNumberOfQuestions DESC")
-    Page<Rank> findAllByOrderByTotalNumberOfQuestionsAsc(LocalDate localDate,Pageable pageable);
+    Page<Rank> findAllByOrderByTotalNumberOfQuestionsAsc(@Param("localDate") LocalDate localDate,Pageable pageable);
 }
