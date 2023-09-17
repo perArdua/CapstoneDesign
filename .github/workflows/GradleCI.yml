@@ -28,7 +28,7 @@ jobs:
 
     # 2. Spring Boot 애플리케이션 빌드
     - name: Build with Gradle
-      working-directory: backend/campusin
+      working-directory: CapstoneDesign/backend/campusin
       run: |
         ./gradlew clean bootJar
         
