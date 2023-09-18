@@ -26,6 +26,10 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+        
+    - name: 디버깅 - 파일 생성 전 디렉터리 내용 확인
+      run: |
+        ls -R ./BackEnd/campusin
 
     - name: make application.yml
       if: true
@@ -34,6 +38,10 @@ jobs:
         mkdir -p ./src/main/resources/
         touch ./src/main/resources/application.yml
         echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
+        
+    - name: 디버깅 - 파일 생성 후 디렉터리 내용 확인
+      run: |
+        ls -R ./BackEnd/campusin
 
       
     # 2. Spring Boot 애플리케이션 빌드
