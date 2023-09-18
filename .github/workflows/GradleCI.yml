@@ -67,7 +67,7 @@ jobs:
           
       # 4. 미사용 이미지를 정리합니다
       - name: delete old docker image
-        run: docker system prune -f
+        run: docker image prune -af
         
       # 1. 최신 이미지를 풀받습니다
       - name: docker pull
