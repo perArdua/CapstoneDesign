@@ -101,5 +101,5 @@ compileQuerydsl {
 task copyPrivate(type: Copy) {
     from '../../lib'
     include "*.yml"
-    into 'src/main/resources'
+    into '$projectDir/src/main/resources'
 }
