@@ -27,7 +27,11 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
   
-
+    - name: Display datasource from application.yml
+      run: |
+        cat ./BackEnd/campusin/src/main/resources/application.yml | grep 'spring.datasource.url'
+      working-directory: ./BackEnd/campusin
+      
     # 2. Spring Boot 애플리케이션 빌드
     - name: Build with Gradle
       working-directory: ./BackEnd/campusin
