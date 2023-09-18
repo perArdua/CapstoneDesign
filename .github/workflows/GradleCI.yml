@@ -26,14 +26,6 @@ jobs:
         token: ${{ secrets.ACTION_TOKEN }}
         java-version: '11'
         distribution: 'temurin'
-  
-    - name: Display datasource from application.yml
-      run: |
-        cat ./lib/application.yml | grep 'spring.datasource.url'
-      env:
-        ACTION_TOKEN: ${{ secrets.ACTION_TOKEN }}
-
-
       
     # 2. Spring Boot 애플리케이션 빌드
     - name: Build with Gradle
