@@ -26,11 +26,7 @@ jobs:
         token: ${{ secrets.ACTION_TOKEN }}
         java-version: '11'
         distribution: 'temurin'
-        
-    - name: logging
-      run: |
-        cd ./lib
-        cat application.yml
+  
 
     # 2. Spring Boot 애플리케이션 빌드
     - name: Build with Gradle
