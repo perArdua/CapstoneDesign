@@ -30,7 +30,6 @@ jobs:
     - name: Display datasource from application.yml
       run: |
         cat ./lib/application.yml | grep 'spring.datasource.url'
-      working-directory: ./BackEnd/campusin
       
     # 2. Spring Boot 애플리케이션 빌드
     - name: Build with Gradle
