@@ -58,7 +58,6 @@ dependencies {
 //    implementation('org.springframework.boot:spring-boot-starter') {
 //        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
 //    }
-    implementation 'org.yaml:snakeyaml:1.28'
 
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
@@ -100,7 +99,7 @@ compileQuerydsl {
 }
 
 task copyPrivate(type: Copy) {
-    def libDir = file("$projectDir/../../lib") // 상위 디렉토리에 있는 lib 디렉토리를 가리키도록 수정
+    def libDir = file("$projectDir/../../lib")
     def resourcesDir = file("$projectDir/src/main/resources")
 
     from libDir
@@ -109,10 +108,14 @@ task copyPrivate(type: Copy) {
 
     println "libDir: ${libDir}"
     println "resourcesDir: ${resourcesDir}"
-//     ../../lib/application.yml 파일의 spring:datasource:url 값을 출력
+
     doLast {
         def yamlFile = file("$libDir/application.yml")
-        def yaml = new org.yaml.snakeyaml.Yaml().load(yamlFile.text)
-        println "datasource url: ${yaml.spring.datasource.url}"
+
+        // 특정 라인을 grep 명령어로 출력
+        def cmd = "cat ${yamlFile} | grep 'url'"
+        def proc = cmd.execute()
+        proc.waitFor()
+        println "spring.datasource.url: ${proc.text}"
     }
 }
