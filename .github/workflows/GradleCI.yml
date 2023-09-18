@@ -31,8 +31,8 @@ jobs:
       if: true
       working-directory: ./BackEnd/campusin
       run: |
-       touch ./src/main/resources/application.properties
-       echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
+       touch ./src/main/resources/application.yml
+       echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
 
       
     # 2. Spring Boot 애플리케이션 빌드
