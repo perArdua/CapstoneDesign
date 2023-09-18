@@ -108,10 +108,10 @@ task copyPrivate(type: Copy) {
 
     println "libDir: ${libDir}"
     println "resourcesDir: ${resourcesDir}"
-    // ../../lib/application.yml 파일의 spring:datasource:url 값을 출력
-//    doLast {
-//        def yamlFile = file("$libDir/application.yml")
-//        def yaml = new org.yaml.snakeyaml.Yaml().load(yamlFile.text)
-//        println "datasource url: ${yaml.spring.datasource.url}"
-//    }
+//     ../../lib/application.yml 파일의 spring:datasource:url 값을 출력
+    doLast {
+        def yamlFile = file("$libDir/application.yml")
+        def yaml = new org.yaml.snakeyaml.Yaml().load(yamlFile.text)
+        println "datasource url: ${yaml.spring.datasource.url}"
+    }
 }
