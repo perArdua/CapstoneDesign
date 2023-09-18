@@ -101,5 +101,5 @@ compileQuerydsl {
 task copyPrivate(type: Copy) {
     from '../../lib'
     include "*.yml"
-    into 'CapstoneDesign/BackEnd/campusin/src/main/resources'
+    into 'src/main/resources'
 }
