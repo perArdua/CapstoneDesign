@@ -101,7 +101,9 @@ compileQuerydsl {
 task copyPrivate(type: Copy) {
     println "../../lib"
     println "$projectDir/src/main/resources"
-    from "../../lib"
+    from file("../../lib")
     include "*.yml"
     into "$projectDir/src/main/resources"
+    // ../../lib/application.yml 파일의 spring:datasource:url 값을 출력
+    println "datasource url : ${Yaml().load(new File("../../lib/application.yml")).spring.datasource.url}"
 }
