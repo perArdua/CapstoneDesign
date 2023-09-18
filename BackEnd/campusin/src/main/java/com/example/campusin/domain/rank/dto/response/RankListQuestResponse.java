@@ -1,5 +1,5 @@
 package com.example.campusin.domain.rank.dto.response;
-import com.example.campusin.domain.rank.Rank;
+import com.example.campusin.domain.rank.Ranks;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +21,12 @@ public class RankListQuestResponse {
         this.month = month;
     }
     @Builder
-    public RankListQuestResponse(Rank rank) {
+    public RankListQuestResponse(Ranks ranks) {
         this(
-                rank.getQuestionRanking(),
-                rank.getUser().getNickname(),
-                rank.getStartDate(rank.getStatistics().getDate()).getDayOfMonth() / 7 + 1,
-                rank.getStartDate(rank.getStatistics().getDate()).getMonthValue()
+                ranks.getQuestionRanking(),
+                ranks.getUser().getNickname(),
+                ranks.getStartDate(ranks.getStatistics().getDate()).getDayOfMonth() / 7 + 1,
+                ranks.getStartDate(ranks.getStatistics().getDate()).getMonthValue()
         );
     }
 }
