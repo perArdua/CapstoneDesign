@@ -106,6 +106,8 @@ task copyPrivate(type: Copy) {
     include "*.yml"
     into resourcesDir
 
+    println "libDir: ${libDir}"
+    println "resourcesDir: ${resourcesDir}"
     // ../../lib/application.yml 파일의 spring:datasource:url 값을 출력
 //    doLast {
 //        def yamlFile = file("$libDir/application.yml")
