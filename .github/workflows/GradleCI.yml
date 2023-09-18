@@ -30,14 +30,14 @@ jobs:
     - name: 디버깅 - 파일 생성 전 디렉터리 내용 확인
       run: |
         ls -R ./BackEnd/campusin
-
+        mkdir -p ./BackEnd/campusin/src/main/resources/
+        
     - name: make application.yml
       if: true
       working-directory: ./BackEnd/campusin
       run: |
-        mkdir -p ./src/main/resources/
         touch ./src/main/resources/application.yml
-        echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
+        echo "${{ secrets.APPLICATION_YML }}" > ./src/main/resources/application.yml
         
     - name: 디버깅 - 파일 생성 후 디렉터리 내용 확인
       run: |
