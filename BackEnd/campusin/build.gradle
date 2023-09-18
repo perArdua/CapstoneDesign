@@ -109,9 +109,8 @@ task copyPrivate(type: Copy) {
     println "libDir: ${libDir}"
     println "resourcesDir: ${resourcesDir}"
 
-    def yamlFile = file("$libDir/application.yml")
-
     doLast {
+        println "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
         // 특정 라인을 grep 명령어로 출력
         def cmd = "cat ${yamlFile} | grep 'url'"
         def proc = cmd.execute()
@@ -123,5 +122,6 @@ task copyPrivate(type: Copy) {
         def proc2 = cmd2.execute()
         proc2.waitFor()
         println "Files in libDir: ${proc2.text}"
+        println "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
     }
 }
