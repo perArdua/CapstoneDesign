@@ -15,11 +15,11 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 @Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "UPDATE rank SET deleted_at = CURRENT_TIMESTAMP where rank_id = ?")
+@SQLDelete(sql = "UPDATE ranks SET deleted_at = CURRENT_TIMESTAMP where rank_id = ?")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Rank extends BaseTimeEntity{
+public class Ranks extends BaseTimeEntity{
 
     @Id
     @Column(name = "rank_id")
@@ -56,7 +56,7 @@ public class Rank extends BaseTimeEntity{
     private int week;
 
     @Builder
-    public Rank(Long Studyranking, Long QuestionRanking, User user, String userName, Statistics statistics, StudyGroup studyGroup, Long totalElapsedTime, Long totalNumberOfQuestions, int week) {
+    public Ranks(Long Studyranking, Long QuestionRanking, User user, String userName, Statistics statistics, StudyGroup studyGroup, Long totalElapsedTime, Long totalNumberOfQuestions, int week) {
         this.Studyranking = Studyranking;
         this.QuestionRanking = QuestionRanking;
         this.user = user;

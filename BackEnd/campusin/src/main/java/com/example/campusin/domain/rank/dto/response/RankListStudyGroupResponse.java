@@ -1,5 +1,5 @@
 package com.example.campusin.domain.rank.dto.response;
-import com.example.campusin.domain.rank.Rank;
+import com.example.campusin.domain.rank.Ranks;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,12 +22,12 @@ public class RankListStudyGroupResponse {
     }
 
     @Builder
-    public RankListStudyGroupResponse(Rank rank){
+    public RankListStudyGroupResponse(Ranks ranks){
         this(
-                rank.getStudyranking(),
-                rank.getStudyGroup().getStudygroupName(),
-                rank.getStartDate(rank.getStatistics().getDate()).getDayOfMonth() / 7 + 1,
-                rank.getStartDate(rank.getStatistics().getDate()).getMonthValue()
+                ranks.getStudyranking(),
+                ranks.getStudyGroup().getStudygroupName(),
+                ranks.getStartDate(ranks.getStatistics().getDate()).getDayOfMonth() / 7 + 1,
+                ranks.getStartDate(ranks.getStatistics().getDate()).getMonthValue()
         );
     }
 }

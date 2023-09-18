@@ -1,6 +1,6 @@
 package com.example.campusin.application.rank;
 
-import com.example.campusin.domain.rank.Rank;
+import com.example.campusin.domain.rank.Ranks;
 import com.example.campusin.domain.rank.dto.request.RankCreateRequest;
 import com.example.campusin.domain.rank.dto.response.RankIdResponse;
 import com.example.campusin.domain.rank.dto.response.RankListQuestResponse;
@@ -55,7 +55,7 @@ public class RankService {
         Long totalStudyTime = timerList.stream().mapToLong(Timer::getElapsedTime).sum();
         Long totalQuestion = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(user, startDate, endDate);
 
-        Rank rank = Rank.builder()
+        Ranks ranks = Ranks.builder()
                 .user(user)
                 .statistics(statistics)
                 .totalNumberOfQuestions(totalQuestion)
@@ -63,7 +63,7 @@ public class RankService {
                 .userName(user.getNickname())
                 .build();
 
-        Long rankId = rankRepository.save(rank).getId();
+        Long rankId = rankRepository.save(ranks).getId();
         return new RankIdResponse(rankId);
     }
 
@@ -104,7 +104,7 @@ public class RankService {
         totalStudyTime = totalStudyTime / studyGroup.getMembers().size();
         totalQuestion = totalQuestion / studyGroup.getMembers().size();
 
-        Rank rank = Rank.builder()
+        Ranks ranks = Ranks.builder()
                 .user(studyGroup.getUser()) // 스터디 그룹장
                 .statistics(statistics)
                 .totalNumberOfQuestions(totalQuestion)
@@ -113,7 +113,7 @@ public class RankService {
                 .studyGroup(studyGroup)
                 .build();
 
-        Long rankId = rankRepository.save(rank).getId();
+        Long rankId = rankRepository.save(ranks).getId();
 
         return new RankIdResponse(rankId);
     }
@@ -122,7 +122,7 @@ public class RankService {
     @Transactional
     public Page<RankListStudyGroupResponse> getStudyGroupPersonalStudyTimeRank(LocalDate localDate, Pageable pageable){
 
-        Page<Rank> ranks = rankRepository.countInStudyGroup(localDate, pageable);
+        Page<Ranks> ranks = rankRepository.countInStudyGroup(localDate, pageable);
 
         for(Long i = 0L; i < ranks.getContent().size(); i++){
             ranks.getContent().get(i.intValue()).updateStudyRanking(i+1);
@@ -135,7 +135,7 @@ public class RankService {
     @Transactional
     public Page<RankListResponse> getAllStudyTimeRankList(LocalDate localDate, Pageable pageable){
 
-        Page<Rank> ranks = rankRepository.findAllByOrderByTotalStudyTimeAsc(localDate, pageable);
+        Page<Ranks> ranks = rankRepository.findAllByOrderByTotalStudyTimeAsc(localDate, pageable);
 
         for(Long i = 0L; i < ranks.getContent().size(); i++){
             ranks.getContent().get(i.intValue()).updateStudyRanking(i+1);
@@ -148,7 +148,7 @@ public class RankService {
     @Transactional
     public Page<RankListQuestResponse> getAllQuestionRankList(LocalDate localDate, Pageable pageable) {
 
-        Page<Rank> ranks = rankRepository.findAllByOrderByTotalNumberOfQuestionsAsc(localDate, pageable);
+        Page<Ranks> ranks = rankRepository.findAllByOrderByTotalNumberOfQuestionsAsc(localDate, pageable);
 
         for(Long i = 0L; i < ranks.getContent().size(); i++){
             ranks.getContent().get(i.intValue()).updateQuestionRanking(i+1);
