@@ -110,18 +110,12 @@ task copyPrivate(type: Copy) {
     println "resourcesDir: ${resourcesDir}"
 
     doLast {
-        println "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-        // 특정 라인을 grep 명령어로 출력
-        def cmd = "cat ${yamlFile} | grep 'url'"
-        def proc = cmd.execute()
-        proc.waitFor()
-        println "spring.datasource.url: ${proc.text}"
-
-        // 디렉토리 내 파일 목록 출력
-        def cmd2 = "ls ${libDir}"
-        def proc2 = cmd2.execute()
-        proc2.waitFor()
-        println "Files in libDir: ${proc2.text}"
-        println "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+        exec {
+            commandLine 'cat', "${libDir}/application.yml"
+        }.text.eachLine { line ->
+            if (line.contains('url')) {
+                println "spring.datasource.url: ${line}"
+            }
+        }
     }
 }
