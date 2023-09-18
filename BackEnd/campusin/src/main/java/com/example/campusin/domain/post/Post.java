@@ -38,15 +38,15 @@ public class Post extends BaseTimeEntity {
     @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    @Column(name = "content", length = 65535)
+    @Column(name = "content", length = 10000)
     private String content;
 
     @Column(name = "price")
-    @ColumnDefault("0L")
+    @ColumnDefault("0")
     private Long price;
 
     @Column(name = "study_group_id")
-    @ColumnDefault("-1L")
+    @ColumnDefault("-1")
     private Long studyGroupId;
 
     @ManyToOne(fetch = FetchType.LAZY)
