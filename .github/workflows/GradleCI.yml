@@ -64,7 +64,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
+          
+      # 4. 미사용 이미지를 정리합니다
+      - name: delete old docker image
+        run: docker system prune -f
+        
       # 1. 최신 이미지를 풀받습니다
       - name: docker pull
         run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo
@@ -86,6 +90,5 @@ jobs:
       - name: docker debugger3
         run: docker ps -a
         
-      # 4. 미사용 이미지를 정리합니다
-      - name: delete old docker image
-        run: docker system prune -f
+      
+      
