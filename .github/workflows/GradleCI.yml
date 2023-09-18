@@ -69,14 +69,23 @@ jobs:
       - name: docker pull
         run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo
       
+      - name: docker debugger1
+        run: docker ps
+      
       # 2. 기존의 컨테이너를 중지시킵니다
       - name: docker stop container
         run: docker stop $(sudo docker ps -q) 2>/dev/null || true
+      
+      - name: docker debugger2
+        run: docker ps
 
       # 3. 최신 이미지를 컨테이너화하여 실행시킵니다
       - name: docker run new container
         run: docker run --name github-actions-demo --rm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo
-
+      
+      - name: docker debugger3
+        run: docker ps
+        
       # 4. 미사용 이미지를 정리합니다
       - name: delete old docker image
         run: docker system prune -f
