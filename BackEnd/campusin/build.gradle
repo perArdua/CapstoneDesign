@@ -99,7 +99,9 @@ compileQuerydsl {
 }
 
 task copyPrivate(type: Copy) {
-    from '../../lib'
+    println "../../lib"
+    println "$projectDir/src/main/resources"
+    from "../../lib"
     include "*.yml"
-    into '$projectDir/src/main/resources'
+    into "$projectDir/src/main/resources"
 }
