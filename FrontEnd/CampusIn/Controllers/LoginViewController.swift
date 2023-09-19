@@ -25,7 +25,9 @@ class LoginViewController: UIViewController {
 
     @IBAction func googleLoginBtnTapped(_ sender: UIButton) {
         var socialURL : String
-        socialURL = "http://localhost:8080/oauth2/authorization/google"
+        socialURL = APIConstants.baseURL + "/oauth2/authorization/google"
+        print("loginurl")
+        print(socialURL)
         let socialVC = self.storyboard?.instantiateViewController(withIdentifier: "socialLogin") as! SocialViewController
         socialVC.socialURL = socialURL
         socialVC.modalTransitionStyle = .coverVertical
