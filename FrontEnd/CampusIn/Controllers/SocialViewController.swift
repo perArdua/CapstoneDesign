@@ -77,16 +77,16 @@ class SocialViewController: UIViewController, WKNavigationDelegate{
             if let url = raw_token {
                 let urlString = url.absoluteString // 해당 url을 string 형태로 바꿔줌
                 
-                if urlString.count >= 34{//토큰을 포함한 유효한 url인지 검증하는 과정
+                if urlString.count >= 100{//토큰을 포함한 유효한 url인지 검증하는 과정
                     //해당 url이 token 키워드를 포함하는지 검증
-                    let checkIdxStart = urlString.index(urlString.startIndex, offsetBy: 23)
-                    let checkIdxEnd = urlString.index(urlString.startIndex, offsetBy: 28)
+                    let checkIdxStart = urlString.index(urlString.startIndex, offsetBy: 64)
+                    let checkIdxEnd = urlString.index(urlString.startIndex, offsetBy: 69)
                     let checkStr = urlString[checkIdxStart..<checkIdxEnd]
                     
                     print("***CHECK***")
                     if checkStr == "token"{//token 포함시
                         print("***token_check_passed***")
-                        let tokenIdx = urlString.index(urlString.startIndex, offsetBy: 29)
+                        let tokenIdx = urlString.index(urlString.startIndex, offsetBy: 70)
                         let token = urlString[tokenIdx...] // token이 포함된 url애서 token만 분리
                         let defaults = UserDefaults.standard
                         
