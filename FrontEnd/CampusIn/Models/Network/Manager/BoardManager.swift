@@ -116,6 +116,7 @@ class BoardManager{
     // MARK: - 게시판 초기화 함수
     static func initBoard(){
         AF.request(APIConstants.Board.initBoards, method: .get, headers: headers).responseDecodable(of: DataResponse.self) { response in
+            print(APIConstants.baseURL)
             switch response.result{
             case .success(let res):
                 print("게시판 초기화 요청 성공")
@@ -196,7 +197,7 @@ class BoardManager{
     
     // MARK: - tag별 필터링
     static func tagFiltering(boardID: Int, tagID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
-        let endpoint = "http://localhost:8080/api/v1/boards/tag/\(boardID)/\(tagID)/posts"
+        let endpoint = APIConstants.Board.tagFiltering + "/\(boardID)/\(tagID)/posts"
         print(endpoint)
             
         AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostList.self) { response in

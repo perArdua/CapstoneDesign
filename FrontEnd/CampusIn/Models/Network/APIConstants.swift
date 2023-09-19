@@ -11,7 +11,7 @@ import Alamofire
 //message 관련 api 완성 시 구조체 추가 요망
 
 struct APIConstants {
-    static let baseURL = "http://localhost:8080/api/v1"
+    static let baseURL = Bundle.main.apiKey
     static let token = String(KeyChain.read(key: "token")!)
     static let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
     
@@ -27,8 +27,7 @@ struct APIConstants {
         
         static let getBoardIds = baseURL + "/boards/boards/ids" // 게시판 id 얻기
         static let initBoards = baseURL + "/boards/init" // 게시판 초기화
-        
-        static let tagFiltering = baseURL + "​/boards/tag/%d/%d/posts" // 태그별 게시글 목록 조회
+        static let tagFiltering = baseURL + "​/boards/tag"
         static let getTags = baseURL + "/boards/tags/ids" // 태그별 고유 id값 얻기
         
         static let getMyPosting = baseURL + "/posts/mypost"

@@ -47,7 +47,7 @@ class SocialViewController: UIViewController, WKNavigationDelegate{
               }
         
         // 구글이 웹뷰에서 OAuth 더이상 안되게 막아서 custom agent로 우회
-        let customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 16_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Mobile/15E148 Safari/604.1"
+        let customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_2 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Mobile/14F89 Safari/602.1"
         if #available(iOS 9.0, *) {
             webView.customUserAgent = customUserAgent
         } else {
@@ -69,7 +69,9 @@ class SocialViewController: UIViewController, WKNavigationDelegate{
     //MARK: - web에서 response 받을 때 마다 호출되는 함수
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         if let response = navigationResponse.response as? HTTPURLResponse {
-            //print(response)
+            print("#######여기부터 리스폰스########")
+            print(response.url)
+            print("#######여기까지 리스폰스########")
             
             let raw_token = response.url // token이 포함된 url
             if let url = raw_token {

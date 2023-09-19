@@ -57,6 +57,8 @@
 		3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */; };
 		3185DF352A2A3FC5001E5265 /* StudyRecordAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */; };
 		318B6E882AA89CBD00D981A8 /* GroupTimerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318B6E872AA89CBD00D981A8 /* GroupTimerResponse.swift */; };
+		31972B042AB95FED0065256F /* secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31972B032AB95FED0065256F /* secret.plist */; };
+		31972B062AB9602D0065256F /* CampusIn++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31972B052AB9602D0065256F /* CampusIn++Bundle.swift */; };
 		3197C68B2A2CCC3000674199 /* StatisticsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3197C68A2A2CCC3000674199 /* StatisticsViewController.storyboard */; };
 		319815142A2B205400B8B010 /* StudyRecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319815132A2B205400B8B010 /* StudyRecordDelegate.swift */; };
 		31A64E262A1A53A100EF3694 /* TimerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */; };
@@ -236,6 +238,8 @@
 		3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDetailViewController.swift; sourceTree = "<group>"; };
 		3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordAddViewController.swift; sourceTree = "<group>"; };
 		318B6E872AA89CBD00D981A8 /* GroupTimerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTimerResponse.swift; sourceTree = "<group>"; };
+		31972B032AB95FED0065256F /* secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = secret.plist; sourceTree = "<group>"; };
+		31972B052AB9602D0065256F /* CampusIn++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CampusIn++Bundle.swift"; sourceTree = "<group>"; };
 		3197C68A2A2CCC3000674199 /* StatisticsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StatisticsViewController.storyboard; sourceTree = "<group>"; };
 		319815132A2B205400B8B010 /* StudyRecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDelegate.swift; sourceTree = "<group>"; };
 		31A64E252A1A53A100EF3694 /* TimerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -496,6 +500,8 @@
 				3165EDCC2A02A3C100D91856 /* Assets.xcassets */,
 				3165EDCE2A02A3C100D91856 /* LaunchScreen.storyboard */,
 				3165EDD12A02A3C100D91856 /* Info.plist */,
+				31972B032AB95FED0065256F /* secret.plist */,
+				31972B052AB9602D0065256F /* CampusIn++Bundle.swift */,
 			);
 			path = CampusIn;
 			sourceTree = "<group>";
@@ -1024,6 +1030,7 @@
 				315E599B2A30848E00E85A61 /* StudyPostingViewController.storyboard in Resources */,
 				5D4ADF9C2A0555BA00195CA9 /* NickNameViewController.storyboard in Resources */,
 				311E085B2A0D37D20048F5FB /* StudyNavigationController.storyboard in Resources */,
+				31972B042AB95FED0065256F /* secret.plist in Resources */,
 				3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1154,6 +1161,7 @@
 				315E599E2A3084BC00E85A61 /* StudyPostingViewController.swift in Sources */,
 				5D507AEC2A0DDDA800EB5CA9 /* MessageBoxViewController.swift in Sources */,
 				5D4ADF982A054A1B00195CA9 /* SocialViewController.swift in Sources */,
+				31972B062AB9602D0065256F /* CampusIn++Bundle.swift in Sources */,
 				5D3F61552A2F63EE000E3B7C /* BookStoreTableViewCell.swift in Sources */,
 				5D69A3E62A1A9D3C00E9BBB4 /* Chats.swift in Sources */,
 				31B2B1682A190735005A3D4E /* TimerTableViewCell.swift in Sources */,
@@ -1400,6 +1408,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CampusIn/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1430,6 +1439,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CampusIn/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
