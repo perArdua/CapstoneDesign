@@ -56,7 +56,7 @@ public class StatisticsService {
         Statistics statistics = findStatistics(statisticsId);
         LocalDate localDate = statistics.getDate();
 
-        List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user, localDate.toString(), localDate.plusDays(1).toString());
+        List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user.getId(), localDate.toString(), localDate.plusDays(1).toString());
 
         Long totalElapsedTime = timerList.stream().mapToLong(Timer::getElapsedTime).sum();
         Long numberOfQuestions = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(user, localDate.toString(), localDate.plusDays(1).toString());

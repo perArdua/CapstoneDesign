@@ -51,7 +51,7 @@ public class RankService {
         LocalDate startDate = localDate.minusDays(localDate.getDayOfWeek().getValue());
         LocalDate endDate = startDate.plusDays(6);
 
-        List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user, startDate.toString(), endDate.toString());
+        List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user.getId(), startDate.toString(), endDate.toString());
         Long totalStudyTime = timerList.stream().mapToLong(Timer::getElapsedTime).sum();
         Long totalQuestion = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(user, startDate.toString(), endDate.toString());
 
@@ -92,7 +92,7 @@ public class RankService {
         for(StudyGroupMember studyGroupMember : studyGroup.getMembers()){
             User studyGroupMemberUser = studyGroupMember.getUser();
 
-            List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(studyGroupMemberUser, startDate.toString(), endDate.toString());
+            List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(studyGroupMemberUser.getId(), startDate.toString(), endDate.toString());
             Long StudyTime = timerList.stream().mapToLong(Timer::getElapsedTime).sum();
             Long Question = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(studyGroupMemberUser, startDate.toString(), endDate.toString());
 
