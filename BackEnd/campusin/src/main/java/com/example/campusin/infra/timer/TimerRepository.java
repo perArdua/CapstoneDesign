@@ -19,9 +19,9 @@ public interface TimerRepository extends JpaRepository<Timer, Long> {
     public Timer findTopByUserIdOrderByModifiedAtDesc(Long userId);
 
     public List<Timer> findAllByUserId(Long userId);
-    @Query("select t from Timer t where t.user = :user and DATE_FORMAT(t.modifiedAt, '%Y-%m-%d') >= :startDate AND DATE_FORMAT(t.modifiedAt, '%Y-%m-%d') <= :endDate")
+    @Query("select t from Timer t where t.user.id = :userId and DATE_FORMAT(t.modifiedAt, '%Y-%m-%d') >= :startDate AND DATE_FORMAT(t.modifiedAt, '%Y-%m-%d') <= :endDate")
     public List<Timer> findAllByUserAndModifiedAtBetween(@Param("userId") Long userId, @Param("startDate") String startDate, @Param("endDate") String endDate);
 
-    @Query(value = "select t from Timer t where t.user.id = : userId and DATE_FORMAT(t.modifiedAt, '%Y-%m-%d') >= :startDate AND DATE_FORMAT(t.modifiedAt, '%Y-%m-%d') <= :endDate")
+    @Query("select t from Timer t where t.user.id = :userId and DATE_FORMAT(t.modifiedAt, '%Y-%m-%d') >= :startDate AND DATE_FORMAT(t.modifiedAt, '%Y-%m-%d') <= :endDate")
     public Page<Timer> findAllMyTimer(@Param("userId") Long userId, Pageable pageable);
 }
