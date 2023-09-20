@@ -197,7 +197,7 @@ class BoardManager{
     
     // MARK: - tag별 필터링
     static func tagFiltering(boardID: Int, tagID: Int, completion: @escaping (Result<[PostListContent], Error>) -> Void){
-        let endpoint = APIConstants.Board.tagFiltering + "/\(boardID)/\(tagID)/posts"
+        let endpoint = APIConstants.baseURL + "/boards/tag/\(boardID)/\(tagID)/posts"
         print(endpoint)
             
         AF.request(endpoint, method: .get, headers: headers).responseDecodable(of: PostList.self) { response in

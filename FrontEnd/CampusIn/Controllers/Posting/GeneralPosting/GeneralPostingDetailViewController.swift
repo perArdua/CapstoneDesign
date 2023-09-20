@@ -98,7 +98,7 @@ class GeneralPostingDetailViewController: UIViewController {
     @objc func pullDownBtnTapped(){
         let nickname = UserDefaults.standard.string(forKey: "nickname")!
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        if (postDetail?.nickname == nickname && false){ // 나중에 수정해줘야함
+        if (postDetail?.nickname == nickname){ // 나중에 수정해줘야함
             
             let editAction = UIAlertAction(title: "수정하기", style: .default) { [self] _ in
                 let nextVC = self.storyboard?.instantiateViewController(identifier: "GeneralPostingAddViewController") as! GeneralPostingAddViewController
@@ -167,7 +167,8 @@ class GeneralPostingDetailViewController: UIViewController {
                     switch result{
                     case .success:
                         print("create new message room!")
-                        let chatVC = self.storyboard!.instantiateViewController(withIdentifier: "MessageBoxViewController") as! MessageBoxViewController
+                        let nextVC = UIStoryboard(name: "MessageBoxViewController", bundle: nil)
+                        let chatVC = nextVC.instantiateViewController(withIdentifier: "MessageBoxViewController") as! MessageBoxViewController
                         self.navigationController?.pushViewController(chatVC, animated: true)
                     case .failure(let error):
                         print(error)

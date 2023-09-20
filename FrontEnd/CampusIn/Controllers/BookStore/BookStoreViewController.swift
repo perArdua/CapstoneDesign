@@ -76,7 +76,11 @@ class BookStoreViewController: UIViewController, UISearchBarDelegate, UITableVie
         self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
         srch = false
-        getData()
+        if(!isPrevVCMyPage()){
+            self.getData()
+        }else{
+            print("from my page")
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = true

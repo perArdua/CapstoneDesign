@@ -68,7 +68,11 @@ class StudyPostingViewController: UIViewController {
         
         print("reload")
         
-        self.getData()
+        if(!isPrevVCMyPage()){
+            self.getData()
+        }else{
+            print("from my page")
+        }
         tableView.reloadData()
         
         BoardManager.getTags { res in
