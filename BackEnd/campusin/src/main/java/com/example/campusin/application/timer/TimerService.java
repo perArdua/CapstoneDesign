@@ -62,7 +62,7 @@ public class TimerService {
         User user = findUser(userId);
         List<Timer> oldTimers = timerRepository.findAllByUserId(userId);
 
-        Statistics statistics = statisticsRepository.findByUserAndDate(user, oldTimers.get(0).getModifiedAt().toLocalDate());
+        Statistics statistics = statisticsRepository.findByUserAndDate(user, oldTimers.get(0).getModifiedAt().toLocalDate().toString());
 
         if (statistics == null) {
             statistics = Statistics.builder()
@@ -93,7 +93,7 @@ public class TimerService {
         if (!timer.getUser().equals(user)) {
             throw new IllegalArgumentException("USER NOT MATCH");
         }
-        Statistics statistics = statisticsRepository.findByUserAndDate(user, timer.getModifiedAt().toLocalDate());
+        Statistics statistics = statisticsRepository.findByUserAndDate(user, timer.getModifiedAt().toLocalDate().toString());
         statistics.addElapsedTime(timer.getElapsedTime());
         statisticsRepository.save(statistics);
         timerRepository.deleteById(timerId);

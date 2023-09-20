@@ -37,7 +37,7 @@ public class RankService {
     @Transactional
     public RankIdResponse createRank(Long userId, RankCreateRequest request){
         User user = findUser(userId);
-        Statistics statistics = statisticsRepository.findByUserAndDate(user, request.getLocalDate());
+        Statistics statistics = statisticsRepository.findByUserAndDate(user, request.getLocalDate().toString());
         if(statistics == null){
             throw new IllegalArgumentException("해당 날짜에 대한 Statistics가 존재하지 않습니다.");
         }
@@ -51,9 +51,9 @@ public class RankService {
         LocalDate startDate = localDate.minusDays(localDate.getDayOfWeek().getValue());
         LocalDate endDate = startDate.plusDays(6);
 
-        List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user, startDate, endDate);
+        List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user, startDate.toString(), endDate.toString());
         Long totalStudyTime = timerList.stream().mapToLong(Timer::getElapsedTime).sum();
-        Long totalQuestion = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(user, startDate, endDate);
+        Long totalQuestion = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(user, startDate.toString(), endDate.toString());
 
         Ranks ranks = Ranks.builder()
                 .user(user)
@@ -71,7 +71,7 @@ public class RankService {
     @Transactional
     public RankIdResponse createStudyRank(Long StudyGroupId, RankCreateRequest request){
         StudyGroup studyGroup = findStudyGroup(StudyGroupId);
-        Statistics statistics = statisticsRepository.findByUserAndDate(studyGroup.getUser(), request.getLocalDate());
+        Statistics statistics = statisticsRepository.findByUserAndDate(studyGroup.getUser(), request.getLocalDate().toString());
         if(statistics == null){
             throw new IllegalArgumentException("해당 날짜에 대한 Statistics가 존재하지 않습니다.");
         }
@@ -92,9 +92,9 @@ public class RankService {
         for(StudyGroupMember studyGroupMember : studyGroup.getMembers()){
             User studyGroupMemberUser = studyGroupMember.getUser();
 
-            List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(studyGroupMemberUser, startDate, endDate);
+            List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(studyGroupMemberUser, startDate.toString(), endDate.toString());
             Long StudyTime = timerList.stream().mapToLong(Timer::getElapsedTime).sum();
-            Long Question = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(studyGroupMemberUser, startDate, endDate);
+            Long Question = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(studyGroupMemberUser, startDate.toString(), endDate.toString());
 
             totalStudyTime += StudyTime;
             totalQuestion += Question;
@@ -122,7 +122,7 @@ public class RankService {
     @Transactional
     public Page<RankListStudyGroupResponse> getStudyGroupPersonalStudyTimeRank(LocalDate localDate, Pageable pageable){
 
-        Page<Ranks> ranks = rankRepository.countInStudyGroup(localDate, pageable);
+        Page<Ranks> ranks = rankRepository.countInStudyGroup(localDate.toString(), pageable);
 
         for(Long i = 0L; i < ranks.getContent().size(); i++){
             ranks.getContent().get(i.intValue()).updateStudyRanking(i+1);
@@ -135,7 +135,7 @@ public class RankService {
     @Transactional
     public Page<RankListResponse> getAllStudyTimeRankList(LocalDate localDate, Pageable pageable){
 
-        Page<Ranks> ranks = rankRepository.findAllByOrderByTotalStudyTimeAsc(localDate, pageable);
+        Page<Ranks> ranks = rankRepository.findAllByOrderByTotalStudyTimeAsc(localDate.toString(), pageable);
 
         for(Long i = 0L; i < ranks.getContent().size(); i++){
             ranks.getContent().get(i.intValue()).updateStudyRanking(i+1);
@@ -148,7 +148,7 @@ public class RankService {
     @Transactional
     public Page<RankListQuestResponse> getAllQuestionRankList(LocalDate localDate, Pageable pageable) {
 
-        Page<Ranks> ranks = rankRepository.findAllByOrderByTotalNumberOfQuestionsAsc(localDate, pageable);
+        Page<Ranks> ranks = rankRepository.findAllByOrderByTotalNumberOfQuestionsAsc(localDate.toString(), pageable);
 
         for(Long i = 0L; i < ranks.getContent().size(); i++){
             ranks.getContent().get(i.intValue()).updateQuestionRanking(i+1);

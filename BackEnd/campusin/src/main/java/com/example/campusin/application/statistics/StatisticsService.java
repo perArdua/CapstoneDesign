@@ -32,7 +32,7 @@ public class StatisticsService {
     public StatisticsIdResponse createStatistics(Long userId, StatisticsCreateRequest statisticsCreateRequest) {
         User user = findUser(userId);
 
-        Statistics oldStatistics = statisticsRepository.findByUserAndDate(user, statisticsCreateRequest.getLocalDate());
+        Statistics oldStatistics = statisticsRepository.findByUserAndDate(user, statisticsCreateRequest.getLocalDate().toString());
 
         if (oldStatistics != null) {
             return new StatisticsIdResponse(oldStatistics.getId());
@@ -56,12 +56,12 @@ public class StatisticsService {
         Statistics statistics = findStatistics(statisticsId);
         LocalDate localDate = statistics.getDate();
 
-        List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user, localDate, localDate.plusDays(1));
+        List<Timer> timerList = timerRepository.findAllByUserAndModifiedAtBetween(user, localDate.toString(), localDate.plusDays(1).toString());
 
         Long totalElapsedTime = timerList.stream().mapToLong(Timer::getElapsedTime).sum();
-        Long numberOfQuestions = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(user, localDate, localDate.plusDays(1));
-        Long numberOfAnswers = statisticsRepository.countAnswersByUserAndModifiedAtBetweenAndIsAnswerTrue(user, localDate, localDate.plusDays(1));
-        Long numberOfAdoptedAnswers = statisticsRepository.countAnswersByUserAndModifiedAtBetweenAndIsAdoptedTrue(user, localDate, localDate.plusDays(1));
+        Long numberOfQuestions = statisticsRepository.countQuestionsByUserAndModifiedAtBetween(user, localDate.toString(), localDate.plusDays(1).toString());
+        Long numberOfAnswers = statisticsRepository.countAnswersByUserAndModifiedAtBetweenAndIsAnswerTrue(user, localDate.toString(), localDate.plusDays(1).toString());
+        Long numberOfAdoptedAnswers = statisticsRepository.countAnswersByUserAndModifiedAtBetweenAndIsAdoptedTrue(user, localDate.toString(), localDate.plusDays(1).toString());
 
         if (localDate.isEqual(LocalDate.now())) {
             statistics.updateElapsedTime(totalElapsedTime);

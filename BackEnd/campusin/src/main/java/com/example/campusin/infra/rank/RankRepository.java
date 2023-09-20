@@ -19,7 +19,7 @@ public interface RankRepository extends JpaRepository<Ranks, Long> {
             "WHERE r.studyGroup.id != null " +
             "AND r.statistics.date = :localDate " +
             "ORDER BY r.totalElapsedTime DESC")
-    Page<Ranks> countInStudyGroup(@Param("localDate") LocalDate localDate, Pageable pageable);
+    Page<Ranks> countInStudyGroup(@Param("localDate") String localDate, Pageable pageable);
 
     @Query(value = "select r from Ranks r where r.user = :user and r.statistics = :statistics and r.studyGroup.id = null")
     Ranks findByUserAndStatistics(User user, Statistics statistics);
@@ -29,11 +29,11 @@ public interface RankRepository extends JpaRepository<Ranks, Long> {
             "WHERE r.studyGroup.id = null " +
             "AND r.statistics.date = :localDate " +
             "ORDER BY r.totalElapsedTime DESC")
-    Page<Ranks> findAllByOrderByTotalStudyTimeAsc(@Param("localDate") LocalDate localDate, Pageable pageable);
+    Page<Ranks> findAllByOrderByTotalStudyTimeAsc(@Param("localDate") String localDate, Pageable pageable);
 
     @Query(value = "SELECT r FROM Ranks r " +
             "WHERE r.studyGroup.id = null " +
             "AND r.statistics.date = :localDate " +
             "ORDER BY r.totalNumberOfQuestions DESC")
-    Page<Ranks> findAllByOrderByTotalNumberOfQuestionsAsc(@Param("localDate") LocalDate localDate, Pageable pageable);
+    Page<Ranks> findAllByOrderByTotalNumberOfQuestionsAsc(@Param("localDate") String localDate, Pageable pageable);
 }

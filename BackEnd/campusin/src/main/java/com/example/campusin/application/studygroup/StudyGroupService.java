@@ -139,7 +139,7 @@ public class StudyGroupService {
             User user = member.getUser();
             Long elapsedTime = 0L;
             for (LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1)) {
-                Statistics statistics = statisticsRepository.findByUserAndDate(user, date);
+                Statistics statistics = statisticsRepository.findByUserAndDate(user, date.toString());
                 if(statistics != null)
                 {
                     elapsedTime += statistics.getElapsedTime();
