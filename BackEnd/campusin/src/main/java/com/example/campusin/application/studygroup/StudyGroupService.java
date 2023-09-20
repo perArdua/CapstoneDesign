@@ -138,14 +138,11 @@ public class StudyGroupService {
         for (StudyGroupMember member: studyGroupMembers) {
             User user = member.getUser();
             Long elapsedTime = 0L;
-            for (LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1)) {
+            for (LocalDate date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)) {
                 Statistics statistics = statisticsRepository.findByUserAndDate(user, date.toString());
                 if(statistics != null)
                 {
                     elapsedTime += statistics.getElapsedTime();
-                }
-                else{
-                    elapsedTime += 0L;
                 }
             }
             studyGroupMemberResponses.add(new StudyGroupTimeResponse(member.getUser().getNickname(), elapsedTime));
