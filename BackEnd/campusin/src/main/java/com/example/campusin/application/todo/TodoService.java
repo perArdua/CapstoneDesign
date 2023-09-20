@@ -36,7 +36,7 @@ public class TodoService {
     @Transactional(readOnly = true)
     public Page<TodoResponse> getAllTodoList(Long userId, Pageable pageable) {
         findUser(userId);
-        return todoRepository.findAll(pageable).map(TodoResponse::new);
+        return todoRepository.findAllMyTodoList(userId, pageable).map(TodoResponse::new);
     }
 
     // todolist 수정
