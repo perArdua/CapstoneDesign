@@ -19,5 +19,5 @@ public interface TimerRepository extends JpaRepository<Timer, Long> {
 
     public List<Timer> findAllByUserId(Long userId);
     @Query("select t from Timer t where t.user = :user and DATE_FORMAT(t.modifiedAt, '%Y-%m-%d') >= :startDate AND DATE_FORMAT(t.modifiedAt, '%Y-%m-%d') < :endDate")
-    public List<Timer> findAllByUserAndModifiedAtBetween(@Param("user") User user, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    public List<Timer> findAllByUserAndModifiedAtBetween(@Param("user") User user, @Param("startDate") String startDate, @Param("endDate") String endDate);
 }
