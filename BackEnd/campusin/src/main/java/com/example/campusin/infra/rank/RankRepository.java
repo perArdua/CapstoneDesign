@@ -13,11 +13,15 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 
 
+
+//@Query(value = "SELECT COUNT(p) FROM Post p WHERE p.user = :user AND p.board.boardType = 'Question' AND DATE_FORMAT(p.createdAt, '%Y-%m-%d') >= :startDate AND DATE_FORMAT(p.createdAt, '%Y-%m-%d') < :endDate")
+//    long countQuestionsByUserAndModifiedAtBetween(@Param("user") User user, @Param("startDate") String startDate, @Param("endDate") String endDate);
+
 @Repository
 public interface RankRepository extends JpaRepository<Ranks, Long> {
     @Query(value = "SELECT r FROM Ranks r " +
             "WHERE r.studyGroup.id != null " +
-            "AND r.statistics.date = :localDate " +
+            "AND DATE_FORMAT(r.statistics.date, '%Y-%m-%d') = :localDate " +
             "ORDER BY r.totalElapsedTime DESC")
     Page<Ranks> countInStudyGroup(@Param("localDate") String localDate, Pageable pageable);
 
@@ -27,13 +31,13 @@ public interface RankRepository extends JpaRepository<Ranks, Long> {
     Ranks findByUserAndStatisticsAndStudyGroup(@Param("user") User user, @Param("statistics") Statistics statistics, @Param("studyGroupId") Long studyGroupId);
     @Query(value = "SELECT r FROM Ranks r " +
             "WHERE r.studyGroup.id = null " +
-            "AND r.statistics.date = :localDate " +
+            "AND DATE_FORMAT(r.statistics.date, '%Y-%m-%d') = :localDate " +
             "ORDER BY r.totalElapsedTime DESC")
     Page<Ranks> findAllByOrderByTotalStudyTimeAsc(@Param("localDate") String localDate, Pageable pageable);
 
     @Query(value = "SELECT r FROM Ranks r " +
             "WHERE r.studyGroup.id = null " +
-            "AND r.statistics.date = :localDate " +
+            "AND DATE_FORMAT(r.statistics.date, '%Y-%m-%d') = :localDate " +
             "ORDER BY r.totalNumberOfQuestions DESC")
     Page<Ranks> findAllByOrderByTotalNumberOfQuestionsAsc(@Param("localDate") String localDate, Pageable pageable);
 }
