@@ -47,7 +47,7 @@ public class TimerService {
     @Transactional(readOnly = true)
     public Page<TimerResponse> getAllTimerList(Long userId, Pageable pageable) {
         findUser(userId);
-        return timerRepository.findAll(pageable).map(TimerResponse::new);
+        return timerRepository.findAllMyTimer(userId, pageable).map(TimerResponse::new);
     }
 
     @Transactional
