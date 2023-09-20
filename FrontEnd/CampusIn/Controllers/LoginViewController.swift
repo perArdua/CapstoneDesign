@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
     @IBAction func googleLoginBtnTapped(_ sender: UIButton) {
         var socialURL : String
 //        socialURL = APIConstants.baseURL + "/oauth2/authorization/google"
-        socialURL = "tmp_URL"
+        socialURL = Bundle.main.loginURL
         print("loginurl")
         print(socialURL)
         let socialVC = self.storyboard?.instantiateViewController(withIdentifier: "socialLogin") as! SocialViewController

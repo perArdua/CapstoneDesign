@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var questionView: UIView!
     @IBOutlet weak var studyView: UIView!
     
+    @IBOutlet weak var todayDateLabel: UILabel!
     
     @IBOutlet var todoLabel: [UILabel]!
     
@@ -30,6 +31,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yy-MM-dd"
+        
+        todayDateLabel.text = dateformatter.string(from: Date())
         
         // Do any additional setup after loading the view.
         let sideBtn = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(rightBtnTapped))
