@@ -48,13 +48,13 @@
                                 <buttonConfiguration key="configuration" style="plain" title="To Main"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbH-6R-ifb">
-                                <rect key="frame" x="50" y="475" width="290" height="50"/>
+                                <rect key="frame" x="100" y="475" width="190" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="7Gy-rm-6jv"/>
+                                    <constraint firstAttribute="height" constant="45" id="7Gy-rm-6jv"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="googleLogin3">
+                                <state key="normal" image="naverLogin">
                                     <color key="titleColor" name="avatarViewBackground"/>
                                 </state>
                                 <connections>
@@ -62,7 +62,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vC9-HN-wNa">
-                                <rect key="frame" x="106" y="535" width="192" height="45"/>
+                                <rect key="frame" x="106" y="530" width="192" height="45"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="kakao" image="kakaoLogin"/>
                                 <connections>
@@ -73,9 +73,9 @@
                         <viewLayoutGuide key="safeArea" id="BMj-8k-iRU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="XbH-6R-ifb" firstAttribute="leading" secondItem="BMj-8k-iRU" secondAttribute="leading" constant="50" id="2Uo-dE-0MC"/>
+                            <constraint firstItem="XbH-6R-ifb" firstAttribute="leading" secondItem="BMj-8k-iRU" secondAttribute="leading" constant="100" id="2Uo-dE-0MC"/>
                             <constraint firstItem="vhz-54-Xrt" firstAttribute="centerX" secondItem="6uT-dY-JXf" secondAttribute="centerX" id="9xJ-uJ-haR"/>
-                            <constraint firstItem="BMj-8k-iRU" firstAttribute="trailing" secondItem="XbH-6R-ifb" secondAttribute="trailing" constant="50" id="Bz6-J7-7Uc"/>
+                            <constraint firstItem="BMj-8k-iRU" firstAttribute="trailing" secondItem="XbH-6R-ifb" secondAttribute="trailing" constant="100" id="Bz6-J7-7Uc"/>
                             <constraint firstItem="5nj-Kv-GpW" firstAttribute="centerY" secondItem="6uT-dY-JXf" secondAttribute="centerY" id="PKC-T2-oXH"/>
                             <constraint firstItem="XbH-6R-ifb" firstAttribute="top" secondItem="5nj-Kv-GpW" secondAttribute="bottom" constant="30" id="SUa-Xx-g9e"/>
                             <constraint firstItem="vC9-HN-wNa" firstAttribute="leading" secondItem="BMj-8k-iRU" secondAttribute="leading" constant="106" id="bii-XV-vd9"/>
@@ -372,6 +372,7 @@
                         <outlet property="generalPostingView" destination="U2Y-JE-sie" id="eqk-Dl-qnc"/>
                         <outlet property="questionView" destination="nrU-SG-pqW" id="TWx-BI-7Ya"/>
                         <outlet property="studyView" destination="QpM-lA-2Ya" id="uZ6-BL-AW0"/>
+                        <outlet property="todayDateLabel" destination="ql0-Ks-boM" id="kEj-xZ-SOy"/>
                         <outlet property="todoView" destination="p6H-4j-v19" id="gRt-nc-Qw9"/>
                         <outletCollection property="generalTitle" destination="1dK-bZ-JWV" collectionClass="NSMutableArray" id="JSe-XZ-fyL"/>
                         <outletCollection property="generalTitle" destination="0sh-S8-tUr" collectionClass="NSMutableArray" id="kny-pZ-Vjq"/>
@@ -1476,9 +1477,9 @@
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="checklist" catalog="system" width="128" height="107"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
-        <image name="googleLogin3" width="191" height="46"/>
         <image name="kakaoLogin" width="183" height="45"/>
         <image name="menubar.rectangle" catalog="system" width="128" height="93"/>
+        <image name="naverLogin" width="750" height="200"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <namedColor name="avatarViewBackground">
