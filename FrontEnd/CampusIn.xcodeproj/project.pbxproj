@@ -57,7 +57,6 @@
 		3185DF332A2A3FB8001E5265 /* StudyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */; };
 		3185DF352A2A3FC5001E5265 /* StudyRecordAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */; };
 		318B6E882AA89CBD00D981A8 /* GroupTimerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318B6E872AA89CBD00D981A8 /* GroupTimerResponse.swift */; };
-		31972B042AB95FED0065256F /* secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31972B032AB95FED0065256F /* secret.plist */; };
 		31972B062AB9602D0065256F /* CampusIn++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31972B052AB9602D0065256F /* CampusIn++Bundle.swift */; };
 		3197C68B2A2CCC3000674199 /* StatisticsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3197C68A2A2CCC3000674199 /* StatisticsViewController.storyboard */; };
 		319815142A2B205400B8B010 /* StudyRecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319815132A2B205400B8B010 /* StudyRecordDelegate.swift */; };
@@ -93,7 +92,6 @@
 		31EAED4B2A32158700F04DEC /* ClassExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EAED4A2A32158700F04DEC /* ClassExtension.swift */; };
 		31EAED4E2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EAED4D2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift */; };
 		31EF222B2AACC26F00EF8A79 /* UpdateReplyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EF222A2AACC26F00EF8A79 /* UpdateReplyDelegate.swift */; };
-		31F2CC4E2ABABD7F00FBBADF /* secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31F2CC4D2ABABD7F00FBBADF /* secret.plist */; };
 		31FCD9172A054DE20068689B /* GeneralPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD9162A054DE20068689B /* GeneralPostingViewController.swift */; };
 		31FCD91D2A054E050068689B /* GeneralPostingCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD91A2A054E050068689B /* GeneralPostingCommentTableViewCell.swift */; };
 		31FCD91E2A054E050068689B /* GeneralPostingContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FCD91B2A054E050068689B /* GeneralPostingContentTableViewCell.swift */; };
@@ -110,6 +108,7 @@
 		5B25F5882AA8A2EE00D2C028 /* StudyDetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B25F5872AA8A2EE00D2C028 /* StudyDetailRecordViewController.swift */; };
 		5B25F58A2AA8B14100D2C028 /* StudyAddRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B25F5892AA8B14100D2C028 /* StudyAddRecordViewController.swift */; };
 		5B2BB8F72AAA165C00AE74D8 /* PostLikeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2BB8F62AAA165C00AE74D8 /* PostLikeResponse.swift */; };
+		5B3AE9E92ABADBF90032D0F6 /* secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B3AE9E82ABADBF90032D0F6 /* secret.plist */; };
 		5B49257F2A9E2D0C0094A203 /* StudyGroupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49257E2A9E2D0C0094A203 /* StudyGroupDetail.swift */; };
 		5B4925822AA0F8420094A203 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4925812AA0F8420094A203 /* MyPageViewController.swift */; };
 		5B56659D2AA2200200CD6854 /* MyPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B56659C2AA2200200CD6854 /* MyPostingViewController.swift */; };
@@ -239,7 +238,6 @@
 		3185DF322A2A3FB8001E5265 /* StudyRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDetailViewController.swift; sourceTree = "<group>"; };
 		3185DF342A2A3FC5001E5265 /* StudyRecordAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordAddViewController.swift; sourceTree = "<group>"; };
 		318B6E872AA89CBD00D981A8 /* GroupTimerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTimerResponse.swift; sourceTree = "<group>"; };
-		31972B032AB95FED0065256F /* secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = secret.plist; sourceTree = "<group>"; };
 		31972B052AB9602D0065256F /* CampusIn++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CampusIn++Bundle.swift"; sourceTree = "<group>"; };
 		3197C68A2A2CCC3000674199 /* StatisticsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StatisticsViewController.storyboard; sourceTree = "<group>"; };
 		319815132A2B205400B8B010 /* StudyRecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyRecordDelegate.swift; sourceTree = "<group>"; };
@@ -275,7 +273,6 @@
 		31EAED4A2A32158700F04DEC /* ClassExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtension.swift; sourceTree = "<group>"; };
 		31EAED4D2A32321300F04DEC /* StudyGroupPostingContentTVCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupPostingContentTVCellDelegate.swift; sourceTree = "<group>"; };
 		31EF222A2AACC26F00EF8A79 /* UpdateReplyDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateReplyDelegate.swift; sourceTree = "<group>"; };
-		31F2CC4D2ABABD7F00FBBADF /* secret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secret.plist; sourceTree = "<group>"; };
 		31FCD9162A054DE20068689B /* GeneralPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingViewController.swift; sourceTree = "<group>"; };
 		31FCD91A2A054E050068689B /* GeneralPostingCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingCommentTableViewCell.swift; sourceTree = "<group>"; };
 		31FCD91B2A054E050068689B /* GeneralPostingContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPostingContentTableViewCell.swift; sourceTree = "<group>"; };
@@ -293,6 +290,7 @@
 		5B25F5872AA8A2EE00D2C028 /* StudyDetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailRecordViewController.swift; sourceTree = "<group>"; };
 		5B25F5892AA8B14100D2C028 /* StudyAddRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyAddRecordViewController.swift; sourceTree = "<group>"; };
 		5B2BB8F62AAA165C00AE74D8 /* PostLikeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeResponse.swift; sourceTree = "<group>"; };
+		5B3AE9E82ABADBF90032D0F6 /* secret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = secret.plist; path = ../../../../Downloads/secret.plist; sourceTree = "<group>"; };
 		5B49257E2A9E2D0C0094A203 /* StudyGroupDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupDetail.swift; sourceTree = "<group>"; };
 		5B4925812AA0F8420094A203 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		5B56659C2AA2200200CD6854 /* MyPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostingViewController.swift; sourceTree = "<group>"; };
@@ -502,8 +500,7 @@
 				3165EDCC2A02A3C100D91856 /* Assets.xcassets */,
 				3165EDCE2A02A3C100D91856 /* LaunchScreen.storyboard */,
 				3165EDD12A02A3C100D91856 /* Info.plist */,
-				31972B032AB95FED0065256F /* secret.plist */,
-				31F2CC4D2ABABD7F00FBBADF /* secret.plist */,
+				5B3AE9E82ABADBF90032D0F6 /* secret.plist */,
 				31972B052AB9602D0065256F /* CampusIn++Bundle.swift */,
 			);
 			path = CampusIn;
@@ -1033,8 +1030,7 @@
 				315E599B2A30848E00E85A61 /* StudyPostingViewController.storyboard in Resources */,
 				5D4ADF9C2A0555BA00195CA9 /* NickNameViewController.storyboard in Resources */,
 				311E085B2A0D37D20048F5FB /* StudyNavigationController.storyboard in Resources */,
-				31972B042AB95FED0065256F /* secret.plist in Resources */,
-				31F2CC4E2ABABD7F00FBBADF /* secret.plist in Resources */,
+				5B3AE9E92ABADBF90032D0F6 /* secret.plist in Resources */,
 				3165CBEB2A03FE69005E34AC /* GeneralPostingViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
