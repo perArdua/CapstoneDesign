@@ -10,7 +10,12 @@ public class MessageRoomIdResponse {
 
     @Schema(name = "쪽지방 id", example = "1")
     private final Long messageRoomId;
+
+    public MessageRoomIdResponse(Long messageRoomId) {
+        this.messageRoomId = messageRoomId;
+    }
+
     public MessageRoomIdResponse(MessageRoom messageRoom) {
-        this.messageRoomId = messageRoom.getId();
+        this(messageRoom.getId());
     }
 }

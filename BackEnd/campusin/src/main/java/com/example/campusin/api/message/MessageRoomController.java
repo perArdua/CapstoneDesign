@@ -8,8 +8,6 @@ import com.example.campusin.domain.message.dto.response.MessageRoomIdResponse;
 import com.example.campusin.domain.message.dto.response.MessageRoomListResponse;
 import com.example.campusin.domain.message.dto.response.MessageRoomResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
-@Tag(name = "쪽지방 API")
+@io.swagger.v3.oas.annotations.tags.Tag(name = "쪽지방 API")
 @RestController
 @RequestMapping("/api/v1/message-rooms")
 @RequiredArgsConstructor
@@ -37,36 +35,26 @@ public class MessageRoomController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "쪽지방 생성 성공", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = MessageRoomIdResponse.class))),
             }
     )
-    @Operation(summary = "쪽지방 생성하기")
+    @io.swagger.v3.oas.annotations.Operation(summary = "쪽지방 생성하기", description = "쪽지방을 생성하는 요청 입니다. MessageRoom ID 반환")
     @PostMapping
     public ApiResponse createMessageRoom(@AuthenticationPrincipal UserPrincipal principal,
                                          @Valid @RequestBody final MessageRoomCreateRequest request,
+                                         @RequestHeader("Idempotency-Key") String idempotencyKey,
                                          RedirectAttributes redirectAttributes) throws URISyntaxException {
 
-        Optional<Long> maybeMessageRoomId = messageRoomService.getMessageRoomId(principal.getUserId(), request.getCreatedFrom(), request.getReceiverId());
-
-
-        if (maybeMessageRoomId.isPresent()) {
-            URI redirectUri = new URI(
-                    new StringBuilder().append("/api/v1/message-rooms/").append(maybeMessageRoomId.get())
-                            .append("/redirect-message?userId=").append(principal.getUserId()).toString()
-            );
-
-
-            redirectAttributes.addFlashAttribute("message", request.getFirstMessage());
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setLocation(redirectUri);
-
-            return ApiResponse.success("이미 존재하는 쪽지방입니다.", "쪽지 전송 요청으로 리디렉트 되었습니다.");
-        }
-
-        MessageRoomIdResponse response = messageRoomService.saveMessageRoom(principal.getUserId(), request);
+        MessageRoomIdResponse response = messageRoomService.saveMessageRoom(
+                principal.getUserId(), request, idempotencyKey
+        );
 
         URI redirectUri = new URI(
-                new StringBuilder().append("/api/v1/message-rooms/").append(response.getMessageRoomId())
-                        .append("?userId=").append(principal.getUserId()).toString());
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setLocation(redirectUri);
+                new StringBuilder()
+                        .append("/api/v1/message-rooms/")
+                        .append(response.getMessageRoomId())
+                        .append("?userId=").append(principal.getUserId())
+                        .toString()
+        );
+
+        redirectAttributes.addFlashAttribute("message", request.getFirstMessage());
 
         return ApiResponse.success("쪽지방 생성이 완료되었습니다.", "MessageRoom create Successfully");
     }
@@ -76,7 +64,7 @@ public class MessageRoomController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "쪽지방 정보와 최근 쪽지 조회 성공", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = MessageRoomResponse.class))),
             }
     )
-    @Operation(summary = "쪽지방 정보와 최근 쪽지 조회하기")
+    @io.swagger.v3.oas.annotations.Operation(summary = "쪽지방 정보와 최근 쪽지 조회하기")
     @GetMapping("/{messageRoomId}")
     public ApiResponse getMessageRoom(@AuthenticationPrincipal UserPrincipal principal,
                                       @PathVariable("messageRoomId") Long messageRoomId) {
@@ -90,10 +78,10 @@ public class MessageRoomController {
     //쪽지방 리스트 조회
     @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "쪽지방 리스트 조회 성공", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = MessageRoomListResponse.class)))),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "쪽지방 리스트 조회 성공", content = @io.swagger.v3.oas.annotations.media.Content(array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = MessageRoomListResponse.class)))),
             }
     )
-    @Operation(summary = "쪽지방 리스트 조회하기")
+    @io.swagger.v3.oas.annotations.Operation(summary = "쪽지방 리스트 조회하기")
     @GetMapping
     public ApiResponse getMessageRooms(@AuthenticationPrincipal UserPrincipal principal,
                                        @PageableDefault(size = 20, sort = "MODIFIED_AT", direction = Sort.Direction.DESC) final Pageable pageable) {
@@ -107,7 +95,7 @@ public class MessageRoomController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "쪽지방 차단 성공"),
             }
     )
-    @Operation(summary = "쪽지방 차단하기")
+    @io.swagger.v3.oas.annotations.Operation(summary = "쪽지방 차단하기")
     @PatchMapping("/{messageRoomId}/block")
     public ApiResponse blockMessageRoom(@AuthenticationPrincipal UserPrincipal principal,
                                         @PathVariable("messageRoomId") Long messageRoomId) {
@@ -122,7 +110,7 @@ public class MessageRoomController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "쪽지방 삭제 성공")
             }
     )
-    @Operation(summary = "쪽지방 삭제하기")
+    @io.swagger.v3.oas.annotations.Operation(summary = "쪽지방 삭제하기")
     @PatchMapping("/{messageRoomId}/delete")
     public ApiResponse deleteMessageRoom(@AuthenticationPrincipal UserPrincipal principal,
                                          @PathVariable("messageRoomId") Long messageRoomId) {

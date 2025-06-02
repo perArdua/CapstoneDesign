@@ -3,13 +3,15 @@ package com.example.campusin.infra.message;
 import com.example.campusin.domain.message.Message;
 import com.example.campusin.domain.message.MessageRoom;
 import com.example.campusin.domain.message.dto.MessageRoomsWithLastMessages;
+import com.example.campusin.domain.post.Post;
+import jakarta.persistence.LockModeType;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.Optional;
 
 public interface MessageRoomRepository extends JpaRepository<MessageRoom, Long> {
     @Query(
@@ -72,4 +74,18 @@ public interface MessageRoomRepository extends JpaRepository<MessageRoom, Long> 
                     + "or (visible_to='ONLY_INITIAL_SENDER' and initial_sender_id =:id))")
     Page<MessageRoomsWithLastMessages> findMessageRoomsAndLastMessagesByUserId(@Param("id") Long userId, Pageable pageable);
 
+    @Query(value = "SELECT GET_LOCK(:lockName, :timeout)", nativeQuery = true)
+    int acquireLock(@Param("lockName") String lockName, @Param("timeout") int timeout);
+
+    @Query(value = "SELECT RELEASE_LOCK(:lockName)", nativeQuery = true)
+    int releaseLock(@Param("lockName") String lockName);
+
+    @Query("SELECT mr FROM MessageRoom mr WHERE mr.createdFrom.id = :postId AND "
+            + "((mr.initialSender.id = :senderId AND mr.initialReceiver.id = :receiverId) "
+            + "OR (mr.initialSender.id = :receiverId AND mr.initialReceiver.id = :senderId))")
+    Optional<MessageRoom> findByUserPairAndPost(@Param("senderId") Long senderId,
+                                                @Param("receiverId") Long receiverId,
+                                                @Param("postId") Long postId);
+
+    long countByInitialSenderIdAndInitialReceiverIdAndCreatedFromId(Long senderId, Long receiverId, Long postId);
 }
