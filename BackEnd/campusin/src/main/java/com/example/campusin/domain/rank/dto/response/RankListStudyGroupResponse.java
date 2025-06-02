@@ -4,6 +4,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import static com.example.campusin.common.utils.WeekUtil.getWeekOfMonth;
+import static com.example.campusin.common.utils.WeekUtil.getWeekStartDate;
+
 @Getter
 @NoArgsConstructor
 public class RankListStudyGroupResponse {
@@ -24,10 +27,10 @@ public class RankListStudyGroupResponse {
     @Builder
     public RankListStudyGroupResponse(Ranks ranks){
         this(
-                ranks.getStudyranking(),
+                ranks.getStudyRanking(),
                 ranks.getStudyGroup().getStudygroupName(),
-                ranks.getStartDate(ranks.getStatistics().getDate()).getDayOfMonth() / 7 + 1,
-                ranks.getStartDate(ranks.getStatistics().getDate()).getMonthValue()
+                getWeekOfMonth(ranks.getWeekStartDate()),
+                ranks.getWeekStartDate().getMonthValue()
         );
     }
 }
