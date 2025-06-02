@@ -2,6 +2,7 @@ package com.example.campusin.application.message;
 
 import com.example.campusin.domain.message.Message;
 import com.example.campusin.domain.message.MessageRoom;
+import com.example.campusin.domain.message.MessageRoomIdempotency;
 import com.example.campusin.domain.message.VisibilityState;
 import com.example.campusin.domain.message.dto.MessageRoomsWithLastMessages;
 import com.example.campusin.domain.message.dto.request.MessageRoomCreateRequest;
@@ -12,6 +13,7 @@ import com.example.campusin.domain.message.dto.response.MessageRoomResponse;
 import com.example.campusin.domain.post.Post;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.message.MessageRepository;
+import com.example.campusin.infra.message.MessageRoomIdempotencyRepository;
 import com.example.campusin.infra.message.MessageRoomRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.user.UserRepository;
@@ -32,37 +34,37 @@ public class MessageRoomService {
 
     private final MessageRoomRepository messageRoomRepository;
     private final MessageRepository messageRepository;
+    private final MessageRoomTxService messageRoomTxService;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
     // 쪽지방 생성
     @Transactional
-    public MessageRoomIdResponse saveMessageRoom(Long userId, MessageRoomCreateRequest request) {
-        if(userId == request.getReceiverId()){
+    public MessageRoomIdResponse saveMessageRoom(Long userId, MessageRoomCreateRequest request, String idempotencyKey) {
+        Long senderId = userId;
+        Long receiverId = request.getReceiverId();
+        Long postId = request.getCreatedFrom();
+
+        if (senderId.equals(receiverId)) {
             throw new InvalidRequestStateException("INVALID MESSAGE TARGET");
         }
-        User currentUser = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
-        User receiver = userRepository.findById(request.getReceiverId())
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
-        Post post = postRepository.findById(request.getCreatedFrom())
-                .orElseThrow(() -> new IllegalArgumentException("POST NOT FOUND"));
 
-        MessageRoom messageRoom = MessageRoom.builder()
-                .initialSender(currentUser)
-                .initialReceiver(receiver)
-                .createdFrom(post)
-                .build();
+        Long small = Math.min(senderId, receiverId);
+        Long large = Math.max(senderId, receiverId);
+        String lockName = "msgRoom:create:" + postId + ":" + small + ":" + large;
 
-        MessageRoom savedMessageRoom = messageRoomRepository.save(messageRoom);
-        Message message = Message.builder()
-                .messageRoom(savedMessageRoom)
-                .writer(currentUser)
-                .content(request.getFirstMessage())
-                .build();
-        messageRepository.save(message);
-        return new MessageRoomIdResponse(savedMessageRoom);
+        if (messageRoomRepository.acquireLock(lockName, 30) != 1) {
+            throw new IllegalStateException("LOCK FAILED");
+        }
+
+        try {
+            return messageRoomTxService.saveUnderLock(senderId, receiverId, postId, request, idempotencyKey);
+        } finally {
+            messageRoomRepository.releaseLock(lockName);
+        }
     }
+
+
 
     // 쪽지방 ID 조회
 
