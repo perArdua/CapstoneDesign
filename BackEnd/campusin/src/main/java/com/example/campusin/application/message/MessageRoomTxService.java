@@ -12,7 +12,6 @@ import com.example.campusin.infra.message.MessageRoomIdempotencyRepository;
 import com.example.campusin.infra.message.MessageRoomRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.user.UserRepository;
-import com.sun.jdi.request.InvalidRequestStateException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

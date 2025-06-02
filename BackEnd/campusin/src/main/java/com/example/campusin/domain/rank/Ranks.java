@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 @Where(clause = "deleted_at IS NULL")

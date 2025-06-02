@@ -14,14 +14,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Optional;
 @io.swagger.v3.oas.annotations.tags.Tag(name = "쪽지방 API")
 @RestController
 @RequestMapping("/api/v1/message-rooms")

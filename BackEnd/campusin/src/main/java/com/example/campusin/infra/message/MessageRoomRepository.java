@@ -3,15 +3,13 @@ package com.example.campusin.infra.message;
 import com.example.campusin.domain.message.Message;
 import com.example.campusin.domain.message.MessageRoom;
 import com.example.campusin.domain.message.dto.MessageRoomsWithLastMessages;
-import com.example.campusin.domain.post.Post;
-import jakarta.persistence.LockModeType;
-import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
 
 public interface MessageRoomRepository extends JpaRepository<MessageRoom, Long> {
     @Query(

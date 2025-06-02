@@ -5,26 +5,24 @@ package com.example.campusin.common.config.security;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.common.config.swagger.AuthenticatedMatchers;
-import com.example.campusin.infra.user.UserRefreshTokenRepository;
+import com.example.campusin.application.oauth.CustomOAuth2UserService;
+import com.example.campusin.application.oauth.CustomUserDetailsService;
 import com.example.campusin.common.config.properties.AppProperties;
 import com.example.campusin.common.config.properties.CorsProperties;
-import com.example.campusin.domain.oauth.RoleType;
+import com.example.campusin.common.config.swagger.AuthenticatedMatchers;
 import com.example.campusin.common.exception.RestAuthenticationEntryPoint;
 import com.example.campusin.common.filter.TokenAuthenticationFilter;
 import com.example.campusin.common.handler.OAuth2AuthenticationFailureHandler;
 import com.example.campusin.common.handler.OAuth2AuthenticationSuccessHandler;
 import com.example.campusin.common.handler.TokenAccessDeniedHandler;
-import com.example.campusin.infra.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
-import com.example.campusin.application.oauth.CustomOAuth2UserService;
-import com.example.campusin.application.oauth.CustomUserDetailsService;
+import com.example.campusin.domain.oauth.RoleType;
 import com.example.campusin.domain.token.AuthTokenProvider;
+import com.example.campusin.infra.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import com.example.campusin.infra.user.UserRefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.BeanIds;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

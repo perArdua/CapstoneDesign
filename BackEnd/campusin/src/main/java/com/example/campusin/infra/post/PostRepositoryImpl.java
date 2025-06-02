@@ -4,14 +4,14 @@ import com.example.campusin.domain.post.Post;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import java.util.Collections;
-import java.util.List;
+import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import jakarta.persistence.EntityManager;
+import java.util.Collections;
+import java.util.List;
 
 import static com.example.campusin.domain.board.QBoard.board;
 import static com.example.campusin.domain.post.QPost.post;

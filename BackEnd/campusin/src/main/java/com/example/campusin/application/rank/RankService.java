@@ -34,7 +34,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.*;
 
-import static com.example.campusin.common.redis.RedisKeyFactory.*;
+import static com.example.campusin.common.redis.RedisKeyFactory.studyTimeRankKey;
+import static com.example.campusin.common.redis.RedisKeyFactory.weeklyRankPageLockKey;
 import static com.example.campusin.common.utils.WeekUtil.getWeekOfMonth;
 import static com.example.campusin.common.utils.WeekUtil.getWeekStartDate;
 

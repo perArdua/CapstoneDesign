@@ -5,19 +5,21 @@ package com.example.campusin.api.auth;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.domain.auth.AuthReqModel;
-import com.example.campusin.domain.user.UserRefreshToken;
-import com.example.campusin.infra.user.UserRefreshTokenRepository;
-import com.example.campusin.common.response.ApiResponse;
 import com.example.campusin.common.config.properties.AppProperties;
+import com.example.campusin.common.response.ApiResponse;
+import com.example.campusin.common.utils.CookieUtil;
+import com.example.campusin.common.utils.HeaderUtil;
+import com.example.campusin.domain.auth.AuthReqModel;
 import com.example.campusin.domain.oauth.RoleType;
 import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.domain.token.AuthToken;
 import com.example.campusin.domain.token.AuthTokenProvider;
-import com.example.campusin.common.utils.CookieUtil;
-import com.example.campusin.common.utils.HeaderUtil;
+import com.example.campusin.domain.user.UserRefreshToken;
+import com.example.campusin.infra.user.UserRefreshTokenRepository;
 import io.jsonwebtoken.Claims;
-import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,9 +28,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 @io.swagger.v3.oas.annotations.tags.Tag(name = "인증 API")

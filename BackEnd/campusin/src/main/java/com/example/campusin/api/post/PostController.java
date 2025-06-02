@@ -10,7 +10,6 @@ import com.example.campusin.domain.post.dto.response.PostIdResponse;
 import com.example.campusin.domain.post.dto.response.PostResponse;
 import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
 import com.example.campusin.domain.post.dto.response.PostStudyResponse;
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
