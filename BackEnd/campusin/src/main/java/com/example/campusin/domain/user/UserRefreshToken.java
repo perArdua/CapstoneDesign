@@ -4,41 +4,21 @@ package com.example.campusin.domain.user;
  * Github : http://github.com/perArdua
  */
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "USER_REFRESH_TOKEN")
+@RedisHash(value = "userRefreshToken", timeToLive = 259200)
 public class UserRefreshToken {
+
     @Id
-    @Column(name = "REFRESH_TOKEN_SEQ")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long refreshTokenSeq;
-
-    @Column(name = "LOGIN_ID", length = 64, unique = true)
-    @NotNull
-    @Size(max = 64)
     private String loginId;
-
-    @Column(name = "REFRESH_TOKEN", length = 256)
-    @NotNull
-    @Size(max = 256)
     private String refreshToken;
-
-    public UserRefreshToken(
-            @NotNull @Size(max = 64) String loginId,
-            @NotNull @Size(max = 256) String refreshToken
-    ) {
-        this.loginId = loginId;
-        this.refreshToken = refreshToken;
-    }
 }

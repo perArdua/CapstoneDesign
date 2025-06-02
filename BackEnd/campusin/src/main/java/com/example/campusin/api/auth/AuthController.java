@@ -5,23 +5,19 @@ package com.example.campusin.api.auth;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.common.config.properties.AppProperties;
-import com.example.campusin.common.response.ApiResponse;
-import com.example.campusin.common.utils.CookieUtil;
-import com.example.campusin.common.utils.HeaderUtil;
 import com.example.campusin.domain.auth.AuthReqModel;
+import com.example.campusin.domain.user.UserRefreshToken;
+import com.example.campusin.infra.user.UserRefreshTokenRepository;
+import com.example.campusin.common.response.ApiResponse;
+import com.example.campusin.common.config.properties.AppProperties;
 import com.example.campusin.domain.oauth.RoleType;
 import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.domain.token.AuthToken;
 import com.example.campusin.domain.token.AuthTokenProvider;
-import com.example.campusin.domain.user.UserRefreshToken;
-import com.example.campusin.infra.user.UserRefreshTokenRepository;
+import com.example.campusin.common.utils.CookieUtil;
+import com.example.campusin.common.utils.HeaderUtil;
 import io.jsonwebtoken.Claims;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,9 +26,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.Date;
 
-@Tag(name = "인증 API")
+@io.swagger.v3.oas.annotations.tags.Tag(name = "인증 API")
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
@@ -47,7 +46,7 @@ public class AuthController {
     private final static long THREE_DAYS_MSEC = 259200000;
     private final static String REFRESH_TOKEN = "refresh_token";
 
-    @Operation(summary = "사용 금지")
+    @io.swagger.v3.oas.annotations.Operation(summary = "사용 금지")
     @PostMapping("/login")
     public ApiResponse login(
             HttpServletRequest request,
@@ -69,9 +68,13 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         Date now = new Date();
+
+        UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
         AuthToken accessToken = tokenProvider.createAuthToken(
-                loginId,
-                ((UserPrincipal) authentication.getPrincipal()).getRoleType().getCode(),
+                principal.getUserId().toString(),
+                principal.getLoginId(),
+                principal.getRoleType().getCode(),
+                principal.getProviderType().toString(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
 
@@ -86,7 +89,7 @@ public class AuthController {
         if (userRefreshToken == null) {
             // 없는 경우 새로 등록
             userRefreshToken = new UserRefreshToken(loginId, refreshToken.getToken());
-            userRefreshTokenRepository.saveAndFlush(userRefreshToken);
+            userRefreshTokenRepository.save(userRefreshToken);
         } else {
             // DB에 refresh 토큰 업데이트
             userRefreshToken.setRefreshToken(refreshToken.getToken());
@@ -100,7 +103,7 @@ public class AuthController {
         return ApiResponse.success("token", accessToken.getToken());
     }
 
-    @Operation(summary = "만료된 토큰인 경우 새 토큰 발급")
+    @io.swagger.v3.oas.annotations.Operation(summary = "만료된 토큰인 경우 새 토큰 발급")
     @GetMapping("/refresh")
     public ApiResponse refreshToken (HttpServletRequest request, HttpServletResponse response) {
         // access token 확인
@@ -137,8 +140,10 @@ public class AuthController {
 
         Date now = new Date();
         AuthToken newAccessToken = tokenProvider.createAuthToken(
-                loginId,
-                roleType.getCode(),
+                claims.get("userId", String.class),
+                claims.getSubject(),
+                claims.get("role", String.class),
+                claims.get("providerType", String.class),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="campusin" target="17" />
+      <module name="campusin.main" target="17" />
+      <module name="campusin.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="campusin" options="-parameters" />
+      <module name="campusin.main" options="-parameters" />
+      <module name="campusin.test" options="-parameters" />
+    </option>
+  </component>
+</project>

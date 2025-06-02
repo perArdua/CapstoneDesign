@@ -5,21 +5,18 @@ package com.example.campusin.common.handler;
  * Github : http://github.com/perArdua
  */
 
+import com.example.campusin.domain.oauth.UserPrincipal;
+import com.example.campusin.domain.user.UserRefreshToken;
+import com.example.campusin.infra.user.UserRefreshTokenRepository;
 import com.example.campusin.common.config.properties.AppProperties;
-import com.example.campusin.common.utils.CookieUtil;
-import com.example.campusin.domain.loginInfo.OAuth2UserInfo;
-import com.example.campusin.domain.loginInfo.OAuth2UserInfoFactory;
 import com.example.campusin.domain.oauth.ProviderType;
 import com.example.campusin.domain.oauth.RoleType;
+import com.example.campusin.domain.loginInfo.OAuth2UserInfo;
+import com.example.campusin.domain.loginInfo.OAuth2UserInfoFactory;
+import com.example.campusin.infra.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
 import com.example.campusin.domain.token.AuthToken;
 import com.example.campusin.domain.token.AuthTokenProvider;
-import com.example.campusin.domain.user.UserRefreshToken;
-import com.example.campusin.infra.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
-import com.example.campusin.infra.user.UserRefreshTokenRepository;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import com.example.campusin.common.utils.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,6 +26,10 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
@@ -78,12 +79,15 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         OAuth2UserInfo userInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(providerType, user.getAttributes());
         Collection<? extends GrantedAuthority> authorities = ((OidcUser) authentication.getPrincipal()).getAuthorities();
 
+        UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
         RoleType roleType = hasAuthority(authorities, RoleType.ADMIN.getCode()) ? RoleType.ADMIN : RoleType.USER;
 
         Date now = new Date();
         AuthToken accessToken = tokenProvider.createAuthToken(
-                userInfo.getLoginId(),
+                principal.getUserId().toString(),
+                principal.getLoginId(),
                 roleType.getCode(),
+                principal.getProviderType().toString(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
 
@@ -95,13 +99,13 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 new Date(now.getTime() + refreshTokenExpiry)
         );
 
-        // DB 저장
+
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByLoginId(userInfo.getLoginId());
         if (userRefreshToken != null) {
             userRefreshToken.setRefreshToken(refreshToken.getToken());
         } else {
             userRefreshToken = new UserRefreshToken(userInfo.getLoginId(), refreshToken.getToken());
-            userRefreshTokenRepository.saveAndFlush(userRefreshToken);
+            userRefreshTokenRepository.save(userRefreshToken);
         }
 
         int cookieMaxAge = (int) refreshTokenExpiry / 60;
