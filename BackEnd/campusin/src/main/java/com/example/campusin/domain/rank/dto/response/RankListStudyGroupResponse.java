@@ -1,11 +1,11 @@
 package com.example.campusin.domain.rank.dto.response;
+
 import com.example.campusin.domain.rank.Ranks;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import static com.example.campusin.common.utils.WeekUtil.getWeekOfMonth;
-import static com.example.campusin.common.utils.WeekUtil.getWeekStartDate;
 
 @Getter
 @NoArgsConstructor

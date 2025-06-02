@@ -3,12 +3,11 @@ package com.example.campusin.domain.message;
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.user.User;
 import io.jsonwebtoken.lang.Assert;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "message")

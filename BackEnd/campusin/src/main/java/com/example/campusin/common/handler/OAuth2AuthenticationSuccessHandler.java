@@ -5,18 +5,22 @@ package com.example.campusin.common.handler;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.domain.oauth.UserPrincipal;
-import com.example.campusin.domain.user.UserRefreshToken;
-import com.example.campusin.infra.user.UserRefreshTokenRepository;
 import com.example.campusin.common.config.properties.AppProperties;
-import com.example.campusin.domain.oauth.ProviderType;
-import com.example.campusin.domain.oauth.RoleType;
+import com.example.campusin.common.utils.CookieUtil;
 import com.example.campusin.domain.loginInfo.OAuth2UserInfo;
 import com.example.campusin.domain.loginInfo.OAuth2UserInfoFactory;
-import com.example.campusin.infra.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import com.example.campusin.domain.oauth.ProviderType;
+import com.example.campusin.domain.oauth.RoleType;
+import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.domain.token.AuthToken;
 import com.example.campusin.domain.token.AuthTokenProvider;
-import com.example.campusin.common.utils.CookieUtil;
+import com.example.campusin.domain.user.UserRefreshToken;
+import com.example.campusin.infra.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import com.example.campusin.infra.user.UserRefreshTokenRepository;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,10 +30,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;

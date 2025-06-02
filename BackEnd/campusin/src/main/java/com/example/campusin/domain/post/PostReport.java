@@ -7,13 +7,12 @@ package com.example.campusin.domain.post;
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.user.User;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JoinColumnOrFormula;
-import org.hibernate.annotations.SQLDelete;
 
-import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity

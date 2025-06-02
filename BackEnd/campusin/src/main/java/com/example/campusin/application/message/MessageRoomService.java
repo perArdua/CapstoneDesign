@@ -2,7 +2,6 @@ package com.example.campusin.application.message;
 
 import com.example.campusin.domain.message.Message;
 import com.example.campusin.domain.message.MessageRoom;
-import com.example.campusin.domain.message.MessageRoomIdempotency;
 import com.example.campusin.domain.message.VisibilityState;
 import com.example.campusin.domain.message.dto.MessageRoomsWithLastMessages;
 import com.example.campusin.domain.message.dto.request.MessageRoomCreateRequest;
@@ -10,10 +9,8 @@ import com.example.campusin.domain.message.dto.request.MessageRoomGetRequest;
 import com.example.campusin.domain.message.dto.response.MessageRoomIdResponse;
 import com.example.campusin.domain.message.dto.response.MessageRoomListResponse;
 import com.example.campusin.domain.message.dto.response.MessageRoomResponse;
-import com.example.campusin.domain.post.Post;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.message.MessageRepository;
-import com.example.campusin.infra.message.MessageRoomIdempotencyRepository;
 import com.example.campusin.infra.message.MessageRoomRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.user.UserRepository;

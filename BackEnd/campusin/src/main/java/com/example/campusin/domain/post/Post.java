@@ -7,6 +7,7 @@ import com.example.campusin.domain.photo.Photo;
 import com.example.campusin.domain.post.dto.request.PostUpdateRequest;
 import com.example.campusin.domain.tag.Tag;
 import com.example.campusin.domain.user.User;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,6 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

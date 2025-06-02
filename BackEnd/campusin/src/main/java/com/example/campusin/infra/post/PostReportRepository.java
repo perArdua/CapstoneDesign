@@ -18,4 +18,7 @@ public interface PostReportRepository extends JpaRepository<PostReport, PostRepo
     @Transactional
     @Query("DELETE FROM PostReport pr WHERE pr.post.id = :postId")
     void deleteByPostId(@Param("postId") Long postId);
+
+    @Query("SELECT SUM(pr.reportScore) FROM PostReport pr WHERE pr.post.id = :postId")
+    int sumReportScore(@Param("postId") Long postId);
 }
