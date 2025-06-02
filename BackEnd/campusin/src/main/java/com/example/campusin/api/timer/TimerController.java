@@ -7,9 +7,8 @@ import com.example.campusin.domain.timer.request.TimerCreateRequest;
 import com.example.campusin.domain.timer.request.TimerUpdateRequest;
 import com.example.campusin.domain.timer.response.TimerIdResponse;
 import com.example.campusin.domain.timer.response.TimerResponse;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,7 +24,7 @@ import java.time.LocalDateTime;
  * Github : http://github.com/perArdua
  */
 
-@Api(tags = {"타이머 API"})
+@Tag(name = "타이머 API")
 @RestController
 @RequestMapping("/api/v1/timer")
 @RequiredArgsConstructor
@@ -33,9 +32,9 @@ public class TimerController {
 
     private final TimerService timerService;
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = TimerIdResponse.class),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = TimerIdResponse.class))),
             }
     )
     @Operation(summary = "Timer 생성", description = "Timer를 생성합니다.")
@@ -45,9 +44,9 @@ public class TimerController {
         return ApiResponse.success("Timer 생성이 완료되었습니다.", timerService.createTimer(principal.getUserId(), request));
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = TimerIdResponse.class),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = TimerIdResponse.class))),
             }
     )
     @Operation(summary = "특정 Timer에 시간을 더함", description = "특정 Timer에 시간을 더함 시간은 초 단위임")
@@ -65,9 +64,9 @@ public class TimerController {
         return ApiResponse.success("Timer 삭제가 완료되었습니다.", "DELETE TIMER SUCCESSFULLY");
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = TimerResponse.class, responseContainer = "Page"),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = TimerResponse.class)))),
             }
     )
     @Operation(summary = "Timer 조회", description = "Timer를 조회합니다.")
@@ -80,9 +79,9 @@ public class TimerController {
         return ApiResponse.success("Timer 조회가 완료되었습니다.", timerService.getAllTimerList(principal.getUserId(), pageable));
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = LocalDateTime.class),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = LocalDateTime.class))),
             }
     )
     @Operation(summary = "Timer 마지막 시간 조회", description = "Timer 마지막 시간을 조회합니다.")
@@ -91,9 +90,9 @@ public class TimerController {
         return ApiResponse.success("가장 마지막에 사용한 Timer의 DateTime 조회가 완료되었습니다.", timerService.getLastDateTime(principal.getUserId()));
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "OK")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK")
             }
     )
     @Operation(summary = "Timer 초기화", description = "Timer를 초기화합니다.")

@@ -4,12 +4,10 @@ import com.example.campusin.application.statistics.StatisticsService;
 import com.example.campusin.application.studygroup.StudyGroupService;
 import com.example.campusin.common.response.ApiResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
-import com.example.campusin.domain.studygroup.dto.request.StudyGroupTimeRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupCreateRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupJoinRequest;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
-@Api(tags = {"스터디그룹 API"})
+@Tag(name = "스터디그룹 API")
 @RestController
 @RequestMapping("/api/v1/studygroup")
 @RequiredArgsConstructor
@@ -30,9 +28,9 @@ public class StudyGroupController {
     private final StudyGroupService studyGroupService;
     private final StatisticsService statisticsService;
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "StudyGroup 생성 성공")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "StudyGroup 생성 성공")
             }
     )
     @Operation(summary = "StudyGroup 생성")
@@ -43,9 +41,9 @@ public class StudyGroupController {
     }
 
     @Operation(summary = "StudyGroup 가입")
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "StudyGroup 가입 성공")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "StudyGroup 가입 성공")
             }
     )
     @PostMapping("/join")
@@ -55,9 +53,9 @@ public class StudyGroupController {
     }
 
     @Operation(summary = "StudyGroup 탈퇴 및 삭제")
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "StudyGroup 탈퇴 및 삭제 성공")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "StudyGroup 탈퇴 및 삭제 성공")
             }
     )
     @DeleteMapping("/{studygroupId}")
@@ -69,9 +67,9 @@ public class StudyGroupController {
     }
 
     //상세정보
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "StudyGroup 상세정보 조회 성공")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "StudyGroup 상세정보 조회 성공")
             }
     )
     @Operation(summary = "StudyGroup 상세정보 조회")
@@ -82,9 +80,9 @@ public class StudyGroupController {
     }
 
     //스터디그룹 목록 조회
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "StudyGroup 목록 조회 성공")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "StudyGroup 목록 조회 성공")
             }
     )
     @Operation(summary = "StudyGroup 목록 조회")
@@ -98,9 +96,9 @@ public class StudyGroupController {
     }
 
     // 스터디그룹 멤버들의 주간 공부시간 조회
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "StudyGroup 멤버들의 주간 공부시간 조회 성공")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "StudyGroup 멤버들의 주간 공부시간 조회 성공")
             }
     )
     @Operation(summary = "StudyGroup 멤버들의 주간 공부시간 조회")

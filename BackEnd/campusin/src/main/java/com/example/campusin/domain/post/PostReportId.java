@@ -4,13 +4,13 @@ package com.example.campusin.domain.post;
  * Created by kok8454@gmail.com on 2023-09-09
  * Github : http://github.com/perArdua
  */
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable

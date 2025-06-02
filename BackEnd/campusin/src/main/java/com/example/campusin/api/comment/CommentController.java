@@ -6,9 +6,8 @@ import com.example.campusin.domain.comment.dto.request.CommentCreateRequest;
 import com.example.campusin.domain.comment.dto.response.CommentCreateResponse;
 import com.example.campusin.domain.comment.dto.response.CommentsOnPostResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +19,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 
-@Api(tags = {"댓글 API"})
+@Tag(name = "댓글 API")
 @RestController
 @RequestMapping("/api/v1/posts/{postId}/comments")
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService commentService;
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "댓글 생성 성공", response = CommentCreateResponse.class),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "댓글 생성 성공", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = CommentCreateResponse.class))),
             }
     )
     @Operation(summary = "댓글 생성", description = "댓글을 생성합니다.")
@@ -52,9 +51,9 @@ public class CommentController {
         return ApiResponse.success("댓글 삭제 성공", "COMMENT DELETE SUCCESSFULLY");
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "댓글 조회 성공", response = CommentsOnPostResponse.class, responseContainer = "Page"),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "댓글 조회 성공", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = CommentsOnPostResponse.class)))),
             }
     )
     @Operation(summary = "댓글 조회", description = "댓글을 조회합니다.")

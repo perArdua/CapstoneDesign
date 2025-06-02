@@ -3,20 +3,17 @@ package com.example.campusin.domain.todo;
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.todo.dto.request.TodoUpdateRequest;
 import com.example.campusin.domain.user.User;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
 
 
 @Entity
 @Table(name = "Todo")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "UPDATE todo SET deleted_at = CURRENT_TIMESTAMP where todo_id = ?")
 public class Todo extends BaseTimeEntity {

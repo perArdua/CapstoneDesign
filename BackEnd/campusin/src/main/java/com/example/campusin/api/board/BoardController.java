@@ -7,12 +7,9 @@ import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.domain.post.dto.request.PostCreateRequest;
 import com.example.campusin.domain.post.dto.response.PostIdResponse;
 import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -27,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
  * Github : http://github.com/perArdua
  */
 
-@Api(tags = {"게시판 API"})
+@Tag(name = "게시판 API")
 @RestController
 @RequestMapping("/api/v1/boards")
 @RequiredArgsConstructor
@@ -35,9 +32,9 @@ public class BoardController {
 
     private final PostService postService;
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시판별 게시글 목록 조회 성공", response = PostSimpleResponse.class, responseContainer = "Page")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시판별 게시글 목록 조회 성공", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
             }
     )
     @Operation(summary = "게시판별 게시글 목록 조회")
@@ -52,9 +49,9 @@ public class BoardController {
         return ApiResponse.success("게시글 목록", postService.getPostsByBoard(boardId, pageable));
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시판별 게시글 검색 성공", response = PostSimpleResponse.class, responseContainer = "Page")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시판별 게시글 검색 성공", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
             }
     )
     @Operation(summary = "게시판별 게시글 검색")
@@ -70,8 +67,8 @@ public class BoardController {
         return ApiResponse.success("게시글 목록", postService.searchPostsAtBoard(boardId, keyword, pageable));
     }
 
-    @ApiResponses({
-            @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 생성 성공, 생성된 게시글의 id 반환", response = PostIdResponse.class),
+    @io.swagger.v3.oas.annotations.responses.ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 생성 성공, 생성된 게시글의 id 반환", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostIdResponse.class))),
     })
     @Operation(summary = "게시글 생성")
     @PostMapping("/{boardId}/posts/{tagId}")
@@ -84,9 +81,9 @@ public class BoardController {
         return ApiResponse.success("게시글 생성", postService.createPost(boardId, tagId, principal.getUserId(), request));
     }
 
-    @ApiResponses({
-            @io.swagger.annotations.ApiResponse(code = 200, message = "게시판 초기화 성공"),
-            @io.swagger.annotations.ApiResponse(code = 500, message = "서버 에러")
+    @io.swagger.v3.oas.annotations.responses.ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시판 초기화 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 에러")
     })
     @Operation(summary = "게시판 초기화 및 태그 초기화")
     @GetMapping("/init")
@@ -94,9 +91,9 @@ public class BoardController {
         return ApiResponse.success("게시판, 태그 초기화", postService.initBoard());
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시판 고유 id값 얻기 성공", response = BoardSimpleResponse.class, responseContainer = "Page")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시판 고유 id값 얻기 성공", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = BoardSimpleResponse.class))))
             }
     )
     @Operation(summary = "게시판 고유 id값 얻기")
@@ -117,9 +114,9 @@ public class BoardController {
         return ApiResponse.success("태그별 고유 id값 얻기", postService.getTags(pageable));
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "태그별 게시글 목록 조회 성공", response = PostSimpleResponse.class, responseContainer = "Page")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "태그별 게시글 목록 조회 성공", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
             }
     )
     @Operation(summary = "게시판 내 태그별 게시글 목록 조회")

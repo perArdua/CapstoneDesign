@@ -1,7 +1,6 @@
 package com.example.campusin.domain.studygroup.dto.request;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,12 +15,12 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-@ApiModel(value = "StudyGroupTimeRequest", description = "StudyGroup Time Request")
+@Schema(name = "StudyGroupTimeRequest", description = "StudyGroup Time Request")
 public class StudyGroupTimeRequest {
 
-    @ApiModelProperty (value = "StudyGroup ID")
+    @Schema(name = "StudyGroup ID")
     private Long studyGroupId;
 
-    @ApiModelProperty (value = "End Date")
+    @Schema(name = "End Date")
     private LocalDate endDate;
 }

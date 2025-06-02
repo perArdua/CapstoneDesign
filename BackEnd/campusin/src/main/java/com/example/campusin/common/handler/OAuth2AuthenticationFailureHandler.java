@@ -5,18 +5,18 @@ package com.example.campusin.common.handler;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.infra.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
 import com.example.campusin.common.utils.CookieUtil;
+import com.example.campusin.infra.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static com.example.campusin.infra.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository.REDIRECT_URI_PARAM_COOKIE_NAME;

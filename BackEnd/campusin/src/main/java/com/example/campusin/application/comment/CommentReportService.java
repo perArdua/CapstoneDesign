@@ -1,7 +1,6 @@
 package com.example.campusin.application.comment;
 
 import com.example.campusin.domain.comment.Comment;
-import com.example.campusin.domain.comment.CommentLikeId;
 import com.example.campusin.domain.comment.CommentReport;
 import com.example.campusin.domain.comment.CommentReportId;
 import com.example.campusin.domain.user.User;

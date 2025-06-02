@@ -5,7 +5,7 @@ package com.example.campusin.common.utils;
  * Github : http://github.com/perArdua
  */
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class HeaderUtil {
 

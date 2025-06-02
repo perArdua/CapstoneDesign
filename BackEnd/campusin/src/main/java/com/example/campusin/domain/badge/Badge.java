@@ -2,13 +2,12 @@ package com.example.campusin.domain.badge;
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.user.User;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
 
 /**
  * Created by kok8454@gmail.com on 2023-06-05

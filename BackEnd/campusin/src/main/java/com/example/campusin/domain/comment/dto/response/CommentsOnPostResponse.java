@@ -2,21 +2,21 @@ package com.example.campusin.domain.comment.dto.response;
 
 import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.user.User;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.querydsl.core.annotations.QueryProjection;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import com.querydsl.core.annotations.QueryProjection;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ApiModel(value = "댓글 응답", description = "댓글 응답")
+@Schema(name = "댓글 응답", description = "댓글 응답")
 public class CommentsOnPostResponse extends CommentResponse{
 
-    @ApiModelProperty(value = "대댓글 리스트", example = "[]")
+    @Schema(description = "대댓글 리스트", example = "[]")
     private List<CommentsOnPostResponse> children = new ArrayList<>();
 
     @QueryProjection

@@ -5,9 +5,9 @@ package com.example.campusin.application.oauth;
  * Github : http://github.com/perArdua
  */
 
+import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.user.UserRepository;
-import com.example.campusin.domain.oauth.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

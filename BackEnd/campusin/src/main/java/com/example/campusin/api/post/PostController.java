@@ -8,9 +8,8 @@ import com.example.campusin.domain.post.dto.response.PostIdResponse;
 import com.example.campusin.domain.post.dto.response.PostResponse;
 import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
 import com.example.campusin.domain.post.dto.response.PostStudyResponse;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,16 +24,16 @@ import org.springframework.web.bind.annotation.*;
  * Github : http://github.com/perArdua
  */
 
-@Api(tags = {"게시글 API"})
+@Tag(name = "게시글 API")
 @RestController
 @RequestMapping("/api/v1/posts")
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 수정 성공", response = PostIdResponse.class)
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 수정 성공", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostIdResponse.class)))
             }
     )
     @Operation(summary = "게시글 수정")
@@ -44,9 +43,9 @@ public class PostController {
 
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 읽기 성공", response = PostResponse.class)
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 읽기 성공", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostResponse.class)))
             }
     )
     @Operation(summary = "게시글 읽기")
@@ -56,9 +55,9 @@ public class PostController {
     }
 
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 삭제 성공")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 삭제 성공")
             }
     )
     @Operation(summary = "게시글 삭제")
@@ -68,9 +67,9 @@ public class PostController {
         return ApiResponse.success("게시글 삭제", "Post deleted successfully");
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 검색 성공", response = PostSimpleResponse.class, responseContainer = "Page")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 검색 성공", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
             }
     )
     @Operation(summary = "게시글 검색")
@@ -83,9 +82,9 @@ public class PostController {
         return ApiResponse.success("게시글 검색", postService.searchPosts(keyword, pageable));
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 목록", response = PostSimpleResponse.class, responseContainer = "Page")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 목록", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
             }
     )
     @Operation(summary = "내가 작성한 게시글 목록")
@@ -99,9 +98,9 @@ public class PostController {
         return ApiResponse.success("게시글 목록", postService.getPostsByUser(principal.getUserId(), pageable));
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "내가 작성한 댓글의 게시글 목록", response = PostSimpleResponse.class, responseContainer = "Page")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "내가 작성한 댓글의 게시글 목록", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
             }
     )
     @Operation(summary = "내가 작성한 댓글의 게시글 목록")
@@ -114,9 +113,9 @@ public class PostController {
         return ApiResponse.success("내가 작성한 댓글의 게시글 목록", postService.getPostsThatUserCommentedAt(principal.getUserId(), pageable));
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 좋아요")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 좋아요")
             }
     )
     @Operation(summary = "게시글 좋아요")
@@ -129,9 +128,9 @@ public class PostController {
         return ApiResponse.success("이미 좋아요한 게시글입니다.", "Already liked post");
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 좋아요 취소")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 좋아요 취소")
             }
     )
     @Operation(summary = "게시글 좋아요 취소")
@@ -144,9 +143,9 @@ public class PostController {
         return ApiResponse.success("좋아요를 누르지 않은 게시글입니다.", "Not liked post");
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 신고")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 신고")
             }
     )
     @Operation(summary = "게시글 신고")
@@ -159,9 +158,9 @@ public class PostController {
         return ApiResponse.success("이미 신고한 게시글입니다.", "Already reported post");
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "게시글 신고 취소")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 신고 취소")
             }
     )
     @Operation(summary = "게시글 신고 취소")
@@ -174,9 +173,9 @@ public class PostController {
         return ApiResponse.success("신고하지 않은 게시글입니다.", "Not reported post");
     }
     
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "스터디 그룹 게시글 목록", response = PostStudyResponse.class, responseContainer = "Page")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "스터디 그룹 게시글 목록", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostStudyResponse.class))))
             }
     )
     @Operation(summary = "스터디 그룹 게시글 목록(스터디원 모두의 게시글)")

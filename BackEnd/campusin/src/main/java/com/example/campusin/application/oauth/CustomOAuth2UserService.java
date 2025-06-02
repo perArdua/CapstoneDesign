@@ -5,14 +5,14 @@ package com.example.campusin.application.oauth;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.domain.user.User;
-import com.example.campusin.infra.user.UserRepository;
-import com.example.campusin.domain.oauth.ProviderType;
-import com.example.campusin.domain.oauth.RoleType;
-import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.common.exception.OAuthProviderMissMatchException;
 import com.example.campusin.domain.loginInfo.OAuth2UserInfo;
 import com.example.campusin.domain.loginInfo.OAuth2UserInfoFactory;
+import com.example.campusin.domain.oauth.ProviderType;
+import com.example.campusin.domain.oauth.RoleType;
+import com.example.campusin.domain.oauth.UserPrincipal;
+import com.example.campusin.domain.user.User;
+import com.example.campusin.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;

@@ -2,19 +2,20 @@ package com.example.campusin.domain.studygroup;
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.user.User;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "UPDATE studygroupmember SET deleted_at = CURRENT_TIMESTAMP where studygroupmember_id = ?")
 @Table(name = "studygroupmember")
 @NoArgsConstructor
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class StudyGroupMember extends BaseTimeEntity {
 
     @Id

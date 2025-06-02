@@ -1,29 +1,25 @@
 package com.example.campusin.api.badge;
 
 import com.example.campusin.application.badge.BadgeService;
-import com.example.campusin.application.user.UserService;
 import com.example.campusin.common.response.ApiResponse;
-import com.example.campusin.domain.badge.request.BadgeCreateRequest;
 import com.example.campusin.domain.badge.response.BadgeResponse;
-import com.example.campusin.domain.oauth.RoleType;
-import com.example.campusin.domain.oauth.UserPrincipal;
-import com.example.campusin.domain.user.User;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by kok8454@gmail.com on 2023-06-05
  * Github : http://github.com/perArdua
  */
 
-@Api(tags = {"뱃지 API"})
+@Tag(name = "뱃지 API")
 @RestController
 @RequestMapping("/api/v1/badges")
 @RequiredArgsConstructor
@@ -31,9 +27,9 @@ public class BadgeController {
 
     private final BadgeService badgeService;
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "유저가 갖고 있는 모든 뱃지 읽기 성공", response = BadgeResponse.class, responseContainer = "Page")
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "유저가 갖고 있는 모든 뱃지 읽기 성공", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = BadgeResponse.class))))
             }
     )
     @Operation(summary = "유저가 갖고 있는 모든 뱃지 읽기")

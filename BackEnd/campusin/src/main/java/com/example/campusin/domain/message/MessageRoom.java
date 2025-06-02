@@ -3,6 +3,7 @@ package com.example.campusin.domain.message;
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.post.Post;
 import com.example.campusin.domain.user.User;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +12,6 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.util.Assert;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

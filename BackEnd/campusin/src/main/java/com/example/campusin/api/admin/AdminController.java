@@ -1,30 +1,23 @@
 package com.example.campusin.api.admin;
 
-import com.example.campusin.application.comment.CommentService;
 import com.example.campusin.application.badge.BadgeService;
+import com.example.campusin.application.comment.CommentService;
 import com.example.campusin.application.post.PostService;
 import com.example.campusin.common.response.ApiResponse;
 import com.example.campusin.domain.badge.request.BadgeCreateRequest;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
 import com.example.campusin.domain.comment.Comment;
-import com.example.campusin.domain.comment.dto.response.CommentOneResponse;
-import com.example.campusin.domain.comment.dto.response.CommentResponse;
 import com.example.campusin.domain.comment.dto.response.CommentsOnPostResponse;
-import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
-import io.swagger.annotations.Api;
+import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +29,7 @@ import java.util.List;
  * Github : http://github.com/perArdua
  */
 
-@Api(tags = {"관리자 API"})
+@Tag(name = "관리자 API")
 @RestController
 @RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor
