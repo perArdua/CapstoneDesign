@@ -5,17 +5,21 @@ package com.example.campusin.domain.user;
  */
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
+import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.oauth.ProviderType;
 import com.example.campusin.domain.oauth.RoleType;
+import com.example.campusin.domain.post.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,12 +41,12 @@ public class User extends BaseTimeEntity {
     @Size(max = 64)
     private String loginId;
 
-    @Column(name = "USERNAME", length = 100, unique = true)
+    @Column(name = "USERNAME", length = 100)
     @NotNull
     @Size(max = 100)
     private String username;
 
-    @Column(name = "NICKNAME", length = 100)
+    @Column(name = "NICKNAME", length = 100, unique = true)
     private String nickname;
 
     @JsonIgnore
