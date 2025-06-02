@@ -4,11 +4,11 @@ package com.example.campusin.domain.loginInfo;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.domain.oauth.ProviderType;
 import com.example.campusin.domain.loginInfo.impl.FacebookOAuth2UserInfo;
 import com.example.campusin.domain.loginInfo.impl.GoogleOAuth2UserInfo;
 import com.example.campusin.domain.loginInfo.impl.KakaoOAuth2UserInfo;
 import com.example.campusin.domain.loginInfo.impl.NaverOAuth2UserInfo;
+import com.example.campusin.domain.oauth.ProviderType;
 
 import java.util.Map;
 

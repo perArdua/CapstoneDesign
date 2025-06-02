@@ -1,11 +1,8 @@
 package com.example.campusin.domain.studygroup.dto.response;
 
 import com.example.campusin.domain.studygroup.StudyGroup;
-import com.example.campusin.domain.studygroup.StudyGroupMember;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,28 +12,28 @@ import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
-@ApiModel(value = "StudyGroupDetailResponse", description = "Detailed response for Study Group")
+@Schema(name = "StudyGroupDetailResponse", description = "Detailed response for Study Group")
 public class StudyGroupDetailResponse {
 
-    @ApiModelProperty(value = "StudyGroup ID")
+    @Schema(description = "StudyGroup ID")
     private Long studyGroupId;
 
-    @ApiModelProperty(value = "StudyGroup Name")
+    @Schema(description = "StudyGroup Name")
     private String studyGroupName;
 
-    @ApiModelProperty(value = "StudyGroup Limited Member Size")
+    @Schema(description = "StudyGroup Limited Member Size")
     private int limitedMemberSize;
 
-    @ApiModelProperty(value = "StudyGroup Current Member Size")
+    @Schema(description = "StudyGroup Current Member Size")
     private int currentMemberSize;
 
-    @ApiModelProperty(value = "StudyGroup Leader Name")
+    @Schema(description = "StudyGroup Leader Name")
     private String leaderName;
 
-    @ApiModelProperty(value = "StudyGroup Created At")
+    @Schema(description = "StudyGroup Created At")
     private LocalDateTime createdAt;
 
-    @ApiModelProperty(value = "List of StudyGroup Members")
+    @Schema(description = "List of StudyGroup Members")
     private List<StudyGroupMemberResponse> memberList;
 
     @Builder

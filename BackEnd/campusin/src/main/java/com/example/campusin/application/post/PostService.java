@@ -25,7 +25,9 @@ import com.example.campusin.infra.studygroup.StudyGroupRepository;
 import com.example.campusin.infra.tag.TagRepository;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

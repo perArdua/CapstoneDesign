@@ -5,21 +5,23 @@ package com.example.campusin.api.auth;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.domain.auth.AuthReqModel;
-import com.example.campusin.domain.user.UserRefreshToken;
-import com.example.campusin.infra.user.UserRefreshTokenRepository;
-import com.example.campusin.common.response.ApiResponse;
 import com.example.campusin.common.config.properties.AppProperties;
+import com.example.campusin.common.response.ApiResponse;
+import com.example.campusin.common.utils.CookieUtil;
+import com.example.campusin.common.utils.HeaderUtil;
+import com.example.campusin.domain.auth.AuthReqModel;
 import com.example.campusin.domain.oauth.RoleType;
 import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.domain.token.AuthToken;
 import com.example.campusin.domain.token.AuthTokenProvider;
-import com.example.campusin.common.utils.CookieUtil;
-import com.example.campusin.common.utils.HeaderUtil;
+import com.example.campusin.domain.user.UserRefreshToken;
+import com.example.campusin.infra.user.UserRefreshTokenRepository;
 import io.jsonwebtoken.Claims;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,12 +30,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
-@Api(tags = {"인증 API"})
+@Tag(name = "인증 API")
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor

@@ -1,16 +1,11 @@
 package com.example.campusin.domain.post.dto.response;
 
-import com.example.campusin.domain.board.BoardType;
-import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
-import com.example.campusin.domain.photo.response.PhotoResponse;
 import com.example.campusin.domain.post.Post;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Schema(name = "스터디 그룹 기록 페이지 응답")

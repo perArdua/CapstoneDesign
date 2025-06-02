@@ -1,7 +1,7 @@
 package com.example.campusin.application.comment;
 
 import com.example.campusin.domain.board.BoardType;
-import com.example.campusin.domain.comment.*;
+import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.comment.dto.request.CommentCreateRequest;
 import com.example.campusin.domain.comment.dto.response.CommentCreateResponse;
 import com.example.campusin.domain.comment.dto.response.CommentsOnPostResponse;

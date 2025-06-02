@@ -4,13 +4,13 @@ import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.comment.dto.response.CommentsOnPostResponse;
 import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.example.campusin.domain.comment.QComment.comment;
 public class CommentRepositoryImpl implements CommentRepositoryCustom{

@@ -1,14 +1,13 @@
 package com.example.campusin.domain.board;
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
 
 /**
  * Created by kok8454@gmail.com on 2023-05-07

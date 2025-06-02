@@ -2,33 +2,32 @@ package com.example.campusin.domain.studygroup.dto.response;
 
 import com.example.campusin.domain.studygroup.StudyGroup;
 import com.example.campusin.domain.studygroup.StudyGroupMember;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-@ApiModel(value = "StudyGroup 응답", description = "StudyGroup 응답")
+@Schema(name = "StudyGroup 응답", description = "StudyGroup 응답")
 public class StudyGroupResponse {
 
-    @ApiModelProperty(value = "StudyGroup id", example = "1")
+    @Schema(description = "StudyGroup id", example = "1")
     private Long id;
 
-    @ApiModelProperty(value = "StudyGroup name", example = "알고리즘스터디")
+    @Schema(description = "StudyGroup name", example = "알고리즘스터디")
     private String studygroupName;
 
-    @ApiModelProperty(value = "StudyGroup 제한인원", example = "5")
+    @Schema(description = "StudyGroup 제한인원", example = "5")
     private int limitedMemberSize;
 
-    @ApiModelProperty(value = "StudyGroup 현재인원", example = "3")
+    @Schema(description = "StudyGroup 현재인원", example = "3")
     private int CurrentMemberSize;
 
-    @ApiModelProperty(value = "StudyGroup user Name", example = "1")
+    @Schema(description = "StudyGroup user Name", example = "1")
     private String userName;
 
-    @ApiModelProperty(value = "StudyGroup createdAt", example = "2021-05-08T00:00:00")
+    @Schema(description = "StudyGroup createdAt", example = "2021-05-08T00:00:00")
     private LocalDateTime createdAt;
 
     @Builder

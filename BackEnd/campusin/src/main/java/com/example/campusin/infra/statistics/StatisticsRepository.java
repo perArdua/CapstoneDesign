@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDate;
-
 /**
  * Created by kok8454@gmail.com on 2023-06-02
  * Github : http://github.com/perArdua

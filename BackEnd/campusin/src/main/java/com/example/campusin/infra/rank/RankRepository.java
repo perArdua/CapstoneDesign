@@ -10,8 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-
 
 
 //@Query(value = "SELECT COUNT(p) FROM Post p WHERE p.user = :user AND p.board.boardType = 'Question' AND DATE_FORMAT(p.createdAt, '%Y-%m-%d') >= :startDate AND DATE_FORMAT(p.createdAt, '%Y-%m-%d') < :endDate")

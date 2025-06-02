@@ -2,8 +2,6 @@ package com.example.campusin.domain.board.dto.response;
 
 import com.example.campusin.domain.board.Board;
 import com.example.campusin.domain.board.BoardType;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 

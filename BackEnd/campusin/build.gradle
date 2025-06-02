@@ -3,72 +3,101 @@ buildscript {
         queryDslVersion = "5.0.0"
     }
 }
+
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.7.9'
-    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
-    id 'org.springdoc.openapi-gradle-plugin' version '1.6.0'
+    id 'org.springframework.boot' version '3.0.0'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = "17"
 
 repositories {
     mavenCentral()
 }
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
-}
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+    querydsl
+    all {
+        exclude group: 'ch.qos.logback'
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
     }
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // Spring Boot Starter
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-//    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.7.1'
+    implementation 'mysql:mysql-connector-java:8.0.27'
+
+    // OpenSearch
+    implementation 'org.opensearch.client:opensearch-java:2.3.0'
+    implementation 'org.opensearch.client:opensearch-rest-client:2.3.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'jakarta.json:jakarta.json-api:2.1.1'
+    implementation 'org.eclipse.parsson:parsson:1.1.1'
+
+    // JWT
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
-    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    implementation 'mysql:mysql-connector-java:8.0.27' // mysql사용시 주석처리 해제
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    runtimeOnly 'com.h2database:h2' // mysql 사용시 주석처리
+
+    // QueryDSL (Jakarta)
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
+    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta"
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // Swagger OpenAPI 3.x 최신
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+
+    // Logging - log4j2만 유지, slf4j 브리지는 log4j-slf4j-impl만
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
+
+    // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:2.7.9"
-    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.7.1'
-//    implementation('org.springframework.boot:spring-boot-starter') {
-//        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-//    }
-
-    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
-    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
-
     testImplementation 'io.findify:s3mock_2.12:0.2.4'
+}
 
-    implementation "io.springfox:springfox-boot-starter:3.0.0"
+// ✅ QueryDSL 전용 task 생성 (Entity만)
+tasks.register("generateQueryDSL", JavaCompile) {
+    source = fileTree('src/main/java/com/example/campusin/domain/entity')
+    classpath = sourceSets.main.compileClasspath
+    destinationDirectory = file("$buildDir/generated/querydsl")
+    options.annotationProcessorPath = configurations.querydsl
+}
 
-    // junit5
-    implementation "org.springframework.boot:spring-boot-starter-test"
+sourceSets {
+    main {
+        java {
+            srcDirs += [file("$buildDir/generated/querydsl")]
+        }
+    }
+}
 
+tasks.named('compileJava') {
+    dependsOn tasks.named('generateQueryDSL')
 }
 
 jar {
@@ -81,21 +110,6 @@ tasks.withType(Jar) {
 
 tasks.named('test') {
     useJUnitPlatform()
-}
-
-def querydslDir = "$buildDir/generated/querydsl"
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
-}
-sourceSets {
-    main.java.srcDir querydslDir
-}
-configurations {
-    querydsl.extendsFrom compileClasspath
-}
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
 }
 
 task copyPrivate(type: Copy) {
@@ -119,3 +133,5 @@ task copyPrivate(type: Copy) {
         }
     }
 }
+
+targetCompatibility = JavaVersion.VERSION_17

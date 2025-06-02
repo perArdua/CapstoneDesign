@@ -6,9 +6,8 @@ import com.example.campusin.domain.oauth.UserPrincipal;
 import com.example.campusin.domain.statistics.dto.request.StatisticsCreateRequest;
 import com.example.campusin.domain.statistics.dto.response.StatisticsIdResponse;
 import com.example.campusin.domain.statistics.dto.response.StatisticsResponse;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +20,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/statistics")
-@Api(tags = {"통계 API"})
+@Tag(name = "통계 API")
 public class StatisticsController {
 
     private final StatisticsService statisticsService;
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "성공", response = StatisticsIdResponse.class)
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = StatisticsIdResponse.class)))
             }
     )
     @Operation(summary = "통계 생성", description = "특정 날짜에 통계 생성")
@@ -38,9 +37,9 @@ public class StatisticsController {
         return ApiResponse.success("통계 생성", statisticsService.createStatistics(userPrincipal.getUserId(), request));
     }
 
-    @ApiResponses(
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.annotations.ApiResponse(code = 200, message = "성공", response = StatisticsResponse.class)
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = StatisticsResponse.class)))
             }
     )
     @Operation(summary = "통계 조회", description = "특정날짜의 통계 조회")

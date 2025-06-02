@@ -3,10 +3,11 @@ package com.example.campusin.application.studygroup;
 import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.studygroup.StudyGroup;
 import com.example.campusin.domain.studygroup.StudyGroupMember;
-import com.example.campusin.domain.studygroup.dto.request.StudyGroupTimeRequest;
 import com.example.campusin.domain.studygroup.dto.request.StudyGroupCreateRequest;
-import com.example.campusin.domain.studygroup.dto.request.StudyGroupJoinRequest;
-import com.example.campusin.domain.studygroup.dto.response.*;
+import com.example.campusin.domain.studygroup.dto.response.StudyGroupDetailResponse;
+import com.example.campusin.domain.studygroup.dto.response.StudyGroupIdResponse;
+import com.example.campusin.domain.studygroup.dto.response.StudyGroupResponse;
+import com.example.campusin.domain.studygroup.dto.response.StudyGroupTimeResponse;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.statistics.StatisticsRepository;
 import com.example.campusin.infra.studygroup.StudyGroupMemberRepository;
@@ -19,13 +20,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.example.campusin.domain.studygroup.QStudyGroup.studyGroup;
 
 /**
  * Created by kok8454@gmail.com on 2023-03-19

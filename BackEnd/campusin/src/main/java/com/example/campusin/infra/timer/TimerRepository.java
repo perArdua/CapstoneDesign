@@ -1,7 +1,6 @@
 package com.example.campusin.infra.timer;
 
 import com.example.campusin.domain.timer.Timer;
-import com.example.campusin.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -3,14 +3,13 @@ package com.example.campusin.domain.timer;
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.timer.request.TimerUpdateRequest;
 import com.example.campusin.domain.user.User;
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
-import java.sql.Time;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by kok8454@gmail.com on 2023-05-21

@@ -1,9 +1,6 @@
 package com.example.campusin.domain.studygroup.dto.response;
 
-import com.example.campusin.domain.studygroup.StudyGroupMember;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,13 +10,13 @@ import lombok.NoArgsConstructor;
  */
 @Getter
 @NoArgsConstructor
-@ApiModel(value = "StudyGroupTimeReseponse", description = "StudyTime of StudyGroup Member")
+@Schema(name = "StudyGroupTimeReseponse", description = "StudyTime of StudyGroup Member")
 public class StudyGroupTimeResponse {
 
-    @ApiModelProperty(value = "Study Group Member Name")
+    @Schema(description = "Study Group Member Name")
     private String studyGroupMemberName;
 
-    @ApiModelProperty(value = "Study Time of the week")
+    @Schema(description = "Study Time of the week")
     private Long elapsedTime;
 
     public StudyGroupTimeResponse(String studyGroupMemberName, Long elapsedTime) {

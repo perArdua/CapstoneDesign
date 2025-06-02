@@ -1,11 +1,11 @@
 package com.example.campusin.infra.comment;
 
 import com.example.campusin.domain.comment.Comment;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 /**
  * Created by kok8454@gmail.com on 2023-03-19
