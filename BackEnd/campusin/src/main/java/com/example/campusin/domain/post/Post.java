@@ -7,7 +7,6 @@ import com.example.campusin.domain.photo.Photo;
 import com.example.campusin.domain.post.dto.request.PostUpdateRequest;
 import com.example.campusin.domain.tag.Tag;
 import com.example.campusin.domain.user.User;
-import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,13 +14,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by kok8454@gmail.com on 2023-05-07
- * Github : http://github.com/perArdua
- */
 
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "UPDATE post SET deleted_at = CURRENT_TIMESTAMP where post_id = ?")
@@ -30,6 +25,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Post extends BaseTimeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "post_id")
@@ -76,8 +72,11 @@ public class Post extends BaseTimeEntity {
 
     private Boolean isBadgeAccepted = null;
 
+    @Column(name = "is_hidden", nullable = false)
+    private boolean isHidden = false;
+
     @Builder
-    public Post(String title, String content, User user, Board board, Long price, Long studyGroupId, Tag tag){
+    public Post(String title, String content, User user, Board board, Long price, Long studyGroupId, Tag tag) {
         this.title = title;
         this.content = content;
         this.user = user;
@@ -102,9 +101,11 @@ public class Post extends BaseTimeEntity {
     public void setContent(String content) {
         this.content = content;
     }
+
     public void setPrice(Long price) {
         this.price = price;
     }
+
     public void setPhotos(List<Photo> photos) {
         this.photos.forEach(photo -> photo.setPost(null));
         this.photos.clear();
@@ -123,6 +124,7 @@ public class Post extends BaseTimeEntity {
     public void setIsBadgeAccepted(Boolean isBadgeAccepted) {
         this.isBadgeAccepted = isBadgeAccepted;
     }
+
     public List<Comment> getCommentList() {
         return comments;
     }
@@ -134,6 +136,7 @@ public class Post extends BaseTimeEntity {
     public void increaseLikeCount() {
         likeCount++;
     }
+
     public void decreaseLikeCount() {
         likeCount--;
     }
@@ -151,5 +154,13 @@ public class Post extends BaseTimeEntity {
             return null;
         }
         return this.photos.get(0);
+    }
+
+    public void hide() {
+        this.isHidden = true;
+    }
+
+    public void unhide() {
+        this.isHidden = false;
     }
 }

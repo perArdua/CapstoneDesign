@@ -7,12 +7,13 @@ package com.example.campusin.domain.post;
 
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.user.User;
-import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JoinColumnOrFormula;
+import org.hibernate.annotations.SQLDelete;
 
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -35,10 +36,19 @@ public class PostReport extends BaseTimeEntity {
     @JoinColumnOrFormula(column = @JoinColumn(name = "user_id", referencedColumnName = "user_id"))
     private User user;
 
-    public PostReport(Post post, User user) {
+    @Enumerated(EnumType.STRING)
+    @Column(name = "report_type", nullable = false)
+    private ReportType reportType;
+
+    @Column(name = "report_score", nullable = false)
+    private int reportScore;
+
+    public PostReport(Post post, User user, ReportType type) {
         setPost(post);
         setUser(user);
         this.id = new PostReportId(user.getId(), post.getId());
+        this.reportType = type;
+        this.reportScore = type.getScore();
     }
 
     private void setPost(Post post) {

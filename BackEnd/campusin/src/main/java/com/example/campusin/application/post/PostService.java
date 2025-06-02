@@ -1,6 +1,6 @@
 package com.example.campusin.application.post;
 
-import com.example.campusin.application.postsearch.PostSearchIndexer;
+import com.example.campusin.application.postSearch.PostSearchIndexer;
 import com.example.campusin.domain.board.Board;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
@@ -196,14 +196,25 @@ public class PostService {
     }
 
     @Transactional
-    public void reportPost(Long userId, Long postId) {
+    public ReportResult reportPost(Long userId, Long postId, ReportType reportType) {
         PostReportId postReportId = new PostReportId(userId, postId);
+        if (isPresentReport(postReportId)) {
+            return ReportResult.ALREADY_REPORTED;
+        }
 
         Post post = findPost(postId);
         User user = findUser(userId);
 
-        PostReport report = new PostReport(post, user);
+        PostReport report = new PostReport(post, user, reportType);
         postReportRepository.save(report);
+
+        int totalScore = postReportRepository.sumReportScore(postId);
+        if (totalScore >= REPORT_HIDE_THRESHOLD) {
+            post.hide();
+            return ReportResult.POST_HIDDEN;
+        }
+
+        return ReportResult.SUCCESS;
     }
 
     @Transactional

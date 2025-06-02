@@ -3,13 +3,14 @@ package com.example.campusin.api.post;
 import com.example.campusin.application.post.PostService;
 import com.example.campusin.common.response.ApiResponse;
 import com.example.campusin.domain.oauth.UserPrincipal;
+import com.example.campusin.domain.post.ReportResult;
 import com.example.campusin.domain.post.dto.request.PostUpdateRequest;
+import com.example.campusin.domain.post.dto.request.ReportRequest;
 import com.example.campusin.domain.post.dto.response.PostIdResponse;
 import com.example.campusin.domain.post.dto.response.PostResponse;
 import com.example.campusin.domain.post.dto.response.PostSimpleResponse;
 import com.example.campusin.domain.post.dto.response.PostStudyResponse;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
  * Github : http://github.com/perArdua
  */
 
-@Tag(name = "게시글 API")
+@io.swagger.v3.oas.annotations.tags.Tag(name = "게시글 API")
 @RestController
 @RequestMapping("/api/v1/posts")
 @RequiredArgsConstructor
@@ -36,7 +37,7 @@ public class PostController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 수정 성공", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostIdResponse.class)))
             }
     )
-    @Operation(summary = "게시글 수정")
+    @io.swagger.v3.oas.annotations.Operation(summary = "게시글 수정")
     @PatchMapping("/{postId}")
     public ApiResponse update(@PathVariable(name = "postId") Long postId, @RequestBody @Validated PostUpdateRequest request) {
         return ApiResponse.success("게시글 수정", postService.updatePost(postId, request));
@@ -48,7 +49,7 @@ public class PostController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 읽기 성공", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostResponse.class)))
             }
     )
-    @Operation(summary = "게시글 읽기")
+    @io.swagger.v3.oas.annotations.Operation(summary = "게시글 읽기")
     @GetMapping("/{postId}")
     public ApiResponse showPost(@PathVariable(name = "postId") Long postId) {
         return ApiResponse.success("게시글 상세", postService.readPost(postId));
@@ -60,7 +61,7 @@ public class PostController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 삭제 성공")
             }
     )
-    @Operation(summary = "게시글 삭제")
+    @io.swagger.v3.oas.annotations.Operation(summary = "게시글 삭제")
     @DeleteMapping("/{postId}")
     public ApiResponse delete(@PathVariable(name = "postId") Long postId) {
         postService.deletePost(postId);
@@ -69,10 +70,10 @@ public class PostController {
 
     @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 검색 성공", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 검색 성공", content = @io.swagger.v3.oas.annotations.media.Content(array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
             }
     )
-    @Operation(summary = "게시글 검색")
+    @io.swagger.v3.oas.annotations.Operation(summary = "게시글 검색")
     @GetMapping()
     public ApiResponse searchPosts(@RequestParam String keyword,
                                    @PageableDefault(
@@ -84,10 +85,10 @@ public class PostController {
 
     @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 목록", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 목록", content = @io.swagger.v3.oas.annotations.media.Content(array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
             }
     )
-    @Operation(summary = "내가 작성한 게시글 목록")
+    @io.swagger.v3.oas.annotations.Operation(summary = "내가 작성한 게시글 목록")
     @GetMapping("/mypost")
     public ApiResponse showMyPosts(@AuthenticationPrincipal UserPrincipal principal,
                                    @PageableDefault(
@@ -100,10 +101,10 @@ public class PostController {
 
     @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "내가 작성한 댓글의 게시글 목록", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "내가 작성한 댓글의 게시글 목록", content = @io.swagger.v3.oas.annotations.media.Content(array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostSimpleResponse.class))))
             }
     )
-    @Operation(summary = "내가 작성한 댓글의 게시글 목록")
+    @io.swagger.v3.oas.annotations.Operation(summary = "내가 작성한 댓글의 게시글 목록")
     @GetMapping("/mycomment")
     public ApiResponse showMyComments(@AuthenticationPrincipal UserPrincipal principal,
                                       @PageableDefault(
@@ -118,7 +119,7 @@ public class PostController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 좋아요")
             }
     )
-    @Operation(summary = "게시글 좋아요")
+    @io.swagger.v3.oas.annotations.Operation(summary = "게시글 좋아요")
     @PostMapping("/{postId}/like")
     public ApiResponse likePost(@AuthenticationPrincipal UserPrincipal principal,
                                 @PathVariable(name = "postId") Long postId) {
@@ -133,7 +134,7 @@ public class PostController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 좋아요 취소")
             }
     )
-    @Operation(summary = "게시글 좋아요 취소")
+    @io.swagger.v3.oas.annotations.Operation(summary = "게시글 좋아요 취소")
     @DeleteMapping("/{postId}/like")
     public ApiResponse unlikePost(@AuthenticationPrincipal UserPrincipal principal,
                                   @PathVariable(name = "postId") Long postId) {
@@ -148,12 +149,19 @@ public class PostController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 신고")
             }
     )
-    @Operation(summary = "게시글 신고")
+    @io.swagger.v3.oas.annotations.Operation(summary = "게시글 신고")
     @PostMapping("/{postId}/report")
     public ApiResponse reportPost(@AuthenticationPrincipal UserPrincipal principal,
-                                  @PathVariable(name = "postId") Long postId) {
-        postService.reportPost(principal.getUserId(), postId);
-            return ApiResponse.success("게시글 신고", "Post reported successfully");
+                                  @PathVariable(name = "postId") Long postId,
+                                  @RequestBody ReportRequest request) {
+
+        ReportResult result = postService.reportPost(principal.getUserId(), postId, request.getType());
+
+        return switch (result) {
+            case SUCCESS -> ApiResponse.success("게시글 신고", "Post reported successfully");
+            case ALREADY_REPORTED -> ApiResponse.success("이미 신고한 게시글입니다.", "Already reported post");
+            case POST_HIDDEN -> ApiResponse.success("게시글이 신고로 숨겨졌습니다.", "Post hidden due to reports");
+        };
     }
 
     @io.swagger.v3.oas.annotations.responses.ApiResponses(
@@ -161,7 +169,7 @@ public class PostController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "게시글 신고 취소")
             }
     )
-    @Operation(summary = "게시글 신고 취소")
+    @io.swagger.v3.oas.annotations.Operation(summary = "게시글 신고 취소")
     @DeleteMapping("/{postId}/report")
     public ApiResponse unreportPost(@AuthenticationPrincipal UserPrincipal principal,
                                     @PathVariable(name = "postId") Long postId) {
@@ -173,10 +181,10 @@ public class PostController {
     
     @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "스터디 그룹 게시글 목록", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json", array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostStudyResponse.class))))
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "스터디 그룹 게시글 목록", content = @io.swagger.v3.oas.annotations.media.Content(array = @io.swagger.v3.oas.annotations.media.ArraySchema(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PostStudyResponse.class))))
             }
     )
-    @Operation(summary = "스터디 그룹 게시글 목록(스터디원 모두의 게시글)")
+    @io.swagger.v3.oas.annotations.Operation(summary = "스터디 그룹 게시글 목록(스터디원 모두의 게시글)")
     @GetMapping("/{studyGroupId}/posts")
     public ApiResponse getPostsByStudyGroupId(@PathVariable(name = "studyGroupId") Long studyGroupId,
                                               @PageableDefault(
