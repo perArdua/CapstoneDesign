@@ -41,6 +41,11 @@ public interface PostRepository extends JpaRepository<Post, Long>, PostRepositor
     @Query("select p from Post p join fetch p.board join fetch p.user left join fetch p.photos where p.id = :postId")
     Optional<Post> findPostById(@Param("postId") Long postId);
 
+
+//    @Query(value = "select p from Post p join fetch p.board join fetch p.user where upper(function('replace', p.title, ' ', '')) like concat('%', upper(function('replace', :keyword, ' ', '')), '%') or upper(function('replace', p.content, ' ', '')) like concat('%', upper(function('replace', :keyword, ' ', '')), '%')",
+//            countQuery = "select count(p) from Post p where upper(function('replace', p.title, ' ', '')) like concat('%', upper(function('replace', :keyword, ' ', '')), '%') or upper(function('replace', p.content, ' ', '')) like concat('%', upper(function('replace', :keyword, ' ', '')), '%')")
+//    Page<Post> searchPosts(@Param("keyword") String keyword, Pageable pageable);
+
     @Query(value = "select p from Post p join fetch p.board join fetch p.user where p.board.id = :boardId and (upper(function('replace', p.title, ' ', '')) like concat('%', upper(function('replace', :keyword, ' ', '')), '%') or upper(function('replace', p.content, ' ', '')) like concat('%', upper(function('replace', :keyword, ' ', '')), '%'))",
             countQuery = "select count(p) from Post p where p.board.id = :boardId and (upper(function('replace', p.title, ' ', '')) like concat('%', upper(function('replace', :keyword, ' ', '')), '%') or upper(function('replace', p.content, ' ', '')) like concat('%', upper(function('replace', :keyword, ' ', '')), '%'))")
     Page<Post> searchPostsAtBoard(@Param("keyword") String keyword, @Param("boardId") Long boardId,
