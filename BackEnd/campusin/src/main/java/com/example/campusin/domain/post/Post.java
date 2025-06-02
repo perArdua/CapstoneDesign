@@ -38,6 +38,9 @@ public class Post extends BaseTimeEntity {
     @Column(name = "title", nullable = false, length = 50)
     private String title;
 
+    @Column(name = "normalized_title", insertable = false, updatable = false, length = 50)
+    private String normalizedTitle;
+
     @Column(name = "content", length = 10000)
     private String content;
 

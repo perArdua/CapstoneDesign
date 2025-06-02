@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.findify:s3mock_2.12:0.2.4" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.findify" artifactId="s3mock_2.12" version="0.2.4" baseVersion="0.2.4" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.findify/s3mock_2.12/0.2.4/eca22857bb99ad597c636e69d5b25ca2704905d3/s3mock_2.12-0.2.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.findify/s3mock_2.12/0.2.4/492b12ee86bbbc1310bd3919361c2f515d78bc19/s3mock_2.12-0.2.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

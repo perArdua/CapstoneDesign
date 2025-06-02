@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.opensearch.client:opensearch-java:2.3.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.opensearch.client" artifactId="opensearch-java" version="2.3.0" baseVersion="2.3.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opensearch.client/opensearch-java/2.3.0/10406c4b6cfac399c687b8402ed96dbbff3c0ba3/opensearch-java-2.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opensearch.client/opensearch-java/2.3.0/d07dde1cb80e35f664a050b7d6273df6e0c0ee2b/opensearch-java-2.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

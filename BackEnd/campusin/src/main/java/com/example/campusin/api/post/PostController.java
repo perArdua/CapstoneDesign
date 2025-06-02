@@ -152,10 +152,8 @@ public class PostController {
     @PostMapping("/{postId}/report")
     public ApiResponse reportPost(@AuthenticationPrincipal UserPrincipal principal,
                                   @PathVariable(name = "postId") Long postId) {
-        if (postService.reportPost(principal.getUserId(), postId)) {
+        postService.reportPost(principal.getUserId(), postId);
             return ApiResponse.success("게시글 신고", "Post reported successfully");
-        }
-        return ApiResponse.success("이미 신고한 게시글입니다.", "Already reported post");
     }
 
     @io.swagger.v3.oas.annotations.responses.ApiResponses(
