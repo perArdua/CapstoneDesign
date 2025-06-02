@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.opensearch.client:opensearch-rest-client:2.3.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.opensearch.client" artifactId="opensearch-rest-client" version="2.3.0" baseVersion="2.3.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opensearch.client/opensearch-rest-client/2.3.0/137039cd4333400be5655a76e28f3b9d0bdd4969/opensearch-rest-client-2.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opensearch.client/opensearch-rest-client/2.3.0/f9a19b23a7d553c0a710b2d19c48dcf8899f0c17/opensearch-rest-client-2.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

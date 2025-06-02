@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.prometheus:simpleclient_tracer_common:0.16.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.prometheus" artifactId="simpleclient_tracer_common" version="0.16.0" baseVersion="0.16.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.prometheus/simpleclient_tracer_common/0.16.0/dec00ef7c6155c4ca1109ec8248f7ff58d8f6cd3/simpleclient_tracer_common-0.16.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.prometheus/simpleclient_tracer_common/0.16.0/ade675bc26f4379144a161d350833511cdcc2698/simpleclient_tracer_common-0.16.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
