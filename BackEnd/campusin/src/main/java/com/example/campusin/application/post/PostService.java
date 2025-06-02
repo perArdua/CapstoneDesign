@@ -1,6 +1,6 @@
 package com.example.campusin.application.post;
 
-import com.example.campusin.application.postSearch.PostSearchIndexer;
+import com.example.campusin.application.postsearch.PostSearchIndexer;
 import com.example.campusin.domain.board.Board;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
