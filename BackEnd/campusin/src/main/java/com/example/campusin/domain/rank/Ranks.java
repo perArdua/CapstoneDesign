@@ -3,7 +3,6 @@ package com.example.campusin.domain.rank;
 import com.example.campusin.domain.basetime.BaseTimeEntity;
 import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.studygroup.StudyGroup;
-import com.example.campusin.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -28,15 +27,12 @@ public class Ranks extends BaseTimeEntity{
     private Long id;
 
     @Column(name = "study_ranking")
-    private Long Studyranking;
+    private Long studyRanking;
 
     @Column(name = "question_ranking")
-    private Long QuestionRanking;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Long questionRanking;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", unique = true)
     private String userName;
 
     @ManyToOne
@@ -53,32 +49,25 @@ public class Ranks extends BaseTimeEntity{
     @Column(name = "total_number_of_questions")
     private Long totalNumberOfQuestions;
 
-    @Column(name = "week")
-    private int week;
+    @Column(name = "week_start_date", nullable = false)
+    private LocalDate weekStartDate;
 
     @Builder
-    public Ranks(Long Studyranking, Long QuestionRanking, User user, String userName, Statistics statistics, StudyGroup studyGroup, Long totalElapsedTime, Long totalNumberOfQuestions, int week) {
-        this.Studyranking = Studyranking;
-        this.QuestionRanking = QuestionRanking;
-        this.user = user;
+    public Ranks(Long studyRanking, Long questionRanking, String userName, Statistics statistics, StudyGroup studyGroup, Long totalElapsedTime, Long totalNumberOfQuestions, LocalDate weekStartDate) {
+        this.studyRanking = studyRanking;
+        this.questionRanking = questionRanking;
         this.userName = userName;
         this.statistics = statistics;
         this.studyGroup = studyGroup;
         this.totalElapsedTime = totalElapsedTime;
         this.totalNumberOfQuestions = totalNumberOfQuestions;
-        this.week = week;
+        this.weekStartDate = weekStartDate;
     }
 
     public void updateStudyRanking(Long ranking) {
-        this.Studyranking = ranking;
+        this.studyRanking = ranking;
     }
     public void updateQuestionRanking(Long ranking) {
-        this.QuestionRanking = ranking;
-    }
-    public LocalDate getStartDate(LocalDate localDate) {
-        while (localDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
-            localDate = localDate.minusDays(1);
-        }
-        return localDate;
+        this.questionRanking = ranking;
     }
 }

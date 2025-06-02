@@ -13,12 +13,17 @@ import com.example.campusin.infra.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.campusin.common.redis.RedisKeyFactory.studyTimeRankKey;
+import static com.example.campusin.common.utils.WeekUtil.getWeekStartDate;
 
 /**
  * Created by kok8454@gmail.com on 2023-05-21
@@ -31,6 +36,7 @@ public class TimerService {
     private final TimerRepository timerRepository;
     private final UserRepository userRepository;
     private final StatisticsRepository statisticsRepository;
+    private final RedisTemplate<String, String> redisTemplate;
 
     @Transactional
     public TimerIdResponse createTimer(Long userId, TimerCreateRequest timerCreateRequest) {
@@ -54,7 +60,13 @@ public class TimerService {
     public TimerIdResponse updateTimer(Long timerId, TimerUpdateRequest timerUpdateRequest) {
         Timer timer = findTimer(timerId);
         timer.updateTimer(timerUpdateRequest);
-        return new TimerIdResponse(timerRepository.save(timer).getId());
+        Timer updatedTimer = timerRepository.save(timer);
+
+        Long timeToAdd = timerUpdateRequest.getElapsedTime();
+        String userName = timer.getUser().getNickname();
+        String weekKey = getCurrentWeekRankKey();
+        redisTemplate.opsForZSet().incrementScore(weekKey, userName, timeToAdd);
+        return new TimerIdResponse(updatedTimer.getId());
     }
 
     @Transactional
@@ -104,6 +116,11 @@ public class TimerService {
         findUser(userId);
         Timer timer = timerRepository.findTopByUserIdOrderByModifiedAtDesc(userId);
         return timer != null ? timer.getModifiedAt() : null;
+    }
+
+    private String getCurrentWeekRankKey() {
+        LocalDate startOfweek = getWeekStartDate(LocalDate.now());
+        return studyTimeRankKey(startOfweek);
     }
 
     private User findUser(Long userId) {
