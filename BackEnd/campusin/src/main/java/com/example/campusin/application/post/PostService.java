@@ -1,5 +1,6 @@
 package com.example.campusin.application.post;
 
+import com.example.campusin.application.postsearch.PostSearchIndexer;
 import com.example.campusin.domain.board.Board;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
@@ -25,9 +26,8 @@ import com.example.campusin.infra.studygroup.StudyGroupRepository;
 import com.example.campusin.infra.tag.TagRepository;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +40,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PostService {
 
     private final PostRepository postRepository;
@@ -50,6 +51,8 @@ public class PostService {
     private final PostReportRepository postReportRepository;
     private final StudyGroupRepository studyGroupRepository;
     private final TagRepository tagRepository;
+    private final PostSearchIndexer postSearchIndexer;
+    public static int REPORT_HIDE_THRESHOLD = 30;
 
     @Transactional(readOnly = true)
     public Page<PostSimpleResponse> getPostsByBoard(Long boardId, Pageable pageable) {
@@ -84,6 +87,7 @@ public class PostService {
             savePhoto.setPost(post);
             photoRepository.save(savePhoto);
         }
+        postSearchIndexer.index(post);
         return new PostIdResponse(postRepository.save(post).getId());
     }
 
@@ -192,15 +196,14 @@ public class PostService {
     }
 
     @Transactional
-    public boolean reportPost(Long userId, Long postId) {
+    public void reportPost(Long userId, Long postId) {
         PostReportId postReportId = new PostReportId(userId, postId);
-        if(isPresentReport(postReportId)){
-            return false;
-        }
+
         Post post = findPost(postId);
         User user = findUser(userId);
-        postReportRepository.save(new PostReport(post, user));
-        return true;
+
+        PostReport report = new PostReport(post, user);
+        postReportRepository.save(report);
     }
 
     @Transactional

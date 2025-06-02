@@ -62,4 +62,5 @@ public interface PostRepository extends JpaRepository<Post, Long>, PostRepositor
             countQuery = "select count(p) from Post p where p.tag.id = :tagId and p.board.id = :boardId")
     Page<Post> findPostsByTagId(@Param("boardId") Long boardId, @Param("tagId") Long tagId, Pageable pageable);
 
+    List<Post> findTop9000ByIdGreaterThanOrderByIdAsc(Long lastId);
 }
