@@ -73,14 +73,6 @@ public class StatisticsService {
         return new StatisticsResponse(statistics.getElapsedTime(), statistics.getNumberOfQuestions(), statistics.getNumberOfAnswers(), statistics.getNumberOfAdoptedAnswers());
     }
 
-    // localDate가 속한 주의 시작 요일을 localDate로 반환
-    public LocalDate getStartDate(LocalDate localDate) {
-        while (localDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
-            localDate = localDate.minusDays(1);
-        }
-        return localDate;
-    }
-
     private User findUser(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));

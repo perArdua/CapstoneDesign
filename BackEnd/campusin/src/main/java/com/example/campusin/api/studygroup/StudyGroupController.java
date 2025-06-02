@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+import static com.example.campusin.common.utils.WeekUtil.getWeekStartDate;
+
 @Tag(name = "스터디그룹 API")
 @RestController
 @RequestMapping("/api/v1/studygroup")
@@ -110,7 +112,7 @@ public class StudyGroupController {
                                                              direction = Sort.Direction.DESC
                                                      ) Pageable pageable){
 
-        LocalDate startDate = statisticsService.getStartDate(endDate);
+        LocalDate startDate = getWeekStartDate(endDate);
         return ApiResponse.success("StudyGroup 멤버들의 주간 공부시간 조회가 완료되었습니다.", studyGroupService.getStudyGroupMemberStudyTime(studyGroupId, startDate, endDate, pageable));
     }
 
