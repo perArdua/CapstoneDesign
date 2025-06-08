@@ -5,11 +5,7 @@ import com.example.campusin.domain.postsearch.PostSearch;
 import com.example.campusin.domain.postsearch.PostSearchMapper;
 import com.example.campusin.infra.postsearch.PostSearchRepository;
 import lombok.RequiredArgsConstructor;
-import org.opensearch.client.opensearch.OpenSearchClient;
-import org.opensearch.client.opensearch.core.IndexRequest;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
