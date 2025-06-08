@@ -1,12 +1,11 @@
 package com.example.campusin.api.postsearch;
 
 import com.example.campusin.application.postsearch.PostSearchService;
+import com.example.campusin.common.response.ApiResponse;
 import com.example.campusin.domain.postsearch.dto.response.PostSearchResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,18 +16,19 @@ public class PostSearchController {
 
     private final PostSearchService postSearchService;
 
-    @GetMapping
-    public List<PostSearchResponse> search(
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<PostSearchResponse>>> search(
             @RequestParam String keyword,
             @RequestParam(required = false) String lastSortValue,
-            @RequestParam(defaultValue = "10") int size) {
-
-        return postSearchService.searchPostsAfter(keyword, lastSortValue, size);
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        List<PostSearchResponse> results = postSearchService.searchWithKeysetPagination(keyword, lastSortValue, size);
+        return ResponseEntity.ok(ApiResponse.success(results));
     }
 
-    @GetMapping("/reindex-all")
-    public String reindexAll() {
+    @PostMapping("/reindex-all")
+    public ResponseEntity<ApiResponse<String>> reindexAll() {
         postSearchService.reindexAllAsync();
-        return "재색인 요청 접수 (비동기)";
+        return ResponseEntity.accepted().body(ApiResponse.success("재색인 요청이 접수되었습니다."));
     }
 }
