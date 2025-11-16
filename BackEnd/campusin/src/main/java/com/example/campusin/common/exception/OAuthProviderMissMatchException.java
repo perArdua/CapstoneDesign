@@ -5,9 +5,13 @@ package com.example.campusin.common.exception;
  * Github : http://github.com/perArdua
  */
 
-public class OAuthProviderMissMatchException extends RuntimeException {
+public class OAuthProviderMissMatchException extends BusinessException {
+
+    public OAuthProviderMissMatchException() {
+        super(ErrorCode.OAUTH_PROVIDER_MISMATCH);
+    }
 
     public OAuthProviderMissMatchException(String message) {
-        super(message);
+        super(ErrorCode.OAUTH_PROVIDER_MISMATCH, message);
     }
 }

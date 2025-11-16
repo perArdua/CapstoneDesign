@@ -5,13 +5,13 @@ package com.example.campusin.common.exception;
  * Github : http://github.com/perArdua
  */
 
-public class TokenValidFailedException extends RuntimeException {
+public class TokenValidFailedException extends BusinessException {
 
     public TokenValidFailedException() {
-        super("Failed to generate Token.");
+        super(ErrorCode.TOKEN_VALIDATION_FAILED);
     }
 
-    private TokenValidFailedException(String message) {
-        super(message);
+    public TokenValidFailedException(String message) {
+        super(ErrorCode.TOKEN_VALIDATION_FAILED, message);
     }
 }
