@@ -1,5 +1,8 @@
 package com.example.campusin.application.comment;
 
+import com.example.campusin.common.exception.CommentNotFoundException;
+import com.example.campusin.common.exception.CommentReportNotFoundException;
+import com.example.campusin.common.exception.UserNotFoundException;
 import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.comment.CommentReport;
 import com.example.campusin.domain.comment.CommentReportId;
@@ -47,7 +50,8 @@ public class CommentReportService {
         Comment comment = getComment(commentId);
         comment.getReports().removeIf(commentReport -> commentReport.getId().equals(commentReportId));
 
-        CommentReport commentReport = commentReportRepository.findById(commentReportId).orElseThrow(() -> new IllegalArgumentException("COMMENT REPORT NOT FOUND"));
+        CommentReport commentReport = commentReportRepository.findById(commentReportId)
+                .orElseThrow(CommentReportNotFoundException::new);
         commentReport.setComment(null);
         commentReport.setUser(null);
 
@@ -56,11 +60,11 @@ public class CommentReportService {
     }
 
     private Comment getComment(Long commentId) {
-        return commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("COMMENT NOT FOUND"));
+        return commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
     }
 
     private User getCurrentUser(Long userId){
-        return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+        return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
     private boolean isPresentReport(CommentReportId commentReportId){

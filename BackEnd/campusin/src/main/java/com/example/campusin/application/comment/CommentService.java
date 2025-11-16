@@ -1,5 +1,8 @@
 package com.example.campusin.application.comment;
 
+import com.example.campusin.common.exception.CommentNotFoundException;
+import com.example.campusin.common.exception.PostNotFoundException;
+import com.example.campusin.common.exception.UserNotFoundException;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.comment.dto.request.CommentCreateRequest;
@@ -33,7 +36,7 @@ public class CommentService {
 
         User currentUser = getCurrentUser(userId);
         Post post = getPost(postId);
-        Comment parent = commentCreateRequest.getParentId() != null ? commentRepository.findById(commentCreateRequest.getParentId()).orElseThrow(() -> new IllegalArgumentException("COMMENT NOT FOUND")) : null;
+        Comment parent = commentCreateRequest.getParentId() != null ? commentRepository.findById(commentCreateRequest.getParentId()).orElseThrow(CommentNotFoundException::new) : null;
 
         Comment comment = Comment.builder()
                 .user(currentUser)
@@ -76,7 +79,7 @@ public class CommentService {
         if (comment.getPost().getUser().getId().equals(userId)) {
             comment.setIsAdopted(true);
         } else {
-            throw new IllegalArgumentException("해당 유저는 답변 채택 권한이 없습니다.");
+            throw new UserNotFoundException();
         }
     }
 
@@ -96,22 +99,22 @@ public class CommentService {
     }
 
     private Post getPost(Long postId){
-        return postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + postId));
+        return postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
     }
 
     private Comment getComment(Long commentId){
         return commentRepository.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 comment 없습니다 id = " + commentId));
+                .orElseThrow(CommentNotFoundException::new);
     }
 
     private User getCurrentUser(Long userId){
         return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
     }
 
     private void checkPostExist(Long postId){
         if(!postRepository.existsById(postId)) {
-            throw new IllegalArgumentException("해당 게시물이 없습니다.");
+            throw new PostNotFoundException();
         }
     }
 

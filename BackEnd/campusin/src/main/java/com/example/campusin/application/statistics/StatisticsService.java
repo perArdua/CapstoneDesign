@@ -1,5 +1,7 @@
 package com.example.campusin.application.statistics;
 
+import com.example.campusin.common.exception.StatisticsNotFoundException;
+import com.example.campusin.common.exception.UserNotFoundException;
 import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.statistics.dto.request.StatisticsCreateRequest;
 import com.example.campusin.domain.statistics.dto.response.StatisticsIdResponse;
@@ -74,11 +76,11 @@ public class StatisticsService {
 
     private User findUser(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
     }
 
     private Statistics findStatistics(Long statisticsId) {
         return statisticsRepository.findById(statisticsId)
-                .orElseThrow(() -> new IllegalArgumentException("STATISTICS NOT FOUND"));
+                .orElseThrow(StatisticsNotFoundException::new);
     }
 }

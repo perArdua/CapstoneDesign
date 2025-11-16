@@ -1,5 +1,7 @@
 package com.example.campusin.application.message;
 
+import com.example.campusin.common.exception.PostNotFoundException;
+import com.example.campusin.common.exception.UserNotFoundException;
 import com.example.campusin.domain.message.Message;
 import com.example.campusin.domain.message.MessageRoom;
 import com.example.campusin.domain.message.MessageRoomIdempotency;
@@ -39,11 +41,11 @@ public class MessageRoomTxService {
         }
 
         User sender = userRepository.findById(senderId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
         User receiver = userRepository.findById(receiverId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("POST NOT FOUND"));
+                .orElseThrow(PostNotFoundException::new);
 
         MessageRoom room = messageRoomRepository.save(MessageRoom.builder()
                 .initialSender(sender)

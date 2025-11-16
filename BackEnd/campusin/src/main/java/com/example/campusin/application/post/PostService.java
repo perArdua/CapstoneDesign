@@ -1,6 +1,11 @@
 package com.example.campusin.application.post;
 
 import com.example.campusin.application.postsearch.PostSearchIndexer;
+import com.example.campusin.common.exception.BoardNotFoundException;
+import com.example.campusin.common.exception.PostNotFoundException;
+import com.example.campusin.common.exception.StudyGroupNotFoundException;
+import com.example.campusin.common.exception.TagNotFoundException;
+import com.example.campusin.common.exception.UserNotFoundException;
 import com.example.campusin.domain.board.Board;
 import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.board.dto.response.BoardSimpleResponse;
@@ -264,7 +269,7 @@ public class PostService {
 
     private StudyGroup findStudyGroup(Long studyGroupId) {
         return studyGroupRepository.findById(studyGroupId).orElseThrow(
-                () -> new IllegalArgumentException("STUDYGROUP NOT FOUND")
+                StudyGroupNotFoundException::new
         );
     }
 
@@ -279,24 +284,24 @@ public class PostService {
 
     private Board findBoard(Long boardId) {
         return boardRepository.findById(boardId).orElseThrow(
-                () -> new IllegalArgumentException("BOARD NOT FOUND")
+                BoardNotFoundException::new
         );
     }
 
     private Post findPost(Long postId) {
         return postRepository.findById(postId).orElseThrow(
-                () -> new IllegalArgumentException("POST NOT FOUND")
+                PostNotFoundException::new
         );
     }
 
     private User findUser(Long userId) {
         return userRepository.findById(userId).orElseThrow(
-                () -> new IllegalArgumentException("USER NOT FOUND")
+                UserNotFoundException::new
         );
     }
     private Tag findTag(Long tagId) {
         return tagRepository.findById(tagId).orElseThrow(
-                () -> new IllegalArgumentException("TAG NOT FOUND")
+                TagNotFoundException::new
         );
     }
 }
