@@ -1,8 +1,8 @@
 package com.example.campusin.application.comment;
 
-import com.example.campusin.common.exception.CommentNotFoundException;
-import com.example.campusin.common.exception.CommentReportNotFoundException;
-import com.example.campusin.common.exception.UserNotFoundException;
+import com.example.campusin.application.comment.exception.CommentNotFoundException;
+import com.example.campusin.application.comment.exception.CommentReportNotFoundException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.comment.CommentReport;
 import com.example.campusin.domain.comment.CommentReportId;

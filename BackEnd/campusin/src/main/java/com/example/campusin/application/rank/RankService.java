@@ -1,9 +1,9 @@
 package com.example.campusin.application.rank;
 
 
-import com.example.campusin.common.exception.StatisticsNotFoundException;
-import com.example.campusin.common.exception.StudyGroupNotFoundException;
-import com.example.campusin.common.exception.UserNotFoundException;
+import com.example.campusin.application.statistics.exception.StatisticsNotFoundException;
+import com.example.campusin.application.studygroup.exception.StudyGroupNotFoundException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.common.redis.RedisLockHelper;
 import com.example.campusin.domain.rank.Ranks;
 import com.example.campusin.domain.rank.dto.request.RankCreateRequest;

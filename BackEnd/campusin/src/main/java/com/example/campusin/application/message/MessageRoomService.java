@@ -1,10 +1,10 @@
 package com.example.campusin.application.message;
 
-import com.example.campusin.common.exception.MessageReadNotAllowedException;
-import com.example.campusin.common.exception.MessageRoomNotFoundException;
-import com.example.campusin.common.exception.MessageSendNotAllowedException;
-import com.example.campusin.common.exception.PostNotFoundException;
-import com.example.campusin.common.exception.UserNotFoundException;
+import com.example.campusin.application.message.exception.MessageReadNotAllowedException;
+import com.example.campusin.application.message.exception.MessageRoomNotFoundException;
+import com.example.campusin.application.message.exception.MessageSendNotAllowedException;
+import com.example.campusin.application.post.exception.PostNotFoundException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.message.Message;
 import com.example.campusin.domain.message.MessageRoom;
 import com.example.campusin.domain.message.VisibilityState;

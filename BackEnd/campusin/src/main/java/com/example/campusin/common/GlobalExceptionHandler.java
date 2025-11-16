@@ -1,8 +1,8 @@
 package com.example.campusin.common;
 
-import com.example.campusin.common.exception.BusinessException;
-import com.example.campusin.common.exception.ErrorCode;
-import com.example.campusin.common.exception.ErrorResponse;
+import com.example.campusin.common.exception.core.BusinessException;
+import com.example.campusin.common.exception.core.ErrorCode;
+import com.example.campusin.common.exception.core.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;

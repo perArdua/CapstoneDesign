@@ -1,7 +1,7 @@
 package com.example.campusin.application.todo;
 
-import com.example.campusin.common.exception.TodoNotFoundException;
-import com.example.campusin.common.exception.UserNotFoundException;
+import com.example.campusin.application.todo.exception.TodoNotFoundException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.todo.Todo;
 import com.example.campusin.domain.todo.dto.request.TodoRequest;
 import com.example.campusin.domain.todo.dto.request.TodoUpdateRequest;

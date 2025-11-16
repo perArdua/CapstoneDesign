@@ -1,11 +1,11 @@
 package com.example.campusin.application.studygroup;
 
-import com.example.campusin.common.exception.StudyGroupAlreadyMemberException;
-import com.example.campusin.common.exception.StudyGroupFullException;
-import com.example.campusin.common.exception.StudyGroupMemberRemoveFailedException;
-import com.example.campusin.common.exception.StudyGroupNotFoundException;
-import com.example.campusin.common.exception.StudyGroupNotMemberException;
-import com.example.campusin.common.exception.UserNotFoundException;
+import com.example.campusin.application.studygroup.exception.StudyGroupAlreadyMemberException;
+import com.example.campusin.application.studygroup.exception.StudyGroupFullException;
+import com.example.campusin.application.studygroup.exception.StudyGroupMemberRemoveFailedException;
+import com.example.campusin.application.studygroup.exception.StudyGroupNotFoundException;
+import com.example.campusin.application.studygroup.exception.StudyGroupNotMemberException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.studygroup.StudyGroup;
 import com.example.campusin.domain.studygroup.StudyGroupMember;

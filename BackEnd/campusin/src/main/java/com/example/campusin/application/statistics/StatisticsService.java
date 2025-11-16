@@ -1,7 +1,7 @@
 package com.example.campusin.application.statistics;
 
-import com.example.campusin.common.exception.StatisticsNotFoundException;
-import com.example.campusin.common.exception.UserNotFoundException;
+import com.example.campusin.application.statistics.exception.StatisticsNotFoundException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.statistics.dto.request.StatisticsCreateRequest;
 import com.example.campusin.domain.statistics.dto.response.StatisticsIdResponse;

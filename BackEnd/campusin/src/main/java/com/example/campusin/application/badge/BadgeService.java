@@ -1,8 +1,8 @@
 package com.example.campusin.application.badge;
 
-import com.example.campusin.common.exception.BadgePostNotFoundException;
-import com.example.campusin.common.exception.BadgeUnauthorizedException;
-import com.example.campusin.common.exception.BadgeUserNotFoundException;
+import com.example.campusin.application.badge.exception.BadgePostNotFoundException;
+import com.example.campusin.application.badge.exception.BadgeUnauthorizedException;
+import com.example.campusin.application.badge.exception.BadgeUserNotFoundException;
 import com.example.campusin.domain.badge.Badge;
 import com.example.campusin.domain.badge.request.BadgeCreateRequest;
 import com.example.campusin.domain.oauth.RoleType;

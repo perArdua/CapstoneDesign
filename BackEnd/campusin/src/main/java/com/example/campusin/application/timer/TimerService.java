@@ -1,8 +1,8 @@
 package com.example.campusin.application.timer;
 
-import com.example.campusin.common.exception.TimerNotFoundException;
-import com.example.campusin.common.exception.TimerUserMismatchException;
-import com.example.campusin.common.exception.UserNotFoundException;
+import com.example.campusin.application.timer.exception.TimerNotFoundException;
+import com.example.campusin.application.timer.exception.TimerUserMismatchException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.timer.Timer;
 import com.example.campusin.domain.timer.request.TimerCreateRequest;
