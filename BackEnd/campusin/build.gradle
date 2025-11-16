@@ -8,11 +8,11 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.0.0'
     id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = "17"
 
 repositories {
     mavenCentral()
@@ -52,6 +52,8 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient:4.5.13'
     implementation 'jakarta.json:jakarta.json-api:2.1.1'
     implementation 'org.eclipse.parsson:parsson:1.1.1'
+    implementation 'org.opensearch.client:opensearch-rest-high-level-client:2.3.0'
+
 
     // JWT
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
@@ -78,6 +80,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'io.findify:s3mock_2.12:0.2.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 // ✅ QueryDSL 전용 task 생성 (Entity만)
@@ -133,5 +136,7 @@ task copyPrivate(type: Copy) {
         }
     }
 }
+kotlin {
+    jvmToolchain(17)
+}
 
-targetCompatibility = JavaVersion.VERSION_17
