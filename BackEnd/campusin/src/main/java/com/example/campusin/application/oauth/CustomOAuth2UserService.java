@@ -5,7 +5,7 @@ package com.example.campusin.application.oauth;
  * Github : http://github.com/perArdua
  */
 
-import com.example.campusin.common.exception.OAuthProviderMissMatchException;
+import com.example.campusin.application.oauth.exception.OAuthProviderMissMatchException;
 import com.example.campusin.domain.loginInfo.OAuth2UserInfo;
 import com.example.campusin.domain.loginInfo.OAuth2UserInfoFactory;
 import com.example.campusin.domain.oauth.ProviderType;

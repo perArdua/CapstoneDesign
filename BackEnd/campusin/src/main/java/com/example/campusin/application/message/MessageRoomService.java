@@ -1,5 +1,10 @@
 package com.example.campusin.application.message;
 
+import com.example.campusin.application.message.exception.MessageReadNotAllowedException;
+import com.example.campusin.application.message.exception.MessageRoomNotFoundException;
+import com.example.campusin.application.message.exception.MessageSendNotAllowedException;
+import com.example.campusin.application.post.exception.PostNotFoundException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.message.Message;
 import com.example.campusin.domain.message.MessageRoom;
 import com.example.campusin.domain.message.VisibilityState;
@@ -68,11 +73,11 @@ public class MessageRoomService {
     @Transactional(readOnly = true)
     public Optional<Long> getMessageRoomId(Long userId, Long createdFrom, Long receiverId) {
         userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
         userRepository.findById(receiverId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
         postRepository.findById(createdFrom)
-                .orElseThrow(() -> new IllegalArgumentException("POST NOT FOUND"));
+                .orElseThrow(PostNotFoundException::new);
 
         return messageRoomRepository.findIdByInfo(createdFrom, userId, receiverId);
     }
@@ -82,9 +87,9 @@ public class MessageRoomService {
     @Transactional(readOnly = true)
     public MessageRoomResponse getMessageRoom(Long userId, MessageRoomGetRequest request) {
         User currentUser = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
         MessageRoom messageRoom = messageRoomRepository.findById(request.getMessageRoomId())
-                .orElseThrow(() -> new IllegalArgumentException("MESSAGE ROOM NOT FOUND"));
+                .orElseThrow(MessageRoomNotFoundException::new);
         checkMessageRoomIsDeleted(messageRoom, userId);
 
         Pageable pageable = PageRequest.of(0, 20, Sort.by("createdAt").descending());
@@ -104,7 +109,7 @@ public class MessageRoomService {
     @Transactional(readOnly = true)
     public Page<MessageRoomListResponse> getMessageRooms(Long userId, Pageable pageable) {
         User currentUser = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
 
         Page<MessageRoomsWithLastMessages> messageRooms = messageRoomRepository.findMessageRoomsAndLastMessagesByUserId(
                 currentUser.getId(), pageable);
@@ -114,7 +119,7 @@ public class MessageRoomService {
                     messageRoom.getInitialSenderId().longValue()
                     : messageRoom.getInitialReceiverId().longValue();
             User interlocutor = userRepository.findById(interlocutorId)
-                    .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                    .orElseThrow(UserNotFoundException::new);
 
             return MessageRoomListResponse.builder()
                     .messageRoomId(messageRoom.getMessageRoomId().longValue())
@@ -130,9 +135,9 @@ public class MessageRoomService {
     @Transactional
     public void deleteMessageRoom(Long userId, Long messageRoomId) {
         User currentUser = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
         MessageRoom messageRoom = messageRoomRepository.findById(messageRoomId)
-                .orElseThrow(() -> new IllegalArgumentException("MESSAGE ROOM NOT FOUND"));
+                .orElseThrow(MessageRoomNotFoundException::new);
         checkUserAuthority(currentUser, messageRoom);
 
         VisibilityState visibilityState = isInitialSender(currentUser, messageRoom) ?
@@ -144,10 +149,10 @@ public class MessageRoomService {
     @Transactional
     public void blockMessageRoom(Long userId, Long messageRoomId) {
         User currentUser = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
 
         MessageRoom messageRoom = messageRoomRepository.findById(messageRoomId)
-                .orElseThrow(() -> new IllegalArgumentException("MESSAGE ROOM NOT FOUND"));
+                .orElseThrow(MessageRoomNotFoundException::new);
 
         checkUserAuthority(currentUser, messageRoom);
 
@@ -159,7 +164,7 @@ public class MessageRoomService {
     private void checkUserAuthority(User user, MessageRoom messageRoom) {
         if (!(messageRoom.getInitialSender().getLoginId() == user.getLoginId()) &&
                 !(messageRoom.getInitialReceiver().getLoginId() == user.getLoginId())) {
-            throw new IllegalArgumentException("PERMISSION DENIED EXCEPTION : NO PERMISSION TO SEND MESSAGE");
+            throw new MessageSendNotAllowedException();
         }
     }
 
@@ -182,7 +187,7 @@ public class MessageRoomService {
                         visibility.equals(VisibilityState.ONLY_INITIAL_RECEIVER)) ||
                 (messageRoom.getInitialReceiver().getId() == userId &&
                         visibility.equals(VisibilityState.ONLY_INITIAL_SENDER))) {
-            throw new IllegalArgumentException("PERMISSION DENIED EXCEPTION : NO PERMISSION TO SEND MESSAGE");
+            throw new MessageReadNotAllowedException();
         }
     }
 }

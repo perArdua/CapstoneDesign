@@ -1,5 +1,8 @@
 package com.example.campusin.application.badge;
 
+import com.example.campusin.application.badge.exception.BadgePostNotFoundException;
+import com.example.campusin.application.badge.exception.BadgeUnauthorizedException;
+import com.example.campusin.application.badge.exception.BadgeUserNotFoundException;
 import com.example.campusin.domain.badge.Badge;
 import com.example.campusin.domain.badge.request.BadgeCreateRequest;
 import com.example.campusin.domain.oauth.RoleType;
@@ -30,7 +33,7 @@ public class BadgeService {
     public Badge createBadge(Long userId, BadgeCreateRequest request) {
         User isAdmin = findUser(userId);
         if (!isAdmin.getRoleType().equals(RoleType.ADMIN)) {
-            throw new IllegalArgumentException("관리자가 아닙니다.");
+            throw new BadgeUnauthorizedException();
         }
         User user = findPost(request.getPostId()).getUser();
 
@@ -48,11 +51,11 @@ public class BadgeService {
     }
 
     public User findUser(Long userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
+        return userRepository.findById(userId).orElseThrow(BadgeUserNotFoundException::new);
     }
 
     public Post findPost(Long postId) {
-        return postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+        return postRepository.findById(postId).orElseThrow(BadgePostNotFoundException::new);
     }
 
 }

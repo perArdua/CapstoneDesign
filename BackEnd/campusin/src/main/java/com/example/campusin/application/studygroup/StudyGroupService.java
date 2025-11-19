@@ -1,5 +1,11 @@
 package com.example.campusin.application.studygroup;
 
+import com.example.campusin.application.studygroup.exception.StudyGroupAlreadyMemberException;
+import com.example.campusin.application.studygroup.exception.StudyGroupFullException;
+import com.example.campusin.application.studygroup.exception.StudyGroupMemberRemoveFailedException;
+import com.example.campusin.application.studygroup.exception.StudyGroupNotFoundException;
+import com.example.campusin.application.studygroup.exception.StudyGroupNotMemberException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.studygroup.StudyGroup;
 import com.example.campusin.domain.studygroup.StudyGroupMember;
@@ -67,12 +73,12 @@ public class StudyGroupService {
 
         //만약 스터디그룹 제한인원이 꽉찼다면 예외처리
         if(studyGroup.getLimitedMemberSize() == studyGroup.getMembers().size()){
-            throw new IllegalArgumentException("스터디그룹 인원이 꽉찼습니다.");
+            throw new StudyGroupFullException();
         }
 
         //만약 이미 스터디그룹에 속해있다면 예외처리
         if(studyGroup.getMembers().stream().anyMatch(member1 -> member1.getUser().getId().equals(userId))){
-            throw new IllegalArgumentException("이미 스터디그룹에 속해있습니다.");
+            throw new StudyGroupAlreadyMemberException();
         }
 
         //스터디그룹에 멤버 추가
@@ -101,7 +107,7 @@ public class StudyGroupService {
                 try{
                     studyGroupMemberRepository.delete(studyGroupMember);
                 } catch (Exception e){
-                    throw new IllegalArgumentException("스터디그룹 멤버 삭제 실패");
+                    throw new StudyGroupMemberRemoveFailedException();
                 }
             }
             studyGroupRepository.delete(studyGroup);
@@ -159,18 +165,18 @@ public class StudyGroupService {
 
     private StudyGroup findStudyGroup(Long studyGroupId) {
         return studyGroupRepository.findById(studyGroupId).orElseThrow(
-                () -> new IllegalArgumentException("STUDYGROUP NOT FOUND")
+                StudyGroupNotFoundException::new
         );
     }
 
     private User findUser(Long userId) {
         return userRepository.findById(userId).orElseThrow(
-                () -> new IllegalArgumentException("USER NOT FOUND")
+                UserNotFoundException::new
         );
     }
     private StudyGroupMember CheckStudyGroupMember(User user, StudyGroup studyGroup) {
         return studyGroupMemberRepository.findByUserAndStudyGroupId(user, studyGroup).orElseThrow(
-                () -> new IllegalArgumentException("해당 사용자는 스터디 그룹의 멤버가 아닙니다.")
+                StudyGroupNotMemberException::new
         );
     }
 

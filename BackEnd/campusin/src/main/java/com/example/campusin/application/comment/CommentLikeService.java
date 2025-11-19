@@ -1,5 +1,8 @@
 package com.example.campusin.application.comment;
 
+import com.example.campusin.application.comment.exception.CommentLikeNotFoundException;
+import com.example.campusin.application.comment.exception.CommentNotFoundException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.comment.Comment;
 import com.example.campusin.domain.comment.CommentLike;
 import com.example.campusin.domain.comment.CommentLikeId;
@@ -41,7 +44,8 @@ public class CommentLikeService {
         Comment comment = getComment(commentId);
         comment.getLikes().removeIf(commentLike -> commentLike.getId().equals(commentLikeId));
 
-        CommentLike commentLike = commentLikeRepository.findById(commentLikeId).orElseThrow(() -> new IllegalArgumentException("COMMENT LIKE NOT FOUND"));
+        CommentLike commentLike = commentLikeRepository.findById(commentLikeId)
+                .orElseThrow(CommentLikeNotFoundException::new);
         commentLike.setComment(null);
         commentLike.setUser(null);
 
@@ -50,11 +54,11 @@ public class CommentLikeService {
     }
 
     private Comment getComment(Long commentId){
-        return commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("COMMENT NOT FOUND"));
+        return commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
     }
 
     private User getCurrentUser(Long userId){
-        return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+        return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
     private boolean isPresentLike(CommentLikeId commentLikeId){

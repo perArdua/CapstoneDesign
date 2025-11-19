@@ -1,6 +1,9 @@
 package com.example.campusin.application.rank;
 
 
+import com.example.campusin.application.statistics.exception.StatisticsNotFoundException;
+import com.example.campusin.application.studygroup.exception.StudyGroupNotFoundException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.common.redis.RedisLockHelper;
 import com.example.campusin.domain.rank.Ranks;
 import com.example.campusin.domain.rank.dto.request.RankCreateRequest;
@@ -58,7 +61,7 @@ public class RankService {
         User user = findUser(userId);
         Statistics statistics = statisticsRepository.findByUserAndDate(user, request.getLocalDate().toString());
         if(statistics == null){
-            throw new IllegalArgumentException("해당 날짜에 대한 Statistics가 존재하지 않습니다.");
+            throw new StatisticsNotFoundException();
         }
 
         //이미 해당 날짜에 대한 Rank가 존재하면 해당 Rank의 Id를 반환
@@ -93,7 +96,7 @@ public class RankService {
         StudyGroup studyGroup = findStudyGroup(StudyGroupId);
         Statistics statistics = statisticsRepository.findByUserAndDate(studyGroup.getUser(), request.getLocalDate().toString());
         if(statistics == null){
-            throw new IllegalArgumentException("해당 날짜에 대한 Statistics가 존재하지 않습니다.");
+            throw new StatisticsNotFoundException();
         }
 
         // 이미 해당 날짜에 대한 Rank가 존재하면서 스터디그룹도 존재하면 해당 Rank의 Id를 반환
@@ -249,7 +252,14 @@ public class RankService {
         int weekOfMonth = getWeekOfMonth(weekStart);
         int month = weekStart.getMonthValue();
 
-        for (ZSetOperations.TypedTuple<String> tuple : rangeWithScores) {
+        // ZSET 응답이 순서 없는 Set으로 전달되더라도 점수 내림차순으로 정렬해 랭크를 보장한다.
+        List<ZSetOperations.TypedTuple<String>> sortedTuples = rangeWithScores.stream()
+                .sorted(Comparator.comparingDouble(
+                        (ZSetOperations.TypedTuple<String> tuple) -> Optional.ofNullable(tuple.getScore()).orElse(0.0))
+                        .reversed())
+                .toList();
+
+        for (ZSetOperations.TypedTuple<String> tuple : sortedTuples) {
             result.add(RankListResponse.builder()
                     .rank(rank++)
                     .name(tuple.getValue())
@@ -274,11 +284,11 @@ public class RankService {
 
     private User findUser(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
     }
 
     private StudyGroup findStudyGroup(Long studyGroupId) {
         return studyGroupRepository.findById(studyGroupId)
-                .orElseThrow(() -> new IllegalArgumentException("STUDYGROUP NOT FOUND"));
+                .orElseThrow(StudyGroupNotFoundException::new);
     }
 }

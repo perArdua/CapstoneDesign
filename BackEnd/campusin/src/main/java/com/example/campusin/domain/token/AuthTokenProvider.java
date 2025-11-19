@@ -5,7 +5,7 @@ package com.example.campusin.domain.token;
  */
 
 import com.example.campusin.application.oauth.CustomUserDetailsService;
-import com.example.campusin.common.exception.TokenValidFailedException;
+import com.example.campusin.application.oauth.exception.TokenValidFailedException;
 import com.example.campusin.domain.oauth.ProviderType;
 import com.example.campusin.domain.oauth.RoleType;
 import com.example.campusin.domain.oauth.UserPrincipal;
