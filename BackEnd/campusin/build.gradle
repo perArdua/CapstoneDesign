@@ -78,12 +78,14 @@ dependencies {
 
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.h2database:h2'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'io.findify:s3mock_2.12:0.2.4'
+    testImplementation 'org.mockito:mockito-inline:5.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
-// ✅ QueryDSL 전용 task 생성 (Entity만)
+// QueryDSL 전용 task 생성 (Entity만)
 tasks.register("generateQueryDSL", JavaCompile) {
     source = fileTree('src/main/java/com/example/campusin/domain/entity')
     classpath = sourceSets.main.compileClasspath
@@ -138,5 +140,11 @@ task copyPrivate(type: Copy) {
 }
 kotlin {
     jvmToolchain(17)
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
