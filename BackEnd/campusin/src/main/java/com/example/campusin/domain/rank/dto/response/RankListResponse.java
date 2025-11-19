@@ -29,7 +29,7 @@ public class RankListResponse {
                 ranks.getStudyRanking(),
                 ranks.getUserName(),
                 getWeekOfMonth(ranks.getWeekStartDate()),
-                ranks.getWeekStartDate().getDayOfMonth()
+                ranks.getWeekStartDate().getMonthValue()
         );
     }
 }
