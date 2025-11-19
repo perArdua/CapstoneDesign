@@ -252,7 +252,14 @@ public class RankService {
         int weekOfMonth = getWeekOfMonth(weekStart);
         int month = weekStart.getMonthValue();
 
-        for (ZSetOperations.TypedTuple<String> tuple : rangeWithScores) {
+        // ZSET 응답이 순서 없는 Set으로 전달되더라도 점수 내림차순으로 정렬해 랭크를 보장한다.
+        List<ZSetOperations.TypedTuple<String>> sortedTuples = rangeWithScores.stream()
+                .sorted(Comparator.comparingDouble(
+                        (ZSetOperations.TypedTuple<String> tuple) -> Optional.ofNullable(tuple.getScore()).orElse(0.0))
+                        .reversed())
+                .toList();
+
+        for (ZSetOperations.TypedTuple<String> tuple : sortedTuples) {
             result.add(RankListResponse.builder()
                     .rank(rank++)
                     .name(tuple.getValue())
