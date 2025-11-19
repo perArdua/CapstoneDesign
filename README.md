@@ -30,5 +30,5 @@
 - **레이어드 아키텍처**: `api`(Controller) → `application`(도메인 서비스/비즈니스 규칙) → `domain`(엔티티·DTO) → `infra`(JPA/외부 연동)로 역할 분리, `common`에서 보안·설정·예외/응답 포맷을 공통 관리.
 - **검색/캐시 파이프라인**: 게시글은 JPA로 저장된 뒤 OpenSearch 인덱싱, 인기/랭킹·세션 데이터는 Redis 기반 캐시로 가속.
 - **배포/실행 흐름**: GitHub Actions를 통해 Docker file을 Docker Hub에 upload 후 AWS EC2에서 self-hosted runner를 통해 실행
-  
-- <img width="1050" height="561" alt="Image" src="https://github.com/user-attachments/assets/687e7bf3-cf05-42d1-8954-36e2cf8cc4a1" />
+
+![아키텍처](https://github.com/user-attachments/assets/687e7bf3-cf05-42d1-8954-36e2cf8cc4a1)
