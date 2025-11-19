@@ -1,5 +1,8 @@
 package com.example.campusin.application.timer;
 
+import com.example.campusin.application.timer.exception.TimerNotFoundException;
+import com.example.campusin.application.timer.exception.TimerUserMismatchException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.timer.Timer;
 import com.example.campusin.domain.timer.request.TimerCreateRequest;
@@ -103,7 +106,7 @@ public class TimerService {
         User user = findUser(userId);
         Timer timer = findTimer(timerId);
         if (!timer.getUser().equals(user)) {
-            throw new IllegalArgumentException("USER NOT MATCH");
+            throw new TimerUserMismatchException();
         }
         Statistics statistics = statisticsRepository.findByUserAndDate(user, timer.getModifiedAt().toLocalDate().toString());
         statistics.addElapsedTime(timer.getElapsedTime());
@@ -125,11 +128,11 @@ public class TimerService {
 
     private User findUser(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("USER NOT FOUND"));
+                .orElseThrow(UserNotFoundException::new);
     }
 
     private Timer findTimer(Long timerId) {
         return timerRepository.findById(timerId)
-                .orElseThrow(() -> new IllegalArgumentException("TIMER NOT FOUND"));
+                .orElseThrow(TimerNotFoundException::new);
     }
 }

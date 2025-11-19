@@ -20,17 +20,23 @@ import com.example.campusin.domain.token.AuthTokenProvider;
 import com.example.campusin.infra.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
 import com.example.campusin.infra.user.UserRefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.request.async.SecurityContextCallableProcessingInterceptor;
+import org.springframework.web.context.request.async.CallableProcessingInterceptor;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -60,6 +66,27 @@ public class SecurityConfig {
 //    }
 
     @Bean
+    @Order(1)
+    public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .securityMatcher("/actuator/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/v3/api-docs/**",
+                        "/swagger-resources/**",
+                        "/webjars/**",
+                        "/swagger/**",
+                        "/api-docs/**")
+                .authorizeHttpRequests(authz -> authz
+                        .anyRequest().permitAll()
+                )
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        return http.build();
+    }
+
+
+    @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors()
@@ -70,17 +97,18 @@ public class SecurityConfig {
                 .csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
+                .securityContext(context -> context.requireExplicitSave(false))
+                .requestCache(AbstractHttpConfigurer::disable)
                 .exceptionHandling()
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                 .accessDeniedHandler(tokenAccessDeniedHandler)
                 .and()
+                .anonymous(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .requestMatchers("/error").permitAll()
                 .requestMatchers("/api/**").hasAnyAuthority(RoleType.USER.getCode())
                 .requestMatchers("/api/**/admin/**").hasAnyAuthority(RoleType.ADMIN.getCode())
-                .requestMatchers(AuthenticatedMatchers.swaggerArray).permitAll()
-                .requestMatchers("/actuator/health", "/actuator/prometheus").permitAll()
-                .requestMatchers("/actuator/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()

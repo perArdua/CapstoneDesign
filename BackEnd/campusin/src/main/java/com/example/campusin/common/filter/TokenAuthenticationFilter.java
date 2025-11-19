@@ -31,6 +31,13 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain)  throws ServletException, IOException {
 
+        String uri = request.getRequestURI();
+
+        if (isPermitAllPath(uri)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String tokenStr = HeaderUtil.getAccessToken(request);
         AuthToken token = tokenProvider.convertAuthToken(tokenStr);
 
@@ -42,4 +49,13 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    private boolean isPermitAllPath(String uri) {
+        return uri.startsWith("/swagger")
+                || uri.startsWith("/v3")
+                || uri.startsWith("/webjars")
+                || uri.equals("/swagger-ui.html")
+                || uri.startsWith("/swagger-resources")
+                || uri.startsWith("/api-docs")
+                || uri.startsWith("/actuator");
+    }
 }

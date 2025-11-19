@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface MessageRoomRepository extends JpaRepository<MessageRoom, Long> {
     @Query(
             value = "select * from message_room "
-                    + "where created_from=:created_from"
+                    + "where created_from=:created_from "
                     + "AND (initial_receiver_id=:first_interlocutor_id AND initial_sender_id=:second_interlocutor_id)  "
                     + "OR (initial_receiver_id=:second_interlocutor_id AND initial_sender_id=:first_interlocutor_id) ",
             nativeQuery = true)
@@ -34,7 +34,7 @@ public interface MessageRoomRepository extends JpaRepository<MessageRoom, Long> 
 
     @Query(
             value = "select exists (select * from message_room "
-                    + "where created_from=:created_from"
+                    + "where created_from=:created_from "
                     + "AND (initial_receiver_id=:first_interlocutor_id AND initial_sender_id=:second_interlocutor_id)  "
                     + "OR (initial_receiver_id=:second_interlocutor_id AND initial_sender_id=:first_interlocutor_id))",
             nativeQuery = true)

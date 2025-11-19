@@ -1,5 +1,7 @@
 package com.example.campusin.application.todo;
 
+import com.example.campusin.application.todo.exception.TodoNotFoundException;
+import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.todo.Todo;
 import com.example.campusin.domain.todo.dto.request.TodoRequest;
 import com.example.campusin.domain.todo.dto.request.TodoUpdateRequest;
@@ -57,12 +59,12 @@ public class TodoService {
     }
 
     private Todo findTodo(Long todoId) {
-        return todoRepository.findById(todoId).orElseThrow(() -> new IllegalArgumentException("TODO NOT FOUND"));
+        return todoRepository.findById(todoId).orElseThrow(TodoNotFoundException::new);
     }
 
     private User findUser(Long userId) {
         return userRepository.findById(userId).orElseThrow(
-                () -> new IllegalArgumentException("USER NOT FOUND")
+                UserNotFoundException::new
         );
     }
 }
