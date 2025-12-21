@@ -3,6 +3,7 @@ package com.example.campusin.application.timer;
 import com.example.campusin.application.timer.exception.TimerNotFoundException;
 import com.example.campusin.application.timer.exception.TimerUserMismatchException;
 import com.example.campusin.application.user.exception.UserNotFoundException;
+import com.example.campusin.application.rank.mirror.RankScoreConverter;
 import com.example.campusin.domain.statistics.Statistics;
 import com.example.campusin.domain.timer.Timer;
 import com.example.campusin.domain.timer.request.TimerCreateRequest;
@@ -68,7 +69,7 @@ public class TimerService {
         Long timeToAdd = timerUpdateRequest.getElapsedTime();
         String userName = timer.getUser().getNickname();
         String weekKey = getCurrentWeekRankKey();
-        redisTemplate.opsForZSet().incrementScore(weekKey, userName, timeToAdd);
+        incrementCompositeScore(weekKey, userName, timeToAdd, timer.getUser().getId());
         return new TimerIdResponse(updatedTimer.getId());
     }
 
@@ -124,6 +125,23 @@ public class TimerService {
     private String getCurrentWeekRankKey() {
         LocalDate startOfweek = getWeekStartDate(LocalDate.now());
         return studyTimeRankKey(startOfweek);
+    }
+
+    private void incrementCompositeScore(String weekKey, String member, long elapsedTimeDelta, Long tieBreakerSource) {
+        Double currentScore = redisTemplate.opsForZSet().score(weekKey, member);
+        double deltaScore = RankScoreConverter.toDeltaScore(elapsedTimeDelta);
+        if (currentScore == null) {
+            double initialScore = RankScoreConverter.initialScore(elapsedTimeDelta, tieBreakerSource);
+            redisTemplate.opsForZSet().add(weekKey, member, initialScore);
+        } else {
+            double baseScore = currentScore;
+            // 레거시 점수(plain elapsed time)일 경우 합성 스코어로 변환
+            if (currentScore < RankScoreConverter.SCALE) {
+                baseScore = RankScoreConverter.fromLegacyTotal(currentScore.longValue(), tieBreakerSource);
+                redisTemplate.opsForZSet().add(weekKey, member, baseScore);
+            }
+            redisTemplate.opsForZSet().incrementScore(weekKey, member, deltaScore);
+        }
     }
 
     private User findUser(Long userId) {
