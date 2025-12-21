@@ -92,6 +92,20 @@ public class RankController {
 
     @io.swagger.v3.oas.annotations.responses.ApiResponses(
             value = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "개인 공부시간 랭킹 리스트 조회(DB 정렬)", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = RankListResponse.class)))
+            }
+    )
+
+    @io.swagger.v3.oas.annotations.Operation(summary = "개인 공부시간 랭킹 리스트 조회(DB 정렬 버전)")
+    @GetMapping("/studyTimeRank/db")
+    public ApiResponse getAllStudyTimeRankListFromDb(@RequestParam(name = "localDate")
+                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate,
+                                                     Pageable pageable) {
+        return ApiResponse.success("랭킹 리스트 조회", rankService.getAllStudyTimeRankListFromDb(localDate, pageable));
+    }
+
+    @io.swagger.v3.oas.annotations.responses.ApiResponses(
+            value = {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "이전 주차 랭킹 리스트 조회", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = RankListResponse.class)))
             }
     )
