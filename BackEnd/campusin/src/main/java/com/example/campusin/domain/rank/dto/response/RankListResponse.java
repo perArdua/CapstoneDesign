@@ -15,13 +15,15 @@ public class RankListResponse {
     private String name;
     private int week;
     private int month;
+    private Double score;
 
     @Builder
-    public RankListResponse(Long rank, String name, int week, int month) {
+    public RankListResponse(Long rank, String name, int week, int month, Double score) {
         this.rank = rank;
         this.name = name;
         this.week = week;
         this.month = month;
+        this.score = score;
     }
     @Builder
     public RankListResponse(Ranks ranks) {
@@ -29,7 +31,8 @@ public class RankListResponse {
                 ranks.getStudyRanking(),
                 ranks.getUserName(),
                 getWeekOfMonth(ranks.getWeekStartDate()),
-                ranks.getWeekStartDate().getMonthValue()
+                ranks.getWeekStartDate().getMonthValue(),
+                ranks.getTotalElapsedTime() == null ? null : ranks.getTotalElapsedTime().doubleValue()
         );
     }
 }

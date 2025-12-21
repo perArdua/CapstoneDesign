@@ -179,6 +179,18 @@ public class RankService {
         }
     }
 
+    public Page<RankListResponse> getAllStudyTimeRankListFromDb(LocalDate localDate, Pageable pageable) {
+        pageable = fixPageSize(pageable);
+        LocalDate weekStart = getWeekStartDate(localDate);
+        Page<Ranks> ranks = rankRepository.findAllByOrderByTotalStudyTimeAsc(weekStart, pageable);
+
+        for (Long i = 0L; i < ranks.getContent().size(); i++) {
+            ranks.getContent().get(i.intValue()).updateStudyRanking(i + 1);
+            rankRepository.save(ranks.getContent().get(i.intValue()));
+        }
+        return ranks.map(RankListResponse::new);
+    }
+
     private Page<RankListResponse> loadCurrentWeekFromRedis(LocalDate weekStart, Pageable pageable) {
         String weekKey = studyTimeRankKey(weekStart);
         long totalUsers = Optional.ofNullable(redisTemplate.opsForZSet().zCard(weekKey)).orElse(0L);
@@ -265,6 +277,7 @@ public class RankService {
                     .name(tuple.getValue())
                     .week(weekOfMonth)
                     .month(month)
+                    .score(tuple.getScore())
                     .build());
         }
         return result;
