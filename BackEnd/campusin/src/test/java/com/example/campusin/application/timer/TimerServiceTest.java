@@ -12,6 +12,7 @@ import com.example.campusin.domain.timer.request.TimerUpdateRequest;
 import com.example.campusin.domain.timer.response.TimerIdResponse;
 import com.example.campusin.domain.timer.response.TimerResponse;
 import com.example.campusin.domain.user.User;
+import com.example.campusin.application.rank.mirror.RankScoreConverter;
 import com.example.campusin.infra.statistics.StatisticsRepository;
 import com.example.campusin.infra.timer.TimerRepository;
 import com.example.campusin.infra.user.UserRepository;
@@ -38,6 +39,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static com.example.campusin.application.rank.mirror.RankScoreConverter.toDeltaScore;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
@@ -196,6 +198,7 @@ class TimerServiceTest {
                 // given
                 Long timerId = 5L;
                 User owner = new User();
+                owner.setId(1L);
                 owner.setNickname("john");
                 Timer existingTimer = Timer.builder()
                         .id(timerId)
@@ -226,7 +229,7 @@ class TimerServiceTest {
                 verify(zSetOperations).incrementScore(keyCaptor.capture(), memberCaptor.capture(), scoreCaptor.capture());
                 assertThat(keyCaptor.getValue()).isEqualTo(expectedWeekKey);
                 assertThat(memberCaptor.getValue()).isEqualTo(owner.getNickname());
-                assertThat(scoreCaptor.getValue()).isEqualTo(request.getElapsedTime().doubleValue());
+                assertThat(scoreCaptor.getValue()).isEqualTo(toDeltaScore(request.getElapsedTime()));
             }
 
             @Test
@@ -235,6 +238,7 @@ class TimerServiceTest {
                 // given
                 Long timerId = 8L;
                 User owner = new User();
+                owner.setId(1L);
                 owner.setNickname("amy");
                 Timer existingTimer = Timer.builder()
                         .id(timerId)
