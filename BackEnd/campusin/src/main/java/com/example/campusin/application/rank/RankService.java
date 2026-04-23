@@ -4,7 +4,6 @@ package com.example.campusin.application.rank;
 import com.example.campusin.application.statistics.exception.StatisticsNotFoundException;
 import com.example.campusin.application.studygroup.exception.StudyGroupNotFoundException;
 import com.example.campusin.application.user.exception.UserNotFoundException;
-import com.example.campusin.common.redis.RedisLockHelper;
 import com.example.campusin.domain.rank.Ranks;
 import com.example.campusin.domain.rank.dto.request.RankCreateRequest;
 import com.example.campusin.domain.rank.dto.response.RankIdResponse;
@@ -33,12 +32,10 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.*;
 
 import static com.example.campusin.common.redis.RedisKeyFactory.studyTimeRankKey;
-import static com.example.campusin.common.redis.RedisKeyFactory.weeklyRankPageLockKey;
 import static com.example.campusin.common.utils.WeekUtil.getWeekOfMonth;
 import static com.example.campusin.common.utils.WeekUtil.getWeekStartDate;
 
@@ -54,7 +51,6 @@ public class RankService {
     private final RedisTemplate<String, String> redisTemplate;
     private final ObjectMapper objectMapper;
     private final RankCacheService rankCacheService;
-    private final RedisLockHelper redisLockHelper;
 
     @Transactional
     public RankIdResponse createRank(Long userId, RankCreateRequest request){
@@ -175,7 +171,7 @@ public class RankService {
         if (weekStart.equals(currentWeekStart)) {
             return loadCurrentWeekFromRedis(weekStart, pageable);
         } else {
-            return loadPastWeekFromCacheOrDb(weekStart, pageable);
+            return loadPastWeek(weekStart, pageable);
         }
     }
 
@@ -205,25 +201,10 @@ public class RankService {
         return new PageImpl<>(rankResponseList, pageable, totalUsers);
     }
 
-    private Page<RankListResponse> loadPastWeekFromCacheOrDb(LocalDate weekStart, Pageable pageable) {
-        String lockKey = weeklyRankPageLockKey(weekStart, pageable.getPageNumber());
-        String lockValue = UUID.randomUUID().toString();
-
+    private Page<RankListResponse> loadPastWeek(LocalDate weekStart, Pageable pageable) {
         Page<RankListResponse> cachedPage = getCachedPage(weekStart, pageable);
         if (cachedPage != null) return cachedPage;
-
-        if (redisLockHelper.tryLock(lockKey, lockValue, Duration.ofSeconds(5))) {
-            try {
-                cachedPage = getCachedPage(weekStart, pageable);
-                return cachedPage != null ? cachedPage : loadFromDbAndCache(weekStart, pageable);
-            } finally {
-                redisLockHelper.unlock(lockKey, lockValue);
-            }
-        } else {
-            waitBriefly();
-            cachedPage = getCachedPage(weekStart, pageable);
-            return cachedPage != null ? cachedPage : Page.empty();
-        }
+        return loadFromDbAndCache(weekStart, pageable);
     }
 
     @Transactional(readOnly = true)
@@ -287,12 +268,6 @@ public class RankService {
         return pageable.getPageSize() != 20
                 ? PageRequest.of(pageable.getPageNumber(), 20, pageable.getSort())
                 : pageable;
-    }
-
-    private void waitBriefly() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ignored) {}
     }
 
     private User findUser(Long userId) {
