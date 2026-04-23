@@ -21,8 +21,6 @@ import static com.example.campusin.common.utils.WeekUtil.getWeekOfMonth;
 @Component
 public class RankShadowRunner {
 
-    private static final double SHADOW_SCORE_SCALE = 1_000_000d;
-
     private final RedisTemplate<String, String> redisTemplate;
     private final MirrorProperties mirrorProperties;
 
@@ -48,7 +46,7 @@ public class RankShadowRunner {
 
         for (ZSetOperations.TypedTuple<String> tuple : rangeWithScores) {
             double rawScore = Optional.ofNullable(tuple.getScore()).orElse(0.0);
-            double normalizedScore = Math.floor(rawScore / SHADOW_SCORE_SCALE);
+            double normalizedScore = RankScoreConverter.toNormalized(rawScore);
             responses.add(RankListResponse.builder()
                     .rank(rank++)
                     .name(tuple.getValue())

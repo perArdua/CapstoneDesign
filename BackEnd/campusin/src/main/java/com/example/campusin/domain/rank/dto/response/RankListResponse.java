@@ -25,6 +25,8 @@ public class RankListResponse {
         this.month = month;
         this.score = score;
     }
+    // Ranks.totalElapsedTime 은 아카이버(RankArchiveService)/직접 생성 경로(RankService.createRank*)
+    // 모두 이미 정규화된 학습시간 단위로 저장되므로(컴포지트 분리 이후), 응답 레이어에서는 추가 변환 없이 그대로 내보낸다.
     @Builder
     public RankListResponse(Ranks ranks) {
         this(
