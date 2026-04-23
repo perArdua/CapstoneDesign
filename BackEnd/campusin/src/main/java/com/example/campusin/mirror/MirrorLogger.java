@@ -32,7 +32,12 @@ public class MirrorLogger {
             payload.put("shadowSummary", result.getShadowSummary());
             payload.put("primaryDigest", result.getPrimaryDigest());
             payload.put("shadowDigest", result.getShadowDigest());
-            log.info(objectMapper.writeValueAsString(payload));
+            String json = objectMapper.writeValueAsString(payload);
+            switch (result.getStatus()) {
+                case OK -> log.info(json);
+                case DIFF -> log.warn(json);
+                case ERROR -> log.error(json);
+            }
         } catch (Exception e) {
             log.warn("Failed to write mirror log", e);
         }

@@ -14,6 +14,12 @@ import java.util.stream.Collectors;
 @Component
 public class RankComparator implements MirrorComparator<Page<RankListResponse>> {
 
+    // 정규화 score는 Math.floor 결과로 정수값이지만 double 타입이므로
+    // 부동소수점 연산 경로에서 발생할 수 있는 미세 오차만 방어한다.
+    // 0.0001은 정수 간 간격(1) 대비 1/10000 수준으로 충분히 엄격하며,
+    // 1분 이상의 의미 있는 차이는 모두 불일치로 감지한다.
+    private static final double SCORE_TOLERANCE = 0.0001;
+
     @Override
     public String compare(Page<RankListResponse> primary, Page<RankListResponse> shadow) {
         if (primary == null || shadow == null) {
@@ -36,8 +42,13 @@ public class RankComparator implements MirrorComparator<Page<RankListResponse>> 
             if (a.getMonth() != b.getMonth()) return "MONTH_DIFF@" + i;
             Double pa = a.getScore();
             Double pb = b.getScore();
-            if (pa != null && pb != null && Double.compare(pa, pb) != 0) {
-                return "SCORE_DIFF@" + i;
+            if (!Objects.equals(pa, pb)) {
+                if (pa == null || pb == null) {
+                    return "SCORE_NULL_DIFF@" + i;
+                }
+                if (Math.abs(pa - pb) > SCORE_TOLERANCE) {
+                    return "SCORE_DIFF@" + i;
+                }
             }
         }
         return null;

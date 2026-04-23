@@ -1,6 +1,7 @@
 package com.example.campusin.application.rank;
 
 
+import com.example.campusin.application.rank.mirror.RankScoreConverter;
 import com.example.campusin.application.statistics.exception.StatisticsNotFoundException;
 import com.example.campusin.application.studygroup.exception.StudyGroupNotFoundException;
 import com.example.campusin.application.user.exception.UserNotFoundException;
@@ -253,12 +254,15 @@ public class RankService {
                 .toList();
 
         for (ZSetOperations.TypedTuple<String> tuple : sortedTuples) {
+            Double rawScore = tuple.getScore();
+            // Redis ZSet score는 composite(elapsedTime*SCALE + tieBreaker)이므로 응답에는 정규화 값만 노출.
+            Double normalizedScore = rawScore == null ? null : RankScoreConverter.toNormalized(rawScore);
             result.add(RankListResponse.builder()
                     .rank(rank++)
                     .name(tuple.getValue())
                     .week(weekOfMonth)
                     .month(month)
-                    .score(tuple.getScore())
+                    .score(normalizedScore)
                     .build());
         }
         return result;

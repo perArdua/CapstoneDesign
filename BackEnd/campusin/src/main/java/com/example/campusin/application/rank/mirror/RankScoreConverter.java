@@ -24,4 +24,12 @@ public final class RankScoreConverter {
     public static double fromLegacyTotal(long legacyTotal, long tieBreaker) {
         return toDeltaScore(legacyTotal) + tieBreakerValue(tieBreaker);
     }
+
+    /**
+     * composite score(elapsedTime × SCALE + tieBreaker)에서 응답·DB 저장용 정규화 값(elapsedTime)만 추출.
+     * tieBreaker 성분은 floor로 제거.
+     */
+    public static double toNormalized(double compositeScore) {
+        return Math.floor(compositeScore / SCALE);
+    }
 }

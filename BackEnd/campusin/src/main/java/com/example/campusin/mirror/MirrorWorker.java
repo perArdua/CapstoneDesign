@@ -1,5 +1,7 @@
 package com.example.campusin.mirror;
 
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.AsyncTaskExecutor;
@@ -14,10 +16,13 @@ import java.util.function.Supplier;
 @RequiredArgsConstructor
 public class MirrorWorker {
 
+    private static final String METRIC_RESULT = "mirror.result";
+
     private final MirrorProperties properties;
     private final MirrorLogger mirrorLogger;
     @Qualifier("shadowTaskExecutor")
     private final AsyncTaskExecutor shadowTaskExecutor;
+    private final MeterRegistry meterRegistry;
 
     @Async("mirrorTaskExecutor")
     public <R> void runMirror(MirrorContext context,
@@ -99,6 +104,12 @@ public class MirrorWorker {
                 .primaryDigest(primaryDigest)
                 .shadowDigest(shadowDigest)
                 .build();
+
+        Counter.builder(METRIC_RESULT)
+                .tag("api", context.getApiName())
+                .tag("status", status.name().toLowerCase())
+                .register(meterRegistry)
+                .increment();
 
         if (properties.isAlwaysLog() || status != MirrorResult.Status.OK) {
             mirrorLogger.log(context, result);
