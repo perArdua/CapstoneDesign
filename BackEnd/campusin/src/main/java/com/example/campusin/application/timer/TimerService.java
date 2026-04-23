@@ -15,11 +15,14 @@ import com.example.campusin.infra.statistics.StatisticsRepository;
 import com.example.campusin.infra.timer.TimerRepository;
 import com.example.campusin.infra.user.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,6 +36,7 @@ import static com.example.campusin.common.utils.WeekUtil.getWeekStartDate;
  * Created by kok8454@gmail.com on 2023-05-21
  * Github : http://github.com/perArdua
  */
+@Slf4j
 @Service
 @AllArgsConstructor
 public class TimerService {
@@ -68,9 +72,28 @@ public class TimerService {
 
         Long timeToAdd = timerUpdateRequest.getElapsedTime();
         String userName = timer.getUser().getNickname();
+        Long userId = timer.getUser().getId();
         String weekKey = getCurrentWeekRankKey();
-        incrementCompositeScore(weekKey, userName, timeToAdd, timer.getUser().getId());
+
+        // DB 커밋 성공 이후에만 ZSet을 갱신한다. 커밋 실패 시 Redis에만 반영된 유령 점수를 방지한다.
+        registerZSetIncrementAfterCommit(weekKey, userName, timeToAdd, userId);
         return new TimerIdResponse(updatedTimer.getId());
+    }
+
+    private void registerZSetIncrementAfterCommit(String weekKey, String userName, long elapsedTimeDelta, Long tieBreakerSource) {
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+            @Override
+            public void afterCommit() {
+                try {
+                    incrementCompositeScore(weekKey, userName, elapsedTimeDelta, tieBreakerSource);
+                } catch (Exception e) {
+                    // Redis 실패는 DB 커밋을 되돌릴 수 없으므로 로그만 남기고 진행한다.
+                    // (추후 과제) 실패 큐로 재시도 보강.
+                    log.error("[TimerService] afterCommit ZSet update failed. weekKey={}, user={}, delta={}, error={}",
+                            weekKey, userName, elapsedTimeDelta, e.getMessage(), e);
+                }
+            }
+        });
     }
 
     @Transactional
