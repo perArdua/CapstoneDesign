@@ -1,5 +1,6 @@
 package com.example.campusin.application.rank;
 
+import com.example.campusin.application.rank.mirror.RankScoreConverter;
 import com.example.campusin.domain.rank.Ranks;
 import com.example.campusin.infra.rank.RankRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -50,10 +51,13 @@ public class RankArchiveService {
 
                 if (userName == null || score == null) continue;
 
+                // Redis ZSet score는 composite(elapsedTime*SCALE + tieBreaker). DB에는 사용자 의미 단위의
+                // 정규화 값(학습시간)만 저장한다. composite 복원이 필요하면 Redis score를 참조.
+                long normalizedElapsedTime = (long) RankScoreConverter.toNormalized(score);
                 ranksToSave.add(Ranks.builder()
                         .userName(userName)
                         .weekStartDate(weekStartDate)
-                        .totalElapsedTime(score.longValue())
+                        .totalElapsedTime(normalizedElapsedTime)
                         .studyRanking(globalRank++)
                         .build());
             }
