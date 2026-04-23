@@ -1,5 +1,7 @@
 package com.example.campusin.mirror;
 
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -31,6 +33,7 @@ class MirrorWorkerTest {
 
     private MirrorProperties properties;
     private AsyncTaskExecutor shadowTaskExecutor;
+    private MeterRegistry meterRegistry;
     private MirrorWorker mirrorWorker;
     private MirrorContext context;
 
@@ -38,10 +41,11 @@ class MirrorWorkerTest {
     void setUp() {
         properties = new MirrorProperties();
         properties.setTimeoutMs(10);
-        properties.setSamplingRate(1.0);
+        properties.setSampleRate(1.0);
         properties.setAlwaysLog(true);
         shadowTaskExecutor = new SimpleAsyncTaskExecutor();
-        mirrorWorker = new MirrorWorker(properties, mirrorLogger, shadowTaskExecutor);
+        meterRegistry = new SimpleMeterRegistry();
+        mirrorWorker = new MirrorWorker(properties, mirrorLogger, shadowTaskExecutor, meterRegistry);
         context = MirrorContext.of("corr", "api", Map.of(), Instant.now());
     }
 
@@ -108,7 +112,7 @@ class MirrorWorkerTest {
                     throw new TaskRejectedException("reject");
                 }
             };
-            mirrorWorker = new MirrorWorker(properties, mirrorLogger, rejectingExecutor);
+            mirrorWorker = new MirrorWorker(properties, mirrorLogger, rejectingExecutor, meterRegistry);
 
             // when
             mirrorWorker.runMirror(
