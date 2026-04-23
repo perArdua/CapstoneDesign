@@ -30,6 +30,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.transaction.support.TransactionSynchronizationUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -41,9 +43,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static com.example.campusin.application.rank.mirror.RankScoreConverter.toDeltaScore;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 
@@ -193,8 +197,8 @@ class TimerServiceTest {
         class Context_when_time_increases {
 
             @Test
-            @DisplayName("타이머 시간을 누적하고 주간 랭킹 ZSET에 반영한다")
-            void 시간을_누적하고_랭킹에_반영한다() {
+            @DisplayName("DB 커밋 전에는 ZSet을 갱신하지 않고 afterCommit 이후에만 갱신한다")
+            void 커밋_이후에만_랭킹에_반영한다() {
                 // given
                 Long timerId = 5L;
                 User owner = new User();
@@ -215,25 +219,34 @@ class TimerServiceTest {
 
                 String expectedWeekKey = RedisKeyFactory.studyTimeRankKey(WeekUtil.getWeekStartDate(LocalDate.now()));
 
-                // when
-                TimerIdResponse response = timerService.updateTimer(timerId, request);
+                TransactionSynchronizationManager.initSynchronization();
+                try {
+                    // when
+                    TimerIdResponse response = timerService.updateTimer(timerId, request);
 
-                // then
-                assertThat(response.getId()).isEqualTo(timerId);
-                assertThat(existingTimer.getElapsedTime()).isEqualTo(15L);
+                    // then — 커밋 이전에는 ZSet 호출이 없다
+                    assertThat(response.getId()).isEqualTo(timerId);
+                    assertThat(existingTimer.getElapsedTime()).isEqualTo(15L);
+                    verify(zSetOperations, never()).incrementScore(any(), any(), anyDouble());
 
-                ArgumentCaptor<String> keyCaptor = ArgumentCaptor.forClass(String.class);
-                ArgumentCaptor<String> memberCaptor = ArgumentCaptor.forClass(String.class);
-                ArgumentCaptor<Double> scoreCaptor = ArgumentCaptor.forClass(Double.class);
+                    // when — afterCommit 트리거
+                    TransactionSynchronizationUtils.triggerAfterCommit();
 
-                verify(zSetOperations).incrementScore(keyCaptor.capture(), memberCaptor.capture(), scoreCaptor.capture());
-                assertThat(keyCaptor.getValue()).isEqualTo(expectedWeekKey);
-                assertThat(memberCaptor.getValue()).isEqualTo(owner.getNickname());
-                assertThat(scoreCaptor.getValue()).isEqualTo(toDeltaScore(request.getElapsedTime()));
+                    // then — 커밋 이후에 정확한 키/멤버/점수로 ZSet이 갱신된다
+                    ArgumentCaptor<String> keyCaptor = ArgumentCaptor.forClass(String.class);
+                    ArgumentCaptor<String> memberCaptor = ArgumentCaptor.forClass(String.class);
+                    ArgumentCaptor<Double> scoreCaptor = ArgumentCaptor.forClass(Double.class);
+                    verify(zSetOperations).incrementScore(keyCaptor.capture(), memberCaptor.capture(), scoreCaptor.capture());
+                    assertThat(keyCaptor.getValue()).isEqualTo(expectedWeekKey);
+                    assertThat(memberCaptor.getValue()).isEqualTo(owner.getNickname());
+                    assertThat(scoreCaptor.getValue()).isEqualTo(toDeltaScore(request.getElapsedTime()));
+                } finally {
+                    TransactionSynchronizationManager.clearSynchronization();
+                }
             }
 
             @Test
-            @DisplayName("경계값 0이라도 저장하고 랭킹에 0을 반영한다")
+            @DisplayName("경계값 0이라도 저장하고 커밋 이후에 랭킹에 0을 반영한다")
             void 경계값_0을_반영한다() {
                 // given
                 Long timerId = 8L;
@@ -253,14 +266,50 @@ class TimerServiceTest {
                 given(timerRepository.findById(timerId)).willReturn(Optional.of(existingTimer));
                 given(timerRepository.save(any(Timer.class))).willAnswer(invocation -> invocation.getArgument(0));
 
-                // when
-                TimerIdResponse response = timerService.updateTimer(timerId, request);
+                TransactionSynchronizationManager.initSynchronization();
+                try {
+                    // when
+                    TimerIdResponse response = timerService.updateTimer(timerId, request);
+                    TransactionSynchronizationUtils.triggerAfterCommit();
 
-                // then
-                assertThat(response.getId()).isEqualTo(timerId);
-                assertThat(existingTimer.getElapsedTime()).isEqualTo(20L);
+                    // then
+                    assertThat(response.getId()).isEqualTo(timerId);
+                    assertThat(existingTimer.getElapsedTime()).isEqualTo(20L);
+                    verify(zSetOperations).incrementScore(any(), eq(owner.getNickname()), eq(0.0));
+                } finally {
+                    TransactionSynchronizationManager.clearSynchronization();
+                }
+            }
 
-                verify(zSetOperations).incrementScore(any(), eq(owner.getNickname()), eq(0.0));
+            @Test
+            @DisplayName("트랜잭션이 롤백되면 ZSet을 갱신하지 않는다")
+            void 롤백시_ZSet_미갱신() {
+                // given
+                Long timerId = 6L;
+                User owner = new User();
+                owner.setId(2L);
+                owner.setNickname("doe");
+                Timer existingTimer = Timer.builder()
+                        .id(timerId)
+                        .user(owner)
+                        .elapsedTime(5L)
+                        .build();
+
+                TimerUpdateRequest request = new TimerUpdateRequest(7L);
+
+                given(timerRepository.findById(timerId)).willReturn(Optional.of(existingTimer));
+                given(timerRepository.save(any(Timer.class))).willAnswer(invocation -> invocation.getArgument(0));
+
+                TransactionSynchronizationManager.initSynchronization();
+                try {
+                    // when — afterCommit을 트리거하지 않고 종료 (롤백 상황 시뮬레이션)
+                    timerService.updateTimer(timerId, request);
+
+                    // then
+                    verifyNoInteractions(redisTemplate);
+                } finally {
+                    TransactionSynchronizationManager.clearSynchronization();
+                }
             }
         }
 

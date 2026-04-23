@@ -3,7 +3,6 @@ package com.example.campusin.application.rank;
 import com.example.campusin.application.statistics.exception.StatisticsNotFoundException;
 import com.example.campusin.application.studygroup.exception.StudyGroupNotFoundException;
 import com.example.campusin.application.user.exception.UserNotFoundException;
-import com.example.campusin.common.redis.RedisLockHelper;
 import com.example.campusin.domain.rank.Ranks;
 import com.example.campusin.domain.rank.dto.request.RankCreateRequest;
 import com.example.campusin.domain.rank.dto.response.RankIdResponse;
@@ -37,7 +36,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +43,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import static com.example.campusin.common.redis.RedisKeyFactory.studyTimeRankKey;
-import static com.example.campusin.common.redis.RedisKeyFactory.weeklyRankPageLockKey;
 import static com.example.campusin.common.utils.WeekUtil.getWeekOfMonth;
 import static com.example.campusin.common.utils.WeekUtil.getWeekStartDate;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -83,8 +80,6 @@ class RankServiceTest {
     ObjectMapper objectMapper;
     @Mock
     RankCacheService rankCacheService;
-    @Mock
-    RedisLockHelper redisLockHelper;
 
     @InjectMocks
     RankService rankService;
@@ -384,22 +379,19 @@ class RankServiceTest {
             // then
             assertThat(result.getContent()).hasSize(1);
             assertThat(result.getContent().get(0).getName()).isEqualTo("cached");
-            verify(redisLockHelper, never()).tryLock(anyString(), anyString(), any());
             verify(rankRepository, never()).findAllByWeekStartDateOrderByStudyRankingAsc(any(), any());
         }
 
         @Test
-        @DisplayName("과거 주차, 캐시 미스, 락 성공이면 DB에서 조회 후 캐시에 저장한다")
-        void 과거주차_캐시미스_락성공() throws Exception {
+        @DisplayName("과거 주차이고 캐시가 없으면 DB에서 조회 후 캐시에 저장한다")
+        void 과거주차_캐시미스() throws Exception {
             // given
             LocalDate past = LocalDate.now().minusWeeks(2);
             LocalDate weekStart = getWeekStartDate(past);
             PageRequest pageable = PageRequest.of(0, 20);
-            String lockKey = weeklyRankPageLockKey(weekStart, pageable.getPageNumber());
 
             when(rankCacheService.getCachedWeeklyRankPage(weekStart, pageable.getPageNumber()))
                     .thenReturn(null);
-            when(redisLockHelper.tryLock(eq(lockKey), anyString(), any(Duration.class))).thenReturn(true);
 
             Ranks ranks = Ranks.builder()
                     .userName("db-user")
@@ -420,28 +412,6 @@ class RankServiceTest {
             assertThat(result.getContent()).hasSize(1);
             assertThat(result.getContent().get(0).getName()).isEqualTo("db-user");
             verify(rankCacheService).cacheWeeklyRankPage(eq(weekStart), eq(pageable.getPageNumber()), anyString());
-            verify(redisLockHelper).unlock(eq(lockKey), anyString());
-        }
-
-        @Test
-        @DisplayName("과거 주차, 캐시 미스, 락 실패 시 대기 후 캐시 없어도 빈 페이지를 반환한다")
-        void 과거주차_캐시미스_락실패() {
-            // given
-            LocalDate past = LocalDate.now().minusWeeks(3);
-            LocalDate weekStart = getWeekStartDate(past);
-            PageRequest pageable = PageRequest.of(0, 20);
-            String lockKey = weeklyRankPageLockKey(weekStart, pageable.getPageNumber());
-
-            when(rankCacheService.getCachedWeeklyRankPage(weekStart, pageable.getPageNumber())).thenReturn(null);
-            when(redisLockHelper.tryLock(eq(lockKey), anyString(), any(Duration.class))).thenReturn(false);
-            when(rankCacheService.getCachedWeeklyRankPage(weekStart, pageable.getPageNumber())).thenReturn(null);
-
-            // when
-            Page<RankListResponse> result = rankService.getAllStudyTimeRankList(past, pageable);
-
-            // then
-            assertThat(result.getContent()).isEmpty();
-            verify(rankRepository, never()).findAllByWeekStartDateOrderByStudyRankingAsc(any(), any());
         }
     }
 
