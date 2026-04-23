@@ -76,6 +76,10 @@ dependencies {
     // Logging - log4j2만 유지, slf4j 브리지는 log4j-slf4j-impl만
     implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
 
+    // ShedLock - 다중 인스턴스 환경에서 @Scheduled 중복 실행 방지
+    implementation 'net.javacrumbs.shedlock:shedlock-spring:5.16.0'
+    implementation 'net.javacrumbs.shedlock:shedlock-provider-jdbc-template:5.16.0'
+
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'com.h2database:h2'
