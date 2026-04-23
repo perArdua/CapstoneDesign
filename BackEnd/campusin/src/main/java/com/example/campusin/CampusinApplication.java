@@ -7,8 +7,10 @@ package com.example.campusin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableJpaAuditing // https://europani.github.io/spring/2021/10/05/027-baseTimeEntity.html
+@EnableScheduling
 @SpringBootApplication
 public class CampusinApplication {
     public static void main(String[] args) {
