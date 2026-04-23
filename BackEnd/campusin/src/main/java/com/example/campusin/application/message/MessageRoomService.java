@@ -7,6 +7,7 @@ import com.example.campusin.application.post.exception.PostNotFoundException;
 import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.message.Message;
 import com.example.campusin.domain.message.MessageRoom;
+import com.example.campusin.domain.message.MessageRoomIdempotency;
 import com.example.campusin.domain.message.VisibilityState;
 import com.example.campusin.domain.message.dto.MessageRoomsWithLastMessages;
 import com.example.campusin.domain.message.dto.request.MessageRoomCreateRequest;
@@ -16,6 +17,7 @@ import com.example.campusin.domain.message.dto.response.MessageRoomListResponse;
 import com.example.campusin.domain.message.dto.response.MessageRoomResponse;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.message.MessageRepository;
+import com.example.campusin.infra.message.MessageRoomIdempotencyRepository;
 import com.example.campusin.infra.message.MessageRoomRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.user.UserRepository;
@@ -37,11 +39,11 @@ public class MessageRoomService {
     private final MessageRoomRepository messageRoomRepository;
     private final MessageRepository messageRepository;
     private final MessageRoomTxService messageRoomTxService;
+    private final MessageRoomIdempotencyRepository messageRoomIdempotencyRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
     // 쪽지방 생성
-    @Transactional
     public MessageRoomIdResponse saveMessageRoom(Long userId, MessageRoomCreateRequest request, String idempotencyKey) {
         Long senderId = userId;
         Long receiverId = request.getReceiverId();
@@ -49,6 +51,13 @@ public class MessageRoomService {
 
         if (senderId.equals(receiverId)) {
             throw new InvalidRequestStateException("INVALID MESSAGE TARGET");
+        }
+
+        // 멱등키 선행 조회 — 락 없이 즉시 기존 응답 반환
+        Optional<MessageRoomIdempotency> preCheck = messageRoomIdempotencyRepository
+                .findBySenderIdAndReceiverIdAndIdempotencyKey(senderId, receiverId, idempotencyKey);
+        if (preCheck.isPresent()) {
+            return new MessageRoomIdResponse(preCheck.get().getMessageRoomId());
         }
 
         Long small = Math.min(senderId, receiverId);

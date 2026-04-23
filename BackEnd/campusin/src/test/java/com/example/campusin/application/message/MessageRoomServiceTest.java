@@ -7,6 +7,7 @@ import com.example.campusin.application.post.exception.PostNotFoundException;
 import com.example.campusin.application.user.exception.UserNotFoundException;
 import com.example.campusin.domain.message.Message;
 import com.example.campusin.domain.message.MessageRoom;
+import com.example.campusin.domain.message.MessageRoomIdempotency;
 import com.example.campusin.domain.message.VisibilityState;
 import com.example.campusin.domain.message.dto.MessageRoomsWithLastMessages;
 import com.example.campusin.domain.message.dto.request.MessageRoomCreateRequest;
@@ -19,6 +20,7 @@ import com.example.campusin.domain.board.BoardType;
 import com.example.campusin.domain.post.Post;
 import com.example.campusin.domain.user.User;
 import com.example.campusin.infra.message.MessageRepository;
+import com.example.campusin.infra.message.MessageRoomIdempotencyRepository;
 import com.example.campusin.infra.message.MessageRoomRepository;
 import com.example.campusin.infra.post.PostRepository;
 import com.example.campusin.infra.user.UserRepository;
@@ -46,6 +48,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
@@ -64,6 +68,8 @@ class MessageRoomServiceTest {
     MessageRepository messageRepository;
     @Mock
     MessageRoomTxService messageRoomTxService;
+    @Mock
+    MessageRoomIdempotencyRepository messageRoomIdempotencyRepository;
     @Mock
     UserRepository userRepository;
     @Mock
@@ -141,6 +147,33 @@ class MessageRoomServiceTest {
                 assertThatThrownBy(() -> messageRoomService.saveMessageRoom(userId, request, "k"))
                         .isInstanceOf(IllegalStateException.class);
                 verify(messageRoomRepository).releaseLock(lockName);
+            }
+        }
+
+        @Nested
+        @DisplayName("동일 멱등키로 이미 처리된 요청이면")
+        class Context_when_idempotent_hit {
+
+            @Test
+            @DisplayName("락을 획득하지 않고 기존 메시지방 ID를 반환한다")
+            void 락_없이_기존_ID를_반환한다() {
+                // given
+                Long userId = 1L;
+                MessageRoomCreateRequest request = new MessageRoomCreateRequest(3L, 2L, "first");
+                String idempotencyKey = "dup-key";
+                MessageRoomIdempotency existing = new MessageRoomIdempotency(userId, 2L, idempotencyKey, 77L);
+
+                when(messageRoomIdempotencyRepository
+                        .findBySenderIdAndReceiverIdAndIdempotencyKey(userId, 2L, idempotencyKey))
+                        .thenReturn(Optional.of(existing));
+
+                // when
+                MessageRoomIdResponse response = messageRoomService.saveMessageRoom(userId, request, idempotencyKey);
+
+                // then
+                assertThat(response.getMessageRoomId()).isEqualTo(77L);
+                verify(messageRoomRepository, never()).acquireLock(anyString(), anyInt());
+                verifyNoInteractions(messageRoomTxService);
             }
         }
 

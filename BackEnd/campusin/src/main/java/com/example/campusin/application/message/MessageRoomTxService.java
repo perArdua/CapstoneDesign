@@ -33,6 +33,8 @@ public class MessageRoomTxService {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public MessageRoomIdResponse saveUnderLock(Long senderId, Long receiverId, Long postId, MessageRoomCreateRequest request, String idempotencyKey) {
+        // 바깥에서 선행 조회를 통과한 요청이 락 대기 후 진입했을 때,
+        // 이미 다른 요청이 생성을 완료했는지 재확인 — 경쟁 진입 방어
         Optional<MessageRoomIdempotency> existing = messageRoomIdempotencyRepository
                 .findBySenderIdAndReceiverIdAndIdempotencyKey(senderId, receiverId, idempotencyKey);
 
